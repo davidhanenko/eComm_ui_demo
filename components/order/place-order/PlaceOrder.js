@@ -47,11 +47,22 @@ const CREATE_ORDER_MUTATION = gql`
         attributes {
           charge
           totalItems
+          item_details
           single_items {
             data {
               id
               attributes {
                 itemTitle
+                sizePrice {
+                  ... on ComponentItemDetailsItemDetails {
+                    id
+                    size
+                    price
+                    quantity
+                    type
+                    type_value
+                  }
+                }
               }
             }
           }
@@ -68,6 +79,14 @@ export default function PlaceOrder() {
     el => (el = el.cartId.split('-')[0])
   );
 
+  const itemDetails = {};
+  cart.forEach((el, i) => {
+    itemDetails[i] = {
+      id: el.cartId.split('-')[0],
+      detailsId: el.itemDetailsId,
+    };
+  });
+
   const [createOrder, { loading, error, data }] =
     useMutation(CREATE_ORDER_MUTATION, {
       variables: {
@@ -78,6 +97,7 @@ export default function PlaceOrder() {
             0
           ),
           totalItems: count,
+          item_details: JSON.stringify(itemDetails),
           single_items: [...ids],
         },
       },
