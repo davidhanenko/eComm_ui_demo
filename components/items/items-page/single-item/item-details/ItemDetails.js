@@ -87,19 +87,22 @@ export default function ItemDetails({
       )}
 
       {filteredDetails.length > 0
-        ? filteredDetails?.map((size, i) => (
-            <input
-              key={size.id}
-              className={`size-input-btn ${
-                i === index
-                  ? 'size-input-btn active-size-btn'
-                  : ''
-              }`}
-              type='button'
-              onClick={handlePrice}
-              value={size.size}
-            />
-          ))
+        ? filteredDetails?.map(
+            (size, i) =>
+              size.size && (
+                <input
+                  key={size.id}
+                  className={`size-input-btn ${
+                    i === index
+                      ? 'size-input-btn active-size-btn'
+                      : ''
+                  }`}
+                  type='button'
+                  onClick={handlePrice}
+                  value={size.size}
+                />
+              )
+          )
         : item?.size && (
             <input
               className='size-input-btn active-size-btn'
