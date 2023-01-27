@@ -1,0 +1,5 @@
+ <img
+  src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdjMFNSug0AAmIBVlvbYrIAAAAASUVORK5CYII='
+  width='1px'
+  height='1px'
+/>;
