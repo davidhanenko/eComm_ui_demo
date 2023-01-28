@@ -31,7 +31,7 @@ const DropdownBtnStyles = styled.button`
 const DropdownMenuStyles = styled.ul`
   padding-left: 2rem;
   z-index: calc(var(--goToTopZ) + 3);
-  box-shadow: 4px 4px 15px 2px var(--offWhite);
+  box-shadow: 0px 0px 3px 1px var(--offWhite);
 
   @media (min-width: 850px) {
     background: var(--white);

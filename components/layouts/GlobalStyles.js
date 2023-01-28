@@ -51,9 +51,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    
     margin: 0;
-    padding: 0;
+    padding: 0; 
     font-size: 1.5rem;
     line-height: 1.6;
     scroll-behavior: smooth;

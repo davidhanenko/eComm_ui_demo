@@ -5,10 +5,12 @@ const FooterStyles = styled.footer`
   color: var(--white);
   padding: 1rem;
 
-  /* position: relative;
-  top: calc(100vh - 20rem - var(--navHeight));
+  position: relative;
+  width: 100vw;
+  top: 40vh;
+  bottom: 0;
   margin: 0;
-  padding: 0; */
+  padding: 2rem 0;
 
   .footer-container {
     margin: 2rem auto;

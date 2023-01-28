@@ -22,7 +22,6 @@ const CART_ITEM_QUERY = gql`
         id
         attributes {
           itemTitle
-
           image {
             data {
               id
@@ -98,7 +97,9 @@ export default function CartItem({
             cartItem?.attributes?.image?.data[0]?.attributes
               ?.url
           }
-          alt={cartItem?.attributes?.itemTitle || 'item image'}
+          alt={
+            cartItem?.attributes?.itemTitle || 'item image'
+          }
           width={45}
           height={45}
           objectFit='scale-down'

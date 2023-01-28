@@ -24,7 +24,7 @@ const CartItemStyles = styled.li`
       line-height: 1;
 
       .item-title {
-        margin: 0;
+        margin: 1.3rem 0;
         font-weight: 400;
         transition: all 0.25s;
 

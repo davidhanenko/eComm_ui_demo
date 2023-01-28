@@ -7,7 +7,7 @@ const CartStyles = styled.div`
   width: 50%;
   z-index: calc(var(--goToTopZ) + 2);
   min-width: 400px;
-  background: var(--offWhite);
+  background: var(--white);
   box-shadow: 0px 1px 3px 1px var(--offWhite);
 
   min-height: 65vh;
@@ -81,6 +81,7 @@ const CartStyles = styled.div`
     padding: 2rem;
     font-size: 1.3rem;
     height: 10rem;
+    border-top: 1px solid var(--blue3);
 
     p {
       font-weight: 300;
