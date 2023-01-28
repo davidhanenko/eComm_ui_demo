@@ -84,7 +84,7 @@ export default function PlaceOrder() {
     itemDetails[i] = {
       id: el.cartId.split('-')[0],
       detailsId: el.itemDetailsId,
-      qty: el.quantity,
+      qty: el.quantity
     };
   });
 
