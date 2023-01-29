@@ -1,13 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import capitalizeStr from '../../../helpers/capitalizeStr';
 import {
   OrderStyles,
   OrderItemStyles,
 } from './OrderStyles';
+import { ALL_ORDERS_QUERY } from '../../../pages/orders/index';
 
 const ORDER_ITEMS_QUERY = gql`
   query ORDER_ITEMS_QUERY($id: ID!) {
@@ -43,7 +45,31 @@ const ORDER_ITEMS_QUERY = gql`
   }
 `;
 
+const UPDATE_ORDER_STATUS = gql`
+  mutation UPDATE_ORDER_STATUS(
+    $data: OrderInput!
+    $id: ID!
+  ) {
+    updateOrder(id: $id, data: $data) {
+      data {
+        id
+        attributes {
+          status
+          charge
+          totalItems
+          createdAt
+          itemDetails: item_details
+        }
+      }
+    }
+  }
+`;
+
 export default function Order({ order }) {
+  const [status, setStatus] = useState(
+    order?.attributes?.status
+  );
+
   // items included in current order (get from db JSON)
   const orderItems = JSON.parse(
     order?.attributes?.itemDetails
@@ -53,16 +79,50 @@ export default function Order({ order }) {
   const tax = totalCharge * 0.08875;
   const toPay = totalCharge + tax;
 
+  const [
+    updateOrder,
+    {
+      data: updateData,
+      loading: updateLoading,
+      error: updateError,
+    },
+  ] = useMutation(UPDATE_ORDER_STATUS, {
+    variables: {
+      id: order.id,
+      data: {
+        status: status,
+      },
+    },
+    // refetchQueries: [{ query: ALL_ORDERS_QUERY }],
+  });
+
+  const handleSelect = e => {
+    setStatus(e.target.value);
+  };
+
+  useEffect(async () => {
+    await updateOrder();
+  }, [status]);
+
+  console.log(order);
+
   return (
     <OrderStyles>
       <header>
         <div className='order-title'>
-          <h2>Order ID - {order.id}</h2>
+          <h2>Order ID - {order?.id}</h2>
 
-          <select name='status' id='status'>
-            <option value='fulfilled'>fulfilled</option>
-            <option value='in progress'>in progress</option>
-            <option value='rejected'>rejected</option>
+          <select
+            disabled={updateLoading}
+            aria-busy={updateLoading}
+            id='status'
+            onChange={handleSelect}
+            value={order?.attributes?.status}
+          >
+            <option value='FULFILLED'>FULFILLED</option>
+            <option value='PENDING'>PENDING</option>
+            <option value='IN_PROGRESS'>IN PROGRESS</option>
+            <option value='REJECTED'>REJECTED</option>
           </select>
         </div>
         <hr />
@@ -77,7 +137,7 @@ export default function Order({ order }) {
               Total cost - $
               {order?.attributes?.charge.toFixed(2)}
             </p>
-            <p>Tax - ${tax}</p>
+            <p>Tax - ${tax.toFixed(2)}</p>
             <p>Total charge - ${toPay.toFixed(2)}</p>
             <p>Shipping - </p>
           </section>
@@ -111,7 +171,7 @@ function OrderItem({ item }) {
     ORDER_ITEMS_QUERY,
     {
       variables: {
-        id: item.id,
+        id: item?.id,
       },
     }
   );
@@ -125,13 +185,15 @@ function OrderItem({ item }) {
   return (
     <OrderItemStyles>
       <div className='item-img'>
-        <Image
-          src={itemData?.image?.data[0]?.attributes?.url}
-          alt={itemData?.itemTitle || ''}
-          height={45}
-          width={45}
-          objectFit='scale-down'
-        />
+        {itemData?.image?.data[0]?.attributes?.url && (
+          <Image
+            src={itemData?.image?.data[0]?.attributes?.url}
+            alt={itemData?.itemTitle || ''}
+            height={45}
+            width={45}
+            objectFit='scale-down'
+          />
+        )}
       </div>
       <div className='item-wrapper'>
         <div className='top-line'>

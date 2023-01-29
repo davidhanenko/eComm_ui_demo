@@ -31,10 +31,6 @@ const OrderStyles = styled.div`
 
       #status {
         height: 4rem;
-
-        option {
-          text-transform: uppercase;
-        }
       }
     }
 
@@ -68,6 +64,8 @@ const OrderStyles = styled.div`
 
 const OrderItemStyles = styled.section`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin: 2rem 0;
 
   @media (max-width: 600px) {
@@ -76,7 +74,9 @@ const OrderItemStyles = styled.section`
 
   .item-img {
     margin-right: 2rem;
+    display: block;
   }
+
   h4,
   p {
     margin: 0;
@@ -86,6 +86,7 @@ const OrderItemStyles = styled.section`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 80vw;
 
     @media (max-width: 800px) {
       flex-direction: column;

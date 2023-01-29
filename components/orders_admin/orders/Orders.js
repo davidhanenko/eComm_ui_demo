@@ -1,11 +1,8 @@
-
 import {
   OrdersStyles,
   OrdersItemStyles,
 } from './OrdersStyles';
 import Link from 'next/link';
-
-
 
 export default function Orders({ orders }) {
   return (
@@ -18,8 +15,6 @@ export default function Orders({ orders }) {
 }
 
 function OrdersItem({ order }) {
- 
-
   const date = order?.attributes?.createdAt;
   const localDate = new Date(date).toLocaleDateString(
     'en-US'
@@ -58,15 +53,8 @@ function OrdersItem({ order }) {
           <p>email.gmail.com</p>
         </div>
 
-        <select name='status' id='status'>
-          <option value='fulfilled'>fulfilled</option>
-          <option value='in progress'>in progress</option>
-          <option value='rejected'>rejected</option>
-        </select>
-
-     
+        <div>{order?.attributes?.status}</div>
       </OrdersItemStyles>
     </Link>
   );
 }
-

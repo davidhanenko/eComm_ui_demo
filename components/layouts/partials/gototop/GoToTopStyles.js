@@ -30,6 +30,10 @@ const GoToTopButtonStyles = styled.button`
     justify-content: center;
     transition: all 0.1s;
   }
+
+  @media print {
+    display: none;
+  }
 `;
 
 export { GoToTopButtonStyles };

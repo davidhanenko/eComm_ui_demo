@@ -11,8 +11,8 @@ const Orders = dynamic(
   }
 );
 
-const ALL_ORDER_QUERY = gql`
-  query ALL_ORDER_QUERY {
+export const ALL_ORDERS_QUERY = gql`
+  query ALL_ORDERS_QUERY {
     orders {
       data {
         id
@@ -20,6 +20,7 @@ const ALL_ORDER_QUERY = gql`
           charge
           totalItems
           createdAt
+          status
           itemDetails: item_details
         }
       }
@@ -28,8 +29,9 @@ const ALL_ORDER_QUERY = gql`
 `;
 
 export default function OrdersPage() {
-  const { data, error, loading } =
-    useQuery(ALL_ORDER_QUERY);
+  const { data, error, loading } = useQuery(
+    ALL_ORDERS_QUERY
+  );
 
   const orders = data?.orders?.data;
 
