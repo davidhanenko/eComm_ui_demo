@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
 import { useCart } from '../../context/cartState';
 import CartItem from './cart-item/CartItem';
 import { CartStyles } from './CartStyles';
@@ -21,6 +22,7 @@ export default function Cart() {
   // purchase policy modal window state
   const [showModal, setShowModal] = useState(false);
 
+  const router = useRouter();
   const cartRef = useRef(null);
 
   // close cart on click outside
@@ -73,6 +75,11 @@ export default function Cart() {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
+  const handlePlaceOrder = () => {
+    closeCart();
+    router.push('/place-order');
+  };
+
   return (
     <>
       <Modal
@@ -123,7 +130,12 @@ export default function Cart() {
           >
             purchase policy
           </p>
-          <button disabled={!count > 0}>place order</button>
+          <button
+            disabled={!count > 0}
+            onClick={handlePlaceOrder}
+          >
+            place order
+          </button>
         </footer>
       </CartStyles>
     </>
