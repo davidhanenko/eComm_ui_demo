@@ -39,6 +39,7 @@ const CartItemStyles = styled.li`
       .item-type,
       .item-size {
         align-items: center;
+        font-weight: 300;
 
         &::before {
           content: '|';

@@ -53,7 +53,11 @@ function OrdersItem({ order }) {
           <p>email.gmail.com</p>
         </div>
 
-        <div>{order?.attributes?.status}</div>
+        <div
+          className={`${order?.attributes?.status} order-status`}
+        >
+          {order?.attributes?.status}
+        </div>
       </OrdersItemStyles>
     </Link>
   );

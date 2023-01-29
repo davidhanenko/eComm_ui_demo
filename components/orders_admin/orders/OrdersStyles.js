@@ -26,9 +26,24 @@ const OrdersItemStyles = styled.li`
     font-size: 1.3rem;
   }
 
-  #status {
-    height: 40px;
-    width: 100px;
+  .order-status {
+    text-transform: uppercase;
+    width: 110px;
+    padding: 0.5rem;
+    color: var(--white);
+    text-align: center;
+  }
+  .pending {
+    background-color: var(--orange);
+  }
+  .fulfilled {
+    background-color: var(--green);
+  }
+  .in-progress {
+    background-color: var(--blue3);
+  }
+  .rejected {
+    background-color: var(--red);
   }
 
   @media (max-width: 800px) {
