@@ -24,8 +24,8 @@ export const SORTING_OPTIONS = [
     title: 'New to Old',
     option: 'createdAt:desc',
   },
-  { title: 'Price, ⬆', option: 'minPrice:asc' },
-  { title: 'Price, ⬇', option: 'minPrice:desc' },
+  { title: 'Price, \u2191', option: 'minPrice:asc' },
+  { title: 'Price, \u2193', option: 'minPrice:desc' },
 ];
 
 export const PER_PAGE_OPTIONS = [

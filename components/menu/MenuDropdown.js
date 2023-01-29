@@ -66,12 +66,10 @@ const MenuDropdown = React.forwardRef(function MenuDropdown(
   }, [width]);
 
   return (
-    <DropdownStyles
-      onMouseOver={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <DropdownStyles onMouseLeave={handleMouseLeave}>
       <div className='dropdown-btns-group'>
         <a
+          onMouseOver={handleMouseEnter}
           href={props.href}
           ref={ref}
           className={`${

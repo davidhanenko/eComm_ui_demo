@@ -50,6 +50,7 @@ const DropdownMenuStyles = styled.ul`
     background: var(--blue3);
     margin-top: 0.5rem;
     min-height: 25rem;
+    height: fit-content;
     width: 30vw;
     position: absolute;
     padding: 2rem 5rem 3rem 3rem;
@@ -61,7 +62,7 @@ const DropdownMenuStyles = styled.ul`
 
     ${props =>
       props.dropdownOpen &&
-      ` visibility: visible; opacity: 0.9; transform: translateY(-2%); height: fit-content;`}
+      ` visibility: visible; opacity: 0.9; transform: translateY(-2%);`}
   }
 
   .no-items {
