@@ -13,7 +13,7 @@ export default function AddToCart({
   link,
 }) {
   const { cart, setCart } = useCart();
-  console.log(cart);
+
   // add item to cart
   const handleAdd = () => {
     // check if there is same item in the cart

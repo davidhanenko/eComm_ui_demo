@@ -27,6 +27,7 @@ const CartItemStyles = styled.li`
         margin: 1.3rem 0;
         font-weight: 400;
         transition: all 0.25s;
+        color: var(--dark);
 
         @media (hover: hover) {
           &:hover {

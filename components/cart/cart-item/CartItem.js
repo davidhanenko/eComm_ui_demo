@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import {
@@ -107,14 +107,14 @@ export default function CartItem({
       </div>
       <div className='item-details'>
         <div className='title-size-container'>
-          <Link href={`/${link}`}>
+          <a href={`/${link}`}>
             <h4 className='item-title'>
               {cartItem?.attributes?.itemTitle &&
                 capitalizeStr(
                   cartItem?.attributes?.itemTitle
                 )}
             </h4>
-          </Link>
+          </a>
 
           {typeProp && (
             <p className='item-type'>{typeProp}</p>

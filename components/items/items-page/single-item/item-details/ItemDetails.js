@@ -74,11 +74,13 @@ export default function ItemDetails({
       {type && (
         <div className='type-select-input'>
           <span>{type}</span>
-          <DropdownSelect
-            options={valuesArr}
-            select={value}
-            handleSelect={e => setValue(e.target.value)}
-          />
+          {value && (
+            <DropdownSelect
+              options={valuesArr}
+              select={value}
+              handleSelect={e => setValue(e.target.value)}
+            />
+          )}
         </div>
       )}
 
@@ -114,10 +116,7 @@ export default function ItemDetails({
       <AddToCart
         id={id}
         itemDetailsId={filteredDetails[index]?.id || null}
-        price={
-          filteredDetails[index]?.price ||
-          item?.price
-        }
+        price={filteredDetails[index]?.price || item?.price}
         size={filteredDetails[index]?.size || item?.size}
         type={filteredDetails[index]?.value}
         link={link}
