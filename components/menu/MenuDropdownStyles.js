@@ -62,7 +62,7 @@ const DropdownMenuStyles = styled.ul`
 
     ${props =>
       props.dropdownOpen &&
-      ` visibility: visible; opacity: 0.9; transform: translateY(-2%);`}
+      `visibility: visible; opacity: 0.9; transform: translateY(-2%);`}
   }
 
   .no-items {

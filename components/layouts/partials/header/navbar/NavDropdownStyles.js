@@ -34,6 +34,10 @@ const DropdownMenuStyles = styled.ul`
   box-shadow: 0px 0px 3px 1px var(--offWhite);
 
   @media (min-width: 850px) {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10%);
     background: var(--white);
     position: fixed;
     right: 12rem;
@@ -41,8 +45,14 @@ const DropdownMenuStyles = styled.ul`
     margin: 0 0 0 -5rem;
     padding: 2rem;
     padding-bottom: 10rem;
+    transition: all 0.25s;
+
     display: grid;
     grid-template-columns: auto auto auto;
+
+    ${props =>
+      props.isDropdownOpen &&
+      `visibility: visible; opacity: 0.9; transform: translateY(-2%);`}
   }
 `;
 
