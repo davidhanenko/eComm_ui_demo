@@ -19,7 +19,7 @@ const NavStyles = styled.nav`
     min-width: 250px;
     gap: 0.5rem;
     place-self: center end;
-    
+
     @media (max-width: 850px) {
       position: fixed;
       gap: 0;
@@ -107,6 +107,10 @@ const CartContainerStyles = styled.div`
   }
   @media (max-width: 850px) {
     font-size: 3rem;
+  }
+
+  @media print {
+    display: none;
   }
 `;
 

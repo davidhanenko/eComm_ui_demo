@@ -35,6 +35,10 @@ const FooterStyles = styled.footer`
     font-size: 1.3rem;
     margin: 0;
   }
+
+  @media print {
+    display: none;
+  }
 `;
 
 const LinkStyles = styled.li`

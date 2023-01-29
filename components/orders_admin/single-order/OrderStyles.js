@@ -20,8 +20,22 @@ const OrderStyles = styled.div`
       margin: 0;
     }
 
-    h2 {
-      font-size: 2.7rem;
+    .order-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        font-size: 2.7rem;
+      }
+
+      #status {
+        height: 4rem;
+
+        option {
+          text-transform: uppercase;
+        }
+      }
     }
 
     .header-wrapper {
@@ -35,6 +49,19 @@ const OrderStyles = styled.div`
   footer {
     button {
       text-transform: uppercase;
+      padding: 1rem;
+      margin-top: 5rem;
+      border: 1px solid var(--blue3);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--blue5);
+        outline: none;
+      }
+    }
+
+    @media print {
+      display: none;
     }
   }
 `;

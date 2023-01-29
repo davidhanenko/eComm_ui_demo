@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
+import capitalizeStr from '../../../helpers/capitalizeStr';
 import {
   OrderStyles,
   OrderItemStyles,
@@ -55,8 +56,15 @@ export default function Order({ order }) {
   return (
     <OrderStyles>
       <header>
-        <h2>Order ID - {order.id}</h2>
+        <div className='order-title'>
+          <h2>Order ID - {order.id}</h2>
 
+          <select name='status' id='status'>
+            <option value='fulfilled'>fulfilled</option>
+            <option value='in progress'>in progress</option>
+            <option value='rejected'>rejected</option>
+          </select>
+        </div>
         <hr />
 
         <div className='header-wrapper'>
@@ -91,7 +99,7 @@ export default function Order({ order }) {
 
       <footer>
         <Link href={'/orders'}>
-          <button>Back to orders</button>
+          <button>&lt; Back to orders</button>
         </Link>
       </footer>
     </OrderStyles>
@@ -127,7 +135,10 @@ function OrderItem({ item }) {
       </div>
       <div className='item-wrapper'>
         <div className='top-line'>
-          <h4>{itemData?.itemTitle}</h4>
+          <h4>
+            {itemData?.itemTitle &&
+              capitalizeStr(itemData?.itemTitle)}
+          </h4>
           <p>
             {itemDetails?.type} - {itemDetails?.typeValue}
           </p>
