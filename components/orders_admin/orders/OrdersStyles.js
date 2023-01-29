@@ -18,7 +18,7 @@ const OrdersItemStyles = styled.li`
   justify-content: space-between;
   align-items: center;
   color: var(--gray);
-  box-shadow: 1px 1px 4px 1px var(--lightGray);
+  box-shadow: 1px 1px 4px 1px var(--blue5);
   transition: all 0.25s;
 
   p {
@@ -44,7 +44,7 @@ const OrdersItemStyles = styled.li`
   @media (hover: hover) {
     &:hover {
       cursor: pointer;
-      box-shadow: 2px 2px 6px 3px var(--lightGray);
+      box-shadow: 2px 2px 6px 3px var(--blue5);
     }
   }
 `;

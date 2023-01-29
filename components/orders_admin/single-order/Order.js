@@ -48,12 +48,17 @@ export default function Order({ order }) {
     order?.attributes?.itemDetails
   );
 
-  console.log(order);
+  const totalCharge = order?.attributes?.charge;
+  const tax = totalCharge * 0.08875;
+  const toPay = totalCharge + tax;
 
   return (
     <OrderStyles>
       <header>
         <h2>Order ID - {order.id}</h2>
+
+        <hr />
+
         <div className='header-wrapper'>
           <section className='top-left'>
             <p>
@@ -64,7 +69,8 @@ export default function Order({ order }) {
               Total cost - $
               {order?.attributes?.charge.toFixed(2)}
             </p>
-            <p>Tax - </p>
+            <p>Tax - ${tax}</p>
+            <p>Total charge - ${toPay.toFixed(2)}</p>
             <p>Shipping - </p>
           </section>
           <section className='top-right'>
@@ -75,10 +81,13 @@ export default function Order({ order }) {
           </section>
         </div>
       </header>
+      <hr />
 
       {Object.values(orderItems).map((item, i) => (
         <OrderItem item={item} key={item.id + i} />
       ))}
+
+      <hr />
 
       <footer>
         <Link href={'/orders'}>
@@ -107,21 +116,36 @@ function OrderItem({ item }) {
 
   return (
     <OrderItemStyles>
-      <Image
-        src={itemData?.image?.data[0]?.attributes?.url}
-        alt={itemData?.itemTitle || ''}
-        height={45}
-        width={45}
-        objectFit='scale-down'
-      />
-      <h4>{itemData?.itemTitle}</h4>
-      <p>{itemDetails?.size || itemData?.size}</p>
-      <p>{`$${
-        itemDetails?.price?.toFixed(2) ||
-        itemData?.price?.toFixed(2)
-      }`}</p>
-      <p>{itemDetails?.type}</p>
-      <p>{itemDetails?.typeValue}</p>
+      <div className='item-img'>
+        <Image
+          src={itemData?.image?.data[0]?.attributes?.url}
+          alt={itemData?.itemTitle || ''}
+          height={45}
+          width={45}
+          objectFit='scale-down'
+        />
+      </div>
+      <div className='item-wrapper'>
+        <div className='top-line'>
+          <h4>{itemData?.itemTitle}</h4>
+          <p>
+            {itemDetails?.type} - {itemDetails?.typeValue}
+          </p>
+          <p>
+            Size - {itemDetails?.size || itemData?.size}
+          </p>
+        </div>
+        <div className='lower-line'>
+          <p>Qty - {item?.qty}</p>
+          <p>
+            Price -{' '}
+            {`$${
+              itemDetails?.price?.toFixed(2) ||
+              itemData?.price?.toFixed(2)
+            }`}
+          </p>
+        </div>
+      </div>
     </OrderItemStyles>
   );
 }
