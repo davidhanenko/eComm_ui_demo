@@ -10,6 +10,8 @@ import {
   OrderItemStyles,
 } from './OrderStyles';
 import { ALL_ORDERS_QUERY } from '../../../pages/orders/index';
+import DropdownSelect from '../../shared/pagination/dropdown/DropdownSelect';
+import { ORDER_STATUS_OPTIONS } from '../../../config';
 
 const ORDER_ITEMS_QUERY = gql`
   query ORDER_ITEMS_QUERY($id: ID!) {
@@ -93,7 +95,7 @@ export default function Order({ order }) {
         status: status,
       },
     },
-    // refetchQueries: [{ query: ALL_ORDERS_QUERY }],
+    refetchQueries: [{ query: ALL_ORDERS_QUERY }],
   });
 
   const handleSelect = e => {
@@ -104,26 +106,18 @@ export default function Order({ order }) {
     await updateOrder();
   }, [status]);
 
-  console.log(order);
-
   return (
     <OrderStyles>
       <header>
         <div className='order-title'>
           <h2>Order ID - {order?.id}</h2>
-
-          <select
-            disabled={updateLoading}
-            aria-busy={updateLoading}
-            id='status'
-            onChange={handleSelect}
-            value={order?.attributes?.status}
-          >
-            <option value='FULFILLED'>FULFILLED</option>
-            <option value='PENDING'>PENDING</option>
-            <option value='IN_PROGRESS'>IN PROGRESS</option>
-            <option value='REJECTED'>REJECTED</option>
-          </select>
+          <div className='status-select'>
+            <DropdownSelect
+              options={ORDER_STATUS_OPTIONS}
+              select={order?.attributes?.status}
+              handleSelect={handleSelect}
+            />
+          </div>
         </div>
         <hr />
 

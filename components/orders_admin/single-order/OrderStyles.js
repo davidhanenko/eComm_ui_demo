@@ -28,17 +28,17 @@ const OrderStyles = styled.div`
       h2 {
         font-size: 2.7rem;
       }
+    }
 
-      #status {
-        height: 4rem;
+    .status-select {
+      #sort-btn {
+        width: 150px;
       }
     }
 
     .header-wrapper {
       display: grid;
       grid-template-columns: 1fr 1fr;
-    }
-    .top-left {
     }
   }
 

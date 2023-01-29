@@ -50,3 +50,22 @@ export const PER_PAGE_OPTIONS = [
     option: 10,
   },
 ];
+
+export const ORDER_STATUS_OPTIONS = [
+  {
+    title: 'PENDING',
+    option: 'pending',
+  },
+  {
+    title: 'FULFILLED',
+    option: 'fulfilled',
+  },
+  {
+    title: 'IN PROGRESS',
+    option: 'in-progress',
+  },
+  {
+    title: 'REJECTED',
+    option: 'rejected',
+  },
+];
