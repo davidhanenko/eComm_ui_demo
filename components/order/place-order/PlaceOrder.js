@@ -78,6 +78,13 @@ export default function PlaceOrder() {
         <p>Tax - ${tax.toFixed(2)}</p>
         <p>Total to charge - ${charge}</p>
 
+        <sub>
+          The charge may include additional cost of items
+          which price not available at the moment of order.
+          We will notify you about total cost after
+          reviewing your order
+        </sub>
+
         <button onClick={handleOrder} disabled={loading}>
           confirm order
         </button>

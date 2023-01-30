@@ -7,18 +7,31 @@ const PlaceOrderStyles = styled.div`
   padding: 0 5rem;
 
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3fr 2fr;
 
   .charge-section {
-    margin-top: 5rem;
-    padding-left: 3rem;
+    padding: 6rem 0 0 3rem;
     border-left: 1px solid var(--blue3);
+    height: 60vh;
     p {
       margin: 0;
     }
     button {
       padding: 1rem;
-      margin-top: 5rem;
+      margin-top: 10rem;
+      background-color: var(--blue3);
+      color: var(--white);
+      border-radius: 2rem;
+      border: none;
+      text-transform: uppercase;
+      transition: all 0.25s;
+
+      @media (hover: hover) {
+        &:hover {
+          cursor: pointer;
+          background-color: var(--blue2);
+        }
+      }
     }
   }
 `;
