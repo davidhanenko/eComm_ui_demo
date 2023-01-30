@@ -4,7 +4,7 @@ const CartItemStyles = styled.li`
   list-style: none;
   width: 100%;
   padding: 1.5rem 2rem 1.5rem 1rem;
-  margin: 2rem 0;
+  margin: 0 0 2rem 0;
   display: grid;
   grid-template-columns: auto 1fr auto;
 

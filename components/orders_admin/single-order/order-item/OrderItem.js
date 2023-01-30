@@ -2,12 +2,11 @@ import Image from 'next/image';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 
-
 import capitalizeStr from '../../../../helpers/capitalizeStr';
 import { OrderItemStyles } from './OrderItemStyles';
 
-const ORDER_ITEMS_QUERY = gql`
-  query ORDER_ITEMS_QUERY($id: ID!) {
+export const ORDER_ITEM_QUERY = gql`
+  query ORDER_ITEM_QUERY($id: ID!) {
     singleItem(id: $id) {
       data {
         id
@@ -42,7 +41,7 @@ const ORDER_ITEMS_QUERY = gql`
 
 export default function OrderItem({ item }) {
   const { data, error, loading } = useQuery(
-    ORDER_ITEMS_QUERY,
+    ORDER_ITEM_QUERY,
     {
       variables: {
         id: item?.id,

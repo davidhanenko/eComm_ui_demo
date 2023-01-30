@@ -1,43 +1,9 @@
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 
 import { useCart } from '../../../context/cartState';
 import { PlaceOrderStyles } from './PlaceOrderStyles';
 import OrderItem from './order-item/OrderItem';
-
-const CART_ITEM_QUERY = gql`
-  query CART_ITEM_QUERY($id: ID!) {
-    singleItems(filters: { id: { eq: $id } }) {
-      data {
-        id
-        attributes {
-          itemTitle
-          price
-          size
-          quantity
-          image {
-            data {
-              id
-              attributes {
-                url
-              }
-            }
-          }
-          sizePrice {
-            ... on ComponentItemDetailsItemDetails {
-              id
-              size
-              price
-              type
-              value
-              quantity
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
@@ -53,16 +19,6 @@ const CREATE_ORDER_MUTATION = gql`
               id
               attributes {
                 itemTitle
-                sizePrice {
-                  ... on ComponentItemDetailsItemDetails {
-                    id
-                    size
-                    price
-                    quantity
-                    type
-                    type_value
-                  }
-                }
               }
             }
           }
@@ -73,18 +29,22 @@ const CREATE_ORDER_MUTATION = gql`
 `;
 
 export default function PlaceOrder() {
-  const { cart, count } = useCart();
+  const { cart, count, totalCost } = useCart();
 
   const ids = cart.map(
     el => (el = el.cartId.split('-')[0])
   );
 
+  const tax = totalCost * 0.08875;
+  const charge = (totalCost + tax).toFixed(2);
+
   const itemDetails = {};
+
   cart.forEach((el, i) => {
     itemDetails[i] = {
       id: el.cartId.split('-')[0],
       detailsId: el.itemDetailsId,
-      qty: el.quantity
+      qty: el.quantity,
     };
   });
 
@@ -92,11 +52,7 @@ export default function PlaceOrder() {
     useMutation(CREATE_ORDER_MUTATION, {
       variables: {
         data: {
-          charge: cart.reduce(
-            (t, el) =>
-              (t += el.price ? el.quantity * el.price : 0),
-            0
-          ),
+          charge: totalCost,
           totalItems: count,
           item_details: JSON.stringify(itemDetails),
           single_items: [...ids],
@@ -108,13 +64,24 @@ export default function PlaceOrder() {
 
   return (
     <PlaceOrderStyles>
-      {cart.map(orderItem => (
-        <OrderItem
-          orderItem={orderItem}
-          key={orderItem.cartId}
-        />
-      ))}
-      <button onClick={handleOrder}>confirm order</button>
+      <section className='items-section'>
+        {cart.map(orderItem => (
+          <OrderItem
+            orderItem={orderItem}
+            key={orderItem.cartId}
+          />
+        ))}
+      </section>
+
+      <section className='charge-section'>
+        <p>Total cost - ${totalCost.toFixed(2)}</p>
+        <p>Tax - ${tax.toFixed(2)}</p>
+        <p>Total to charge - ${charge}</p>
+
+        <button onClick={handleOrder} disabled={loading}>
+          confirm order
+        </button>
+      </section>
     </PlaceOrderStyles>
   );
 }

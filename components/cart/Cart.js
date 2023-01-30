@@ -16,9 +16,10 @@ export default function Cart() {
     closeCart,
     cartRefState,
     modalCloseBtnRef,
+    totalCost,
+    setTotalCost,
   } = useCart();
-  // total cost of cart items state
-  const [totalCost, setTotalCost] = useState();
+
   // purchase policy modal window state
   const [showModal, setShowModal] = useState(false);
 
@@ -71,6 +72,7 @@ export default function Cart() {
           0
         )
     );
+
     // set items from cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
@@ -115,10 +117,6 @@ export default function Cart() {
           {totalCost > 0 && (
             <div className='cart-total'>
               <p>Cart total - ${totalCost.toFixed(2)}</p>
-              <p>
-                Approximate tax - $
-                {(totalCost * 0.08).toFixed(2)}
-              </p>
               <sub>
                 Plus cost of items without a defined price{' '}
               </sub>

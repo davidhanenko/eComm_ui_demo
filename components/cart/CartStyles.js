@@ -10,7 +10,9 @@ const CartStyles = styled.div`
   background: var(--white);
   box-shadow: 0px 1px 3px 1px var(--offWhite);
 
-  min-height: 65vh;
+  min-height: calc(
+    100vh - var(--navHeight) + var(--searchHeight) - 5rem
+  );
   height: 100%;
   right: -120%;
 
@@ -28,9 +30,6 @@ const CartStyles = styled.div`
 
   @media (max-width: 650px) {
     width: 100%;
-    height: calc(
-      100vh - var(--navHeight) - var(--searchHeight)
-    );
   }
 
   header {
@@ -59,10 +58,11 @@ const CartStyles = styled.div`
   }
 
   .cart-body {
-    padding: 2rem 1rem;
+    padding: 0 1rem;
     overflow-y: scroll;
     ul {
       padding: 0;
+      margin: 0;
     }
 
     .cart-empty {

@@ -4,9 +4,10 @@ const LocalStateContext = createContext();
 const LocalStateProvider = LocalStateContext.Provider;
 
 function CartStateProvider({ children }) {
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const [count, setCount] = useState(null);
+  const [totalCost, setTotalCost] = useState(0);
   const [cartRefState, setCartRefState] = useState(null);
   const [modalCloseBtnRef, setModalCloseBtnRef] =
     useState(null);
@@ -30,6 +31,8 @@ function CartStateProvider({ children }) {
         setCart,
         count,
         setCount,
+        totalCost,
+        setTotalCost,
         isCartOpen,
         setIsCartOpen,
         toggleCart,

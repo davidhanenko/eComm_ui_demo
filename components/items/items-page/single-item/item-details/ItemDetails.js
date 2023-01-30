@@ -118,7 +118,8 @@ export default function ItemDetails({
         itemDetailsId={filteredDetails[index]?.id || null}
         price={filteredDetails[index]?.price || item?.price}
         size={filteredDetails[index]?.size || item?.size}
-        type={filteredDetails[index]?.value}
+        type={filteredDetails[index]?.type}
+        typeValue={filteredDetails[index]?.value}
         link={link}
       />
     </ItemDetailsStyles>

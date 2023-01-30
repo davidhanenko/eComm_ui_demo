@@ -10,6 +10,7 @@ export default function AddToCart({
   size,
   price,
   type,
+  typeValue,
   link,
 }) {
   const { cart, setCart } = useCart();
@@ -37,8 +38,9 @@ export default function AddToCart({
             size,
             price,
             type,
-            quantity: 1,
+            typeValue,
             link,
+            quantity: 1,
           },
         ]);
   };
