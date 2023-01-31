@@ -56,7 +56,10 @@ export default function SingleItem({
               singleItem?.attributes?.image?.data[0]
                 ?.attributes?.url
             }
-            alt={singleItem?.attributes?.itemTitle || 'item image'}
+            alt={
+              singleItem?.attributes?.itemTitle ||
+              'item image'
+            }
             width={300}
             height={300}
             objectFit='scale-down'

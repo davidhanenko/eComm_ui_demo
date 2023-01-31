@@ -4,7 +4,7 @@ export default function PlaceOrderPage(props) {
   return <PlaceOrder />;
 }
 
-export async function getStaticProps(props) {
+export async function getServerSideProps(props) {
   let layout = 'main';
 
   return {
