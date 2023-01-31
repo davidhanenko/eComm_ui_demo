@@ -1,32 +1,7 @@
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
-
 import { useCart } from '../../../context/cartState';
 import { PlaceOrderStyles } from './PlaceOrderStyles';
 import OrderItem from './order-item/OrderItem';
-
-const CREATE_ORDER_MUTATION = gql`
-  mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
-    createOrder(data: $data) {
-      data {
-        id
-        attributes {
-          charge
-          totalItems
-          item_details
-          single_items {
-            data {
-              id
-              attributes {
-                itemTitle
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+import OrderForm from './order-form/OrderForm';
 
 export default function PlaceOrder() {
   const { cart, count, totalCost } = useCart();
@@ -48,20 +23,6 @@ export default function PlaceOrder() {
     };
   });
 
-  const [createOrder, { loading, error, data }] =
-    useMutation(CREATE_ORDER_MUTATION, {
-      variables: {
-        data: {
-          charge: totalCost,
-          totalItems: count,
-          item_details: JSON.stringify(itemDetails),
-          single_items: [...ids],
-        },
-      },
-    });
-
-  const handleOrder = async () => await createOrder();
-
   return (
     <PlaceOrderStyles>
       <section className='items-section'>
@@ -78,16 +39,23 @@ export default function PlaceOrder() {
         <p>Tax - ${tax.toFixed(2)}</p>
         <p>Total to charge - ${charge}</p>
 
-        <sub>
+        <OrderForm
+          totalCost={totalCost}
+          count={count}
+          item_details={JSON.stringify(itemDetails)}
+          single_items={[...ids]}
+        />
+
+        <p>
           The charge may include additional cost of items
           which price not available at the moment of order.
           We will notify you about total cost after
           reviewing your order
-        </sub>
-
+        </p>
+{/* 
         <button onClick={handleOrder} disabled={loading}>
           confirm order
-        </button>
+        </button> */}
       </section>
     </PlaceOrderStyles>
   );

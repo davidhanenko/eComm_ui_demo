@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
 const ContactsStyles = styled.div`
-  margin-top: calc(
-    var(--navHeight) + var(--searchHeight));
+  margin-top: calc(var(--navHeight) + var(--searchHeight));
   padding: 15rem 5rem;
-  background-color: var(--offWhite);
+  background-color: var(--bg);
 
   @media (max-width: 576px) {
     margin-bottom: 15rem;

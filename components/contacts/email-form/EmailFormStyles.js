@@ -21,8 +21,9 @@ const EmailFormStyles = styled.form`
   }
 
   .form {
-    background: var(--offWhite);
-    border: 1px solid var(--gray);
+    background: var(--white);
+    /* border: 1px solid var(--blue4); */
+    box-shadow: 0px 0px 3px 1px var(--blue5);
 
     padding: 2rem;
     width: 100%;
@@ -39,14 +40,14 @@ const EmailFormStyles = styled.form`
       &:focus-within label {
         color: var(--dark);
         opacity: 1;
-        background: var(--mokka);
+        background: var(--blue3);
         width: 7rem;
         max-height: 12rem;
       }
 
       input,
       textarea {
-        border: 1px solid var(--gray);
+        border: 1px solid var(--blue4);
         color: var(--dark);
         outline: none;
         background: transparent;
@@ -58,7 +59,7 @@ const EmailFormStyles = styled.form`
         transition: all 0.3s ease;
 
         &:focus {
-          border: 1px solid var(--brown);
+          border: 1px solid var(--blue2);
           margin-left: 7rem;
           width: calc(100% - 7rem);
         }
@@ -83,7 +84,7 @@ const EmailFormStyles = styled.form`
       .label-dirty {
         color: var(--dark);
         opacity: 1;
-        background: var(--mokka);
+        background: var(--blue3);
         width: 7rem;
       }
 
@@ -102,7 +103,7 @@ const EmailSendBtn = styled.button`
   display: inline-block;
   padding: 1.5rem 2.5rem;
   border: none;
-  color: var(--mokka);
+  color: var(--blue3);
   text-transform: uppercase;
   font-size: 1.6rem;
   letter-spacing: 0.15rem;
@@ -120,7 +121,7 @@ const EmailSendBtn = styled.button`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--brown);
+    background-color: var(--blue2);
     z-index: -2;
   }
   &:before {
@@ -130,7 +131,7 @@ const EmailSendBtn = styled.button`
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: var(--mokka);
+    background-color: var(--blue3);
     transition: all 0.3s;
     z-index: -1;
   }

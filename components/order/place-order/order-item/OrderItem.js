@@ -14,7 +14,6 @@ export default function OrderItem({ orderItem }) {
       },
     }
   );
-  console.log(orderItem);
 
   const item = data?.singleItem?.data?.attributes;
 
@@ -36,7 +35,9 @@ export default function OrderItem({ orderItem }) {
         )}
       </div>
       <div className='item-details'>
-        <h4 className='item-title'>{capitalizeStr(item?.itemTitle)}</h4>
+        <h4 className='item-title'>
+          {capitalizeStr(item?.itemTitle)}
+        </h4>
 
         <div className='item-type'>
           {orderItem?.type && <p>{orderItem?.type}:</p>}

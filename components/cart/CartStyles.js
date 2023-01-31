@@ -78,7 +78,7 @@ const CartStyles = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 2rem;
+    padding: 2rem 2rem 4rem 2rem;
     font-size: 1.3rem;
     height: 10rem;
     border-top: 1px solid var(--blue3);
@@ -112,13 +112,14 @@ const CartStyles = styled.div`
       padding: 1rem 1rem;
       text-transform: uppercase;
       border: none;
-      background: var(--green);
+      background: var(--blue3);
       border-radius: 2rem;
+      color: var(--white);
 
       @media (hover: hover) {
         &:hover {
           cursor: pointer;
-          background: var(--greenHover);
+          background: var(--blue2);
         }
       }
     }

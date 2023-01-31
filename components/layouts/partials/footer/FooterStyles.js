@@ -7,7 +7,6 @@ const FooterStyles = styled.footer`
 
   position: relative;
   width: 100vw;
-  top: 40vh;
   bottom: 0;
   margin: 0;
   padding: 2rem 0;

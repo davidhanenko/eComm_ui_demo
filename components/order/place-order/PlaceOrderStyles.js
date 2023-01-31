@@ -9,10 +9,14 @@ const PlaceOrderStyles = styled.div`
   display: grid;
   grid-template-columns: 3fr 2fr;
 
+  @media (max-width: 800px) {
+    display: block;
+  }
+
   .charge-section {
     padding: 6rem 0 0 3rem;
     border-left: 1px solid var(--blue3);
-    height: 60vh;
+    min-height: 60vh;
     p {
       margin: 0;
     }
