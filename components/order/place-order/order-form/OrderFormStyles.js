@@ -7,9 +7,9 @@ const OrderFormStyles = styled.form`
     border: 1px solid transparent;
     max-height: 12rem;
     outline: none;
-    position: relative;
     margin-bottom: 2rem;
     padding: 0 2rem;
+    position: relative;
 
     &:focus-within label {
       color: var(--dark);
@@ -25,16 +25,20 @@ const OrderFormStyles = styled.form`
       color: var(--dark);
       outline: none;
       background: transparent;
-      padding: 0.9rem 0.5rem;
+      padding: 0.6rem 0.5rem;
       width: 100%;
       height: 100%;
-      font-size: 1.5rem;
-      font-weight: 100;
+      font-size: 1.2rem;
+      font-weight: 400;
       transition: all 0.25s ease;
 
       &:focus {
         border: 1px solid var(--blue2);
         margin-left: 5px;
+      }
+
+      &::placeholder {
+        font-weight: 300;
       }
     }
 
@@ -46,6 +50,9 @@ const OrderFormStyles = styled.form`
     .input-error {
       font-size: 1rem;
       color: var(--red);
+      position: absolute;
+      left: 2rem;
+      bottom: -1.8rem;
     }
   }
 
@@ -53,6 +60,7 @@ const OrderFormStyles = styled.form`
     font-size: 1.2rem;
     padding: 5rem 3rem 2rem 1rem;
   }
+
   button {
     padding: 1rem;
     background-color: var(--blue3);

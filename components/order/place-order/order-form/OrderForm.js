@@ -55,7 +55,7 @@ export default function OrderForm({
       company: '',
       email: '',
       phone: '',
-      // notesMessage: '',
+      orderNotes: '',
     },
   });
 
@@ -169,21 +169,40 @@ export default function OrderForm({
                 /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim,
               message: 'Please enter a valid phone number',
             },
-
-            // minLength: {
-            //   value: 10,
-            //   message: 'Seems to short',
-            // },
-            // maxLength: {
-            //   value: 12,
-            //   message: 'Not a phone number',
-            // },
+            minLength: {
+              value: 10,
+              message: 'Seems to short',
+            },
+            maxLength: {
+              value: 12,
+              message: 'Not a phone number',
+            },
           })}
         />
         {
           <div className='input-error'>
             {errors?.phone?.message}
           </div>
+        }
+      </fieldset>
+      <fieldset className='input-field'>
+        <textarea
+          placeholder='Leave us some notes about your order'
+          className={
+            dirtyFields.orderNotes ? 'input-dirty' : ''
+          }
+          rows={3}
+          {...register('orderNotes', {
+            minLength: {
+              value: 10,
+              message: 'Tell us more please',
+            },
+          })}
+        />
+        {
+          <span className='input-error'>
+            {errors?.orderNotes?.message}
+          </span>
         }
       </fieldset>
 
