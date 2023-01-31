@@ -1,12 +1,13 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useCart } from '../../../../context/cartState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Oval from 'react-loader-spinner';
 import { OrderFormStyles } from './OrderFormStyles';
+import { Router } from 'next/router';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
@@ -59,6 +60,8 @@ export default function OrderForm({
     },
   });
 
+  const router = useRouter();
+
   const [createOrder, { loading, error, data }] =
     useMutation(CREATE_ORDER_MUTATION);
 
@@ -70,6 +73,7 @@ export default function OrderForm({
       company: values.company,
       email: values.email,
       phone: values.phone,
+      orderNotes: values.orderNotes,
     };
 
     try {
@@ -85,6 +89,7 @@ export default function OrderForm({
 
       reset();
       setCart([]);
+      router.push('/');
     } catch (err) {
       toast.error(
         'An unexpected error occurred, please try again'
@@ -106,7 +111,7 @@ export default function OrderForm({
           {...register('name', {
             required: 'Name is required',
             minLength: {
-              value: 5,
+              value: 3,
               message: 'Seems to short',
             },
           })}
