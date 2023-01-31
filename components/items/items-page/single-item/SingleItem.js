@@ -26,7 +26,7 @@ export default function SingleItem({
     ...singleItem?.attributes?.sizePrice,
   ]);
 
-  // sort by prices, to show list of available sizes of item in asc order
+  // sort by prices to show list of available sizes of item in asc order
   sizePrice.sort((a, b) => a.price - b.price);
 
   // functions from image slider/carousel
