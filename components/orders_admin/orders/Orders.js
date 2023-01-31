@@ -7,15 +7,21 @@ import Link from 'next/link';
 export default function Orders({ orders }) {
   return (
     <OrdersStyles>
-      {orders?.map(order => (
-        <OrdersItem key={order?.id} order={order} />
-      ))}
+      {orders &&
+        orders?.map(order => (
+          <OrdersItem key={order?.id} order={order} />
+        ))}
     </OrdersStyles>
   );
 }
 
 function OrdersItem({ order }) {
   const date = order?.attributes?.createdAt;
+
+  const orderDetails = JSON.parse(
+    order?.attributes?.orderDetails
+  );
+
   const localDate = new Date(date).toLocaleDateString(
     'en-US'
   );
@@ -33,24 +39,24 @@ function OrdersItem({ order }) {
         },
       }}
     >
-      <OrdersItemStyles order={order}>
+      <OrdersItemStyles>
         <p>ID - {order?.id}</p>
 
         <p>
           {localDate} &nbsp; {localTime}
         </p>
         <div>
-          <p>Total charge - ${order?.attributes?.charge}</p>
-          <p>Items - {order?.attributes?.totalItems}</p>
+          <p>Total charge - ${orderDetails?.charge}</p>
+          <p>Items - {orderDetails?.totalItems}</p>
         </div>
 
         <div>
-          <p>David Hanenko</p>
-          <p>Company</p>
+          <p>{orderDetails?.name}</p>
+          <p>{orderDetails?.company}</p>
         </div>
         <div>
-          <p>9293313730</p>
-          <p>email.gmail.com</p>
+          <p>{orderDetails?.phone}</p>
+          <p>{orderDetails?.email}</p>
         </div>
 
         <div

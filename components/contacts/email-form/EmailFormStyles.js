@@ -22,7 +22,6 @@ const EmailFormStyles = styled.form`
 
   .form {
     background: var(--white);
-    /* border: 1px solid var(--blue4); */
     box-shadow: 0px 0px 3px 1px var(--blue5);
 
     padding: 2rem;
@@ -73,7 +72,7 @@ const EmailFormStyles = styled.form`
         height: 100%;
         max-height: 100%;
         transition: all 0.3s ease;
-        font-size: 1.5rem;ß
+        font-size: 1.5rem;
       }
 
       .input-dirty {

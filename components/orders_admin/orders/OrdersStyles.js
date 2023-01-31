@@ -4,7 +4,7 @@ const OrdersStyles = styled.ul`
   margin-top: calc(
     var(--navHeight) + var(--searchHeight) + 5rem
   );
-  padding: 0 5rem;
+  padding: 5rem 5rem 10rem 5rem; 
   @media (max-width: 800px) {
     padding: 0 2rem;
   }
@@ -17,6 +17,8 @@ const OrdersItemStyles = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
   color: var(--gray);
   box-shadow: 1px 1px 4px 1px var(--blue5);
   transition: all 0.25s;
@@ -34,7 +36,7 @@ const OrdersItemStyles = styled.li`
     text-align: center;
   }
   .pending {
-    background-color: var(--orange);
+    background-color: #ffde36;
   }
   .fulfilled {
     background-color: var(--green);

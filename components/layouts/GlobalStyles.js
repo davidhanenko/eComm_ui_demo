@@ -61,6 +61,10 @@ const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  input, textarea {
+    font-family: 'Roboto', sans-serif;
+  }
  
 `;
 

@@ -20,5 +20,10 @@
   "git.ignoreLimitWarning": true,
   "prettier.jsxSingleQuote": true,
   "prettier.singleQuote": true,
-  "cSpell.words": ["metatags", "mokka"]
+  "cSpell.words": [
+    "metatags",
+    "mokka",
+    "toastify",
+    "Toastify"
+  ]
 }

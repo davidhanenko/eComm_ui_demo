@@ -9,11 +9,10 @@ export const ORDER_QUERY = gql`
       data {
         id
         attributes {
-          charge
-          totalItems
           createdAt
           status
-          itemDetails: item_details
+          orderDetails: order_details
+          itemDetails: items_details
         }
       }
     }
@@ -28,7 +27,7 @@ export default function OrderPage({ query }) {
   });
 
   if (loading) return <LoaderContainer height={'50vh'} />;
-  
+
   const order = data?.order?.data;
 
   return <Order order={order} />;

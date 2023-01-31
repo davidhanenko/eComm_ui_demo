@@ -40,8 +40,20 @@ const OrderStyles = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
+
+    @media (max-width: 600px) {
+      .order-title {
+        flex-direction: column;
+      }
+    }
   }
 
+  .order-notes {
+    width: 70%;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
   footer {
     button {
       text-transform: uppercase;

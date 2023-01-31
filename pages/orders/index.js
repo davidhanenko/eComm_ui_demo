@@ -1,15 +1,8 @@
-import dynamic from 'next/dynamic';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
-import LoaderContainer from '../../components/shared/loaders/loader-container/LoaderContainer';
+import Orders from '../../components/orders_admin/orders/Orders';
 
-const Orders = dynamic(
-  () =>
-    import('../../components/orders_admin/orders/Orders'),
-  {
-    loading: () => <LoaderContainer height={'70vh'} />,
-  }
-);
+import LoaderContainer from '../../components/shared/loaders/loader-container/LoaderContainer';
 
 export const ALL_ORDERS_QUERY = gql`
   query ALL_ORDERS_QUERY {
@@ -17,11 +10,10 @@ export const ALL_ORDERS_QUERY = gql`
       data {
         id
         attributes {
-          charge
-          totalItems
           createdAt
           status
-          itemDetails: item_details
+          orderDetails: order_details
+          itemDetails: items_details
         }
       }
     }
@@ -32,6 +24,8 @@ export default function OrdersPage() {
   const { data, error, loading } = useQuery(
     ALL_ORDERS_QUERY
   );
+
+  if (loading) return <LoaderContainer height={'70vh'} />;
 
   const orders = data?.orders?.data;
 

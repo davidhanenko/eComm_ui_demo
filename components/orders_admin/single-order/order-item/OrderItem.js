@@ -74,22 +74,35 @@ export default function OrderItem({ item }) {
             {itemData?.itemTitle &&
               capitalizeStr(itemData?.itemTitle)}
           </h4>
+          <div>
+            {itemDetails?.type && (
+              <span className='item-type'>
+                {itemDetails?.type} -{' '}
+              </span>
+            )}
+            <span>{itemDetails?.typeValue}</span>
+          </div>
           <p>
-            {itemDetails?.type} - {itemDetails?.typeValue}
-          </p>
-          <p>
-            Size - {itemDetails?.size || itemData?.size}
+            {itemDetails?.size || itemData?.size
+              ? `Size - ${
+                  itemDetails?.size || itemData?.size
+                }`
+              : itemDetails?.size || itemData?.size}
           </p>
         </div>
         <div className='lower-line'>
           <p>Qty - {item?.qty}</p>
-          <p>
-            Price -{' '}
-            {`$${
-              itemDetails?.price?.toFixed(2) ||
-              itemData?.price?.toFixed(2)
-            }`}
-          </p>
+
+          {itemDetails?.price || itemData?.price ? (
+            <p>
+              Price - $
+              {itemDetails?.price?.toFixed(2) ||
+                itemData?.price?.toFixed(2)}
+              
+            </p>
+          ) : (
+            <p className='price-not-available' >Price not available</p>
+          )}
         </div>
       </div>
     </OrderItemStyles>

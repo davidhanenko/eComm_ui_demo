@@ -20,10 +20,6 @@ const UPDATE_ORDER_STATUS = gql`
         id
         attributes {
           status
-          charge
-          totalItems
-          createdAt
-          itemDetails: item_details
         }
       }
     }
@@ -39,10 +35,14 @@ export default function Order({ order }) {
   const orderItems = JSON.parse(
     order?.attributes?.itemDetails
   );
+  // order details (get from db JSON)
+  const orderDetails = JSON.parse(
+    order?.attributes?.orderDetails
+  );
 
-  const totalCharge = order?.attributes?.charge;
-  const tax = totalCharge * 0.08875;
-  const toPay = totalCharge + tax;
+  const charge = orderDetails?.charge;
+  const tax = charge * 0.08875;
+  const totalCharge = charge + tax;
 
   const [
     updateOrder,
@@ -75,6 +75,7 @@ export default function Order({ order }) {
         <div className='order-title'>
           <h2>Order ID - {order?.id}</h2>
           <div className='status-select'>
+            <span>Order status</span>
             <DropdownSelect
               options={ORDER_STATUS_OPTIONS}
               select={order?.attributes?.status}
@@ -88,21 +89,18 @@ export default function Order({ order }) {
           <section className='top-left'>
             <p>
               Total items in order -{' '}
-              {order?.attributes?.totalItems}
+              {orderDetails?.totalItems}
             </p>
-            <p>
-              Total cost - $
-              {order?.attributes?.charge.toFixed(2)}
-            </p>
+            <p>Total cost - ${charge.toFixed(2)}</p>
             <p>Tax - ${tax.toFixed(2)}</p>
-            <p>Total charge - ${toPay.toFixed(2)}</p>
+            <p>Total charge - ${totalCharge.toFixed(2)}</p>
             <p>Shipping - </p>
           </section>
           <section className='top-right'>
-            <p>David Hanenko</p>
-            <p>Company</p>
-            <p>email@gmail.com</p>
-            <p>929-222-1144</p>
+            <p>{orderDetails?.name}</p>
+            <p>{orderDetails?.company}</p>
+            <p>{orderDetails?.email}</p>
+            <p>{orderDetails?.phone}</p>
           </section>
         </div>
       </header>
@@ -113,6 +111,11 @@ export default function Order({ order }) {
       ))}
 
       <hr />
+<div className='order-notes'>
+  <sub>Notes related to current order leaved by customer</sub>
+      <p>{orderDetails?.orderNotes}</p>
+
+</div>
 
       <footer>
         <Link href={'/orders'}>

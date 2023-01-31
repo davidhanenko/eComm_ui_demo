@@ -26,6 +26,10 @@ const OrderItemStyles = styled.section`
     justify-content: space-between;
     width: 80vw;
 
+    .item-type {
+      text-transform: capitalize;
+    }
+
     @media (max-width: 800px) {
       flex-direction: column;
       width: 100%;
@@ -50,6 +54,10 @@ const OrderItemStyles = styled.section`
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     width: 50vw;
+
+    .price-not-available {
+      font-weight: 300;
+    }
   }
 `;
 
