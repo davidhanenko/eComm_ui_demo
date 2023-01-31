@@ -25,38 +25,41 @@ export default function PlaceOrder() {
 
   return (
     <PlaceOrderStyles>
-      <section className='items-section'>
-        {cart.map(orderItem => (
-          <OrderItem
-            orderItem={orderItem}
-            key={orderItem.cartId}
-          />
-        ))}
-      </section>
-
-      <section className='charge-section'>
-        <p>Total cost - ${totalCost.toFixed(2)}</p>
-        <p>Tax - ${tax.toFixed(2)}</p>
-        <p>Total to charge - ${charge}</p>
-
-        <OrderForm
-          totalCost={totalCost}
-          count={count}
-          items_details={JSON.stringify(itemDetails)}
-          single_items={[...ids]}
-        />
-
+      <header>
+        <h1>Process your order</h1>
         <p>
-          The charge may include additional cost of items
-          which price not available at the moment of order.
-          We will notify you about total cost after
-          reviewing your order
+          Please carefully review the items included in the
+          current order and terms & conditions related to
+          order process procedure
         </p>
-        {/* 
-        <button onClick={handleOrder} disabled={loading}>
-          confirm order
-        </button> */}
-      </section>
+        <p>
+          Go back to the cart whenever you need to adjust
+          your order
+        </p>
+      </header>
+      <main>
+        <section className='items-section'>
+          {cart.map(orderItem => (
+            <OrderItem
+              orderItem={orderItem}
+              key={orderItem.cartId}
+            />
+          ))}
+        </section>
+
+        <section className='charge-section'>
+          <p>Total cost - ${totalCost.toFixed(2)}</p>
+          <p>Tax - ${tax.toFixed(2)}</p>
+          <p>Total to charge - ${charge}</p>
+
+          <OrderForm
+            totalCost={totalCost}
+            count={count}
+            items_details={JSON.stringify(itemDetails)}
+            single_items={[...ids]}
+          />
+        </section>
+      </main>
     </PlaceOrderStyles>
   );
 }

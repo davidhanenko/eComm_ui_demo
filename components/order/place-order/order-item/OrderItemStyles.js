@@ -23,6 +23,15 @@ const OrderItemStyles = styled.div`
       margin: 0;
       font-size: 1.5rem;
     }
+
+    .item-type p {
+      &:first-child {
+        text-transform: capitalize;
+      }
+    }
+    .item-price-not-available {
+      font-size: 1rem;
+    }
   }
 `;
 

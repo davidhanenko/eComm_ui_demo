@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
+import { useCart } from '../../../../context/cartState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,6 +36,8 @@ export default function OrderForm({
   items_details,
   single_items,
 }) {
+  const { setCart } = useCart();
+
   const {
     register,
     handleSubmit,
@@ -63,7 +66,7 @@ export default function OrderForm({
       charge: totalCost,
       totalItems: count,
       name: values.name,
-      company: values.email,
+      company: values.company,
       email: values.email,
       phone: values.phone,
     };
@@ -80,6 +83,7 @@ export default function OrderForm({
       });
 
       reset();
+      setCart([]);
     } catch (err) {
       toast.error(
         'An unexpected error occurred, please try again'
@@ -94,12 +98,12 @@ export default function OrderForm({
     >
       {/* name */}
       <fieldset>
-        <label
+        {/* <label
           className={dirtyFields.name ? 'label-dirty' : ''}
           htmlFor='name'
         >
           Full name
-        </label>
+        </label> */}
         <input
           type='text'
           placeholder='Full name'
@@ -116,8 +120,10 @@ export default function OrderForm({
             {errors?.name?.message}
           </div>
         }
+      </fieldset>
 
-        {/* company */}
+      {/* company */}
+      <fieldset>
         <input
           type='text'
           placeholder='Company name'
@@ -128,8 +134,9 @@ export default function OrderForm({
             {errors?.company?.message}
           </div>
         }
-
-        {/* email */}
+      </fieldset>
+      {/* email */}
+      <fieldset>
         <input
           id='email'
           placeholder='Email'
@@ -144,8 +151,9 @@ export default function OrderForm({
             {errors?.email?.message}
           </span>
         }
-
-        {/* phone */}
+      </fieldset>
+      {/* phone */}
+      <fieldset>
         <input
           type='text'
           placeholder='Phone #'
@@ -168,6 +176,13 @@ export default function OrderForm({
         }
       </fieldset>
 
+      <p className='price-not-available-note'>
+        The charge may include additional cost of items
+        which price not available at the moment of order. We
+        will notify you about total cost after reviewing
+        your order
+      </p>
+
       <button type='submit' disabled={isSubmitting}>
         {isSubmitting ? (
           <Oval
@@ -177,7 +192,7 @@ export default function OrderForm({
             width={25}
           />
         ) : (
-          <span>send</span>
+          <span>confirm order</span>
         )}
       </button>
     </OrderFormStyles>

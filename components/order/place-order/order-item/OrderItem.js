@@ -44,17 +44,25 @@ export default function OrderItem({ orderItem }) {
           <p>{orderItem?.typeValue}</p>
         </div>
 
-        <div className='item-qty'>
-          <p>Size:</p>
+        <div className='item-size'>
+          {orderItem?.size && <p>Size:</p>}
           <p>{orderItem?.size}</p>
         </div>
         <div className='item-qty'>
           <p>Qty:</p>
           <p>{orderItem?.quantity}</p>
         </div>
-        <div className='item-qty'>
+        <div className='item-price'>
           <p>Price:</p>
-          <p>{orderItem?.price}</p>
+          <p>
+            {orderItem?.price ? (
+              `$${orderItem?.price.toFixed(2)}`
+            ) : (
+              <p className='item-price-not-available'>
+                We will contact you about this item price
+              </p>
+            )}
+          </p>
         </div>
       </div>
     </OrderItemStyles>
