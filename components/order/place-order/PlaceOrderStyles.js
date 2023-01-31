@@ -9,10 +9,6 @@ const PlaceOrderStyles = styled.div`
   display: grid;
   grid-template-columns: 3fr 2fr;
 
-  @media (max-width: 800px) {
-    display: block;
-  }
-
   .charge-section {
     padding: 6rem 0 0 3rem;
     border-left: 1px solid var(--blue3);
@@ -36,6 +32,15 @@ const PlaceOrderStyles = styled.div`
           background-color: var(--blue2);
         }
       }
+    }
+  }
+
+  @media (max-width: 850px) {
+    display: flex;
+    flex-direction: column;
+
+    .charge-section {
+      border: none;
     }
   }
 `;

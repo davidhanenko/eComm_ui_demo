@@ -42,7 +42,7 @@ export default function PlaceOrder() {
         <OrderForm
           totalCost={totalCost}
           count={count}
-          item_details={JSON.stringify(itemDetails)}
+          items_details={JSON.stringify(itemDetails)}
           single_items={[...ids]}
         />
 
@@ -52,7 +52,7 @@ export default function PlaceOrder() {
           We will notify you about total cost after
           reviewing your order
         </p>
-{/* 
+        {/* 
         <button onClick={handleOrder} disabled={loading}>
           confirm order
         </button> */}

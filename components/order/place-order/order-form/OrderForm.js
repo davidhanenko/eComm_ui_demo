@@ -13,9 +13,8 @@ const CREATE_ORDER_MUTATION = gql`
       data {
         id
         attributes {
-          charge
-          totalItems
-          item_details
+          order_details
+          items_details
           single_items {
             data {
               id
@@ -33,7 +32,7 @@ const CREATE_ORDER_MUTATION = gql`
 export default function OrderForm({
   totalCost,
   count,
-  item_details,
+  items_details,
   single_items,
 }) {
   const {
@@ -60,18 +59,22 @@ export default function OrderForm({
     useMutation(CREATE_ORDER_MUTATION);
 
   const onSubmitForm = async values => {
+    const orderDetails = {
+      charge: totalCost,
+      totalItems: count,
+      name: values.name,
+      company: values.email,
+      email: values.email,
+      phone: values.phone,
+    };
+
     try {
       await createOrder({
         variables: {
           data: {
-            charge: totalCost,
-            totalItems: count,
-            item_details: item_details,
+            order_details: JSON.stringify(orderDetails),
+            items_details: items_details,
             single_items: single_items,
-            name: values.name,
-            company: values.email,
-            email: values.email,
-            phone: values.phone,
           },
         },
       });
