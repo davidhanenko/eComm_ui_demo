@@ -24,6 +24,7 @@
     "date-fns": "^2.22.1",
     "downshift": "^6.1.7",
     "embla-carousel": "^4.5.3",
+    "extract-files": "^13.0.0",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5",
     "graphql-upload": "^11.0.0",
