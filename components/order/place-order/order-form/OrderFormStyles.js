@@ -30,12 +30,22 @@ const OrderFormStyles = styled.form`
       height: 100%;
       font-size: 1.5rem;
       font-weight: 100;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
 
       &:focus {
         border: 1px solid var(--blue2);
         margin-left: 5px;
       }
+    }
+
+    .input-dirty {
+      border: 1px solid var(--blue2);
+      box-shadow: 0px 0px 2px 1px var(--blue5);
+    }
+
+    .input-error {
+      font-size: 1rem;
+      color: var(--red);
     }
   }
 
@@ -45,7 +55,6 @@ const OrderFormStyles = styled.form`
   }
   button {
     padding: 1rem;
-    /* margin-top: 10rem; */
     background-color: var(--blue3);
     color: var(--white);
     border-radius: 2rem;

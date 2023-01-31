@@ -4,7 +4,7 @@ const PlaceOrderStyles = styled.div`
   margin-top: calc(
     var(--navHeight) + var(--searchHeight) + 5rem
   );
-  padding: 0 5rem;
+  padding: 2rem 5rem;
   p {
     margin: 0;
   }

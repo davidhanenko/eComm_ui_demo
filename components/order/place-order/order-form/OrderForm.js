@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useCart } from '../../../../context/cartState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -49,6 +49,7 @@ export default function OrderForm({
       isDirty,
     },
   } = useForm({
+    mode: 'onBlur',
     defaultValues: {
       name: '',
       company: '',
@@ -98,15 +99,10 @@ export default function OrderForm({
     >
       {/* name */}
       <fieldset>
-        {/* <label
-          className={dirtyFields.name ? 'label-dirty' : ''}
-          htmlFor='name'
-        >
-          Full name
-        </label> */}
         <input
           type='text'
           placeholder='Full name'
+          className={dirtyFields.name ? 'input-dirty' : ''}
           {...register('name', {
             required: 'Name is required',
             minLength: {
@@ -127,6 +123,9 @@ export default function OrderForm({
         <input
           type='text'
           placeholder='Company name'
+          className={
+            dirtyFields.company ? 'input-dirty' : ''
+          }
           {...register('company')}
         />
         {
@@ -138,12 +137,16 @@ export default function OrderForm({
       {/* email */}
       <fieldset>
         <input
-          id='email'
+          type='email'
           placeholder='Email'
           className={dirtyFields.email ? 'input-dirty' : ''}
-          type='email'
           {...register('email', {
             required: 'Email is required',
+            pattern: {
+              value:
+                /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'Please enter a valid email',
+            },
           })}
         />
         {
@@ -152,21 +155,29 @@ export default function OrderForm({
           </span>
         }
       </fieldset>
+
       {/* phone */}
       <fieldset>
         <input
           type='text'
           placeholder='Phone #'
+          className={dirtyFields.phone ? 'input-dirty' : ''}
           {...register('phone', {
             required: 'Phone number is required',
-            minLength: {
-              value: 10,
-              message: 'Seems to short',
+            pattern: {
+              value:
+                /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim,
+              message: 'Please enter a valid phone number',
             },
-            maxLength: {
-              value: 12,
-              message: 'Not a phone number',
-            },
+
+            // minLength: {
+            //   value: 10,
+            //   message: 'Seems to short',
+            // },
+            // maxLength: {
+            //   value: 12,
+            //   message: 'Not a phone number',
+            // },
           })}
         />
         {
