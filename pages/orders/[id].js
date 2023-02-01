@@ -1,7 +1,9 @@
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import {
+  addApolloState,
+  initializeApollo,
+} from '../../lib/apollo';
 import Order from '../../components/orders_admin/single-order/Order';
-import LoaderContainer from '../../components/shared/loaders/loader-container/LoaderContainer';
 
 export const ORDER_QUERY = gql`
   query ORDER_QUERY($id: ID!) {
@@ -19,26 +21,38 @@ export const ORDER_QUERY = gql`
   }
 `;
 
-export default function OrderPage({ query }) {
-  const { data, error, loading } = useQuery(ORDER_QUERY, {
-    variables: {
-      id: query?.id,
-    },
-  });
-
-  if (loading) return <LoaderContainer height={'50vh'} />;
-
-  const order = data?.order?.data;
+export default function OrderPage(props) {
+  const order = props?.order?.data;
 
   return <Order order={order} />;
 }
 
-export async function getServerSideProps(props) {
+export const getServerSideProps = async ctx => {
+  const client = initializeApollo({
+    headers: ctx?.req?.headers,
+  });
+
   let layout = 'main';
 
-  return {
-    props: {
-      layout,
-    },
-  };
-}
+  try {
+    const {
+      data: { order },
+    } = await client.query({
+      query: ORDER_QUERY,
+      variables: {
+        id: ctx?.query?.id,
+      },
+    });
+
+    return addApolloState(client, {
+      props: {
+        order: order || null,
+        layout,
+      },
+    });
+  } catch {
+    return {
+      props: {},
+    };
+  }
+};

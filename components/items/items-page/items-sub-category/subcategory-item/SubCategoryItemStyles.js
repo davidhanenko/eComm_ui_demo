@@ -11,6 +11,10 @@ const SubCategoryItemStyles = styled.div`
     padding: 1rem 0 1.5rem 0;
     margin: 0;
     transition: all 0.25s;
+
+    @media (max-width: 600px) {
+      font-size: 1.3rem;
+    }
   }
 
   .sub-image {

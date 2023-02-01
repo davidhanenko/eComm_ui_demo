@@ -38,8 +38,8 @@ const CollectionItemStyles = styled.div`
     margin: 0;
     transition: all 0.25s;
 
-    @media (max-width: 576px) {
-      font-size: 1.3rem;
+    @media (max-width: 600px) {
+      font-size: 1.2rem;
     }
   }
 

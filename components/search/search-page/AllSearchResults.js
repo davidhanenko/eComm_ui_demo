@@ -88,7 +88,7 @@ export default function AllSearchResults({
 }) {
   const { itemsPerPage, sortItemsBy } = usePagination();
 
-  const { data, error, loading } = useQuery(SEARCH_QUERY, {
+  const { data, loading } = useQuery(SEARCH_QUERY, {
     variables: {
       searchTerm: term,
       limit: itemsPerPage,
@@ -98,11 +98,6 @@ export default function AllSearchResults({
   });
 
   if (loading) return <LoaderContainer height={'100vh'} />;
-  // if (error) {
-  //   toast.error(
-  //     'An unexpected error while searching for items, please try again'
-  //   );
-  // }
 
   const foundItems = data?.singleItems?.data || [];
 

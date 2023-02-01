@@ -2,7 +2,11 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+
+import {
+  addApolloState,
+  initializeApollo,
+} from '../../lib/apollo';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,6 +22,7 @@ export const ITEMS_PAGE_QUERY = gql`
       data {
         id
         attributes {
+          service
           metatags {
             ... on ComponentMetatagsMetatags {
               metaTitle
@@ -38,37 +43,22 @@ export const ITEMS_PAGE_QUERY = gql`
   }
 `;
 
-export default function ServicePage({ query }) {
-  // name of the service
-  const service = query?.service;
-
-
-  const { data, error, loading } = useQuery(
-    ITEMS_PAGE_QUERY,
-    {
-      variables: {
-        service: service,
-      },
-    }
-  );
+export default function ServicePage(props) {
+  // title of the service
+  const service =
+    props?.services?.data[0]?.attributes?.service;
 
   const allServiceItems =
-    data?.services?.data[0]?.attributes?.items?.data;
-
-  if (error) {
-    toast.error(
-      'An unexpected error while loading the page, please try again'
-    );
-  }
+    props?.services?.data[0]?.attributes?.items?.data;
 
   return (
     <>
       <Head>
         <title>
-          {data?.services?.data[0]?.attributes?.metatags[0]
+          {props?.services?.data[0]?.attributes?.metatags[0]
             ?.metaTitle &&
             capitalizeStr(
-              data?.services?.data[0]?.attributes
+              props?.services?.data[0]?.attributes
                 ?.metatags[0]?.metaTitle
             )}{' '}
           - A2Z
@@ -76,8 +66,8 @@ export default function ServicePage({ query }) {
         <meta
           name='description'
           content={
-            data?.services[0]?.data?.attributes?.metatags[0]
-              ?.metaDescription
+            props?.services[0]?.data?.attributes
+              ?.metatags[0]?.metaDescription
           }
         />
       </Head>
@@ -85,9 +75,35 @@ export default function ServicePage({ query }) {
         <Items
           allServiceItems={allServiceItems}
           service={service}
-          loading={loading}
         />
       }
     </>
   );
 }
+
+export const getServerSideProps = async ctx => {
+  const client = initializeApollo({
+    headers: ctx?.req?.headers,
+  });
+
+  try {
+    const {
+      data: { services },
+    } = await client.query({
+      query: ITEMS_PAGE_QUERY,
+      variables: {
+        service: ctx?.query?.service,
+      },
+    });
+
+    return addApolloState(client, {
+      props: {
+        services: services || null,
+      },
+    });
+  } catch {
+    return {
+      props: {},
+    };
+  }
+};

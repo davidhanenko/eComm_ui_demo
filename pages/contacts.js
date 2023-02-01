@@ -13,7 +13,7 @@ export default function ContactsPage(props) {
   return <Contacts />;
 }
 
-export async function getServerSideProps(props) {
+export async function getStaticProps() {
   let layout = 'main';
 
   return {

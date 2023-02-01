@@ -1,6 +1,9 @@
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
 import Orders from '../../components/orders_admin/orders/Orders';
+import {
+  addApolloState,
+  initializeApollo,
+} from '../../lib/apollo';
 
 import LoaderContainer from '../../components/shared/loaders/loader-container/LoaderContainer';
 
@@ -20,24 +23,41 @@ export const ALL_ORDERS_QUERY = gql`
   }
 `;
 
-export default function OrdersPage() {
-  const { data, error, loading } = useQuery(
-    ALL_ORDERS_QUERY
-  );
+export default function OrdersPage(props) {
+  // const { data, error, loading } = useQuery(
+  //   ALL_ORDERS_QUERY
+  // );
 
-  if (loading) return <LoaderContainer height={'70vh'} />;
+  // if (loading) return <LoaderContainer height={'70vh'} />;
 
-  const orders = data?.orders?.data;
+  const orders = props?.orders?.data;
 
   return <Orders orders={orders} />;
 }
 
-export async function getServerSideProps(props) {
+export const getStaticProps = async ctx => {
+  const client = initializeApollo({
+    headers: ctx?.req?.headers,
+  });
+
   let layout = 'main';
 
-  return {
-    props: {
-      layout,
-    },
-  };
-}
+  try {
+    const {
+      data: { orders },
+    } = await client.query({
+      query: ALL_ORDERS_QUERY,
+    });
+
+    return addApolloState(client, {
+      props: {
+        orders: orders || null,
+        layout,
+      },
+    });
+  } catch {
+    return {
+      props: {},
+    };
+  }
+};

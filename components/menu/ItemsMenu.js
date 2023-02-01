@@ -16,7 +16,7 @@ import {
 
 const SERVICE_MENU_QUERY = gql`
   query SERVICE_MENU_QUERY($service: String!) {
-    services(filters: { service: { eq: $service } }) {
+    services(filters: { service: { eqi: $service } }) {
       data {
         id
         attributes {

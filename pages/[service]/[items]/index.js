@@ -1,8 +1,10 @@
 import dynamic from 'next/dynamic';
 
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
-
+import {
+  addApolloState,
+  initializeApollo,
+} from '../../../lib/apollo';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -17,36 +19,31 @@ export const ALL_ITEMS_QUERY = gql`
     $service: String!
     $itemsCategory: String!
   ) {
-    services(filters: { service: { eq: $service } }) {
+    items(
+      filters: {
+        title: { eqi: $itemsCategory }
+        services: { service: { eqi: $service } }
+      }
+    ) {
       data {
         id
         attributes {
-          service
-          items(
-            filters: { title: { eq: $itemsCategory } }
-          ) {
+          title
+          category: items_categories {
             data {
               id
               attributes {
-                title
-                category: items_categories {
+                categoryTitle
+                singleItems: single_items {
                   data {
                     id
                     attributes {
-                      categoryTitle
-                      singleItems: single_items {
+                      itemTitle
+                      image {
                         data {
                           id
                           attributes {
-                            itemTitle
-                            image {
-                              data {
-                                id
-                                attributes {
-                                  url
-                                }
-                              }
-                            }
+                            url
                           }
                         }
                       }
@@ -56,39 +53,58 @@ export const ALL_ITEMS_QUERY = gql`
               }
             }
           }
+          services {
+            data {
+              id
+              attributes {
+                service
+              }
+            }
+          }
         }
       }
     }
   }
 `;
 
-export default function ServiceCategoryPage({ query }) {
-  const { data, error, loading } = useQuery(
-    ALL_ITEMS_QUERY,
-    {
-      variables: {
-        service: query.service,
-        itemsCategory: decodeURIComponent(query.items),
-      },
-    }
-  );
+export default function ServiceCategoryPage(props) {
+  const items = props?.items?.data[0];
 
-  const items =
-    data?.services?.data[0]?.attributes?.items?.data[0];
-
-  const service = query?.service;
-
-  if (error) {
-    toast.error(
-      'An unexpected error while loading the page, please try again'
-    );
-  }
+  const service =
+    props?.items?.data[0]?.attributes?.services?.data[0]
+      ?.attributes?.service;
 
   return (
-    <ItemsByCategory
-      items={items}
-      service={service}
-      loading={loading}
-    />
+    <ItemsByCategory items={items} service={service} />
   );
 }
+
+export const getServerSideProps = async ctx => {
+  const client = initializeApollo({
+    headers: ctx?.req?.headers,
+  });
+
+  try {
+    const {
+      data: { items },
+    } = await client.query({
+      query: ALL_ITEMS_QUERY,
+      variables: {
+        service: ctx?.query?.service,
+        itemsCategory: decodeURIComponent(
+          ctx?.query?.items
+        ),
+      },
+    });
+
+    return addApolloState(client, {
+      props: {
+        items: items || null,
+      },
+    });
+  } catch {
+    return {
+      props: {},
+    };
+  }
+};

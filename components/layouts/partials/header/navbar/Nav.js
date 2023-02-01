@@ -20,7 +20,6 @@ import {
 } from './NavStyles';
 import { TOGGLE_WIDTH } from '../../../../../config';
 import Search from '../../../../search/Search';
-import MenuItemPlaceholder from '../../../../shared/placeholders/MenuItemPlaceholder';
 import CartCount from '../../../../cart/cart-count/CartCount';
 
 const SERVICES_NAV_QUERY = gql`
@@ -67,11 +66,8 @@ const SERVICES_NAV_QUERY = gql`
   }
 `;
 
-export default function Nav() {
-  const { data, loading } = useQuery(SERVICES_NAV_QUERY, {
-    fetchPolicy: 'cache-and-network',
-    nextFetchPolicy: 'cache-first',
-  });
+export default function Nav(props) {
+  const { data, loading } = useQuery(SERVICES_NAV_QUERY);
 
   // services to spread in nav
   const services = data?.services?.data;
@@ -169,23 +165,18 @@ export default function Nav() {
           <Link href='/about' passHref>
             <LinkBtn title={'about'} page={'about'} />
           </Link>
-
-          {loading ? (
-            <MenuItemPlaceholder i={'navLink'} />
-          ) : (
-            services?.map(service => (
-              <Link
-                key={service.id}
-                href={`/${service?.attributes?.service}`}
-                passHref
-              >
-                <NavDropdown
-                  title={service?.attributes?.service}
-                  items={service?.attributes?.items?.data}
-                />
-              </Link>
-            ))
-          )}
+          {services?.map(service => (
+            <Link
+              key={service.id}
+              href={`/${service?.attributes?.service}`}
+              passHref
+            >
+              <NavDropdown
+                title={service?.attributes?.service}
+                items={service?.attributes?.items?.data}
+              />
+            </Link>
+          ))}
           <Link href='/contacts' passHref>
             <LinkBtn title={'contacts'} page={'contacts'} />
           </Link>

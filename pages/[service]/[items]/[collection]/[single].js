@@ -1,6 +1,9 @@
 import Head from 'next/head';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import {
+  addApolloState,
+  initializeApollo,
+} from '../../../../lib/apollo';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -46,25 +49,8 @@ export const SINGLE_ITEM_QUERY = gql`
   }
 `;
 
-export default function SingleItemPage({ query }) {
-  const { data, error, loading } = useQuery(
-    SINGLE_ITEM_QUERY,
-    {
-      variables: {
-        item: decodeURIComponent(query?.single),
-      },
-    }
-  );
-
-  const linkToSingleItem = `${query?.service}/${query?.items}/${query?.collection}/${query?.single}`;
-
-  if (error) {
-    toast.error(
-      'An unexpected error while loading the page, please try again'
-    );
-  }
-
-  const singleItem = data?.singleItems?.data[0];
+export default function SingleItemPage(props) {
+  const singleItem = props?.singleItems?.data[0];
 
   return (
     <>
@@ -88,10 +74,40 @@ export default function SingleItemPage({ query }) {
       {singleItem && (
         <SingleItem
           singleItem={singleItem}
-          loading={loading}
-          link={linkToSingleItem}
+          // loading={loading}
+          link={props?.resolvedUrl}
         />
       )}
     </>
   );
 }
+
+export const getServerSideProps = async ctx => {
+  const client = initializeApollo({
+    headers: ctx?.req?.headers,
+  });
+
+  try {
+    const resolvedUrl = ctx?.resolvedUrl;
+
+    const {
+      data: { singleItems },
+    } = await client.query({
+      query: SINGLE_ITEM_QUERY,
+      variables: {
+        item: decodeURIComponent(ctx?.query?.single),
+      },
+    });
+
+    return addApolloState(client, {
+      props: {
+        singleItems: singleItems || null,
+        resolvedUrl: resolvedUrl || null,
+      },
+    });
+  } catch {
+    return {
+      props: {},
+    };
+  }
+};

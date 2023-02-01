@@ -4,11 +4,12 @@ import Link from 'next/link';
 
 import Item from '../item/Item';
 import { CategoriesStyles } from './CategoriesStyles';
+import LoaderContainer from '../../../../shared/loaders/loader-container/LoaderContainer';
 
 const ITEMS_COMPONENT_QUERY = gql`
   query ITEMS_COMPONENT_QUERY($items: String) {
     itemsCategories(
-      filters: { items: { title: { eq: $items } } }
+      filters: { items: { title: { eqi: $items } } }
       pagination: { start: 0, limit: 4 }
     ) {
       data {
@@ -44,7 +45,9 @@ export default function Categories({
 
   const categories = data?.itemsCategories?.data;
 
-  return (
+  return loading ? (
+    <LoaderContainer height={'5rem'} />
+  ) : (
     <CategoriesStyles>
       <Link
         href={{
@@ -64,7 +67,7 @@ export default function Categories({
                   page={page}
                   key={itemsCategory.id}
                   categoryTitle={
-                    itemsCategory.attributes.categoryTitle
+                    itemsCategory?.attributes?.categoryTitle
                   }
                 />
               ))}

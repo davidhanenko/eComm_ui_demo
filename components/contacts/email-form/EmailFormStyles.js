@@ -9,7 +9,6 @@ const EmailFormStyles = styled.form`
 
   margin: 2rem;
 
-
   h2 {
     text-align: center;
     font-size: 3rem;
@@ -54,8 +53,8 @@ const EmailFormStyles = styled.form`
         width: 100%;
         height: 100%;
         font-size: 1.5rem;
-        font-weight: 100;
-        transition: all 0.3s ease;
+        font-weight: 300;
+        transition: all 0.25s ease;
 
         &:focus {
           border: 1px solid var(--blue2);

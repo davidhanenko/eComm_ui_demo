@@ -15,9 +15,9 @@ const ItemsSlideStyles = styled.div`
     font-size: 2.5rem;
     text-transform: uppercase;
     font-weight: 400;
-    color: var(--brown);
+    color: var(--blue3);
     z-index: 3;
-    transition: all 0.3s;
+    transition: all 0.25s;
     @media (max-width: 500px) {
       font-size: 2.8rem;
     }
@@ -30,7 +30,7 @@ const ItemsSlideStyles = styled.div`
   }
 
   .item-image {
-    transition: transform 0.3s;
+    transition: transform 0.25s;
   }
 
   @media (hover: hover) {

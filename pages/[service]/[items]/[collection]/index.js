@@ -1,13 +1,15 @@
 import dynamic from 'next/dynamic';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import {
+  addApolloState,
+  initializeApollo,
+} from '../../../../lib/apollo';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { PaginationStateProvider } from '../../../../context/paginationState';
 import Pagination from '../../../../components/shared/pagination/Pagination';
-import LoaderContainer from '../../../../components/shared/loaders/loader-container/LoaderContainer';
 
 const SubCategoryCollection = dynamic(() =>
   import(
@@ -20,7 +22,7 @@ const PAGINATION_QUERY = gql`
     singleItems(
       filters: {
         items_categories: {
-          categoryTitle: { eq: $collection }
+          categoryTitle: { eqi: $collection }
         }
       }
     ) {
@@ -33,53 +35,72 @@ const PAGINATION_QUERY = gql`
   }
 `;
 
-export default function ServiceCollectionPage({ query }) {
-  const service = query.service;
-  const items = query.items;
-  const collection = query.collection;
-
-  const { data, error, loading } = useQuery(
-    PAGINATION_QUERY,
-    {
-      variables: {
-        collection: decodeURIComponent(collection),
-      },
-    }
-  );
-
-  const itemsCount =
-    data?.singleItems?.meta?.pagination?.total;
+export default function ServiceCollectionPage(props) {
+  const service = props?.service;
+  const items = props?.items;
+  const collection = props?.collection;
 
   // url for pagination component
-  const currentUrl = `${service}/${items}/${collection}`;
+  const currentUrl = `/${service}/${items}/${collection}`;
+
+  const itemsCount =
+    props?.singleItems?.meta?.pagination?.total;
 
   // current page
-  const page = parseInt(query.page);
+  const page = parseInt(props?.page);
 
-  if (error) {
-    toast.error(
-      'An unexpected error while loading the page, please try to refresh'
-    );
-  }
 
   return (
     <PaginationStateProvider>
-      {!loading ? (
-        <Pagination
-          page={page || 1}
-          currentUrl={currentUrl}
-          itemsCount={itemsCount}
-        />
-      ) : (
-        <LoaderContainer height={'75vh'} />
-      )}
+      <Pagination
+        page={page || 1}
+        currentUrl={currentUrl}
+        itemsCount={itemsCount}
+      />
       <SubCategoryCollection
-        service={service}
-        items={items}
-        collection={collection}
+        items={props?.items}
+        collection={props?.collection}
         page={page || 1}
         itemsCount={itemsCount}
       />
     </PaginationStateProvider>
   );
 }
+
+export const getServerSideProps = async ctx => {
+  const client = initializeApollo({
+    headers: ctx?.req?.headers,
+  });
+
+  try {
+    const service = ctx?.query?.service;
+    const items = ctx?.query?.items;
+    const collection = ctx?.query?.collection;
+    const page = ctx?.query?.page;
+
+    const {
+      data: { singleItems },
+    } = await client.query({
+      query: PAGINATION_QUERY,
+      variables: {
+        collection: decodeURIComponent(
+          ctx?.query?.collection
+        ),
+      },
+    });
+
+    return addApolloState(client, {
+      props: {
+        singleItems: singleItems || null,
+        service: service || null,
+        items: items || null,
+        collection: collection || null,
+        page: page || null,
+      },
+    });
+  } catch {
+    return {
+      props: {},
+    };
+  }
+};
