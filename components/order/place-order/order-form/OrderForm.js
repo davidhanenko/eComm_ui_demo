@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Oval from 'react-loader-spinner';
 import { OrderFormStyles } from './OrderFormStyles';
-import { Router } from 'next/router';
+import { useRouter } from 'next/router';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
