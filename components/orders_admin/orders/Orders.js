@@ -18,9 +18,10 @@ export default function Orders({ orders }) {
 function OrdersItem({ order }) {
   const date = order?.attributes?.createdAt;
 
-  const orderDetails = JSON.parse(
-    order?.attributes?.orderDetails
-  );
+  const orderDetails =
+    typeof order?.attributes?.orderDetails === 'object'
+      ? order?.attributes?.orderDetails
+      : JSON.parse(order?.attributes?.orderDetails);
 
   const localDate = new Date(date).toLocaleDateString(
     'en-US'

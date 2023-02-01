@@ -159,12 +159,6 @@ export default function Nav(props) {
         ref={navRef}
       >
         <div className='nav-links'>
-          <Link href='/' passHref>
-            <LinkBtn title={'home'} page={''} />
-          </Link>
-          <Link href='/about' passHref>
-            <LinkBtn title={'about'} page={'about'} />
-          </Link>
           {services?.map(service => (
             <Link
               key={service.id}
@@ -177,6 +171,14 @@ export default function Nav(props) {
               />
             </Link>
           ))}
+
+          <Link href='/' passHref>
+            <LinkBtn title={'home'} page={''} />
+          </Link>
+          <Link href='/about' passHref>
+            <LinkBtn title={'about'} page={'about'} />
+          </Link>
+
           <Link href='/contacts' passHref>
             <LinkBtn title={'contacts'} page={'contacts'} />
           </Link>

@@ -31,14 +31,17 @@ export default function Order({ order }) {
     order?.attributes?.status
   );
 
-  // items included in current order (get from db JSON)
-  const orderItems = JSON.parse(
-    order?.attributes?.itemDetails
-  );
-  // order details (get from db JSON)
-  const orderDetails = JSON.parse(
-    order?.attributes?.orderDetails
-  );
+  // items included in current order (get from db - parse if JSON or use as object)
+  const orderItems =
+    typeof order?.attributes?.itemDetails === 'object'
+      ? order?.attributes?.itemDetails
+      : JSON.parse(order?.attributes?.itemDetails);
+
+  // order details (get from db JSON || object)
+  const orderDetails =
+    typeof order?.attributes?.orderDetails === 'object'
+      ? order?.attributes?.orderDetails
+      : JSON.parse(order?.attributes?.orderDetails);
 
   const charge = orderDetails?.charge;
   const tax = charge * 0.08875;
@@ -111,11 +114,12 @@ export default function Order({ order }) {
       ))}
 
       <hr />
-<div className='order-notes'>
-  <sub>Notes related to current order leaved by customer</sub>
-      <p>{orderDetails?.orderNotes}</p>
-
-</div>
+      <div className='order-notes'>
+        <sub>
+          Notes related to current order leaved by customer
+        </sub>
+        <p>{orderDetails?.orderNotes}</p>
+      </div>
 
       <footer>
         <Link href={'/orders'}>
