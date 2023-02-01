@@ -1,13 +1,16 @@
-import dynamic from 'next/dynamic';
+
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import {
+  addApolloState,
+  initializeApollo,
+} from '../../lib/apollo';
 import styled from 'styled-components';
 
 import { PaginationStateProvider } from '../../context/paginationState';
 
 import AllSearchResults from '../../components/search/search-page/AllSearchResults';
 import Pagination from '../../components/shared/pagination/Pagination';
-import LoaderContainer from '../../components/shared/loaders/loader-container/LoaderContainer';
+
 
 // query to found quantity of found items
 const SEARCH_PAGINATION_QUERY = gql`
@@ -36,29 +39,18 @@ const PaginationStyles = styled.div`
   );
 `;
 
-export default function SearchPage({ query }) {
+export default function SearchPage(props) {
   // current page
-  const page = parseInt(query.page);
-  // search term
-  const term = query.search;
-
-  const { data, loading, error } = useQuery(
-    SEARCH_PAGINATION_QUERY,
-    {
-      variables: {
-        searchTerm: term,
-      },
-    }
-  );
+  const page = parseInt(props?.page);
 
   // count of found items
   const itemsCount =
-    data?.singleItems?.meta?.pagination?.total;
+    props?.singleItems?.meta?.pagination?.total;
 
   // url for pagination component
-  const currentUrl = `search/${term}`;
+  const currentUrl = `/search/${props?.searchTerm}`;
 
-  if (loading) return <LoaderContainer height={'100vh'} />;
+
 
   return (
     <PaginationStateProvider>
@@ -71,19 +63,45 @@ export default function SearchPage({ query }) {
       </PaginationStyles>
       <AllSearchResults
         itemsCount={itemsCount}
-        term={term}
+        term={props?.searchTerm}
         page={page || 1}
       />
     </PaginationStateProvider>
   );
 }
 
-export async function getServerSideProps(props) {
-  let layout = 'main';
+export const getServerSideProps = async ctx => {
+  const client = initializeApollo({
+    headers: ctx?.req?.headers,
+  });
 
-  return {
-    props: {
-      layout,
-    },
-  };
-}
+  const layout = 'main';
+
+  try {
+    const page = ctx?.query?.page;
+
+    const searchTerm = ctx?.query?.search;
+
+    const {
+      data: { singleItems },
+    } = await client.query({
+      query: SEARCH_PAGINATION_QUERY,
+      variables: {
+        searchTerm: ctx?.query?.search,
+      },
+    });
+
+    return addApolloState(client, {
+      props: {
+        singleItems: singleItems || null,
+        searchTerm: searchTerm || null,
+        page: page || null,
+        layout,
+      },
+    });
+  } catch {
+    return {
+      props: {},
+    };
+  }
+};

@@ -13,7 +13,7 @@ const ItemsMainPageStyles = styled.section`
     font-size: 4rem;
     text-transform: uppercase;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--blue1);
     padding-left: 5rem;
     padding-bottom: 5rem;
   }
@@ -31,7 +31,7 @@ const ItemsMainPageStyles = styled.section`
   }
 
   img {
-    transition: all 0.3s;
+    transition: all 0.25s;
   }
 `;
 

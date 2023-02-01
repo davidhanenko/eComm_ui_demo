@@ -20,7 +20,7 @@ const ITEMS_SUBCATEGORY_COLLECTION_QUERY = gql`
     singleItems(
       filters: {
         items_categories: {
-          categoryTitle: { eq: $collection }
+          categoryTitle: { eqi: $collection }
         }
       }
       pagination: { start: $start, limit: $limit }
@@ -42,7 +42,7 @@ const ITEMS_SUBCATEGORY_COLLECTION_QUERY = gql`
             }
           }
           itemsCategories: items_categories(
-            filters: { categoryTitle: { eq: $collection } }
+            filters: { categoryTitle: { eqi: $collection } }
           ) {
             data {
               id

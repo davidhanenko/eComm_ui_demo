@@ -11,7 +11,7 @@ const CATEGORY_ITEM_QUERY = gql`
     singleItems(
       filters: {
         items_categories: {
-          categoryTitle: { eq: $category }
+          categoryTitle: { eqi: $category }
         }
       }
       pagination: { start: 0, limit: 1 }
@@ -46,6 +46,8 @@ export default function Item({ categoryTitle }) {
       category: categoryTitle,
     },
   });
+
+  console.log(categoryTitle);
 
   const serviceItem = data?.singleItems?.data[0];
 

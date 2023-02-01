@@ -1,13 +1,7 @@
-import Head from 'next/head';
-import Image from 'next/image';
-
+import About from '../components/about/About';
 
 export default function AboutPage(props) {
-  return (
-    <>
-      <h1>About Page</h1>
-    </>
-  );
+  return <About />;
 }
 
 export async function getServerSideProps(props) {

@@ -30,7 +30,7 @@ const ItemsSliderStyles = styled.div`
 
   .embla__slide {
     position: relative;
-    min-width: 50%;
+    /* min-width: 50%; */
     @media (max-width: 500px) {
       min-width: 100%;
     }
@@ -72,12 +72,12 @@ const ItemsSliderStyles = styled.div`
     cursor: pointer;
 
     svg {
-      fill: var(--brown);
+      fill: var(--blue2);
     }
     @media (hover: hover) {
       &:hover {
         svg {
-          fill: var(--orange);
+          fill: var(--blue3);
         }
       }
     }

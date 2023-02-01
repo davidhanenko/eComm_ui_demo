@@ -8,11 +8,10 @@ import { ParallaxProvider } from 'react-scroll-parallax';
 import '../styles/nprogress.css';
 import '../styles/fonts.css';
 
-import withData from '../lib/withData';
-
 import LayoutWrapper from '../components/layouts/LayoutWrapper';
 import { PaginationStateProvider } from '../context/paginationState';
 import { CartStateProvider } from '../context/cartState';
+import { useApollo } from '../lib/apollo';
 
 // smoothscroll polyfill - safari
 if (typeof window !== 'undefined') {
@@ -30,11 +29,11 @@ Router.events.on('routeChangeError', () =>
   NProgress.done()
 );
 
-function MyApp({ Component, pageProps, apollo }) {
-  const getLayout = Component.getLayout || (page => page);
+function MyApp({ Component, pageProps }) {
+  const apolloClient = useApollo(pageProps);
 
   return (
-    <ApolloProvider client={apollo}>
+    <ApolloProvider client={apolloClient}>
       <ParallaxProvider>
         <ScrollProvider>
           <CartStateProvider>
@@ -50,16 +49,4 @@ function MyApp({ Component, pageProps, apollo }) {
   );
 }
 
-MyApp.getInitialProps = async function ({
-  Component,
-  ctx,
-}) {
-  let pageProps = {};
-  if (Component.getInitialProps) {
-    pageProps = await Component.getInitialProps(ctx);
-  }
-  pageProps.query = ctx.query;
-  return { pageProps };
-};
-
-export default withData(MyApp);
+export default MyApp;
