@@ -77,10 +77,12 @@ export default function OrderForm({
     };
 
     try {
+      const orderDetailsJson = JSON.stringify(orderDetails);
+
       await createOrder({
         variables: {
           data: {
-            order_details: JSON.stringify(orderDetails),
+            order_details: orderDetailsJson,
             items_details: items_details,
             single_items: single_items,
           },
