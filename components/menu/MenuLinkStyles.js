@@ -7,21 +7,27 @@ const MenuLinkStyles = styled.div`
     text-decoration: none;
   }
   .link-title {
-    margin: 1rem 1rem 0 1rem;
-    padding: 1.5rem 1rem 1rem 1rem;
+    margin: 0rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
     color: var(--dark);
     text-transform: uppercase;
     font-weight: 400;
     transition: all 0.25s;
     @media (hover: hover) {
       &:hover {
-        color: var(--blue3);
+        color: var(--blue4);
       }
     }
   }
 
   .active {
-    color: var(--blue3);
+    color: var(--blue4);
+  }
+
+  @media (min-width: 850px) {
+    .active {
+      color: var(--blue4);
+    }
   }
 `;
 

@@ -27,13 +27,14 @@ const NavStyles = styled.nav`
       right: 0;
       min-width: 80%;
       background: var(--white);
+      box-shadow: 1px 1px 3px 1px var(--offWhite);
       transform: translateX(100%);
       z-index: 2;
       padding-bottom: 2rem;
       opacity: 0.9;
       ${props =>
         props.open &&
-        `grid-auto-flow: row; opacity: 1; transform: translate(0, var(--navHeight)); transition: all 0.3s;`};
+        `grid-auto-flow: row; opacity: 0.98; transform: translate(0, var(--navHeight)); transition: all 0.3s;`};
       ${props =>
         !props.open &&
         props.width <= 850 &&

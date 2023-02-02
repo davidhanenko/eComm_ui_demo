@@ -58,7 +58,6 @@ export default function ItemsMainPage({ service }) {
     }
   );
 
-  console.log(data);
   const SLIDE_COUNT =
     data?.services?.data[0]?.attributes?.items?.data
       ?.length;

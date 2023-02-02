@@ -171,7 +171,6 @@ export default function Nav(props) {
               />
             </Link>
           ))}
-
           <Link href='/' passHref>
             <LinkBtn title={'home'} page={''} />
           </Link>
