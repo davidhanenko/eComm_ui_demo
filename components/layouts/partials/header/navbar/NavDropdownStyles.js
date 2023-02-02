@@ -31,7 +31,14 @@ const DropdownBtnStyles = styled.button`
 const DropdownMenuStyles = styled.ul`
   padding-left: 2rem;
   z-index: calc(var(--goToTopZ) + 3);
-  box-shadow: 0px 0px 3px 1px var(--offWhite);
+
+  display: none;
+  opacity: 0;
+  transition: all 0.25s;
+
+  ${props =>
+    props.isDropdownOpen &&
+    `display: block; opacity: 0.95;`}
 
   @media (min-width: 850px) {
     display: block;
@@ -46,6 +53,7 @@ const DropdownMenuStyles = styled.ul`
     padding: 2rem;
     padding-bottom: 10rem;
     transition: all 0.25s;
+    box-shadow: 0px 0px 3px 1px var(--offWhite);
 
     display: grid;
     grid-template-columns: auto auto auto;
@@ -74,7 +82,7 @@ const DropdownItemStyles = styled.li`
 
   .item-image {
     img {
-      transition: all 0.3s;
+      transition: all 0.2s;
       transform: translateX(100%);
       background-color: var(--white);
 

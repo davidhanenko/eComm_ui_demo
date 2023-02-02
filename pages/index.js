@@ -85,7 +85,6 @@ export default function MainPage(props) {
   const services = props?.services?.data;
   const metaTags = props?.mainMetaTag?.data;
 
-
   return (
     <>
       <Head>
@@ -110,8 +109,10 @@ export default function MainPage(props) {
   );
 }
 
-export const getStaticProps = async ctx => {
-  const client = initializeApollo({});
+export const getServerSideProps = async ctx => {
+  const client = initializeApollo({
+    headers: ctx?.req?.headers,
+  });
 
   const layout = 'main';
 

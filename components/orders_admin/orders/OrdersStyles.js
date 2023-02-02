@@ -4,7 +4,13 @@ const OrdersStyles = styled.ul`
   margin-top: calc(
     var(--navHeight) + var(--searchHeight) + 5rem
   );
-  padding: 5rem 5rem 10rem 5rem; 
+  padding: 0rem 5rem 10rem 5rem;
+
+  h1 {
+    font-size: 4rem;
+    color: var(--blue2);
+  }
+
   @media (max-width: 800px) {
     padding: 0 2rem;
   }

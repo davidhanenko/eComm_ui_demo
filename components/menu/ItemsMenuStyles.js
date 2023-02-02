@@ -42,18 +42,19 @@ const ItemsMenuStyles = styled.div`
   .side-menu-links {
     flex-direction: column;
     align-items: flex-start;
-    background: var(--blue4);
+    background: var(--blue3);
+    box-shadow: 1px 1px 4px 1px var(--blue3);
     display: none;
     position: absolute;
     width: 300px;
-    padding-left: 3rem;
+    padding: 3rem;
     opacity: 0;
     transform: translateX(-100%);
-    transition: all 0.35s;
+    transition: all 0.25s;
     z-index: 5;
     ${props =>
       props.isMenuOpen &&
-      `transform: translateX(0%); opacity:1;`};
+      `transform: translateX(0%); opacity: 0.95;`};
     ${props =>
       !props.btnClicked &&
       ` -webkit-transition: none !important;

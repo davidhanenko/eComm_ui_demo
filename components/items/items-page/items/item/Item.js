@@ -47,7 +47,6 @@ export default function Item({ categoryTitle }) {
     },
   });
 
-  console.log(categoryTitle);
 
   const serviceItem = data?.singleItems?.data[0];
 
