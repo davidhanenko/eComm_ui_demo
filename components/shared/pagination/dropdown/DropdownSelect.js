@@ -72,7 +72,7 @@ export default function DropdownSelect({
         onClick={showDropdown}
         ref={btnRef}
       >
-        {currentSelect.title}
+        {currentSelect?.title}
         {dropdownOpen ? <MdExpandLess /> : <MdExpandMore />}
       </button>
       <ul id='sort-dropdown' ref={dropdownRef}>

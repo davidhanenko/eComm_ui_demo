@@ -82,6 +82,7 @@ export default function Cart() {
     router.push('/place-order');
   };
 
+
   return (
     <>
       <Modal
@@ -105,6 +106,7 @@ export default function Cart() {
                   sizeProp={cartItem?.size}
                   priceProp={cartItem?.price}
                   typeProp={cartItem?.type}
+                  typeValueProp={cartItem?.typeValue}
                   link={cartItem?.link}
                 />
               ))

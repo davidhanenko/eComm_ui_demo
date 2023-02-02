@@ -42,19 +42,17 @@ export default function CartItem({
   sizeProp,
   priceProp,
   typeProp,
+  typeValueProp,
   link,
 }) {
   const { cart, setCart } = useCart();
   const [qty, setQty] = useState(quantity);
 
-  const { data, error, loading } = useQuery(
-    CART_ITEM_QUERY,
-    {
-      variables: {
-        id: cartId?.split('-')[0],
-      },
-    }
-  );
+  const { data, loading } = useQuery(CART_ITEM_QUERY, {
+    variables: {
+      id: cartId?.split('-')[0],
+    },
+  });
 
   const cartItem = data?.singleItems?.data[0];
 
@@ -117,7 +115,7 @@ export default function CartItem({
           </a>
 
           {typeProp && (
-            <p className='item-type'>{typeProp}</p>
+            <p className='item-type'>{typeValueProp}</p>
           )}
           {sizeProp && (
             <p className='item-size'>{sizeProp}</p>

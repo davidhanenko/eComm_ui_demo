@@ -17,11 +17,12 @@ const OrderItemStyles = styled.div`
 
     .item-title {
       font-weight: 400;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
+      margin: 0;
     }
     p {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
 
     .item-type p {
@@ -31,6 +32,14 @@ const OrderItemStyles = styled.div`
     }
     .item-price-not-available {
       font-size: 1rem;
+    }
+    @media (max-width: 700px) {
+      .item-title {
+        font-size: 1.35rem;
+      }
+      p {
+        font-size: 1.25rem;
+      }
     }
   }
 `;

@@ -58,11 +58,12 @@ const OrderFormStyles = styled.form`
 
   .price-not-available-note {
     font-size: 1.2rem;
-    padding: 5rem 3rem 2rem 1rem;
+    padding: 5rem 3rem 3rem 1rem;
   }
 
   button {
     padding: 1rem;
+    margin-bottom: 3rem;
     background-color: var(--blue3);
     color: var(--white);
     border-radius: 2rem;
@@ -75,6 +76,10 @@ const OrderFormStyles = styled.form`
         cursor: pointer;
         background-color: var(--blue2);
       }
+    }
+
+    @media (max-width: 600px) {
+      padding: 1.25rem;
     }
   }
 `;

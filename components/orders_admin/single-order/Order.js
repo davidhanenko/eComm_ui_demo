@@ -64,13 +64,13 @@ export default function Order({ order }) {
     refetchQueries: [{ query: ALL_ORDERS_QUERY }],
   });
 
+  useEffect(() => {
+    updateOrder();
+  }, [status]);
+
   const handleSelect = e => {
     setStatus(e.target.value);
   };
-
-  useEffect(async () => {
-    await updateOrder();
-  }, [status]);
 
   return (
     <OrderStyles>
@@ -81,7 +81,10 @@ export default function Order({ order }) {
             <span>Order status</span>
             <DropdownSelect
               options={ORDER_STATUS_OPTIONS}
-              select={order?.attributes?.status}
+              select={
+                updateData?.updateOrder?.data?.attributes
+                  ?.status || order?.attributes?.status
+              }
               handleSelect={handleSelect}
             />
           </div>

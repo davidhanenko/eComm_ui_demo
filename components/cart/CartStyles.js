@@ -28,7 +28,11 @@ const CartStyles = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
 
-  @media (max-width: 650px) {
+  @media (max-width: 900px) {
+    width: 65%;
+  }
+
+  @media (max-width: 700px) {
     width: 100%;
   }
 
@@ -89,10 +93,7 @@ const CartStyles = styled.div`
     }
 
     .cart-total {
-      position: relative;
-
       sub {
-        /* position: absolute; */
         font-size: 1.1rem;
       }
 
@@ -109,7 +110,7 @@ const CartStyles = styled.div`
     }
 
     button {
-      padding: 1rem 1rem;
+      padding: 1rem;
       text-transform: uppercase;
       border: none;
       background: var(--blue3);
@@ -131,10 +132,22 @@ const CartStyles = styled.div`
       background-color: var(--white);
 
       p {
-        margin: 0.5rem auto;
+        margin: 0;
       }
+
+      .cart-total {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 2rem;
+      }
+
       .modal-trigger {
         margin-bottom: 1.5rem;
+      }
+
+      button {
+        margin-bottom: 2rem;
+        padding: 1.25rem;
       }
     }
   }
