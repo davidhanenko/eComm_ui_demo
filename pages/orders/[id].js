@@ -44,12 +44,12 @@ export const getServerSideProps = async ctx => {
       },
     });
 
-    return addApolloState(client, {
+    return {
       props: {
         order: order || null,
         layout,
       },
-    });
+    };
   } catch {
     return {
       props: {},
