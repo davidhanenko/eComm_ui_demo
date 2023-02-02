@@ -5,8 +5,6 @@ import {
   initializeApollo,
 } from '../../lib/apollo';
 
-import LoaderContainer from '../../components/shared/loaders/loader-container/LoaderContainer';
-
 export const ALL_ORDERS_QUERY = gql`
   query ALL_ORDERS_QUERY {
     orders {
@@ -24,18 +22,12 @@ export const ALL_ORDERS_QUERY = gql`
 `;
 
 export default function OrdersPage(props) {
-  // const { data, error, loading } = useQuery(
-  //   ALL_ORDERS_QUERY
-  // );
-
-  // if (loading) return <LoaderContainer height={'70vh'} />;
-
   const orders = props?.orders?.data;
 
   return <Orders orders={orders} />;
 }
 
-export const getStaticProps = async ctx => {
+export const getServerSideProps = async ctx => {
   const client = initializeApollo({
     headers: ctx?.req?.headers,
   });
