@@ -8,20 +8,7 @@ import placeholderImg from '../../../../public/img/1px.png';
 import ItemPlaceholder from '../../../shared/placeholders/SingleItemPlaceholder';
 import ItemDetails from './item-details/ItemDetails';
 
-export default function SingleItem({
-  singleItem,
-  link,
-  loading,
-}) {
-  if (loading)
-    return (
-      <SingleItemStyles>
-        <div className='item-image-container'>
-          <ItemPlaceholder i={'singleItem'} />
-        </div>
-      </SingleItemStyles>
-    );
-
+export default function SingleItem({ singleItem, link }) {
   const [sizePrice, setSizePrise] = useState([
     ...singleItem?.attributes?.sizePrice,
   ]);
@@ -37,6 +24,14 @@ export default function SingleItem({
     singleItem?.attributes?.image?.data[
       index % singleItem?.attributes?.image?.data?.length
     ];
+
+  if (!singleItem) {
+    <SingleItemStyles>
+      <div className='item-image-container'>
+        <ItemPlaceholder i={'singleItem'} />
+      </div>
+    </SingleItemStyles>;
+  }
 
   return (
     <SingleItemStyles>

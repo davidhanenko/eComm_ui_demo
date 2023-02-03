@@ -220,16 +220,21 @@ export default function OrderForm({
         your order
       </p>
 
-      <button type='submit' disabled={isSubmitting}>
-        {isSubmitting ? (
-          <Oval
-            type='Oval'
-            color='#b5dff0'
-            height={25}
-            width={25}
-          />
+      <button
+        type='submit'
+        disabled={isSubmitting || loading}
+      >
+        {isSubmitting || loading ? (
+          <div>
+            <Oval
+              type='Oval'
+              color='#b5dff0'
+              height={20}
+              width={20}
+            />
+          </div>
         ) : (
-          <span>confirm order</span>
+          <div>confirm order</div>
         )}
       </button>
     </OrderFormStyles>

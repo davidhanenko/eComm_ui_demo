@@ -74,7 +74,6 @@ export default function SingleItemPage(props) {
       {singleItem && (
         <SingleItem
           singleItem={singleItem}
-          // loading={loading}
           link={props?.resolvedUrl}
         />
       )}
