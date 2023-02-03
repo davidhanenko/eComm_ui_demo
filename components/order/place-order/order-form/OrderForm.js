@@ -52,11 +52,11 @@ export default function OrderForm({
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      name: 'name',
+      name: '',
       company: '',
-      email: 'email@gmail.com',
-      phone: '9293313730',
-      orderNotes: 'Notes about order',
+      email: '',
+      phone: '',
+      orderNotes: '',
     },
   });
 
