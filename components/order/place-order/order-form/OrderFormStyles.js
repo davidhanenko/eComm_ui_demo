@@ -28,7 +28,7 @@ const OrderFormStyles = styled.form`
       padding: 0.6rem 0.5rem;
       width: 100%;
       height: 100%;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       font-weight: 400;
       transition: all 0.25s ease;
 
@@ -62,6 +62,8 @@ const OrderFormStyles = styled.form`
   }
 
   button {
+    width: 20rem;
+    height: 4rem;
     padding: 1rem;
     margin-bottom: 3rem;
     background-color: var(--blue3);
@@ -70,6 +72,10 @@ const OrderFormStyles = styled.form`
     border: none;
     text-transform: uppercase;
     transition: all 0.25s;
+
+    div {
+      width: 100%;
+    }
 
     @media (hover: hover) {
       &:hover {

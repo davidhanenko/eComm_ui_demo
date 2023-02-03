@@ -55,6 +55,10 @@ const LinkStyles = styled.li`
       }
     }
   }
+
+  @media (max-width: 600px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const FooterServicesStyles = styled.section`
