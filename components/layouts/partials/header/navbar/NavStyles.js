@@ -128,4 +128,4 @@ const NavButtonStyles = styled.button`
   }
 `;
 
-export { NavStyles, NavButtonStyles, CartContainerStyles };
+export { NavStyles, NavButtonStyles };

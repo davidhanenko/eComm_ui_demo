@@ -7,20 +7,12 @@ import Hamburger from 'hamburger-react';
 
 import useWindowDimensions from '../../../../../lib/windowDimensions';
 import { useNav } from '../../../../../context/navState';
-import { useCart } from '../../../../../context/cartState';
-
-import { GiShoppingCart } from 'react-icons/gi';
-import { TbUserCircle } from 'react-icons/tb';
 
 import NavDropdown from './NavDropdown';
-import {
-  NavStyles,
-  NavButtonStyles,
-  CartContainerStyles,
-} from './NavStyles';
+import { NavStyles, NavButtonStyles } from './NavStyles';
 import { TOGGLE_WIDTH } from '../../../../../config';
 import Search from '../../../../search/Search';
-import CartCount from '../../../../cart/cart-count/CartCount';
+import UserCart from './user-cart/UserCart';
 
 const SERVICES_NAV_QUERY = gql`
   query SERVICES_NAV_QUERY {
@@ -83,9 +75,6 @@ export default function Nav(props) {
   } = useNav();
 
   const { width } = useWindowDimensions();
-
-  // cart
-  const { toggleCart, setCartRefState } = useCart();
 
   // close toggled nav on click outside
   useEffect(() => {
@@ -192,18 +181,7 @@ export default function Nav(props) {
             toggle={toggleNav}
           />
         </NavButtonStyles>
-        <CartContainerStyles>
-          <div className='user'>
-            <TbUserCircle />
-          </div>
-          <div
-            className='cart'
-            ref={node => setCartRefState(node)}
-          >
-            <GiShoppingCart onClick={toggleCart} />
-          </div>
-          <CartCount />
-        </CartContainerStyles>
+        <UserCart />
       </NavStyles>
       <Search />
     </>
