@@ -108,6 +108,7 @@ export default function OrderForm({
       <fieldset>
         <input
           type='text'
+          name='name'
           placeholder='Full name'
           className={dirtyFields.name ? 'input-dirty' : ''}
           {...register('name', {
@@ -129,6 +130,7 @@ export default function OrderForm({
       <fieldset>
         <input
           type='text'
+          name='company'
           placeholder='Company name'
           className={
             dirtyFields.company ? 'input-dirty' : ''
@@ -167,6 +169,7 @@ export default function OrderForm({
       <fieldset>
         <input
           type='text'
+          name='phone'
           placeholder='Phone #'
           className={dirtyFields.phone ? 'input-dirty' : ''}
           {...register('phone', {
@@ -194,6 +197,7 @@ export default function OrderForm({
       </fieldset>
       <fieldset className='input-field'>
         <textarea
+          name='message'
           placeholder='Leave us some notes about your order'
           className={
             dirtyFields.orderNotes ? 'input-dirty' : ''

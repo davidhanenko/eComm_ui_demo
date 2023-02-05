@@ -14,7 +14,7 @@ export default function ContactsPage(props) {
 }
 
 export async function getStaticProps() {
-  let layout = 'main';
+  const layout = 'main';
 
   return {
     props: {

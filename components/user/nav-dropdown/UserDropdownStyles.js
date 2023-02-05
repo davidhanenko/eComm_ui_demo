@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const UserDropdownStyles = styled.div`
   position: absolute;
   top: var(--navHeight);
-  background-color: var(--offWhite);
+  background-color: var(--white);
+  box-shadow: 0px 0px 3px 1px var(--offWhite);
 
   width: 100px;
   height: 150px;
@@ -24,7 +25,7 @@ const UserDropdownStyles = styled.div`
     padding: 0.4rem 0;
     text-align: center;
     text-transform: capitalize;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     width: 100%;
   }
 `;
