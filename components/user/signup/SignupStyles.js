@@ -3,8 +3,22 @@ import styled from 'styled-components';
 const SignupStyles = styled.div`
   margin-top: calc(var(--navHeight) + var(--searchHeight));
 
-  width: 50vw;
+  width: 450px;
   margin: 15rem auto;
+  text-align: center;
+
+  h1 {
+    font-size: 3.5rem;
+    color: var(--blue3);
+  }
+
+  @media (max-width: 800px) {
+    width: 70vw;
+  }
+
+  @media (max-width: 600px) {
+    width: 90vw;
+  }
 `;
 
 const FormStyles = styled.form`
@@ -12,18 +26,16 @@ const FormStyles = styled.form`
 
   fieldset {
     border: 1px solid transparent;
-    max-height: 12rem;
     outline: none;
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
     padding: 0 2rem;
     position: relative;
 
-    &:focus-within label {
-      color: var(--dark);
-      opacity: 1;
-      background: var(--blue3);
-      width: 7rem;
-      max-height: 12rem;
+    label {
+      display: flex;
+      justify-self: start;
+      color: var(--gray);
+      font-size: 1.4rem;
     }
 
     input,
@@ -35,17 +47,18 @@ const FormStyles = styled.form`
       padding: 0.6rem 0.5rem;
       width: 100%;
       height: 100%;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 400;
       transition: all 0.25s ease;
 
       &:focus {
         border: 1px solid var(--blue2);
-        margin-left: 5px;
       }
 
       &::placeholder {
-        font-weight: 300;
+        font-weight: 100;
+        opacity: 0.8;
+        font-size: 1.3rem;
       }
     }
 
@@ -72,7 +85,7 @@ const FormStyles = styled.form`
     width: 20rem;
     height: 4rem;
     padding: 1rem;
-    margin-bottom: 3rem;
+    margin-top: 4rem;
     background-color: var(--blue3);
     color: var(--white);
     border-radius: 2rem;
@@ -97,4 +110,22 @@ const FormStyles = styled.form`
   }
 `;
 
-export { SignupStyles, FormStyles };
+const FooterStyles = styled.footer`
+  margin-top: 5rem;
+  p {
+    margin: 0.5rem 0;
+    font-size: 1.3rem;
+  }
+
+  a {
+    color: var(--blue3);
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+`;
+
+export { SignupStyles, FormStyles, FooterStyles };

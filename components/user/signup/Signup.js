@@ -1,5 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { SignupStyles, FormStyles } from './SignupStyles';
+import {
+  SignupStyles,
+  FormStyles,
+  FooterStyles,
+} from './SignupStyles';
+import Oval from 'react-loader-spinner';
+import Link from 'next/link';
 
 export default function Signup() {
   const {
@@ -41,11 +47,20 @@ export default function Signup() {
         onSubmit={handleSubmit(onSubmitForm)}
       >
         <fieldset>
+          <label
+            className={
+              dirtyFields.name ? 'label-dirty' : ''
+            }
+            htmlFor='name'
+          >
+            Name
+          </label>
           <input
             type='text'
             name='name'
+            id='name'
             autoComplete='name'
-            placeholder='Name'
+            placeholder='Full name'
             className={
               dirtyFields.name ? 'input-dirty' : ''
             }
@@ -65,9 +80,18 @@ export default function Signup() {
           }
         </fieldset>
         <fieldset>
+          <label
+            className={
+              dirtyFields.name ? 'label-dirty' : ''
+            }
+            htmlFor='name'
+          >
+            Email
+          </label>
           <input
             type='text'
             name='email'
+            id='email'
             autoComplete='email'
             placeholder='Email'
             className={
@@ -89,10 +113,19 @@ export default function Signup() {
           }
         </fieldset>
         <fieldset>
+          <label
+            className={
+              dirtyFields.name ? 'label-dirty' : ''
+            }
+            htmlFor='name'
+          >
+            Password
+          </label>
           <input
             type='password'
             name='password'
-            placeholder='Password'
+            id='password'
+            placeholder='At least 8 characters'
             className={
               dirtyFields.password ? 'input-dirty' : ''
             }
@@ -112,10 +145,19 @@ export default function Signup() {
           }
         </fieldset>
         <fieldset>
+          <label
+            className={
+              dirtyFields.name ? 'label-dirty' : ''
+            }
+            htmlFor='name'
+          >
+            Re-enter a password
+          </label>
           <input
             name='passwordRepeat'
             type='password'
-            placeholder='Repeat password'
+            id='passwordRepeat'
+            placeholder='Re-enter a password'
             className={
               dirtyFields.passwordRepeat
                 ? 'input-dirty'
@@ -132,12 +174,32 @@ export default function Signup() {
           />
           {
             <div className='input-error'>
-              {errors?.password?.message}
+              {errors?.repeatPassword?.message}
             </div>
           }
         </fieldset>
-        <button>Sign up</button>
+        <button>
+          {isSubmitting ? (
+            <div>
+              <Oval
+                type='Oval'
+                color='#b5dff0'
+                height={20}
+                width={20}
+              />
+            </div>
+          ) : (
+            <div>Sign up</div>
+          )}
+        </button>
       </FormStyles>
+      <FooterStyles>
+        <p className='is-account'>
+          Already have an account -{' '}
+          <Link href='/user/signin'> Sign in</Link>{' '}
+        </p>
+        <p className='terms'>Terms of use</p>
+      </FooterStyles>
     </SignupStyles>
   );
 }

@@ -11,14 +11,6 @@ const OrderFormStyles = styled.form`
     padding: 0 2rem;
     position: relative;
 
-    &:focus-within label {
-      color: var(--dark);
-      opacity: 1;
-      background: var(--blue3);
-      width: 7rem;
-      max-height: 12rem;
-    }
-
     input,
     textarea {
       border: 1px solid var(--blue4);
