@@ -5,8 +5,6 @@ import {
   initializeApollo,
 } from '../../../../lib/apollo';
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import { PaginationStateProvider } from '../../../../context/paginationState';
 import Pagination from '../../../../components/shared/pagination/Pagination';

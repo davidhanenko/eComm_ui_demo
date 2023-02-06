@@ -1,11 +1,39 @@
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   SignupStyles,
   FormStyles,
   FooterStyles,
 } from './SignupStyles';
 import Oval from 'react-loader-spinner';
-import Link from 'next/link';
+
+const SIGNUP_MUTATION = gql`
+  mutation SIGNUP_MUTATION(
+    $email: String!
+    $username: String!
+    $password: String!
+  ) {
+    register(
+      input: {
+        username: $username
+        email: $email
+        password: $password
+      }
+    ) {
+      user {
+        id
+        email
+        username
+      }
+    }
+  }
+`;
 
 export default function Signup() {
   const {
@@ -22,20 +50,53 @@ export default function Signup() {
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      name: '',
+      username: '',
       email: '',
       password: '',
       repeatPassword: '',
     },
   });
 
+  const [registerUser, { loading, error }] =
+    useMutation(SIGNUP_MUTATION);
+
+  // router
+  const router = useRouter();
+
   const onSubmitForm = async values => {
-    console.log(
-      'submit: ',
-      values.name,
-      values.email,
-      values.password
-    );
+    if (error) {
+      toast.error(`${error?.message}`, {
+        position: 'top-right',
+        autoClose: 4000,
+      });
+    }
+
+    try {
+      const { data } = await registerUser({
+        variables: {
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        },
+      });
+
+      if (data?.register?.user) {
+        toast.success(
+          `You are signed up with ${data?.register?.user?.email}`,
+          {
+            position: 'top-right',
+            autoClose: 5000,
+          }
+        );
+
+        reset();
+        router.push('/user/signin');
+      }
+    } catch (err) {
+      toast.error(
+        'An unexpected error occurred, please try again'
+      );
+    }
   };
 
   return (
@@ -49,22 +110,22 @@ export default function Signup() {
         <fieldset>
           <label
             className={
-              dirtyFields.name ? 'label-dirty' : ''
+              dirtyFields.username ? 'label-dirty' : ''
             }
-            htmlFor='name'
+            htmlFor='username'
           >
             Name
           </label>
           <input
             type='text'
-            name='name'
-            id='name'
-            autoComplete='name'
+            name='username'
+            id='nausernamee'
+            autoComplete='username'
             placeholder='Full name'
             className={
-              dirtyFields.name ? 'input-dirty' : ''
+              dirtyFields.username ? 'input-dirty' : ''
             }
-            {...register('name', {
+            {...register('username', {
               required: 'Name is required',
               minLength: {
                 value: 5,
@@ -75,7 +136,7 @@ export default function Signup() {
           />
           {
             <div className='input-error'>
-              {errors?.name?.message}
+              {errors?.username?.message}
             </div>
           }
         </fieldset>
@@ -84,7 +145,7 @@ export default function Signup() {
             className={
               dirtyFields.name ? 'label-dirty' : ''
             }
-            htmlFor='name'
+            htmlFor='email'
           >
             Email
           </label>
@@ -117,7 +178,7 @@ export default function Signup() {
             className={
               dirtyFields.name ? 'label-dirty' : ''
             }
-            htmlFor='name'
+            htmlFor='password'
           >
             Password
           </label>
@@ -149,7 +210,7 @@ export default function Signup() {
             className={
               dirtyFields.name ? 'label-dirty' : ''
             }
-            htmlFor='name'
+            htmlFor='passwordRepeat'
           >
             Re-enter a password
           </label>
@@ -178,8 +239,8 @@ export default function Signup() {
             </div>
           }
         </fieldset>
-        <button>
-          {isSubmitting ? (
+        <button disabled={isSubmitting || loading}>
+          {isSubmitting || loading ? (
             <div>
               <Oval
                 type='Oval'

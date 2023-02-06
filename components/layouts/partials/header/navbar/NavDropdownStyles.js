@@ -37,8 +37,7 @@ const DropdownMenuStyles = styled.ul`
   transition: all 0.25s;
 
   ${props =>
-    props.isDropdownOpen &&
-    `display: block; opacity: 0.95;`}
+    props.isDropdownOpen && `display: block; opacity:0.99;`}
 
   @media (min-width: 850px) {
     display: block;
@@ -60,7 +59,7 @@ const DropdownMenuStyles = styled.ul`
 
     ${props =>
       props.isDropdownOpen &&
-      `visibility: visible; opacity: 0.9; transform: translateY(-2%);`}
+      `visibility: visible; opacity: 0.96; transform: translateY(-2%);`}
   }
 `;
 

@@ -31,10 +31,10 @@ const NavStyles = styled.nav`
       transform: translateX(100%);
       z-index: 2;
       padding-bottom: 2rem;
-      opacity: 0.9;
+      opacity: 1;
       ${props =>
         props.open &&
-        `grid-auto-flow: row; opacity: 0.98; transform: translate(0, var(--navHeight)); transition: all 0.3s;`};
+        `grid-auto-flow: row; opacity: 1; transform: translate(0, var(--navHeight)); transition: all 0.3s;`};
       ${props =>
         !props.open &&
         props.width <= 850 &&
@@ -82,36 +82,6 @@ const NavStyles = styled.nav`
     flex-direction: row;
     justify-content: space-around;
     align-self: center;
-  }
-`;
-
-const CartContainerStyles = styled.div`
-  color: var(--blue3);
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  font-size: 2.5rem;
-  margin-right: 3rem;
-  .user {
-    padding: 0 1rem;
-  }
-  .user,
-  .cart {
-    transition: all 0.25s;
-    @media (hover: hover) {
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.2);
-        color: var(--darkBlue);
-      }
-    }
-  }
-  @media (max-width: 850px) {
-    font-size: 3rem;
-  }
-
-  @media print {
-    display: none;
   }
 `;
 

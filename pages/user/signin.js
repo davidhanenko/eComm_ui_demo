@@ -1,21 +1,7 @@
+import Signin from '../../components/user/signin/Signin';
+
 export default function SigninPage(props) {
-  return (
-    <>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-      <h1>SignIn</h1>
-    </>
-  );
+  return <Signin />;
 }
 
 export async function getStaticProps() {
