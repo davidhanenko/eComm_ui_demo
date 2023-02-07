@@ -1,13 +1,44 @@
 import Link from 'next/link';
+import gql from 'graphql-tag';
+import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   SignupStyles,
   FormStyles,
   FooterStyles,
 } from './SigninStyles';
 import Oval from 'react-loader-spinner';
+import { useRouter } from 'next/router';
+import {
+  getSession,
+  signIn,
+  signOut,
+} from 'next-auth/react';
 
-export default function Signin() {
+export const SIGNIN_MUTATION = gql`
+  mutation SIGNIN_MUTATION(
+    $identifier: String!
+    $password: String!
+  ) {
+    login(
+      input: {
+        identifier: $identifier
+        password: $password
+      }
+    ) {
+      jwt
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+`;
+
+export default function Signin(props) {
   const {
     register,
     handleSubmit,
@@ -27,8 +58,45 @@ export default function Signin() {
     },
   });
 
+  // console.log(session);
+
+  const router = useRouter();
+
+  const [login, { data, loading, error }] =
+    useMutation(SIGNIN_MUTATION);
+
   const onSubmitForm = async values => {
-    console.log('submit: ', values.email, values.password);
+    // await signIn('credentials', {
+    //   redirect: false,
+    //   email: values.email,
+    //   password: values.password,
+    // });
+    if (values) {
+      try {
+        await login({
+          variables: {
+            identifier: values.email,
+            password: values.password,
+            provider: 'local',
+          },
+        });
+
+        console.log(data);
+
+        // if (data) {
+        //   signIn('credentials', {
+
+        //   });
+        // }
+
+        // router.push('/');
+      } catch (err) {
+        toast.error(`${err?.message}`, {
+          position: 'top-right',
+          autoClose: 4000,
+        });
+      }
+    }
   };
 
   return (
@@ -116,7 +184,7 @@ export default function Signin() {
       </FormStyles>
       <FooterStyles>
         <p className='is-account'>
-          Already have an account -{' '}
+          Don't have an account yet -{' '}
           <Link href='/user/signup'> Sign up</Link>{' '}
         </p>
         <p className='terms'>Terms of use</p>

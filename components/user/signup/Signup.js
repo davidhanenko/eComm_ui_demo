@@ -26,6 +26,7 @@ const SIGNUP_MUTATION = gql`
         password: $password
       }
     ) {
+      jwt
       user {
         id
         email
@@ -64,13 +65,6 @@ export default function Signup() {
   const router = useRouter();
 
   const onSubmitForm = async values => {
-    if (error) {
-      toast.error(`${error?.message}`, {
-        position: 'top-right',
-        autoClose: 4000,
-      });
-    }
-
     try {
       const { data } = await registerUser({
         variables: {
@@ -93,9 +87,10 @@ export default function Signup() {
         router.push('/user/signin');
       }
     } catch (err) {
-      toast.error(
-        'An unexpected error occurred, please try again'
-      );
+      toast.error(`${err?.message}`, {
+        position: 'top-right',
+        autoClose: 4000,
+      });
     }
   };
 
