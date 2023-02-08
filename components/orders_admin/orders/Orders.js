@@ -4,10 +4,13 @@ import {
 } from './OrdersStyles';
 import Link from 'next/link';
 
+
 export default function Orders({ orders }) {
+
+
   return (
     <OrdersStyles>
-<h1>Orders</h1>
+      <h1>Orders</h1>
 
       {orders &&
         orders?.map(order => (

@@ -1,5 +1,8 @@
 import gql from 'graphql-tag';
 import Orders from '../../components/orders_admin/orders/Orders';
+import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '../api/auth/[...nextauth]';
 import {
   addApolloState,
   initializeApollo,
@@ -34,7 +37,23 @@ export const getServerSideProps = async ctx => {
 
   let layout = 'main';
 
+  const session = await getServerSession(
+    ctx.req,
+    ctx.res,
+    authOptions
+  );
+
+  // console.log(session);
+
   try {
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      };
+    }
     const {
       data: { orders },
     } = await client.query({

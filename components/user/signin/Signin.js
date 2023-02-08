@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import gql from 'graphql-tag';
-import { useMutation } from '@apollo/client';
+
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,30 +14,10 @@ import {
   getSession,
   signIn,
   signOut,
+  useSession,
 } from 'next-auth/react';
 
-export const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION(
-    $identifier: String!
-    $password: String!
-  ) {
-    login(
-      input: {
-        identifier: $identifier
-        password: $password
-      }
-    ) {
-      jwt
-      user {
-        id
-        username
-        email
-      }
-    }
-  }
-`;
-
-export default function Signin(props) {
+export default function Signin({ providers }) {
   const {
     register,
     handleSubmit,
@@ -58,50 +37,33 @@ export default function Signin(props) {
     },
   });
 
-  // console.log(session);
+
 
   const router = useRouter();
 
-  const [login, { data, loading, error }] =
-    useMutation(SIGNIN_MUTATION);
-
   const onSubmitForm = async values => {
-    // await signIn('credentials', {
-    //   redirect: false,
-    //   email: values.email,
-    //   password: values.password,
-    // });
-    if (values) {
-      try {
-        await login({
-          variables: {
-            identifier: values.email,
-            password: values.password,
-            provider: 'local',
-          },
-        });
+    try {
+      signIn('credentials', {
+        email: values.email,
+        password: values.password,
+      });
 
-        console.log(data);
-
-        // if (data) {
-        //   signIn('credentials', {
-
-        //   });
-        // }
-
-        // router.push('/');
-      } catch (err) {
-        toast.error(`${err?.message}`, {
-          position: 'top-right',
-          autoClose: 4000,
-        });
-      }
+      // router.push('/');
+    } catch (err) {
+      toast.error(`${err?.message}`, {
+        position: 'top-right',
+        autoClose: 4000,
+      });
     }
   };
 
   return (
     <SignupStyles>
       <h1>Sign in</h1>
+
+      <button onClick={() => signIn(providers.google.id)}>
+        google
+      </button>
 
       <FormStyles
         isDirty={isDirty}

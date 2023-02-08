@@ -188,7 +188,7 @@ export default function Signup() {
             {...register('password', {
               required: 'You must specify a password',
               minLength: {
-                value: 8,
+                value: 5,
                 message:
                   'Password must have at least 8 characters',
               },

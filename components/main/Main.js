@@ -6,7 +6,6 @@ import ItemsMainPage from '../items/main-page/ItemsMainPage';
 import { MainStyles } from './MainStyles';
 import LoaderContainer from '../shared/loaders/loader-container/LoaderContainer';
 
-
 const MAIN_QUERY = gql`
   query MAIN_QUERY {
     mainPageSlides {

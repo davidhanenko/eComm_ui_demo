@@ -1,24 +1,19 @@
-import {
-  getSession,
-  signIn,
-  signOut,
-} from 'next-auth/react';
+import { getProviders } from 'next-auth/react';
 import Signin from '../../components/user/signin/Signin';
 
 export default function SigninPage(props) {
-  return <Signin />;
+  return <Signin providers={props.providers} />;
 }
 
 export async function getServerSideProps({ req }) {
   const layout = 'main';
-  
-  const session = await getSession({ req });
 
+  const providers = await getProviders();
 
   return {
     props: {
       layout,
-      session,
+      providers,
     },
   };
 }

@@ -1,77 +1,81 @@
-import Link from 'next/link';
-import gql from 'graphql-tag';
-
 import NextAuth from 'next-auth';
-import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
+import axios from 'axios';
 
-import { SIGNIN_MUTATION } from '../../../components/user/signin/Signin';
-
-const options = {
+const authOptions = {
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
     CredentialsProvider({
+      name: 'Email',
       type: 'credentials',
-      name: 'Sign in with Email',
-      credentials: {
-        identifier: { label: 'Email', type: 'text' },
-        password: { label: 'Password', type: 'password' },
-      },
-      async authorize(credentials, req) {
-        // if (credentials == null) return null;
 
-        // try {
-        //   // const { user, jwt } = await signIn({
-        //   //   email: credentials.email,
-        //   //   password: credentials.password,
-        //   // });
+      async authorize(credentials) {
+        const { email, password } = credentials;
 
-        //   // console.log(user);
-        //   return { ...user, jwt };
-        // } catch (error) {
-        //   console.log(error);
-        //   return null;
-        // }
+        try {
+          const { data } = await axios.post(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/auth/local`,
+            {
+              identifier: email,
+              password: password,
+            }
+          );
+          const user = await data;
 
-        console.log(credentials);
-        return user;
+          console.log(user);
+
+          if (user) {
+            return user;
+          } else {
+            return null;
+          }
+        } catch (err) {
+          return null;
+        }
       },
     }),
   ],
-  // pages: {
-  //   signIn: '/user/signin',
-  // },
 
-  // database: process.env.NEXT_PUBLIC_DATABASE_URL,
   session: {
-    strategy: 'jwt',
+    jwt: true,
   },
-  debug: true,
+  secret: process.env.NEXTAUTH_SECRET,
+
   callbacks: {
     async session({ session, token, user }) {
       session.jwt = token.jwt;
       session.id = token.id;
-
       return session;
     },
     async jwt({ token, user, account }) {
-      const isSignIn = user ? true : false;
+      if (user) {
+        if (account.provider !== 'credentials') {
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/api/auth/${account.provider}/callback?access_token=${account?.access_token}`
+          );
+          const data = await response.json();
 
-      if (isSignIn) {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}/auth/${account.provider}/callback?access_token=${account?.access_token}`
-        );
-
-        const data = await response.json();
-
-        token.jwt = data.jwt;
-        token.id = data.user.id;
+          token.jwt = data.jwt;
+          token.id = data.user.id;
+        } else {
+          token.jwt = user.jwt;
+          token.id = user.user.id;
+        }
       }
 
       return token;
     },
   },
+
+  pages: {
+    signIn: '/auth/signin',
+  },
 };
 
-const Auth = (req, res) => NextAuth(req, res, options);
+const Auth = (req, res) => NextAuth(req, res, authOptions);
 
 export default Auth;
