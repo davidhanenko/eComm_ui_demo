@@ -17,6 +17,11 @@ export default function UserDropdown({
 
   const dropdownRef = useRef(null);
 
+  const handleAccountClick = () => {
+    setUserOpen(false);
+    router.push(`/auth/account/${session.id}`);
+  };
+
   // close dropdown on click outside
   useEffect(() => {
     const handleClickOutside = event => {
@@ -50,12 +55,17 @@ export default function UserDropdown({
       ref={dropdownRef}
     >
       {session ? (
-        <button
-          type='button'
-          onClick={() => router.push(`/user/${session.id}`)}
-        >
-          Account
-        </button>
+        <>
+          <button
+            type='button'
+            onClick={handleAccountClick}
+          >
+            Account
+          </button>
+          <p className='user-title'>
+            {session?.user?.name}
+          </p>
+        </>
       ) : (
         <button
           type='button'
