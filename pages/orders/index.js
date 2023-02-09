@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 import Orders from '../../components/orders_admin/orders/Orders';
-import { getSession } from 'next-auth/react';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
 import {
@@ -42,8 +41,6 @@ export const getServerSideProps = async ctx => {
     ctx.res,
     authOptions
   );
-
-  // console.log(session);
 
   try {
     if (!session) {

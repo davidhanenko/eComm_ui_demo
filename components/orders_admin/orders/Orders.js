@@ -1,13 +1,10 @@
+import Link from 'next/link';
 import {
   OrdersStyles,
   OrdersItemStyles,
 } from './OrdersStyles';
-import Link from 'next/link';
-
 
 export default function Orders({ orders }) {
-
-
   return (
     <OrdersStyles>
       <h1>Orders</h1>

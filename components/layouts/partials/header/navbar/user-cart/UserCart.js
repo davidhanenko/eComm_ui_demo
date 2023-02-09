@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { GiShoppingCart } from 'react-icons/gi';
 import { TbUserCircle } from 'react-icons/tb';
 import { useCart } from '../../../../../../context/cartState';
-import UserDropdown from '../../../../../user/nav-dropdown/UserDropdown';
+import UserDropdown from '../../../../../auth/nav-dropdown/UserDropdown';
+
 import CartCount from '../../../../../cart/cart-count/CartCount';
 import { UserCartStyles } from './UserCartStyles';
 
 export default function UserCart() {
   const [userOpen, setUserOpen] = useState(false);
+  const [userOpenBtnRef, setUserOpenBtnRef] =
+    useState(null);
 
   // cart state
   const { toggleCart, setCartRefState } = useCart();
@@ -18,10 +21,17 @@ export default function UserCart() {
 
   return (
     <UserCartStyles>
-      <div className='user'>
+      <div
+        className='user'
+        ref={node => setUserOpenBtnRef(node)}
+      >
         <TbUserCircle onClick={handleUserClick} />
       </div>
-      <UserDropdown userOpen={userOpen} />
+      <UserDropdown
+        userOpen={userOpen}
+        setUserOpen={setUserOpen}
+        userOpenBtnRef={userOpenBtnRef}
+      />
       <div
         className='cart'
         ref={node => setCartRefState(node)}

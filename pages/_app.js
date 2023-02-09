@@ -36,8 +36,8 @@ function MyApp({
   const apolloClient = useApollo(pageProps);
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <SessionProvider session={session}>
+    <SessionProvider session={session}>
+      <ApolloProvider client={apolloClient}>
         <ScrollProvider>
           <CartStateProvider>
             <PaginationStateProvider>
@@ -47,8 +47,8 @@ function MyApp({
             </PaginationStateProvider>
           </CartStateProvider>
         </ScrollProvider>
-      </SessionProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </SessionProvider>
   );
 }
 

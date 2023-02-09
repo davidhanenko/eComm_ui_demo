@@ -5,13 +5,50 @@ import {
   signOut,
   useSession,
 } from 'next-auth/react';
+import { useEffect, useRef } from 'react';
 
-export default function UserDropdown({ userOpen }) {
+export default function UserDropdown({
+  userOpen,
+  setUserOpen,
+  userOpenBtnRef,
+}) {
   const router = useRouter();
   const { data: session } = useSession();
 
+  const dropdownRef = useRef(null);
+
+  // close dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (
+        userOpen &&
+        !dropdownRef.current.contains(event.target) &&
+        !userOpenBtnRef.contains(event.target)
+      ) {
+        setUserOpen(false);
+      }
+    };
+    document.addEventListener(
+      'mousedown',
+      handleClickOutside,
+      {
+        passive: true,
+      }
+    );
+
+    return () => {
+      document.removeEventListener(
+        'mousedown',
+        handleClickOutside
+      );
+    };
+  }, [userOpen]);
+
   return (
-    <UserDropdownStyles userOpen={userOpen}>
+    <UserDropdownStyles
+      userOpen={userOpen}
+      ref={dropdownRef}
+    >
       {session ? (
         <button
           type='button'
