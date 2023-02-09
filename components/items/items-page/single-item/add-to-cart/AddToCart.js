@@ -1,6 +1,7 @@
 import { useCart } from '../../../../../context/cartState';
 import { AddToCartStyles } from './AddToCartStyles';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { GiShoppingCart } from 'react-icons/gi';
 

@@ -8,8 +8,6 @@ import {
   initializeApollo,
 } from '../../lib/apollo';
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import capitalizeStr from '../../helpers/capitalizeStr';
 
 const Items = dynamic(() =>
@@ -86,6 +84,8 @@ export const getServerSideProps = async ctx => {
     headers: ctx?.req?.headers,
   });
 
+
+  
   try {
     const {
       data: { services },

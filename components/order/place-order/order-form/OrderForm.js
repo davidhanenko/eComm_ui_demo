@@ -1,31 +1,21 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useCart } from '../../../../context/cartState';
+import useUser from '../../../auth/User';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSession } from 'next-auth/react';
 
 import Oval from 'react-loader-spinner';
 import { OrderFormStyles } from './OrderFormStyles';
-import { useRouter } from 'next/router';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
     createOrder(data: $data) {
       data {
         id
-        attributes {
-          order_details
-          items_details
-          single_items {
-            data {
-              id
-              attributes {
-                itemTitle
-              }
-            }
-          }
-        }
       }
     }
   }
@@ -60,10 +50,20 @@ export default function OrderForm({
     },
   });
 
+  const { data: session } = useSession();
+
   const router = useRouter();
+  // const me = useUser();
+  // console.log(session.id);
 
   const [createOrder, { loading, error, data }] =
-    useMutation(CREATE_ORDER_MUTATION);
+    useMutation(CREATE_ORDER_MUTATION, {
+      context: {
+        headers: {
+          authorization: `Bearer ${session?.jwt}`,
+        },
+      },
+    });
 
   const onSubmitForm = async values => {
     const orderDetails = {
@@ -85,6 +85,7 @@ export default function OrderForm({
             order_details: orderDetailsJson,
             items_details: items_details,
             single_items: single_items,
+            users_permissions_user: session.id,
           },
         },
       });
@@ -108,6 +109,7 @@ export default function OrderForm({
       <fieldset>
         <input
           type='text'
+          name='name'
           placeholder='Full name'
           className={dirtyFields.name ? 'input-dirty' : ''}
           {...register('name', {
@@ -129,6 +131,7 @@ export default function OrderForm({
       <fieldset>
         <input
           type='text'
+          name='company'
           placeholder='Company name'
           className={
             dirtyFields.company ? 'input-dirty' : ''
@@ -167,6 +170,7 @@ export default function OrderForm({
       <fieldset>
         <input
           type='text'
+          name='phone'
           placeholder='Phone #'
           className={dirtyFields.phone ? 'input-dirty' : ''}
           {...register('phone', {
@@ -194,6 +198,7 @@ export default function OrderForm({
       </fieldset>
       <fieldset className='input-field'>
         <textarea
+          name='message'
           placeholder='Leave us some notes about your order'
           className={
             dirtyFields.orderNotes ? 'input-dirty' : ''

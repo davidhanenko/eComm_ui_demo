@@ -88,7 +88,7 @@ const EmailFormStyles = styled.form`
 
       .input-error {
         position: absolute;
-        color: #ae310b;
+        color: var(--red);
         font-size: 1.3rem;
         right: 0;
         top: -2.5rem;

@@ -3,7 +3,7 @@ import NProgress from 'nprogress';
 import smoothscroll from 'smoothscroll-polyfill';
 import { ApolloProvider } from '@apollo/client';
 import { ScrollProvider } from '../lib/useScroll';
-import { ParallaxProvider } from 'react-scroll-parallax';
+import { SessionProvider } from 'next-auth/react';
 
 import '../styles/nprogress.css';
 import '../styles/fonts.css';
@@ -29,12 +29,15 @@ Router.events.on('routeChangeError', () =>
   NProgress.done()
 );
 
-function MyApp({ Component, pageProps }) {
+function MyApp({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   const apolloClient = useApollo(pageProps);
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <ParallaxProvider>
+    <SessionProvider session={session}>
+      <ApolloProvider client={apolloClient}>
         <ScrollProvider>
           <CartStateProvider>
             <PaginationStateProvider>
@@ -44,8 +47,8 @@ function MyApp({ Component, pageProps }) {
             </PaginationStateProvider>
           </CartStateProvider>
         </ScrollProvider>
-      </ParallaxProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </SessionProvider>
   );
 }
 

@@ -2,6 +2,7 @@ import Head from 'next/head';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { usePagination } from '../../../context/paginationState';
 import LoaderContainer from '../../shared/loaders/loader-container/LoaderContainer';

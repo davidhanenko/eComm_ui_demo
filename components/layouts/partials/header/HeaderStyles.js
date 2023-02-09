@@ -9,6 +9,8 @@ const HeaderStyles = styled.header`
   top: 0;
   width: 100%;
   z-index: 10;
+
+
   .navbar {
     height: var(--navHeight);
     display: flex;

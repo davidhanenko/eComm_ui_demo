@@ -5,8 +5,7 @@ import {
   addApolloState,
   initializeApollo,
 } from '../../../lib/apollo';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 const ItemsByCategory = dynamic(() =>
   import(
