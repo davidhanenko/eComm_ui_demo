@@ -12,6 +12,18 @@ const authOptions = {
     CredentialsProvider({
       name: 'Email',
       type: 'credentials',
+      credentials: {
+        email: {
+          label: 'Email',
+          type: 'text',
+          placeholder: 'Enter email',
+        },
+        password: {
+          label: 'Password',
+          type: 'password',
+          placeholder: 'Enter Password',
+        },
+      },
 
       async authorize(credentials) {
         const { email, password } = credentials;
@@ -26,14 +38,13 @@ const authOptions = {
           );
           const user = await data;
 
-          console.log(user);
-
           if (user) {
             return user;
           } else {
             return null;
           }
         } catch (err) {
+          console.log(err.message);
           return null;
         }
       },
@@ -70,10 +81,12 @@ const authOptions = {
       return token;
     },
   },
-
-  pages: {
-    signIn: '/auth/signin',
+  theme: {
+    colorScheme: 'light',
   },
+  // pages: {
+  //   signIn: '/auth/signin',
+  // },
 };
 
 const Auth = (req, res) => NextAuth(req, res, authOptions);

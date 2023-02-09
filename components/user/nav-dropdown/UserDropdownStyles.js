@@ -2,31 +2,45 @@ import styled from 'styled-components';
 
 const UserDropdownStyles = styled.div`
   position: absolute;
+  right: 0;
   top: var(--navHeight);
   background-color: var(--white);
   box-shadow: 0px 0px 3px 1px var(--offWhite);
-
-  width: 100px;
-  height: 150px;
-
+  width: 150px;
   display: flex;
   flex-direction: column;
-  padding-top: 2rem;
-  z-index: 3;
-
-  display: none;
+  padding: 2rem 0;
+  z-index: 10;
 
   transition: all 0.25s;
+  transform: translateX(150%);
 
-  ${props => props.userOpen && `display: flex;`}
+  ${props => props.userOpen && `transform: translateX(0%);`}
 
-  a {
-    margin: 0 auto;
-    padding: 0.4rem 0;
-    text-align: center;
-    text-transform: capitalize;
-    font-size: 1.5rem;
+  hr {
     width: 100%;
+    margin: 1rem 0;
+    height: 1px;
+    border: none;
+    background-color: var(--blue4);
+  }
+
+  button {
+    color: var(--blue3);
+    border: none;
+    background: transparent;
+    margin: 0.5rem auto;
+    padding: 0.4rem 2rem;
+    text-align: center;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: all 0.25s;
+
+    @media (hover: hover) {
+      &:hover {
+        color: var(--blue2);
+      }
+    }
   }
 `;
 export { UserDropdownStyles };

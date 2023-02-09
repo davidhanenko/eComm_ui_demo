@@ -37,18 +37,29 @@ export default function Signin({ providers }) {
     },
   });
 
-
-
   const router = useRouter();
 
   const onSubmitForm = async values => {
     try {
-      signIn('credentials', {
+      const res = await signIn('credentials', {
         email: values.email,
         password: values.password,
+        // redirect: false,
       });
 
-      // router.push('/');
+      if (res.error) {
+        if (res.status === 401) {
+          toast.error(
+            'Wrong email or password, please check credentials',
+            {
+              position: 'top-right',
+              autoClose: 5000,
+            }
+          );
+        }
+      }
+      console.log(res);
+      router.push('/');
     } catch (err) {
       toast.error(`${err?.message}`, {
         position: 'top-right',

@@ -1,19 +1,42 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { UserDropdownStyles } from './UserDropdownStyles';
 import {
-  getSession,
   signIn,
   signOut,
   useSession,
 } from 'next-auth/react';
 
 export default function UserDropdown({ userOpen }) {
+  const router = useRouter();
+  const { data: session } = useSession();
+
   return (
     <UserDropdownStyles userOpen={userOpen}>
-      <Link href='/auth/signin'>Sign in</Link>
-      <Link href='/user/signup'>Sign up</Link>
-      <Link href='/user/:id'>Account</Link>
-      <button onClick={() => signOut()}>log out</button>
+      {session ? (
+        <button
+          type='button'
+          onClick={() => router.push(`/user/${session.id}`)}
+        >
+          Account
+        </button>
+      ) : (
+        <button
+          type='button'
+          onClick={() => router.push('/user/signup')}
+        >
+          Sign up
+        </button>
+      )}
+      <hr />
+      {session ? (
+        <button type='button' onClick={() => signOut()}>
+          Log out
+        </button>
+      ) : (
+        <button type='button' onClick={() => signIn()}>
+          Sign in
+        </button>
+      )}
     </UserDropdownStyles>
   );
 }
