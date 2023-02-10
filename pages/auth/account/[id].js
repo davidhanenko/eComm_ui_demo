@@ -1,8 +1,5 @@
 import gql from 'graphql-tag';
-import {
-  addApolloState,
-  initializeApollo,
-} from '../../../lib/apollo';
+import { initializeApollo } from '../../../lib/apollo';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../api/auth/[...nextauth]';
 
@@ -23,7 +20,12 @@ const USER_QUERY = gql`
 `;
 
 export default function AccountPage(props) {
-  return <Account />;
+  console.log(props);
+  return (
+    <Account
+      user={props?.user?.data?.usersPermissionsUser}
+    />
+  );
 }
 
 export const getServerSideProps = async ctx => {
@@ -38,26 +40,30 @@ export const getServerSideProps = async ctx => {
     authOptions
   );
 
-  const id = ctx?.query?.id;
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
 
   try {
-    if (session) {
-      const {
-        data: { user },
-      } = await client.query({
-        query: USER_QUERY,
-        variables: {
-          id,
-        },
-      });
+    const id = ctx?.query?.id;
+    const data = await client.query({
+      query: USER_QUERY,
+      variables: {
+        id,
+      },
+    });
 
-      return addApolloState(client, {
-        props: {
-          user: user || null,
-          layout,
-        },
-      });
-    }
+    return {
+      props: {
+        user: data || null,
+        layout,
+      },
+    };
   } catch (err) {
     return {
       redirect: {
@@ -67,10 +73,4 @@ export const getServerSideProps = async ctx => {
       props: {},
     };
   }
-
-  return {
-    props: {
-      layout,
-    },
-  };
 };

@@ -7,6 +7,7 @@ import {
 } from 'next-auth/react';
 import { useEffect, useRef } from 'react';
 
+
 export default function UserDropdown({
   userOpen,
   setUserOpen,
@@ -69,7 +70,7 @@ export default function UserDropdown({
       ) : (
         <button
           type='button'
-          onClick={() => router.push('/user/signup')}
+          onClick={() => router.push('/auth/signup')}
         >
           Sign up
         </button>

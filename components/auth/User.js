@@ -15,17 +15,8 @@ const CURRENT_USER_QUERY = gql`
 export default function useUser() {
   const { data: session } = useSession();
 
-  if (!session) return null;
-
   const { data, loading, error } = useQuery(
-    CURRENT_USER_QUERY,
-    {
-      context: {
-        headers: {
-          authorization: `Bearer ${session?.jwt}`,
-        },
-      },
-    }
+    CURRENT_USER_QUERY
   );
   return data;
 }

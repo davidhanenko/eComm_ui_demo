@@ -35,6 +35,8 @@ export const getServerSideProps = async ctx => {
   let layout = 'main';
 
   try {
+    id = await ctx?.query?.id;
+
     const {
       data: { order },
     } = await client.query({
