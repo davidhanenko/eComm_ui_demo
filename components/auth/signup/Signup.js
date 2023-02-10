@@ -84,7 +84,7 @@ export default function Signup() {
         );
 
         reset();
-        router.push('/user/signin');
+        router.push('/');
       }
     } catch (err) {
       toast.error(`${err?.message}`, {
