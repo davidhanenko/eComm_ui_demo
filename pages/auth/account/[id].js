@@ -20,7 +20,6 @@ const USER_QUERY = gql`
 `;
 
 export default function AccountPage(props) {
-  console.log(props);
   return (
     <Account
       user={props?.user?.data?.usersPermissionsUser}
