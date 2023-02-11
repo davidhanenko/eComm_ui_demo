@@ -7,7 +7,6 @@ import {
 } from 'next-auth/react';
 import { useEffect, useRef } from 'react';
 
-
 export default function UserDropdown({
   userOpen,
   setUserOpen,
@@ -20,7 +19,7 @@ export default function UserDropdown({
 
   const handleAccountClick = () => {
     setUserOpen(false);
-    router.push(`/auth/account/${session.id}`);
+    router.push(`/auth/account/${session?.id}`);
   };
 
   // close dropdown on click outside
