@@ -17,7 +17,8 @@ export default function OrderItem({
       variables: {
         id: orderItem?.cartId.split('-')[0],
       },
-      fetchPolicy: 'network-only',
+      fetchPolicy: 'no-cache',
+      ssr: false,
     }
   );
 
@@ -28,8 +29,8 @@ export default function OrderItem({
   )[0];
 
   const orderItemObj = {
-    price: item?.price || itemDetails?.price,
-    size: item?.size || itemDetails?.size,
+    price: itemDetails?.price || item?.price,
+    size: itemDetails?.size || item?.size,
     type: itemDetails?.type || null,
     typeValue: itemDetails?.typeValue || null,
     qty: orderItem?.quantity,
@@ -49,12 +50,12 @@ export default function OrderItem({
         [orderItem?.cartId, orderItemObj],
       ]);
     }
-  }, [itemDetails, item]);
+  }, [item, itemDetails]);
 
   const imgUrl = item?.image?.data[0]?.attributes?.url;
 
-  if (loading) return <LoaderContainer height={'10rem'} />;
 
+  if (loading) return <LoaderContainer height={'10rem'} />;
   return (
     <OrderItemStyles>
       <div className='item-img'>

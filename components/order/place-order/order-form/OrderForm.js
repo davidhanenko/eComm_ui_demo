@@ -28,7 +28,7 @@ export default function OrderForm({
   items_details,
   single_items,
 }) {
-  const { setCart, cartError, setCartError } = useCart();
+  const { setCart, cartReload, setCartReload } = useCart();
 
   const {
     register,
@@ -69,7 +69,10 @@ export default function OrderForm({
       orderNotes: values.orderNotes,
     };
 
+    console.log(costFromCart, totalCost);
+
     if (costFromCart !== totalCost) {
+      setCartReload(prev => !prev);
       toast.error(
         'Looks like there are some changes related to items in your cart. Please, reload the page, review your order again, and confirm if it aligns with your needs.',
         {
@@ -80,8 +83,6 @@ export default function OrderForm({
       try {
         const orderDetailsJson =
           JSON.stringify(orderDetails);
-
-        if (error) console.log(error.message);
 
         await createOrder({
           variables: {
@@ -94,11 +95,9 @@ export default function OrderForm({
           },
         });
 
-        if (data) {
-          reset();
-          setCart([]);
-          router.push('/');
-        }
+        reset();
+        setCart([]);
+        router.push('/');
       } catch (err) {
         toast.error(err.message);
         // router.reload('/place-order');
@@ -111,9 +110,6 @@ export default function OrderForm({
       isDirty={isDirty}
       onSubmit={handleSubmit(onSubmitForm)}
     >
-      {cartError && (
-        <ErrorMessage errorMessage={cartError} />
-      )}
       {/* name */}
       <fieldset>
         <input

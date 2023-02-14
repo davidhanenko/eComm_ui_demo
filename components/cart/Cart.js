@@ -75,13 +75,12 @@ export default function Cart() {
 
     // set items from cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+  }, [cart, totalCost]);
 
   const handlePlaceOrder = () => {
     closeCart();
     router.push('/place-order');
   };
-
 
   return (
     <>
@@ -108,6 +107,7 @@ export default function Cart() {
                   typeProp={cartItem?.type}
                   typeValueProp={cartItem?.typeValue}
                   link={cartItem?.link}
+                  itemDetailsId={cartItem?.itemDetailsId}
                 />
               ))
             ) : (

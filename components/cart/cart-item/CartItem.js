@@ -9,52 +9,61 @@ import {
 } from './CartItemStyles';
 import { useCart } from '../../../context/cartState';
 import capitalizeStr from '../../../helpers/capitalizeStr';
+import { ORDER_ITEM_QUERY } from '../../orders_admin/single-order/order-item/OrderItem';
 
 import ThreeDots from 'react-loader-spinner';
 import { MdOutlineDeleteOutline } from 'react-icons/md';
 import { FaMinus } from 'react-icons/fa';
 import { FaPlus } from 'react-icons/fa';
 
-const CART_ITEM_QUERY = gql`
-  query CART_ITEM_QUERY($id: ID!) {
-    singleItems(filters: { id: { eq: $id } }) {
-      data {
-        id
-        attributes {
-          itemTitle
-          image {
-            data {
-              id
-              attributes {
-                url
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 export default function CartItem({
   cartId,
+  itemDetailsId,
   quantity,
-  sizeProp,
-  priceProp,
-  typeProp,
-  typeValueProp,
   link,
 }) {
-  const { cart, setCart } = useCart();
+  const { cart, setCart, cartReload } = useCart();
   const [qty, setQty] = useState(quantity);
 
-  const { data, loading } = useQuery(CART_ITEM_QUERY, {
+  const { data, loading } = useQuery(ORDER_ITEM_QUERY, {
     variables: {
       id: cartId?.split('-')[0],
     },
   });
+  const cartItem = data?.singleItem?.data;
 
-  const cartItem = data?.singleItems?.data[0];
+  const itemDetails = itemDetailsId
+    ? cartItem?.attributes?.sizePrice?.filter(
+        el => el.id === itemDetailsId
+      )[0]
+    : null;
+
+  const price = itemDetailsId
+    ? itemDetails?.price
+    : cartItem?.attributes?.price;
+  const size = itemDetailsId
+    ? itemDetails?.size
+    : cartItem?.attributes?.size;
+  const type = itemDetails?.size;
+  const typeValue = itemDetails?.typeValue;
+
+  useEffect(() => {
+    setCart(
+      cart.map(el =>
+        el.cartId === cartId
+          ? {
+              ...el,
+              price: price,
+              size: size,
+              type: type,
+              typeValue: typeValue,
+            }
+          : el
+      )
+    );
+  }, [cartReload, data]);
+
+  console.log(cart);
 
   const handleQuantity = e => {
     const result = e.target.value.replace(/\D/g, '');
@@ -96,7 +105,8 @@ export default function CartItem({
               ?.url
           }
           alt={
-            cartItem?.attributes?.itemTitle || 'item image'
+            cartItem?.attributes?.itemTitle ||
+            'cart item image'
           }
           width={45}
           height={45}
@@ -105,7 +115,7 @@ export default function CartItem({
       </div>
       <div className='item-details'>
         <div className='title-size-container'>
-          <a href={`/${link}`}>
+          <a href={`${link}`}>
             <h4 className='item-title'>
               {cartItem?.attributes?.itemTitle &&
                 capitalizeStr(
@@ -114,12 +124,10 @@ export default function CartItem({
             </h4>
           </a>
 
-          {typeProp && (
-            <p className='item-type'>{typeValueProp}</p>
+          {typeValue && (
+            <p className='item-type'>{typeValue}</p>
           )}
-          {sizeProp && (
-            <p className='item-size'>{sizeProp}</p>
-          )}
+          {size && <p className='item-size'>{size}</p>}
         </div>
 
         <div className='price-amount-container'>
@@ -144,14 +152,14 @@ export default function CartItem({
             </button>
           </QtyControlStyles>
 
-          {priceProp && qty > 0 && (
+          {price && qty > 0 && (
             <p className='item-qty-price'>
-              {qty} &times; ${priceProp.toFixed(2)}
+              {qty} &times; ${price?.toFixed(2)}
             </p>
           )}
-          {priceProp ? (
+          {price ? (
             <p className='item-cost'>
-              ${(qty * priceProp).toFixed(2)}
+              ${(qty * price).toFixed(2)}
             </p>
           ) : (
             <p className='no-item-price'>

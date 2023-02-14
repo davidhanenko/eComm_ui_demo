@@ -19,22 +19,12 @@ export default function PlaceOrder() {
   );
 
   // cost at the moment of order creation
-  const orderCost = orderItemDetails.reduce(
+  let orderCost = orderItemDetails?.reduce(
     (acc, el) => (acc += el[1].price * el[1].qty),
     0
   );
   const tax = orderCost * 0.08875;
   const charge = (orderCost + tax).toFixed(2);
-
-  // const itemDetails = {};
-
-  // cart.forEach((el, i) => {
-  //   itemDetails[i] = {
-  //     id: el.cartId.split('-')[0],
-  //     detailsId: el.itemDetailsId,
-  //     qty: el.quantity,
-  //   };
-  // });
 
   return (
     <PlaceOrderStyles>
@@ -63,8 +53,8 @@ export default function PlaceOrder() {
         </section>
 
         <section className='charge-section'>
-          <p>Total cost - ${orderCost.toFixed(2)}</p>
-          <p>Tax - ${tax.toFixed(2)}</p>
+          <p>Total cost - ${orderCost?.toFixed(2)}</p>
+          <p>Tax - ${tax?.toFixed(2)}</p>
           <p>Total charge - ${charge}</p>
 
           <OrderForm
