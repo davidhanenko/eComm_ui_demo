@@ -1,9 +1,7 @@
 import gql from 'graphql-tag';
-import {
-  addApolloState,
-  initializeApollo,
-} from '../../lib/apollo';
+import { initializeApollo } from '../../lib/apollo';
 import Order from '../../components/orders_admin/single-order/Order';
+import { authOptions } from '../api/auth/[...nextauth]';
 
 export const ORDER_QUERY = gql`
   query ORDER_QUERY($id: ID!) {
@@ -31,27 +29,45 @@ export const getServerSideProps = async ctx => {
   const client = initializeApollo({
     headers: ctx?.req?.headers,
   });
-
-  let layout = 'main';
+  const layout = 'main';
+  const session = await getServerSession(
+    ctx.req,
+    ctx.res,
+    authOptions
+  );
 
   try {
-    id = await ctx?.query?.id;
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/api/auth/signin',
+          permanent: false,
+        },
+      };
+    } else {
+      id = await ctx?.query?.id;
 
-    const {
-      data: { order },
-    } = await client.query({
-      query: ORDER_QUERY,
-      variables: {
-        id: ctx?.query?.id,
-      },
-    });
+      const {
+        data: { order },
+      } = await client.query({
+        query: ORDER_QUERY,
+        variables: {
+          id: ctx?.query?.id,
+        },
+        context: {
+          headers: {
+            authorization: `Bearer ${session?.jwt}`,
+          },
+        },
+      });
 
-    return {
-      props: {
-        order: order || null,
-        layout,
-      },
-    };
+      return {
+        props: {
+          order: order || null,
+          layout,
+        },
+      };
+    }
   } catch {
     return {
       props: {},

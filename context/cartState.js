@@ -11,6 +11,7 @@ function CartStateProvider({ children }) {
   const [cartRefState, setCartRefState] = useState(null);
   const [modalCloseBtnRef, setModalCloseBtnRef] =
     useState(null);
+  const [cartError, setCartError] = useState('');
 
   function toggleCart() {
     setIsCartOpen(!isCartOpen);
@@ -42,6 +43,8 @@ function CartStateProvider({ children }) {
         setCartRefState,
         modalCloseBtnRef,
         setModalCloseBtnRef,
+        cartError,
+        setCartError,
       }}
     >
       {children}

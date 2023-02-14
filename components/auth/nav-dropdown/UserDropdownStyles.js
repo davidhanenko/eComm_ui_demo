@@ -30,7 +30,7 @@ const UserDropdownStyles = styled.div`
     border: none;
     background: transparent;
     margin: 0.5rem auto;
-    padding: 0.4rem 2rem;
+    padding: 0.6rem 2rem;
     text-align: center;
     font-size: 1.6rem;
     cursor: pointer;
@@ -44,7 +44,7 @@ const UserDropdownStyles = styled.div`
   }
 
   .user-title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     text-transform: lowercase;
     text-align: center;
     color: var(--dark);

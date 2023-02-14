@@ -3,13 +3,13 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useCart } from '../../../../context/cartState';
-import useUser from '../../../auth/User';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSession } from 'next-auth/react';
 
 import Oval from 'react-loader-spinner';
 import { OrderFormStyles } from './OrderFormStyles';
+import ErrorMessage from '../../../shared/error/ErrorMessage';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
@@ -23,11 +23,12 @@ const CREATE_ORDER_MUTATION = gql`
 
 export default function OrderForm({
   totalCost,
+  costFromCart,
   count,
   items_details,
   single_items,
 }) {
-  const { setCart } = useCart();
+  const { setCart, cartError, setCartError } = useCart();
 
   const {
     register,
@@ -42,10 +43,10 @@ export default function OrderForm({
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      name: '',
+      name: 'test name',
       company: '',
-      email: '',
-      phone: '',
+      email: 'email@email.vom',
+      phone: '3333333333',
       orderNotes: '',
     },
   });
@@ -53,17 +54,9 @@ export default function OrderForm({
   const { data: session } = useSession();
 
   const router = useRouter();
-  // const me = useUser();
-  // console.log(session.id);
 
   const [createOrder, { loading, error, data }] =
-    useMutation(CREATE_ORDER_MUTATION, {
-      context: {
-        headers: {
-          authorization: `Bearer ${session?.jwt}`,
-        },
-      },
-    });
+    useMutation(CREATE_ORDER_MUTATION, {});
 
   const onSubmitForm = async values => {
     const orderDetails = {
@@ -76,27 +69,40 @@ export default function OrderForm({
       orderNotes: values.orderNotes,
     };
 
-    try {
-      const orderDetailsJson = JSON.stringify(orderDetails);
-
-      await createOrder({
-        variables: {
-          data: {
-            order_details: orderDetailsJson,
-            items_details: items_details,
-            single_items: single_items,
-            users_permissions_user: session.id,
-          },
-        },
-      });
-
-      reset();
-      setCart([]);
-      router.push('/');
-    } catch (err) {
+    if (costFromCart !== totalCost) {
       toast.error(
-        'An unexpected error occurred, please try again'
+        'Looks like there are some changes related to items in your cart. Please, reload the page, review your order again, and confirm if it aligns with your needs.',
+        {
+          autoClose: false,
+        }
       );
+    } else {
+      try {
+        const orderDetailsJson =
+          JSON.stringify(orderDetails);
+
+        if (error) console.log(error.message);
+
+        await createOrder({
+          variables: {
+            data: {
+              order_details: orderDetailsJson,
+              items_details: items_details,
+              single_items: single_items,
+              users_permissions_user: session.id,
+            },
+          },
+        });
+
+        if (data) {
+          reset();
+          setCart([]);
+          router.push('/');
+        }
+      } catch (err) {
+        toast.error(err.message);
+        // router.reload('/place-order');
+      }
     }
   };
 
@@ -105,6 +111,9 @@ export default function OrderForm({
       isDirty={isDirty}
       onSubmit={handleSubmit(onSubmitForm)}
     >
+      {cartError && (
+        <ErrorMessage errorMessage={cartError} />
+      )}
       {/* name */}
       <fieldset>
         <input

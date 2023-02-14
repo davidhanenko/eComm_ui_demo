@@ -2,26 +2,39 @@ import { useCart } from '../../../context/cartState';
 import { PlaceOrderStyles } from './PlaceOrderStyles';
 import OrderItem from './order-item/OrderItem';
 import OrderForm from './order-form/OrderForm';
+import { useState } from 'react';
 
 export default function PlaceOrder() {
-  const { cart, count, totalCost } = useCart();
+  const [orderItemDetails, setOrderItemDetails] = useState(
+    []
+  );
+  const {
+    cart,
+    count,
+    totalCost: costFromCart,
+  } = useCart();
 
   const ids = cart.map(
     el => (el = el.cartId.split('-')[0])
   );
 
-  const tax = totalCost * 0.08875;
-  const charge = (totalCost + tax).toFixed(2);
+  // cost at the moment of order creation
+  const orderCost = orderItemDetails.reduce(
+    (acc, el) => (acc += el[1].price * el[1].qty),
+    0
+  );
+  const tax = orderCost * 0.08875;
+  const charge = (orderCost + tax).toFixed(2);
 
-  const itemDetails = {};
+  // const itemDetails = {};
 
-  cart.forEach((el, i) => {
-    itemDetails[i] = {
-      id: el.cartId.split('-')[0],
-      detailsId: el.itemDetailsId,
-      qty: el.quantity,
-    };
-  });
+  // cart.forEach((el, i) => {
+  //   itemDetails[i] = {
+  //     id: el.cartId.split('-')[0],
+  //     detailsId: el.itemDetailsId,
+  //     qty: el.quantity,
+  //   };
+  // });
 
   return (
     <PlaceOrderStyles>
@@ -42,20 +55,23 @@ export default function PlaceOrder() {
           {cart.map(orderItem => (
             <OrderItem
               orderItem={orderItem}
-              key={orderItem.cartId}
+              key={orderItem?.cartId}
+              orderItemDetails={orderItemDetails}
+              setOrderItemDetails={setOrderItemDetails}
             />
           ))}
         </section>
 
         <section className='charge-section'>
-          <p>Total cost - ${totalCost.toFixed(2)}</p>
+          <p>Total cost - ${orderCost.toFixed(2)}</p>
           <p>Tax - ${tax.toFixed(2)}</p>
-          <p>Total to charge - ${charge}</p>
+          <p>Total charge - ${charge}</p>
 
           <OrderForm
-            totalCost={totalCost}
+            costFromCart={costFromCart}
+            totalCost={orderCost}
             count={count}
-            items_details={JSON.stringify(itemDetails)}
+            items_details={JSON.stringify(orderItemDetails)}
             single_items={[...ids]}
           />
         </section>

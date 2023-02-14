@@ -4,18 +4,52 @@ import { ORDER_ITEM_QUERY } from '../../../orders_admin/single-order/order-item/
 import LoaderContainer from '../../../shared/loaders/loader-container/LoaderContainer';
 import { OrderItemStyles } from './OrderItemStyles';
 import capitalizeStr from '../../../../helpers/capitalizeStr';
+import { useEffect } from 'react';
 
-export default function OrderItem({ orderItem }) {
+export default function OrderItem({
+  orderItem,
+  orderItemDetails,
+  setOrderItemDetails,
+}) {
   const { data, error, loading } = useQuery(
     ORDER_ITEM_QUERY,
     {
       variables: {
         id: orderItem?.cartId.split('-')[0],
       },
+      fetchPolicy: 'network-only',
     }
   );
 
   const item = data?.singleItem?.data?.attributes;
+
+  const itemDetails = item?.sizePrice?.filter(
+    el => el?.id === orderItem?.itemDetailsId
+  )[0];
+
+  const orderItemObj = {
+    price: item?.price || itemDetails?.price,
+    size: item?.size || itemDetails?.size,
+    type: itemDetails?.type || null,
+    typeValue: itemDetails?.typeValue || null,
+    qty: orderItem?.quantity,
+    itemDetailsId: orderItem?.itemDetailsId,
+  };
+
+  useEffect(() => {
+    // add order item details from db to common array
+    if (
+      !orderItemDetails.some(
+        el => el[0] === orderItem?.cartId
+      ) &&
+      data
+    ) {
+      setOrderItemDetails(prev => [
+        ...prev,
+        [orderItem?.cartId, orderItemObj],
+      ]);
+    }
+  }, [itemDetails, item]);
 
   const imgUrl = item?.image?.data[0]?.attributes?.url;
 
@@ -34,35 +68,38 @@ export default function OrderItem({ orderItem }) {
           />
         )}
       </div>
+
       <div className='item-details'>
         <h4 className='item-title'>
-          {capitalizeStr(item?.itemTitle)}
+          {item?.itemTitle &&
+            capitalizeStr(item?.itemTitle)}
         </h4>
 
         <div className='item-type'>
-          {orderItem?.type && <p>{orderItem?.type}:</p>}
-          <p>{orderItem?.typeValue}</p>
+          {orderItemObj?.type && (
+            <p>{orderItemObj?.type}:</p>
+          )}
+          <p>{orderItemObj?.typeValue}</p>
         </div>
 
         <div className='item-size'>
-          {orderItem?.size && <p>Size:</p>}
-          <p>{orderItem?.size}</p>
+          {orderItemObj?.size && <p>Size:</p>}
+          <p>{orderItemObj?.size}</p>
         </div>
         <div className='item-qty'>
           <p>Qty:</p>
-          <p>{orderItem?.quantity}</p>
+          <p>{orderItemObj?.qty}</p>
         </div>
         <div className='item-price'>
           <p>Price:</p>
-          <p>
-            {orderItem?.price ? (
-              `$${orderItem?.price.toFixed(2)}`
-            ) : (
-              <p className='item-price-not-available'>
-                We will contact you about this item price
-              </p>
-            )}
-          </p>
+
+          {orderItemObj?.price ? (
+            <p>${orderItemObj?.price?.toFixed(2)}</p>
+          ) : (
+            <p className='item-price-not-available'>
+              We will contact you about this item price
+            </p>
+          )}
         </div>
       </div>
     </OrderItemStyles>
