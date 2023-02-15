@@ -26,6 +26,7 @@ export default function OrderForm({
   count,
   items_details,
   single_items,
+  me,
 }) {
   const { setCart, cartReload, setCartReload } = useCart();
 
@@ -42,10 +43,10 @@ export default function OrderForm({
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      name: 'test name',
+      name: me?.username || '',
       company: '',
-      email: 'email@email.vom',
-      phone: '3333333333',
+      email: me?.email || '',
+      phone: '',
       orderNotes: '',
     },
   });
@@ -99,7 +100,6 @@ export default function OrderForm({
       isDirty={isDirty}
       onSubmit={handleSubmit(onSubmitForm)}
     >
-      {/* name */}
       <fieldset>
         <input
           type='text'
@@ -121,7 +121,6 @@ export default function OrderForm({
         }
       </fieldset>
 
-      {/* company */}
       <fieldset>
         <input
           type='text'
@@ -138,7 +137,7 @@ export default function OrderForm({
           </div>
         }
       </fieldset>
-      {/* email */}
+
       <fieldset>
         <input
           type='email'
@@ -160,7 +159,6 @@ export default function OrderForm({
         }
       </fieldset>
 
-      {/* phone */}
       <fieldset>
         <input
           type='text'

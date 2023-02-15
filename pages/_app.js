@@ -4,6 +4,7 @@ import smoothscroll from 'smoothscroll-polyfill';
 import { ApolloProvider } from '@apollo/client';
 import { ScrollProvider } from '../lib/useScroll';
 import { SessionProvider } from 'next-auth/react';
+import 'react-toastify/dist/ReactToastify.css';
 
 import '../styles/nprogress.css';
 import '../styles/fonts.css';

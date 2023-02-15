@@ -59,8 +59,8 @@ export default function SingleItem({ singleItem, link }) {
             height={300}
             objectFit='scale-down'
             layout='responsive'
-            placeholder='blur'
-            blurDataURL={placeholderImg}
+            // placeholder='blur'
+            // blurDataURL={placeholderImg}
           />
         )}
       </div>

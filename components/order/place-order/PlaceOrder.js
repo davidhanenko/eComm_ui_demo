@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
 import { useCart } from '../../../context/cartState';
 import { PlaceOrderStyles } from './PlaceOrderStyles';
 import OrderItem from './order-item/OrderItem';
 import OrderForm from './order-form/OrderForm';
 import { TAX_VALUE } from '../../../config';
+import useUser from '../../auth/User';
 
 export default function PlaceOrder() {
   const {
@@ -11,10 +11,7 @@ export default function PlaceOrder() {
     count,
     totalCost: costFromCart,
   } = useCart();
-  const [orderItemDetails, setOrderItemDetails] = useState(
-    []
-  );
-  const [orderCost, setOrderCost] = useState(costFromCart);
+  const me = useUser();
 
   const ids = cart.map(
     el => (el = el.cartId.split('-')[0])
@@ -52,13 +49,16 @@ export default function PlaceOrder() {
           <p>Tax - ${tax?.toFixed(2)}</p>
           <p>Total charge - ${TotalCharge}</p>
 
-          <OrderForm
-            totalCost={costFromCart}
-            count={count}
-            items_details={JSON.stringify(cart)}
-            single_items={[...ids]}
-            tax={tax}
-          />
+          {me && (
+            <OrderForm
+              totalCost={costFromCart}
+              count={count}
+              items_details={JSON.stringify(cart)}
+              single_items={[...ids]}
+              tax={tax}
+              me={me}
+            />
+          )}
         </section>
       </main>
     </PlaceOrderStyles>

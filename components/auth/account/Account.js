@@ -90,9 +90,8 @@ function OrderItem({ order }) {
   const charge = orderDetails?.charge;
   const tax = orderDetails?.charge * 0.08875;
   const total = (charge + tax).toFixed(2);
-  const date = new Date(order?.attributes?.createdAt);
-  const time = date.getHours();
-  console.log(time);
+  // const date = new Date(order?.attributes?.createdAt);
+
 
   return (
     <OrderItemStyles>

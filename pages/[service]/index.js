@@ -69,12 +69,12 @@ export default function ServicePage(props) {
           }
         />
       </Head>
-      {
+      {service && (
         <Items
           allServiceItems={allServiceItems}
           service={service}
         />
-      }
+      )}
     </>
   );
 }

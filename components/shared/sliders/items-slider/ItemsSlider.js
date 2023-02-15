@@ -56,12 +56,12 @@ const ItemsSlider = ({ slides, itemsByIndex, service, loading}) => {
           {slides.map(index => (
             <div className='embla__slide' key={index}>
               <div className='embla__slide__inner'>
-                <ItemsSlide
+                {!loading && <ItemsSlide
                   itemsByIndex={itemsByIndex}
                   index={index}
                   service={service}
                   loading={loading}
-                />
+                />}
               </div>
             </div>
           ))}
