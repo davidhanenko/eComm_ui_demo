@@ -84,8 +84,6 @@ export const getServerSideProps = async ctx => {
     headers: ctx?.req?.headers,
   });
 
-
-  
   try {
     const {
       data: { services },
@@ -95,6 +93,12 @@ export const getServerSideProps = async ctx => {
         service: ctx?.query?.service,
       },
     });
+
+    if (services?.data?.length <= 0) {
+      return {
+        notFound: true,
+      };
+    }
 
     return addApolloState(client, {
       props: {

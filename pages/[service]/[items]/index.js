@@ -6,7 +6,6 @@ import {
   initializeApollo,
 } from '../../../lib/apollo';
 
-
 const ItemsByCategory = dynamic(() =>
   import(
     '../../../components/items/items-page/items-by-category/ItemsByCategory'
@@ -95,6 +94,12 @@ export const getServerSideProps = async ctx => {
         ),
       },
     });
+
+    if (items?.data?.length <= 0) {
+      return {
+        notFound: true,
+      };
+    }
 
     return addApolloState(client, {
       props: {

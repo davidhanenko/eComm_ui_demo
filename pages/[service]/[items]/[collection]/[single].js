@@ -5,7 +5,6 @@ import {
   initializeApollo,
 } from '../../../../lib/apollo';
 
-
 import capitalizeStr from '../../../../helpers/capitalizeStr';
 
 import SingleItem from '../../../../components/items/items-page/single-item/SingleItem';
@@ -96,6 +95,11 @@ export const getServerSideProps = async ctx => {
       },
     });
 
+    if (singleItems?.data?.length <= 0) {
+      return {
+        notFound: true,
+      };
+    }
     return addApolloState(client, {
       props: {
         singleItems: singleItems || null,

@@ -69,7 +69,6 @@ export default function OrderForm({
       orderNotes: values.orderNotes,
     };
 
-
     try {
       const orderDetailsJson = JSON.stringify(orderDetails);
 
