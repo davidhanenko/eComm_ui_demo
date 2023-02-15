@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 
 import { ALL_ORDERS_QUERY } from '../../../pages/orders/index';
 import DropdownSelect from '../../shared/pagination/dropdown/DropdownSelect';
-import { ORDER_STATUS_OPTIONS } from '../../../config';
+import { ORDER_STATUS_OPTIONS, TAX_VALUE } from '../../../config';
 import OrderItem from './order-item/OrderItem';
 import { OrderStyles } from './OrderStyles';
 
@@ -31,6 +31,8 @@ export default function Order({ order }) {
     order?.attributes?.status
   );
 
+
+
   // items included in current order (get from db - parse if JSON or use as object)
   const orderItems =
     typeof order?.attributes?.itemDetails === 'object'
@@ -44,7 +46,7 @@ export default function Order({ order }) {
       : JSON.parse(order?.attributes?.orderDetails);
 
   const charge = orderDetails?.charge;
-  const tax = charge * 0.08875;
+  const tax = charge * TAX_VALUE;
   const totalCharge = charge + tax;
 
   const [

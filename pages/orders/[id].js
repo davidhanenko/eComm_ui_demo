@@ -1,9 +1,8 @@
 import gql from 'graphql-tag';
-import {
-  addApolloState,
-  initializeApollo,
-} from '../../lib/apollo';
+import { initializeApollo } from '../../lib/apollo';
 import Order from '../../components/orders_admin/single-order/Order';
+import { authOptions } from '../api/auth/[...nextauth]';
+import { getServerSession } from 'next-auth/next';
 
 export const ORDER_QUERY = gql`
   query ORDER_QUERY($id: ID!) {
@@ -24,18 +23,30 @@ export const ORDER_QUERY = gql`
 export default function OrderPage(props) {
   const order = props?.order?.data;
 
-  return <Order order={order} />;
+  // return <Order order={order} />;
+  return <h1>resd</h1>;
 }
 
 export const getServerSideProps = async ctx => {
   const client = initializeApollo({
     headers: ctx?.req?.headers,
   });
-
-  let layout = 'main';
+  const layout = 'main';
+  const session = await getServerSession(
+    ctx.req,
+    ctx.res,
+    authOptions
+  );
 
   try {
-    id = await ctx?.query?.id;
+    if (!session) {
+      return {
+        redirect: {
+          destination: '/api/auth/signin',
+          permanent: false,
+        },
+      };
+    }
 
     const {
       data: { order },
@@ -45,6 +56,12 @@ export const getServerSideProps = async ctx => {
         id: ctx?.query?.id,
       },
     });
+
+    if (!order?.data) {
+      return {
+        notFound: true,
+      };
+    }
 
     return {
       props: {

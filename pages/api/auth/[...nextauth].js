@@ -53,7 +53,9 @@ const authOptions = {
 
   session: {
     jwt: true,
+    maxAge: 60 * 60 * 24,
   },
+
   secret: process.env.NEXTAUTH_SECRET,
 
   callbacks: {
@@ -75,6 +77,7 @@ const authOptions = {
         } else {
           token.jwt = user.jwt;
           token.id = user.user.id;
+          token.name = user.user.username;
         }
       }
 

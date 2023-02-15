@@ -3,7 +3,6 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useCart } from '../../../../context/cartState';
-import useUser from '../../../auth/User';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSession } from 'next-auth/react';
@@ -23,11 +22,12 @@ const CREATE_ORDER_MUTATION = gql`
 
 export default function OrderForm({
   totalCost,
+  tax,
   count,
   items_details,
   single_items,
 }) {
-  const { setCart } = useCart();
+  const { setCart, cartReload, setCartReload } = useCart();
 
   const {
     register,
@@ -42,10 +42,10 @@ export default function OrderForm({
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      name: '',
+      name: 'test name',
       company: '',
-      email: '',
-      phone: '',
+      email: 'email@email.vom',
+      phone: '3333333333',
       orderNotes: '',
     },
   });
@@ -53,21 +53,14 @@ export default function OrderForm({
   const { data: session } = useSession();
 
   const router = useRouter();
-  // const me = useUser();
-  // console.log(session.id);
 
   const [createOrder, { loading, error, data }] =
-    useMutation(CREATE_ORDER_MUTATION, {
-      context: {
-        headers: {
-          authorization: `Bearer ${session?.jwt}`,
-        },
-      },
-    });
+    useMutation(CREATE_ORDER_MUTATION, {});
 
   const onSubmitForm = async values => {
     const orderDetails = {
       charge: totalCost,
+      tax: tax,
       totalItems: count,
       name: values.name,
       company: values.company,
@@ -90,15 +83,16 @@ export default function OrderForm({
         },
       });
 
-      reset();
-      setCart([]);
-      router.push('/');
+      setTimeout(() => {
+        reset();
+        setCart([]);
+        router.push('/');
+      }, 0);
     } catch (err) {
-      toast.error(
-        'An unexpected error occurred, please try again'
-      );
+      toast.error(err.message);
     }
   };
+  // };
 
   return (
     <OrderFormStyles

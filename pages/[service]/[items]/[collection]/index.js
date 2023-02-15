@@ -5,7 +5,6 @@ import {
   initializeApollo,
 } from '../../../../lib/apollo';
 
-
 import { PaginationStateProvider } from '../../../../context/paginationState';
 import Pagination from '../../../../components/shared/pagination/Pagination';
 
@@ -47,7 +46,6 @@ export default function ServiceCollectionPage(props) {
   // current page
   const page = parseInt(props?.page);
 
-
   return (
     <PaginationStateProvider>
       <Pagination
@@ -87,15 +85,20 @@ export const getServerSideProps = async ctx => {
       },
     });
 
-    return addApolloState(client, {
-      props: {
-        singleItems: singleItems || null,
-        service: service || null,
-        items: items || null,
-        collection: collection || null,
-        page: page || null,
-      },
-    });
+    if (singleItems?.meta?.pagination?.total <= 0) {
+      return {
+        notFound: true,
+      };
+    }
+      return addApolloState(client, {
+        props: {
+          singleItems: singleItems || null,
+          service: service || null,
+          items: items || null,
+          collection: collection || null,
+          page: page || null,
+        },
+      });
   } catch {
     return {
       props: {},

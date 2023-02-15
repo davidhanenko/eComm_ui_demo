@@ -3,6 +3,8 @@ export const PROD_ENDPOINT = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 
 export const PER_PAGE_DEFAULT = 6;
 
+export const TAX_VALUE = 0.08875;
+
 export const SORT_ITEMS_BY_DEFAULT = 'itemTitle:asc';
 
 export const TOGGLE_WIDTH = 850;

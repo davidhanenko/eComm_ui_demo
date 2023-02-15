@@ -20,7 +20,7 @@ export default function AddToCart({
   const handleAdd = () => {
     // check if there is same item in the cart
     const itemIsInCart = cart.some(
-      el => el.cartId === `${id}-${price}-${type}`
+      el => el.cartId === `${id}-${price}-${typeValue}`
     );
 
     itemIsInCart
@@ -34,7 +34,7 @@ export default function AddToCart({
       : setCart([
           ...cart,
           {
-            cartId: `${id}-${price}-${type}`,
+            cartId: `${id}-${price}-${typeValue}`,
             itemDetailsId,
             size,
             price,
