@@ -5,12 +5,15 @@ import LoaderContainer from '../../../shared/loaders/loader-container/LoaderCont
 import { OrderItemStyles } from './OrderItemStyles';
 import capitalizeStr from '../../../../helpers/capitalizeStr';
 import { useEffect } from 'react';
+import { useCart } from '../../../../context/cartState';
 
 export default function OrderItem({
   orderItem,
   orderItemDetails,
   setOrderItemDetails,
 }) {
+  const { count } = useCart();
+
   const { data, error, loading } = useQuery(
     ORDER_ITEM_QUERY,
     {
@@ -29,6 +32,7 @@ export default function OrderItem({
   )[0];
 
   const orderItemObj = {
+    cartId: orderItem?.cartId,
     price: itemDetails?.price || item?.price,
     size: itemDetails?.size || item?.size,
     type: itemDetails?.type || null,
@@ -36,24 +40,40 @@ export default function OrderItem({
     qty: orderItem?.quantity,
     itemDetailsId: orderItem?.itemDetailsId,
   };
+  const isInOrder = orderItemDetails.some(
+    el => el?.cartId === orderItem?.cartId
+  );
 
   useEffect(() => {
     // add order item details from db to common array
-    if (
-      !orderItemDetails.some(
-        el => el[0] === orderItem?.cartId
-      ) &&
-      data
-    ) {
-      setOrderItemDetails(prev => [
-        ...prev,
-        [orderItem?.cartId, orderItemObj],
-      ]);
-    }
-  }, [item, itemDetails]);
+
+    !isInOrder
+      ? data &&
+        setOrderItemDetails([
+          ...orderItemDetails,
+          {
+            cartId: orderItem?.cartId,
+            price: itemDetails?.price || item?.price,
+            size: itemDetails?.size || item?.size,
+            type: itemDetails?.type || null,
+            typeValue: itemDetails?.typeValue || null,
+            qty: orderItem?.quantity,
+            itemDetailsId: orderItem?.itemDetailsId,
+          },
+        ])
+      : setOrderItemDetails(
+          orderItemDetails.map(el =>
+            el?.cartId === orderItem?.cartId
+              ? {
+                  ...el,
+                  orderItemObj,
+                }
+              : el
+          )
+        );
+  }, [orderItem, ]);
 
   const imgUrl = item?.image?.data[0]?.attributes?.url;
-
 
   if (loading) return <LoaderContainer height={'10rem'} />;
   return (

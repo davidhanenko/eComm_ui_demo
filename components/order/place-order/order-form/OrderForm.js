@@ -23,7 +23,7 @@ const CREATE_ORDER_MUTATION = gql`
 
 export default function OrderForm({
   totalCost,
-  costFromCart,
+  tax,
   count,
   items_details,
   single_items,
@@ -61,6 +61,7 @@ export default function OrderForm({
   const onSubmitForm = async values => {
     const orderDetails = {
       charge: totalCost,
+      tax: tax,
       totalItems: count,
       name: values.name,
       company: values.company,
@@ -69,41 +70,40 @@ export default function OrderForm({
       orderNotes: values.orderNotes,
     };
 
-    console.log(costFromCart, totalCost);
+    // if (costFromCart !== totalCost) {
+    //   setCartReload(prev => !prev);
+    //   toast.error(
+    //     'Looks like there are some changes related to items in your cart. Please, reload the page, review your order again, and confirm if it aligns with your needs.',
+    //     {
+    //       autoClose: false,
+    //     }
+    //   );
+    // } else {
+    try {
+      const orderDetailsJson = JSON.stringify(orderDetails);
 
-    if (costFromCart !== totalCost) {
-      setCartReload(prev => !prev);
-      toast.error(
-        'Looks like there are some changes related to items in your cart. Please, reload the page, review your order again, and confirm if it aligns with your needs.',
-        {
-          autoClose: false,
-        }
-      );
-    } else {
-      try {
-        const orderDetailsJson =
-          JSON.stringify(orderDetails);
-
-        await createOrder({
-          variables: {
-            data: {
-              order_details: orderDetailsJson,
-              items_details: items_details,
-              single_items: single_items,
-              users_permissions_user: session.id,
-            },
+      await createOrder({
+        variables: {
+          data: {
+            order_details: orderDetailsJson,
+            items_details: items_details,
+            single_items: single_items,
+            users_permissions_user: session.id,
           },
-        });
+        },
+      });
 
+      setTimeout(() => {
         reset();
         setCart([]);
         router.push('/');
-      } catch (err) {
-        toast.error(err.message);
-        // router.reload('/place-order');
-      }
+      }, 0);
+    } catch (err) {
+      toast.error(err.message);
+      // router.reload('/place-order');
     }
   };
+  // };
 
   return (
     <OrderFormStyles

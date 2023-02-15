@@ -29,6 +29,8 @@ export default function CartItem({
     variables: {
       id: cartId?.split('-')[0],
     },
+    fetchPolicy: 'no-cache',
+    ssr: false,
   });
   const cartItem = data?.singleItem?.data;
 
@@ -44,7 +46,7 @@ export default function CartItem({
   const size = itemDetailsId
     ? itemDetails?.size
     : cartItem?.attributes?.size;
-  const type = itemDetails?.size;
+  const type = itemDetails?.type;
   const typeValue = itemDetails?.typeValue;
 
   useEffect(() => {
@@ -62,8 +64,6 @@ export default function CartItem({
       )
     );
   }, [cartReload, data]);
-
-  console.log(cart);
 
   const handleQuantity = e => {
     const result = e.target.value.replace(/\D/g, '');

@@ -1,30 +1,40 @@
+import { useEffect, useState } from 'react';
 import { useCart } from '../../../context/cartState';
 import { PlaceOrderStyles } from './PlaceOrderStyles';
 import OrderItem from './order-item/OrderItem';
 import OrderForm from './order-form/OrderForm';
-import { useState } from 'react';
+import { TAX_VALUE } from '../../../config';
 
 export default function PlaceOrder() {
-  const [orderItemDetails, setOrderItemDetails] = useState(
-    []
-  );
   const {
     cart,
     count,
     totalCost: costFromCart,
   } = useCart();
+  const [orderItemDetails, setOrderItemDetails] = useState(
+    []
+  );
+  const [orderCost, setOrderCost] = useState(costFromCart);
 
   const ids = cart.map(
     el => (el = el.cartId.split('-')[0])
   );
 
-  // cost at the moment of order creation
-  let orderCost = orderItemDetails?.reduce(
-    (acc, el) => (acc += el[1].price * el[1].qty),
-    0
-  );
-  const tax = orderCost * 0.08875;
-  const charge = (orderCost + tax).toFixed(2);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setOrderCost(
+  //       orderItemDetails?.reduce(
+  //         (acc, el) => (acc += el.price * el.qty),
+  //         0
+  //       )
+  //     );
+  //   }, 0);
+  // }, [orderItemDetails]);
+
+  // console.log(orderItemDetails);
+
+  const tax = costFromCart * TAX_VALUE;
+  const TotalCharge = (costFromCart + tax).toFixed(2);
 
   return (
     <PlaceOrderStyles>
@@ -53,16 +63,16 @@ export default function PlaceOrder() {
         </section>
 
         <section className='charge-section'>
-          <p>Total cost - ${orderCost?.toFixed(2)}</p>
+          <p>Total cost - ${costFromCart?.toFixed(2)}</p>
           <p>Tax - ${tax?.toFixed(2)}</p>
-          <p>Total charge - ${charge}</p>
+          <p>Total charge - ${TotalCharge}</p>
 
           <OrderForm
-            costFromCart={costFromCart}
-            totalCost={orderCost}
+            totalCost={costFromCart}
             count={count}
-            items_details={JSON.stringify(orderItemDetails)}
+            items_details={JSON.stringify(cart)}
             single_items={[...ids]}
+            tax={tax}
           />
         </section>
       </main>
