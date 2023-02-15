@@ -85,13 +85,15 @@ function OrderItem({ order }) {
   let orderDetails = order?.attributes?.order_details;
   let itemsDetails = order?.attributes?.items_details;
 
-  orderDetails = JSON.parse(orderDetails);
+  orderDetails =
+    typeof orderDetails === 'object'
+      ? JSON.parse(orderDetails)
+      : orderDetails;
 
   const charge = orderDetails?.charge;
   const tax = orderDetails?.charge * 0.08875;
   const total = (charge + tax).toFixed(2);
   // const date = new Date(order?.attributes?.createdAt);
-
 
   return (
     <OrderItemStyles>
