@@ -9,7 +9,6 @@ import { useSession } from 'next-auth/react';
 
 import Oval from 'react-loader-spinner';
 import { OrderFormStyles } from './OrderFormStyles';
-import ErrorMessage from '../../../shared/error/ErrorMessage';
 
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
@@ -70,15 +69,7 @@ export default function OrderForm({
       orderNotes: values.orderNotes,
     };
 
-    // if (costFromCart !== totalCost) {
-    //   setCartReload(prev => !prev);
-    //   toast.error(
-    //     'Looks like there are some changes related to items in your cart. Please, reload the page, review your order again, and confirm if it aligns with your needs.',
-    //     {
-    //       autoClose: false,
-    //     }
-    //   );
-    // } else {
+
     try {
       const orderDetailsJson = JSON.stringify(orderDetails);
 
@@ -100,7 +91,6 @@ export default function OrderForm({
       }, 0);
     } catch (err) {
       toast.error(err.message);
-      // router.reload('/place-order');
     }
   };
   // };

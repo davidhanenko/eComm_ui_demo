@@ -9,8 +9,6 @@ import { useCart } from '../../../../context/cartState';
 
 export default function OrderItem({
   orderItem,
-  orderItemDetails,
-  setOrderItemDetails,
 }) {
   const { count } = useCart();
 
@@ -40,38 +38,7 @@ export default function OrderItem({
     qty: orderItem?.quantity,
     itemDetailsId: orderItem?.itemDetailsId,
   };
-  const isInOrder = orderItemDetails.some(
-    el => el?.cartId === orderItem?.cartId
-  );
 
-  useEffect(() => {
-    // add order item details from db to common array
-
-    !isInOrder
-      ? data &&
-        setOrderItemDetails([
-          ...orderItemDetails,
-          {
-            cartId: orderItem?.cartId,
-            price: itemDetails?.price || item?.price,
-            size: itemDetails?.size || item?.size,
-            type: itemDetails?.type || null,
-            typeValue: itemDetails?.typeValue || null,
-            qty: orderItem?.quantity,
-            itemDetailsId: orderItem?.itemDetailsId,
-          },
-        ])
-      : setOrderItemDetails(
-          orderItemDetails.map(el =>
-            el?.cartId === orderItem?.cartId
-              ? {
-                  ...el,
-                  orderItemObj,
-                }
-              : el
-          )
-        );
-  }, [orderItem, ]);
 
   const imgUrl = item?.image?.data[0]?.attributes?.url;
 

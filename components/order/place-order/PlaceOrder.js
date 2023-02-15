@@ -20,19 +20,6 @@ export default function PlaceOrder() {
     el => (el = el.cartId.split('-')[0])
   );
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setOrderCost(
-  //       orderItemDetails?.reduce(
-  //         (acc, el) => (acc += el.price * el.qty),
-  //         0
-  //       )
-  //     );
-  //   }, 0);
-  // }, [orderItemDetails]);
-
-  // console.log(orderItemDetails);
-
   const tax = costFromCart * TAX_VALUE;
   const TotalCharge = (costFromCart + tax).toFixed(2);
 
@@ -56,8 +43,6 @@ export default function PlaceOrder() {
             <OrderItem
               orderItem={orderItem}
               key={orderItem?.cartId}
-              orderItemDetails={orderItemDetails}
-              setOrderItemDetails={setOrderItemDetails}
             />
           ))}
         </section>
