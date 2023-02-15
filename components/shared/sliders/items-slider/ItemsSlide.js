@@ -12,6 +12,11 @@ export default function Slide({
   service,
   loading,
 }) {
+  const imgUrl =
+    itemsByIndex(index)?.attributes?.category?.data[0]
+      ?.attributes?.singleItem?.data[0]?.attributes?.image
+      ?.data[0]?.attributes?.url;
+
   if (loading) {
     return (
       <ItemsSlideStyles>
@@ -32,34 +37,28 @@ export default function Slide({
       >
         <a>
           <div className='item'>
-            {itemsByIndex(index)?.attributes?.category
-              ?.data[0]?.attributes?.singleItem?.data[0]
-              ?.attributes?.image?.data[0]?.attributes
-              ?.url ? (
+            {imgUrl ? (
               <Image
                 className='embla__slide__img item-image'
-                src={
-                  itemsByIndex(index)?.attributes?.category
-                    ?.data[0]?.attributes?.singleItem
-                    ?.data[0]?.attributes?.image?.data[0]
-                    ?.attributes?.url
-                }
+                src={imgUrl}
                 alt={itemsByIndex(index)?.attributes?.title}
                 width={300}
                 height={300}
                 layout='responsive'
-                placeholder='blur'
-                blurDataURL={placeholderImg}
+                // placeholder='blur'
+                // blurDataURL={placeholderImg}
               />
             ) : (
               <div className='no-items'>
-                <Image
-                  src={placeholderImg}
-                  alt='item image'
-                  width={300}
-                  height={300}
-                  layout='responsive'
-                />
+                {placeholderImg && (
+                  <Image
+                    src={placeholderImg}
+                    alt='item image'
+                    width={300}
+                    height={300}
+                    layout='responsive'
+                  />
+                )}
                 <div>
                   <p>Coming soon...</p>
                 </div>

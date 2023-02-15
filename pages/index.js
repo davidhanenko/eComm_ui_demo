@@ -81,9 +81,12 @@ const TAGS_QUERY = gql`
   }
 `;
 
-export default function MainPage(props) {
-  const services = props?.services?.data;
-  const metaTags = props?.mainMetaTag?.data;
+export default function MainPage({
+  services,
+  mainMetaTag,
+}) {
+  const servicesData = services?.data;
+  const metaTags = mainMetaTag?.data;
 
   return (
     <>
@@ -104,7 +107,7 @@ export default function MainPage(props) {
           }
         />
       </Head>
-      <Main services={services} />
+      {services && <Main services={servicesData} />}
     </>
   );
 }
@@ -114,21 +117,27 @@ export const getServerSideProps = async ctx => {
     headers: ctx?.req?.headers,
   });
 
-  const layout = 'main';
+  try {
+    const layout = 'main';
 
-  const {
-    data: { mainMetaTag },
-  } = await client.query({ query: TAGS_QUERY });
+    const {
+      data: { mainMetaTag },
+    } = await client.query({ query: TAGS_QUERY });
 
-  const {
-    data: { services },
-  } = await client.query({ query: SERVICES_QUERY });
+    const {
+      data: { services },
+    } = await client.query({ query: SERVICES_QUERY });
 
-  return addApolloState(client, {
-    props: {
-      services: services || null,
-      mainMetaTag: mainMetaTag || null,
-      layout,
-    },
-  });
+    return addApolloState(client, {
+      props: {
+        services: services || null,
+        mainMetaTag: mainMetaTag || null,
+        layout,
+      },
+    });
+  } catch {
+    return {
+      props: {},
+    };
+  }
 };
