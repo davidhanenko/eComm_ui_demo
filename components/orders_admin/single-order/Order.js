@@ -6,7 +6,10 @@ import { useMutation } from '@apollo/client';
 
 import { ALL_ORDERS_QUERY } from '../../../pages/orders/index';
 import DropdownSelect from '../../shared/pagination/dropdown/DropdownSelect';
-import { ORDER_STATUS_OPTIONS, TAX_VALUE } from '../../../config';
+import {
+  ORDER_STATUS_OPTIONS,
+  TAX_VALUE,
+} from '../../../config';
 import OrderItem from './order-item/OrderItem';
 import { OrderStyles } from './OrderStyles';
 
@@ -30,8 +33,6 @@ export default function Order({ order }) {
   const [status, setStatus] = useState(
     order?.attributes?.status
   );
-
-
 
   // items included in current order (get from db - parse if JSON or use as object)
   const orderItems =
@@ -115,14 +116,16 @@ export default function Order({ order }) {
       <hr />
 
       {Object.values(orderItems).map((item, i) => (
-        <OrderItem item={item} key={item.id + i} />
+        <OrderItem
+          item={item}
+          index={i + 1}
+          key={`${item.id}-${i}`}
+        />
       ))}
 
       <hr />
       <div className='order-notes'>
-        <sub>
-          Notes related to current order leaved by customer
-        </sub>
+        <sub>Notes:</sub>
         <p>{orderDetails?.orderNotes}</p>
       </div>
 

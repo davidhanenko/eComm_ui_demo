@@ -2,17 +2,19 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useCart } from '../../../../context/cartState';
+import { useCart } from '../../../../../context/cartState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSession } from 'next-auth/react';
 
 import Oval from 'react-loader-spinner';
-import { OrderFormStyles } from './OrderFormStyles';
+import { RequestOrderFormStyles } from './RequestOrderFormStyles';
 
-const CREATE_ORDER_MUTATION = gql`
-  mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
-    createOrder(data: $data) {
+const CREATE_ORDER_REQUEST_MUTATION = gql`
+  mutation CREATE_ORDER_REQUEST_MUTATION(
+    $data: OrderRequestInput!
+  ) {
+    createOrderRequest(data: $data) {
       data {
         id
       }
@@ -20,15 +22,14 @@ const CREATE_ORDER_MUTATION = gql`
   }
 `;
 
-export default function OrderForm({
+export default function RequestOrderForm({
   totalCost,
   tax,
   count,
   items_details,
   single_items,
-  me,
 }) {
-  const { setCart } = useCart();
+  const { setCart, cartReload, setCartReload } = useCart();
 
   const {
     register,
@@ -43,10 +44,10 @@ export default function OrderForm({
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      name: me?.username || '',
+      name: '',
       company: '',
-      email: me?.email || '',
-      phone: '4444444444',
+      email: '',
+      phone: '',
       orderNotes: '',
     },
   });
@@ -55,8 +56,8 @@ export default function OrderForm({
 
   const router = useRouter();
 
-  const [createOrder, { loading, error, data }] =
-    useMutation(CREATE_ORDER_MUTATION, {});
+  const [createOrderRequest, { loading, error, data }] =
+    useMutation(CREATE_ORDER_REQUEST_MUTATION, {});
 
   const onSubmitForm = async values => {
     const orderDetails = {
@@ -72,16 +73,13 @@ export default function OrderForm({
 
     try {
       const orderDetailsJson = JSON.stringify(orderDetails);
-      const itemsDetailsJson =
-        JSON.stringify(items_details);
 
-      await createOrder({
+      await createOrderRequest({
         variables: {
           data: {
             order_details: orderDetailsJson,
-            items_details: itemsDetailsJson,
+            items_details: items_details,
             single_items: single_items,
-            users_permissions_user: session.id,
           },
         },
       });
@@ -92,12 +90,15 @@ export default function OrderForm({
         router.push('/');
       }, 0);
     } catch (err) {
+      toast.error(
+        'An unexpected error occurred, please refresh the page and try again'
+      );
       console.error(err.message);
     }
   };
 
   return (
-    <OrderFormStyles
+    <RequestOrderFormStyles
       isDirty={isDirty}
       onSubmit={handleSubmit(onSubmitForm)}
     >
@@ -220,11 +221,7 @@ export default function OrderForm({
 
       <button
         type='submit'
-        disabled={
-          single_items.length <= 0 ||
-          isSubmitting ||
-          loading
-        }
+        disabled={isSubmitting || loading}
       >
         {isSubmitting || loading ? (
           <div>
@@ -236,9 +233,9 @@ export default function OrderForm({
             />
           </div>
         ) : (
-          <div>confirm order</div>
+          <div>request order</div>
         )}
       </button>
-    </OrderFormStyles>
+    </RequestOrderFormStyles>
   );
 }

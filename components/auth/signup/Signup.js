@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { signIn } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -252,7 +253,7 @@ export default function Signup() {
       <FooterStyles>
         <p className='is-account'>
           Already have an account -{' '}
-          <Link href='/user/signin'> Sign in</Link>{' '}
+          <span onClick={() => signIn()}>Sign in</span>
         </p>
         <p className='terms'>Terms of use</p>
       </FooterStyles>

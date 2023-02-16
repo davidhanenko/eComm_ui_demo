@@ -1,18 +1,15 @@
-import { useCart } from '../../../context/cartState';
-import { PlaceOrderStyles } from './PlaceOrderStyles';
-import OrderItem from './order-item/OrderItem';
-import OrderForm from './order-form/OrderForm';
-import { TAX_VALUE } from '../../../config';
-import useUser from '../../auth/User';
-import RequestOrderComponent from '../order-request/request-component/RequestOrderComponent';
+import { useCart } from '../../../../context/cartState';
+import OrderItem from '../../place-order/order-item/OrderItem';
+import { TAX_VALUE } from '../../../../config';
+import { RequestOrderStyles } from './RequestOrderStyles';
+import RequestOrderForm from './request-order-form/RequestOrderForm';
 
-export default function PlaceOrder() {
+export default function RequestOrder() {
   const {
     cart,
     count,
     totalCost: costFromCart,
   } = useCart();
-  const me = useUser();
 
   const ids = cart.map(
     el => (el = el.cartId.split('-')[0])
@@ -22,7 +19,7 @@ export default function PlaceOrder() {
   const TotalCharge = (costFromCart + tax).toFixed(2);
 
   return (
-    <PlaceOrderStyles>
+    <RequestOrderStyles>
       <header>
         <h1>Process your order</h1>
         <p>
@@ -50,20 +47,15 @@ export default function PlaceOrder() {
           <p>Tax - ${tax?.toFixed(2)}</p>
           <p>Total charge - ${TotalCharge}</p>
 
-          {me ? (
-            <OrderForm
-              totalCost={costFromCart}
-              count={count}
-              items_details={cart}
-              single_items={[...ids]}
-              tax={tax}
-              me={me}
-            />
-          ) : (
-            <RequestOrderComponent />
-          )}
+          <RequestOrderForm
+            totalCost={costFromCart}
+            count={count}
+            items_details={JSON.stringify(cart)}
+            single_items={[...ids]}
+            tax={tax}
+          />
         </section>
       </main>
-    </PlaceOrderStyles>
+    </RequestOrderStyles>
   );
 }

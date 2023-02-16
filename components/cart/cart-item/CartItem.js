@@ -40,6 +40,7 @@ export default function CartItem({
       )[0]
     : null;
 
+  const title = cartItem?.attributes?.itemTitle;
   const price = itemDetailsId
     ? itemDetails?.price
     : cartItem?.attributes?.price;
@@ -55,6 +56,7 @@ export default function CartItem({
         el.cartId === cartId
           ? {
               ...el,
+              title: title,
               price: price,
               size: size,
               type: type,
@@ -117,10 +119,7 @@ export default function CartItem({
         <div className='title-size-container'>
           <a href={`${link}`}>
             <h4 className='item-title'>
-              {cartItem?.attributes?.itemTitle &&
-                capitalizeStr(
-                  cartItem?.attributes?.itemTitle
-                )}
+              {title && capitalizeStr(title)}
             </h4>
           </a>
 

@@ -5,11 +5,15 @@ const OrderItemStyles = styled.section`
   align-items: center;
   justify-content: space-between;
   margin: 2rem 0;
+  border-bottom: 1px dashed var(--blue4);
 
   @media (max-width: 600px) {
     font-size: 1.2rem;
   }
 
+  .item-number {
+    width: 3rem;
+  }
   .item-img {
     margin-right: 2rem;
     display: block;

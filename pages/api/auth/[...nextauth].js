@@ -54,6 +54,7 @@ const authOptions = {
   session: {
     jwt: true,
     maxAge: 60 * 60 * 24,
+    updateAge: 2 * 24 * 60 * 60,
   },
 
   secret: process.env.NEXTAUTH_SECRET,

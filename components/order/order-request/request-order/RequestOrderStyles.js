@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const PlaceOrderStyles = styled.div`
+const RequestOrderStyles = styled.div`
   margin-top: calc(
     var(--navHeight) + var(--searchHeight) + 5rem
   );
@@ -46,4 +46,4 @@ const PlaceOrderStyles = styled.div`
   }
 `;
 
-export { PlaceOrderStyles };
+export { RequestOrderStyles };
