@@ -53,19 +53,6 @@ const SERVICES_QUERY = gql`
   }
 `;
 
-// export const SERVICES_QUERY = gql`
-//   query SERVICES_QUERY {
-//     services {
-//       data {
-//         id
-//         attributes {
-//           serviceTitle: service
-//         }
-//       }
-//     }
-//   }
-// `;
-
 const TAGS_QUERY = gql`
   query TAGS_QUERY {
     mainMetaTag {

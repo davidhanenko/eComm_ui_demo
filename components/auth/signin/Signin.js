@@ -38,13 +38,14 @@ export default function Signin({ providers }) {
   });
 
   const router = useRouter();
+  const urlToRedirect = router?.query?.callbackUrl;
 
   const onSubmitForm = async values => {
     try {
       const res = await signIn('credentials', {
         email: values.email,
         password: values.password,
-        // redirect: false,
+        redirect: false,
       });
 
       if (res.error) {
@@ -58,13 +59,17 @@ export default function Signin({ providers }) {
           );
         }
       }
-      console.log(res);
-      router.push('/');
+      if (res.ok) {
+        router.push(urlToRedirect);
+      }
     } catch (err) {
-      toast.error(`${err?.message}`, {
-        position: 'top-right',
-        autoClose: 4000,
-      });
+      toast.error(
+        'An unexpected error happens, please try again',
+        {
+          position: 'top-right',
+          autoClose: 4000,
+        }
+      );
     }
   };
 
@@ -72,7 +77,13 @@ export default function Signin({ providers }) {
     <SignupStyles>
       <h1>Sign in</h1>
 
-      <button onClick={() => signIn(providers.google.id)}>
+      <button
+        onClick={() =>
+          signIn(providers.google.id, {
+            callbackUrl: urlToRedirect,
+          })
+        }
+      >
         google
       </button>
 

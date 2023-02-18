@@ -125,7 +125,7 @@ export default function Order({ order }) {
 
       <hr />
       <div className='order-notes'>
-        <sub>Notes:</sub>
+        {orderDetails?.orderNotes && <sub>Notes:</sub>}
         <p>{orderDetails?.orderNotes}</p>
       </div>
 

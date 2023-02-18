@@ -92,7 +92,7 @@ export default function OrderForm({
         router.push('/');
       }, 0);
     } catch (err) {
-      console.error(err.message);
+      console.log(err.message);
     }
   };
 

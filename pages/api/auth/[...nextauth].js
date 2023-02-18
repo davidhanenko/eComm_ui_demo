@@ -88,9 +88,9 @@ const authOptions = {
   theme: {
     colorScheme: 'light',
   },
-  // pages: {
-  //   signIn: '/auth/signin',
-  // },
+  pages: {
+    signIn: '/auth/signin',
+  },
 };
 
 const Auth = (req, res) => NextAuth(req, res, authOptions);

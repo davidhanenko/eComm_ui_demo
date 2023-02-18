@@ -1,6 +1,8 @@
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
+import { useSession } from 'next-auth/react';
+
 import {
   AccountStyles,
   OrderItemStyles,
@@ -59,24 +61,30 @@ export default function Account({ id }) {
     },
   });
 
+  const { data: session } = useSession();
+
   const user = data?.usersPermissionsUser?.data;
   const orders = ordersData?.orders?.data;
 
   return (
     <AccountStyles>
-      <section className='user'>
-        <h3>{user?.attributes?.username}</h3>
-        <hr />
-        <p>{user?.attributes?.email}</p>
-        <p>{user?.attributes?.phone}</p>
-      </section>
-      <section className='orders'>
-        <h4>Your orders</h4>
-        {orders &&
-          orders?.map(order => (
-            <OrderItem key={order?.id} order={order} />
-          ))}
-      </section>
+      {parseInt(user?.id) === session?.id && (
+        <>
+          <section className='user'>
+            <h3>{user?.attributes?.username}</h3>
+            <hr />
+            <p>{user?.attributes?.email}</p>
+            <p>{user?.attributes?.phone}</p>
+          </section>
+          <section className='orders'>
+            <h4>Your orders</h4>
+            {orders &&
+              orders?.map(order => (
+                <OrderItem key={order?.id} order={order} />
+              ))}
+          </section>
+        </>
+      )}
     </AccountStyles>
   );
 }
@@ -86,7 +94,7 @@ function OrderItem({ order }) {
   let itemsDetails = order?.attributes?.items_details;
 
   orderDetails =
-    typeof orderDetails === 'object'
+    typeof orderDetails !== 'object'
       ? JSON.parse(orderDetails)
       : orderDetails;
 
