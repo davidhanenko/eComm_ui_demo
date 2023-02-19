@@ -1,14 +1,15 @@
 import Link from 'next/link';
-
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
-  SignupStyles,
+  SigninStyles,
+  GoogleBtnStyles,
   FormStyles,
   FooterStyles,
 } from './SigninStyles';
 import Oval from 'react-loader-spinner';
+import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import {
   getSession,
@@ -74,18 +75,24 @@ export default function Signin({ providers }) {
   };
 
   return (
-    <SignupStyles>
+    <SigninStyles>
       <h1>Sign in</h1>
 
-      <button
+      <GoogleBtnStyles
+        className='google-btn'
         onClick={() =>
           signIn(providers.google.id, {
             callbackUrl: urlToRedirect,
           })
         }
       >
-        google
-      </button>
+        <div>
+          Sign in with google
+          <FcGoogle className='icon-google' />
+        </div>
+      </GoogleBtnStyles>
+
+      <div className='divider'>or</div>
 
       <FormStyles
         isDirty={isDirty}
@@ -173,6 +180,6 @@ export default function Signin({ providers }) {
         </p>
         <p className='terms'>Terms of use</p>
       </FooterStyles>
-    </SignupStyles>
+    </SigninStyles>
   );
 }

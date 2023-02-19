@@ -4,17 +4,16 @@ const CartStyles = styled.div`
   position: absolute;
   right: 0;
   top: calc(var(--navHeight) + var(--searchHeight));
-  width: 50%;
+  width: 40%;
   z-index: calc(var(--goToTopZ) + 2);
-  min-width: 400px;
   background: var(--white);
   box-shadow: 0px 1px 3px 1px var(--offWhite);
-
+  max-width: 700px;
   min-height: calc(
     100vh - var(--navHeight) + var(--searchHeight) - 5rem
   );
   height: 100%;
-  right: -120%;
+  right: -150%;
 
   transition: all 0.35s;
   transition-timing-function: cubic-bezier(
@@ -28,12 +27,16 @@ const CartStyles = styled.div`
   display: grid;
   grid-template-rows: auto 1fr auto;
 
+  @media (max-width: 1200px) {
+    width: 50%;
+  }
+
   @media (max-width: 900px) {
     width: 65%;
   }
 
   @media (max-width: 700px) {
-    width: 100%;
+    width: 100vw;
   }
 
   header {

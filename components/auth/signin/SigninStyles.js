@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SignupStyles = styled.div`
+const SigninStyles = styled.div`
   margin-top: calc(var(--navHeight) + var(--searchHeight));
 
   width: 450px;
@@ -18,6 +18,71 @@ const SignupStyles = styled.div`
 
   @media (max-width: 600px) {
     width: 90vw;
+  }
+
+  .divider {
+    margin: 3rem auto;
+    position: relative;
+    width: 80%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 50%;
+      left: 0;
+      width: 45%;
+      height: 1px;
+      background-color: var(--blue3);
+      transition: all 0.3s;
+      z-index: -1;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 50%;
+      right: 0;
+      width: 45%;
+      height: 1px;
+      background-color: var(--blue3);
+      transition: all 0.3s;
+      z-index: -1;
+    }
+  }
+`;
+
+const GoogleBtnStyles = styled.button`
+  align-items: center;
+  height: 4rem;
+  padding: 1rem 1.5rem;
+  margin-top: 4rem;
+  background-color: var(--lightGray);
+  color: var(--white);
+  border-radius: 2rem;
+  border: none;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--blue4);
+    }
+
+    div {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .icon-google {
+        font-size: 1.8rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding: 1.25rem;
   }
 `;
 
@@ -85,7 +150,7 @@ const FormStyles = styled.form`
     width: 20rem;
     height: 4rem;
     padding: 1rem;
-    margin-top: 4rem;
+    margin-top: 1rem;
     background-color: var(--blue3);
     color: var(--white);
     border-radius: 2rem;
@@ -128,4 +193,9 @@ const FooterStyles = styled.footer`
   }
 `;
 
-export { SignupStyles, FormStyles, FooterStyles };
+export {
+  SigninStyles,
+  GoogleBtnStyles,
+  FormStyles,
+  FooterStyles,
+};
