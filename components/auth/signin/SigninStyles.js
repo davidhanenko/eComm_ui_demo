@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
 const SigninStyles = styled.div`
-  margin-top: calc(var(--navHeight) + var(--searchHeight));
-
   width: 450px;
-  margin: 15rem auto;
+  margin: 18rem auto;
   text-align: center;
+  min-height: 50vh;
 
   h1 {
     font-size: 3.5rem;
     color: var(--blue3);
+    font-weight: 400;
   }
 
   @media (max-width: 800px) {
@@ -24,6 +24,7 @@ const SigninStyles = styled.div`
     margin: 3rem auto;
     position: relative;
     width: 80%;
+    color: var(--blue3);
 
     &::before {
       content: '';
@@ -32,9 +33,7 @@ const SigninStyles = styled.div`
       left: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue3);
-      transition: all 0.3s;
-      z-index: -1;
+      background-color: var(--blue5);
     }
     &::after {
       content: '';
@@ -43,9 +42,7 @@ const SigninStyles = styled.div`
       right: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue3);
-      transition: all 0.3s;
-      z-index: -1;
+      background-color: var(--blue5);
     }
   }
 `;
@@ -82,7 +79,7 @@ const GoogleBtnStyles = styled.button`
   }
 
   @media (max-width: 600px) {
-    padding: 1.25rem;
+    font-size: 1.1rem;
   }
 `;
 
@@ -171,6 +168,7 @@ const FormStyles = styled.form`
 
     @media (max-width: 600px) {
       padding: 1.25rem;
+      font-size: 1.1rem;
     }
   }
 `;
@@ -184,6 +182,7 @@ const FooterStyles = styled.footer`
 
   a {
     color: var(--blue3);
+    font-size: 1.3rem;
 
     @media (hover: hover) {
       &:hover {

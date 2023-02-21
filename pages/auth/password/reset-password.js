@@ -1,15 +1,14 @@
-import Signin from '../../components/auth/signin/Signin';
-import { getProviders } from 'next-auth/react';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../api/auth/[...nextauth]';
+import { ResetPassword } from '../../../components/auth/password/reset-password/ResetPassword';
 
-export default function SignupPage(props) {
-  return <Signin providers={props?.providers} />;
+import { authOptions } from '../../api/auth/[...nextauth]';
+
+export default function ResetPswdPage(props) {
+  return <ResetPassword />;
 }
 
 export const getServerSideProps = async ctx => {
   let layout = 'main';
-  const providers = await getProviders();
 
   const session = await getServerSession(
     ctx.req,
@@ -29,7 +28,6 @@ export const getServerSideProps = async ctx => {
 
     return {
       props: {
-        providers,
         layout,
       },
     };

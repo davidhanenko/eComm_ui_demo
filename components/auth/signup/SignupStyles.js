@@ -10,6 +10,7 @@ const SignupStyles = styled.div`
   h1 {
     font-size: 3.5rem;
     color: var(--blue3);
+    font-weight: 400;
   }
 
   @media (max-width: 800px) {

@@ -2,40 +2,32 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { signIn } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-import {
-  SignupStyles,
-  FormStyles,
-  FooterStyles,
-} from './SignupStyles';
 import Oval from 'react-loader-spinner';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
-    $email: String!
-    $username: String!
+import { ResetPswdStyles } from './ResetPasswordStyles';
+import { FormStyles } from '../../signup/SignupStyles';
+
+const PASSWORD_RESET_MUTATION = gql`
+  mutation PASSWORD_RESET_MUTATION(
     $password: String!
+    $passwordConfirmation: String!
+    $code: String!
   ) {
-    register(
-      input: {
-        username: $username
-        email: $email
-        password: $password
-      }
+    resetPassword(
+      password: $password
+      passwordConfirmation: $passwordConfirmation
+      code: $code
     ) {
       user {
         id
-        email
-        username
       }
     }
   }
 `;
 
-export default function Signup() {
+export function ResetPassword() {
   const {
     register,
     handleSubmit,
@@ -50,123 +42,60 @@ export default function Signup() {
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      username: '',
-      email: '',
       password: '',
       repeatPassword: '',
     },
   });
 
-  const [registerUser, { loading, error }] =
-    useMutation(SIGNUP_MUTATION);
-
-  // router
   const router = useRouter();
+
+  const [resetPassword, { loading, error }] = useMutation(
+    PASSWORD_RESET_MUTATION
+  );
 
   const onSubmitForm = async values => {
     try {
-      const { data } = await registerUser({
+      const { data } = await resetPassword({
         variables: {
-          username: values.username,
-          email: values.email,
           password: values.password,
+          passwordConfirmation: values.repeatPassword,
+          code: router.query.code,
         },
       });
 
-      if (data?.register?.user) {
-        toast.success(
-          `You are signed up with ${data?.register?.user?.email}`,
-          {
-            position: 'top-right',
-            autoClose: 8000,
-          }
-        );
+      console.log(data);
 
+      toast.success(
+        `Your user's password has been reset. You will be redirected to Sign in page.`,
+        {
+          position: 'top-right',
+          autoClose: 5000,
+        }
+      );
+
+      setTimeout(() => {
         reset();
-        router.push('/');
-      }
+        router.push('/auth/signin');
+      }, 5000);
     } catch (err) {
-      toast.error(`${err?.message}`, {
-        position: 'top-right',
-        autoClose: 5000,
-      });
+      toast.error(
+        'An unexpected error happen, please try again ',
+        {
+          position: 'top-right',
+          autoClose: 4800,
+        }
+      );
     }
   };
 
   return (
-    <SignupStyles>
-      <h1>Sign up</h1>
+    <ResetPswdStyles>
+      <h1>Reset password</h1>
 
       <FormStyles
         isDirty={isDirty}
         onSubmit={handleSubmit(onSubmitForm)}
       >
-        <fieldset>
-          <label
-            className={
-              dirtyFields.username ? 'label-dirty' : ''
-            }
-            htmlFor='username'
-          >
-            Name
-          </label>
-          <input
-            type='text'
-            name='username'
-            id='username'
-            autoComplete='username'
-            placeholder='Full name'
-            className={
-              dirtyFields.username ? 'input-dirty' : ''
-            }
-            {...register('username', {
-              required: 'Name is required',
-              minLength: {
-                value: 5,
-                message:
-                  'Please make name at least 5 characters long',
-              },
-            })}
-          />
-          {
-            <div className='input-error'>
-              {errors?.username?.message}
-            </div>
-          }
-        </fieldset>
-        <fieldset>
-          <label
-            className={
-              dirtyFields.name ? 'label-dirty' : ''
-            }
-            htmlFor='email'
-          >
-            Email
-          </label>
-          <input
-            type='text'
-            name='email'
-            id='email'
-            autoComplete='email'
-            placeholder='Email'
-            className={
-              dirtyFields.email ? 'input-dirty' : ''
-            }
-            {...register('email', {
-              required: 'Email is required',
-              pattern: {
-                value:
-                  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Please enter a valid email',
-              },
-            })}
-          />
-          {
-            <div className='input-error'>
-              {errors?.email?.message}
-            </div>
-          }
-        </fieldset>
         <fieldset>
           <label
             className={
@@ -244,17 +173,10 @@ export default function Signup() {
               />
             </div>
           ) : (
-            <div>Sign up</div>
+            <div>reset password</div>
           )}
         </button>
       </FormStyles>
-      <FooterStyles>
-        <p className='is-account'>
-          Already have an account -{' '}
-          <span onClick={() => signIn()}>Sign in</span>
-        </p>
-        <p className='terms'>Terms of use</p>
-      </FooterStyles>
-    </SignupStyles>
+    </ResetPswdStyles>
   );
 }

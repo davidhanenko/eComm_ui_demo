@@ -11,19 +11,13 @@ import {
 import Oval from 'react-loader-spinner';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
-import {
-  getSession,
-  signIn,
-  signOut,
-  useSession,
-} from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 export default function Signin({ providers }) {
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: {
       errors,
       isSubmitting,
@@ -40,7 +34,6 @@ export default function Signin({ providers }) {
 
   const router = useRouter();
   const urlToRedirect = router?.query?.callbackUrl;
-
   const onSubmitForm = async values => {
     try {
       const res = await signIn('credentials', {
@@ -55,20 +48,23 @@ export default function Signin({ providers }) {
             'Wrong email or password, please check credentials',
             {
               position: 'top-right',
-              autoClose: 5000,
+              autoClose: 8000,
             }
           );
         }
       }
       if (res.ok) {
-        router.push(urlToRedirect);
+        reset();
+        urlToRedirect
+          ? router.push(urlToRedirect)
+          : router.push('/');
       }
     } catch (err) {
       toast.error(
         'An unexpected error happens, please try again',
         {
           position: 'top-right',
-          autoClose: 4000,
+          autoClose: 5000,
         }
       );
     }
@@ -178,6 +174,9 @@ export default function Signin({ providers }) {
           Don't have an account yet -{' '}
           <Link href='/user/signup'> Sign up</Link>{' '}
         </p>
+        <Link href='/auth/password/request-password-reset'>
+          Forgot password?
+        </Link>
         <p className='terms'>Terms of use</p>
       </FooterStyles>
     </SigninStyles>
