@@ -12,7 +12,7 @@ export default function PlaceOrder() {
     count,
     totalCost: costFromCart,
   } = useCart();
-  const me = useUser();
+  const { me } = useUser();
 
   const ids = cart.map(
     el => (el = el.cartId.split('-')[0])

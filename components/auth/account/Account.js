@@ -18,6 +18,8 @@ const USER_QUERY = gql`
           username
           email
           phone
+          company
+          deliveryAddress: delivery_address
         }
       }
     }

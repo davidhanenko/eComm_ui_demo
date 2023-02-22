@@ -44,9 +44,9 @@ export default function OrderForm({
     mode: 'onBlur',
     defaultValues: {
       name: me?.username || '',
-      company: '',
+      company: me?.company || '',
       email: me?.email || '',
-      phone: '4444444444',
+      phone: me?.phone || '',
       orderNotes: '',
     },
   });

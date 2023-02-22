@@ -64,8 +64,9 @@ const FormStyles = styled.form`
     label {
       display: flex;
       justify-self: start;
-      color: var(--gray);
+      color: var(--lightGray);
       font-size: 1.4rem;
+      user-select: none;
     }
 
     input,
