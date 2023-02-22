@@ -31,13 +31,14 @@ export const getServerSideProps = async ctx => {
     headers: ctx?.req?.headers,
   });
   const layout = 'main';
-  const session = await getServerSession(
-    ctx.req,
-    ctx.res,
-    authOptions
-  );
 
   try {
+    const session = await getServerSession(
+      ctx.req,
+      ctx.res,
+      authOptions
+    );
+
     if (!session) {
       return {
         redirect: {

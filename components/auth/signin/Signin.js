@@ -45,7 +45,7 @@ export default function Signin({ providers }) {
       if (res.error) {
         if (res.status === 401) {
           toast.error(
-            'Wrong email or password, please check credentials',
+            'Wrong email or password, please check credentials and try again',
             {
               position: 'top-right',
               autoClose: 8000,
@@ -72,8 +72,6 @@ export default function Signin({ providers }) {
 
   return (
     <SigninStyles>
-      <h1>Sign in</h1>
-
       <GoogleBtnStyles
         className='google-btn'
         onClick={() =>
@@ -89,6 +87,8 @@ export default function Signin({ providers }) {
       </GoogleBtnStyles>
 
       <div className='divider'>or</div>
+
+      <h3>Sign in with email</h3>
 
       <FormStyles
         isDirty={isDirty}
@@ -172,7 +172,7 @@ export default function Signin({ providers }) {
       <FooterStyles>
         <p className='is-account'>
           Don't have an account yet -{' '}
-          <Link href='/user/signup'> Sign up</Link>{' '}
+          <Link href='/auth/signup'> Sign up</Link>{' '}
         </p>
         <Link href='/auth/password/request-password-reset'>
           Forgot password?

@@ -16,6 +16,7 @@ const AccountStyles = styled.main`
     margin: 2rem 0;
 
     hr {
+      margin: 4rem 0;
       border: none;
       background-color: var(--blue4);
       height: 1px;
@@ -28,6 +29,26 @@ const AccountStyles = styled.main`
 
     p {
       font-size: 1.5rem;
+    }
+
+    .edit-container {
+      margin-top: 3rem;
+
+      .divider {
+        margin: 0 1rem;
+        color: var(--blue4);
+      }
+
+      a {
+        color: var(--blue3);
+        transition: all 0.2s;
+
+        @media (hover: hover) {
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
 

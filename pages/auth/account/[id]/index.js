@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../../api/auth/[...nextauth]';
+import { authOptions } from '../../../api/auth/[...nextauth]';
 
-import Account from '../../../components/auth/account/Account';
+import Account from '../../../../components/auth/account/Account';
 
 export default function AccountPage(props) {
   return <Account id={props.id} />;

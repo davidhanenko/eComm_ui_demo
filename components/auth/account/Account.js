@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import { useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 import {
   AccountStyles,
@@ -75,6 +76,18 @@ export default function Account({ id }) {
             <hr />
             <p>{user?.attributes?.email}</p>
             <p>{user?.attributes?.phone}</p>
+
+            <hr />
+
+            <div className='edit-container'>
+              <Link href={`${session?.id}/edit`}>Edit</Link>
+              <span className='divider'>|</span>
+              {!session?.user?.email && (
+                <Link href='/auth/password/change-password'>
+                  Change password
+                </Link>
+              )}
+            </div>
           </section>
           <section className='orders'>
             <h4>Your orders</h4>

@@ -1,14 +1,13 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { signIn } from 'next-auth/react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Oval from 'react-loader-spinner';
 
 import { ForgotPswdReqStyles } from './ForgotPswdReqStyles';
 import { FormStyles } from '../../signup/SignupStyles';
+import Link from 'next/link';
 
 const REQUEST_PSWD_RESET_MUTATION = gql`
   mutation REQUEST_PSWD_RESET_MUTATION($email: String!) {
@@ -42,25 +41,26 @@ export function ForgotPswdReq() {
 
   const onSubmitForm = async values => {
     try {
-      const { data } = await forgotPassword({
+      const { data, error } = await forgotPassword({
         variables: {
           email: values.email,
         },
       });
 
+
       if (data?.forgotPassword?.ok) {
         toast.success(
-          `Email with the link to reset your password was sent to ${values?.email}`,
+          `Email with the link to reset your password was sent to ${values?.email}. If you are registered user use it to reset your password `,
           {
             position: 'top-right',
-            autoClose: 8000,
+            autoClose: 10000,
           }
         );
 
         reset();
-        router.push('/');
       }
     } catch (err) {
+      console.log(err);
       toast.error(
         'An unexpected error happen, please try again ',
         {
@@ -126,11 +126,9 @@ export function ForgotPswdReq() {
             <div>Send link</div>
           )}
         </button>
-
-        <p className='is-password'>
-          Know your password -{' '}
-          <span onClick={() => signIn()}>Sign in</span>
-        </p>
+        <div className='cancel-reset'>
+          <Link href='/auth/signin'>Cancel</Link>
+        </div>
       </FormStyles>
     </ForgotPswdReqStyles>
   );

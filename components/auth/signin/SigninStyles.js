@@ -6,8 +6,11 @@ const SigninStyles = styled.div`
   text-align: center;
   min-height: 50vh;
 
-  h1 {
-    font-size: 3.5rem;
+  box-shadow: 0px 0px 3px 1px var(--blue5);
+  padding: 5rem 3rem;
+
+  h3 {
+    font-size: 2.5rem;
     color: var(--blue3);
     font-weight: 400;
   }
@@ -18,6 +21,7 @@ const SigninStyles = styled.div`
 
   @media (max-width: 600px) {
     width: 90vw;
+    padding: 5rem 1rem;
   }
 
   .divider {
@@ -48,9 +52,8 @@ const SigninStyles = styled.div`
 `;
 
 const GoogleBtnStyles = styled.button`
-  align-items: center;
   height: 4rem;
-  padding: 1rem 1.5rem;
+  padding: 1.5rem;
   margin-top: 4rem;
   background-color: var(--lightGray);
   color: var(--white);
@@ -66,6 +69,7 @@ const GoogleBtnStyles = styled.button`
     }
 
     div {
+      height: 100%;
       margin: 0;
       display: flex;
       align-items: center;
@@ -84,7 +88,7 @@ const GoogleBtnStyles = styled.button`
 `;
 
 const FormStyles = styled.form`
-  margin-top: 5rem;
+  margin-top: 3rem;
 
   fieldset {
     border: 1px solid transparent;

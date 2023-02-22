@@ -2,24 +2,26 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { useSession } from 'next-auth/react';
+
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Oval from 'react-loader-spinner';
 
 import { useMessage } from '../../../../context/messageState';
-import { ResetPswdStyles } from './ResetPasswordStyles';
+import { ChangePswdStyles } from './ChangePasswordStyles';
 import { FormStyles } from '../../signup/SignupStyles';
 
-const PASSWORD_RESET_MUTATION = gql`
-  mutation PASSWORD_RESET_MUTATION(
+const PASSWORD_CHANGE_MUTATION = gql`
+  mutation PASSWORD_CHANGE_MUTATION(
+    $currentPassword: String!
     $password: String!
     $passwordConfirmation: String!
-    $code: String!
   ) {
-    resetPassword(
+    changePassword(
+      currentPassword: $currentPassword
       password: $password
       passwordConfirmation: $passwordConfirmation
-      code: $code
     ) {
       user {
         id
@@ -28,7 +30,7 @@ const PASSWORD_RESET_MUTATION = gql`
   }
 `;
 
-export function ResetPassword() {
+export function ChangePassword() {
   const {
     register,
     handleSubmit,
@@ -44,36 +46,39 @@ export function ResetPassword() {
     mode: 'onBlur',
     defaultValues: {
       password: '',
-      repeatPassword: '',
+      newPassword: '',
+      newPasswordRepeat: '',
     },
   });
 
   const router = useRouter();
   const { setMessage } = useMessage();
+  const { data: session } = useSession();
 
-  const [resetPassword, { loading, error }] = useMutation(
-    PASSWORD_RESET_MUTATION
+  const [changePassword, { loading, error }] = useMutation(
+    PASSWORD_CHANGE_MUTATION
   );
 
   const onSubmitForm = async values => {
     try {
-      const { data } = await resetPassword({
+      const { data } = await changePassword({
         variables: {
-          password: values.password,
-          passwordConfirmation: values.repeatPassword,
-          code: router.query.code,
+          currentPassword: values.password,
+          password: values.newPassword,
+          passwordConfirmation: values.newPasswordRepeat,
         },
       });
 
       setMessage(
-        `Your user's password has been reset. Signin please.`
+        `Your password has been successfully changed`
       );
 
       reset();
-      router.push('/auth/signin');
+      router.push(`/auth/account/${session?.id}`);
     } catch (err) {
+      console.log(err);
       toast.error(
-        'An unexpected error happen, please try again ',
+        'An unexpected error happen, please check your credentials and try again',
         {
           position: 'top-right',
           autoClose: 5000,
@@ -83,8 +88,8 @@ export function ResetPassword() {
   };
 
   return (
-    <ResetPswdStyles>
-      <h1>Reset password</h1>
+    <ChangePswdStyles>
+      <h1>Change password</h1>
 
       <FormStyles
         isDirty={isDirty}
@@ -97,17 +102,46 @@ export function ResetPassword() {
             }
             htmlFor='password'
           >
-            Password
+            Current password
           </label>
           <input
             type='password'
             name='password'
             id='password'
-            placeholder='At least 8 characters'
+            placeholder='Current password'
             className={
               dirtyFields.password ? 'input-dirty' : ''
             }
             {...register('password', {
+              required:
+                'You must specify your current password',
+            })}
+          />
+          {
+            <div className='input-error'>
+              {errors?.password?.message}
+            </div>
+          }
+        </fieldset>
+
+        <fieldset>
+          <label
+            className={
+              dirtyFields.name ? 'label-dirty' : ''
+            }
+            htmlFor='newPassword'
+          >
+            New password
+          </label>
+          <input
+            type='password'
+            name='newPassword'
+            id='newPassword'
+            placeholder='At least 8 characters'
+            className={
+              dirtyFields.password ? 'input-dirty' : ''
+            }
+            {...register('newPassword', {
               required: 'You must specify a password',
               minLength: {
                 value: 5,
@@ -118,41 +152,42 @@ export function ResetPassword() {
           />
           {
             <div className='input-error'>
-              {errors?.password?.message}
+              {errors?.newPassword?.message}
             </div>
           }
         </fieldset>
+
         <fieldset>
           <label
             className={
               dirtyFields.name ? 'label-dirty' : ''
             }
-            htmlFor='passwordRepeat'
+            htmlFor='newPasswordRepeat'
           >
-            Re-enter a password
+            Re-enter new password
           </label>
           <input
-            name='passwordRepeat'
+            name='newPasswordRepeat'
             type='password'
-            id='passwordRepeat'
+            id='newPasswordRepeat'
             placeholder='Re-enter a password'
             className={
-              dirtyFields.passwordRepeat
+              dirtyFields.newPasswordRepeat
                 ? 'input-dirty'
                 : ''
             }
-            {...register('repeatPassword', {
-              required: 'Please re-enter your password',
+            {...register('newPasswordRepeat', {
+              required: 'Please re-enter your new password',
               validate: value => {
-                const { password } = getValues();
-                if (value !== password)
+                const { newPassword } = getValues();
+                if (value !== newPassword)
                   return 'The passwords do not match';
               },
             })}
           />
           {
             <div className='input-error'>
-              {errors?.repeatPassword?.message}
+              {errors?.newPasswordRepeat?.message}
             </div>
           }
         </fieldset>
@@ -167,10 +202,10 @@ export function ResetPassword() {
               />
             </div>
           ) : (
-            <div>reset password</div>
+            <div>change password</div>
           )}
         </button>
       </FormStyles>
-    </ResetPswdStyles>
+    </ChangePswdStyles>
   );
 }

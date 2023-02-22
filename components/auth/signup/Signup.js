@@ -1,17 +1,25 @@
+import Link from 'next/link';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { signIn } from 'next-auth/react';
+import {
+  signIn,
+  signOut,
+  useSession,
+} from 'next-auth/react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Oval from 'react-loader-spinner';
+import { FcGoogle } from 'react-icons/fc';
+import LoaderContainer from '../../shared/loaders/loader-container/LoaderContainer';
 
 import {
   SignupStyles,
   FormStyles,
   FooterStyles,
+  SignUpSessionStyles,
 } from './SignupStyles';
-import Oval from 'react-loader-spinner';
+import { GoogleBtnStyles } from '../signin/SigninStyles';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -60,8 +68,7 @@ export default function Signup() {
   const [registerUser, { loading, error }] =
     useMutation(SIGNUP_MUTATION);
 
-  // router
-  const router = useRouter();
+  const { data: session } = useSession();
 
   const onSubmitForm = async values => {
     try {
@@ -83,7 +90,6 @@ export default function Signup() {
         );
 
         reset();
-        router.push('/');
       }
     } catch (err) {
       toast.error(`${err?.message}`, {
@@ -93,9 +99,27 @@ export default function Signup() {
     }
   };
 
-  return (
+  if (loading) return <LoaderContainer height={'40vh'} />;
+
+  return !session ? (
     <SignupStyles>
-      <h1>Sign up</h1>
+      <GoogleBtnStyles
+        className='google-btn'
+        onClick={() =>
+          signIn('google', {
+            redirect: false,
+          })
+        }
+      >
+        <div>
+          Sign up with google
+          <FcGoogle className='icon-google' />
+        </div>
+      </GoogleBtnStyles>
+
+      <div className='divider'>or</div>
+
+      <h3>Create an account</h3>
 
       <FormStyles
         isDirty={isDirty}
@@ -256,5 +280,18 @@ export default function Signup() {
         <p className='terms'>Terms of use</p>
       </FooterStyles>
     </SignupStyles>
+  ) : (
+    <SignUpSessionStyles>
+      <p>
+        Successfully signed up with{' '}
+        <span>{`${session?.user?.email}`}</span>
+      </p>
+      <hr />
+      <Link href={`/auth/account/${session?.id}`}>
+        Go to your Account
+      </Link>{' '}
+      <span> or use the navigation to continue</span>
+      <button onClick={() => signOut()}>Sign Out</button>
+    </SignUpSessionStyles>
   );
 }
