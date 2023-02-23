@@ -12,14 +12,14 @@ export default function PlaceOrder() {
     count,
     totalCost: costFromCart,
   } = useCart();
-  const { me } = useUser();
+  const me = useUser();
 
   const ids = cart.map(
     el => (el = el.cartId.split('-')[0])
   );
 
   const tax = costFromCart * TAX_VALUE;
-  const TotalCharge = (costFromCart + tax).toFixed(2);
+  const totalCharge = (costFromCart + tax).toFixed(2);
 
   return (
     <PlaceOrderStyles>
@@ -48,15 +48,17 @@ export default function PlaceOrder() {
         <section className='charge-section'>
           <p>Total cost - ${costFromCart?.toFixed(2)}</p>
           <p>Tax - ${tax?.toFixed(2)}</p>
-          <p>Total charge - ${TotalCharge}</p>
+          <p>Total charge - ${totalCharge}</p>
+          <p>Total items in order - {count}</p>
 
           {me ? (
             <OrderForm
-              totalCost={costFromCart}
+              totalCost={costFromCart.toFixed(2)}
+              tax={tax.toFixed(2)}
+              totalCharge={totalCharge}
               count={count}
               items_details={cart}
               single_items={[...ids]}
-              tax={tax}
               me={me}
             />
           ) : (

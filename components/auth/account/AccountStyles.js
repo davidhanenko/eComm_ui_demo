@@ -24,7 +24,7 @@ const AccountStyles = styled.main`
 
     h3 {
       font-size: 3rem;
-      color: var(--blue3);
+      color: var(--blue1);
     }
 
     p {
@@ -55,20 +55,38 @@ const AccountStyles = styled.main`
   .orders {
     padding: 0 2rem;
     h4 {
+      text-align: center;
       font-size: 2.2rem;
-      color: var(--blue4);
+      color: var(--blue2);
     }
   }
 `;
 
 const OrderItemStyles = styled.div`
-  border-bottom: 1px dashed var(--blue5);
+  border: 1px dashed var(--blue5);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1.5rem 0;
+
   p {
     margin: 0;
     font-size: 1.3rem;
   }
 
-  .top-line {
+  span {
+    margin: 0;
+    font-size: 1.3rem;
+
+    &:nth-of-type(2) {
+      margin: 0 0.3rem;
+    }
+  }
+
+  .left-side {
+  }
+
+  .right-side {
   }
 `;
 

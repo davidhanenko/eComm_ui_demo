@@ -108,6 +108,7 @@ export function ResetPassword() {
               dirtyFields.password ? 'input-dirty' : ''
             }
             {...register('password', {
+              disabled: isSubmitting || loading,
               required: 'You must specify a password',
               minLength: {
                 value: 5,
@@ -142,6 +143,7 @@ export function ResetPassword() {
                 : ''
             }
             {...register('repeatPassword', {
+              disabled: isSubmitting || loading,
               required: 'Please re-enter your password',
               validate: value => {
                 const { password } = getValues();

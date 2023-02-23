@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import { useCart } from '../../../../../context/cartState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSession } from 'next-auth/react';
 
 import Oval from 'react-loader-spinner';
 import { RequestOrderFormStyles } from './RequestOrderFormStyles';
@@ -52,16 +51,14 @@ export default function RequestOrderForm({
     },
   });
 
-  const { data: session } = useSession();
-
   const router = useRouter();
 
-  const [createOrderRequest, { loading, error, data }] =
+  const [createOrderRequest, { loading, error}] =
     useMutation(CREATE_ORDER_REQUEST_MUTATION, {});
 
   const onSubmitForm = async values => {
     const orderDetails = {
-      charge: totalCost,
+      total: totalCost,
       tax: tax,
       totalItems: count,
       name: values.name,
@@ -109,6 +106,7 @@ export default function RequestOrderForm({
           placeholder='Full name'
           className={dirtyFields.name ? 'input-dirty' : ''}
           {...register('name', {
+            disabled: isSubmitting || loading,
             required: 'Name is required',
             minLength: {
               value: 3,
@@ -131,7 +129,9 @@ export default function RequestOrderForm({
           className={
             dirtyFields.company ? 'input-dirty' : ''
           }
-          {...register('company')}
+          {...register('company'), {
+            disabled: isSubmitting || loading,
+          }}
         />
         {
           <div className='input-error'>
@@ -146,6 +146,7 @@ export default function RequestOrderForm({
           placeholder='Email'
           className={dirtyFields.email ? 'input-dirty' : ''}
           {...register('email', {
+            disabled: isSubmitting || loading,
             required: 'Email is required',
             pattern: {
               value:
@@ -168,6 +169,7 @@ export default function RequestOrderForm({
           placeholder='Phone #'
           className={dirtyFields.phone ? 'input-dirty' : ''}
           {...register('phone', {
+            disabled: isSubmitting || loading,
             required: 'Phone number is required',
             pattern: {
               value:

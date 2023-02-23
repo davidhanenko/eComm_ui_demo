@@ -20,6 +20,17 @@ const USER_QUERY = gql`
           phone
           company
           deliveryAddress: delivery_address
+          orders {
+            data {
+              id
+              attributes {
+                order_details
+                items_details
+                status
+                createdAt
+              }
+            }
+          }
         }
       }
     }
@@ -58,16 +69,10 @@ export default function Account({ id }) {
     },
   });
 
-  const { data: ordersData } = useQuery(USER_ORDERS_QUERY, {
-    variables: {
-      id,
-    },
-  });
-
   const { data: session } = useSession();
 
   const user = data?.usersPermissionsUser?.data;
-  const orders = ordersData?.orders?.data;
+  const orders = user.attributes?.orders?.data;
 
   return (
     <AccountStyles>
@@ -78,11 +83,15 @@ export default function Account({ id }) {
             <hr />
             <p>{user?.attributes?.email}</p>
             <p>{user?.attributes?.phone}</p>
+            <p>{user?.attributes?.company}</p>
+            <p>{user?.attributes?.deliveryAddress}</p>
 
             <hr />
 
             <div className='edit-container'>
-              <Link href={`${session?.id}/edit`}>Edit</Link>
+              <Link href={`${session?.id}/edit`}>
+                Update Account
+              </Link>
               <span className='divider'>|</span>
               {!session?.user?.email && (
                 <Link href='/auth/password/change-password'>
@@ -92,7 +101,7 @@ export default function Account({ id }) {
             </div>
           </section>
           <section className='orders'>
-            <h4>Your orders</h4>
+            <h4>Orders</h4>
             {orders &&
               orders?.map(order => (
                 <OrderItem key={order?.id} order={order} />
@@ -113,20 +122,32 @@ function OrderItem({ order }) {
       ? JSON.parse(orderDetails)
       : orderDetails;
 
+  const total = orderDetails?.total;
+  const tax = orderDetails?.tax;
   const charge = orderDetails?.charge;
-  const tax = orderDetails?.charge * 0.08875;
-  const total = (charge + tax).toFixed(2);
-  // const date = new Date(order?.attributes?.createdAt);
+  const date = order?.attributes?.createdAt;
+
+  const localDate = new Date(date).toLocaleDateString(
+    'en-US'
+  );
+  const localTime = new Date(date).toLocaleTimeString(
+    'en-US'
+  );
 
   return (
     <OrderItemStyles>
-      <section className='top-line'>
-        <p>{order.id}</p>
-        <p>Charge: ${charge.toFixed(2)}</p>
-        <p>Tax: ${tax.toFixed(2)}</p>
+      <section className='left-side'>
+        <p>Order id - {order.id}</p>
+        <span>Created -</span>
+        <span>{localDate}</span>
+        <span>at</span>
+        <span>{localTime}</span>
+        <p>Order status - {order?.attributes?.status}</p>
+      </section>
+      <section className='right-side'>
         <p>Total: ${total}</p>
-        {/* <p>{date}</p> */}
-        <p>{order?.attributes?.status}</p>
+        <p>Tax: ${tax}</p>
+        <p>Total charge: ${charge}</p>
       </section>
     </OrderItemStyles>
   );

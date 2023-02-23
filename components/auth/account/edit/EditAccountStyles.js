@@ -15,6 +15,20 @@ const EditAccountStyles = styled.main`
     font-weight: 400;
   }
 
+  .back-to-account-btn {
+    margin-top: 3rem;
+
+    a {
+      color: var(--blue3);
+      transition: all 0.2s;
+
+      @media (hover: hover) {
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
   @media (max-width: 800px) {
     width: 70vw;
   }

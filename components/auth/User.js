@@ -19,5 +19,5 @@ export default function useUser() {
     CURRENT_USER_QUERY
   );
 
-  return { me: data, meLoading: loading };
+  return data?.me;
 }

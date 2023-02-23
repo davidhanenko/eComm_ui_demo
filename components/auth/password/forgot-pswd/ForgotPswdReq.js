@@ -98,6 +98,7 @@ export function ForgotPswdReq() {
               dirtyFields.email ? 'input-dirty' : ''
             }
             {...register('email', {
+              disabled: isSubmitting || loading,
               required: 'Email is required',
               pattern: {
                 value:

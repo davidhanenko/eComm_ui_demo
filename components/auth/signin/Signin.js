@@ -113,6 +113,7 @@ export default function Signin({ providers }) {
               dirtyFields.email ? 'input-dirty' : ''
             }
             {...register('email', {
+              disabled: isSubmitting,
               required: 'Email is required',
               pattern: {
                 value:
@@ -145,6 +146,7 @@ export default function Signin({ providers }) {
               dirtyFields.password ? 'input-dirty' : ''
             }
             {...register('password', {
+              disabled: isSubmitting,
               required: 'Password is required',
             })}
           />

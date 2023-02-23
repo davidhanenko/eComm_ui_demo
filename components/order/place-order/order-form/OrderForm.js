@@ -23,6 +23,7 @@ const CREATE_ORDER_MUTATION = gql`
 export default function OrderForm({
   totalCost,
   tax,
+  totalCharge,
   count,
   items_details,
   single_items,
@@ -55,13 +56,16 @@ export default function OrderForm({
 
   const router = useRouter();
 
-  const [createOrder, { loading, error, data }] =
-    useMutation(CREATE_ORDER_MUTATION, {});
+  const [createOrder, { loading, error }] = useMutation(
+    CREATE_ORDER_MUTATION,
+    {}
+  );
 
   const onSubmitForm = async values => {
     const orderDetails = {
-      charge: totalCost,
+      total: totalCost,
       tax: tax,
+      charge: totalCharge,
       totalItems: count,
       name: values.name,
       company: values.company,
@@ -81,7 +85,7 @@ export default function OrderForm({
             order_details: orderDetailsJson,
             items_details: itemsDetailsJson,
             single_items: single_items,
-            users_permissions_user: session.id,
+            user: me?.id || session?.id,
           },
         },
       });
@@ -108,6 +112,7 @@ export default function OrderForm({
           placeholder='Full name'
           className={dirtyFields.name ? 'input-dirty' : ''}
           {...register('name', {
+            disabled: isSubmitting || loading,
             required: 'Name is required',
             minLength: {
               value: 3,
@@ -130,7 +135,9 @@ export default function OrderForm({
           className={
             dirtyFields.company ? 'input-dirty' : ''
           }
-          {...register('company')}
+          {...register('company', {
+            disabled: isSubmitting || loading,
+          })}
         />
         {
           <div className='input-error'>
@@ -145,6 +152,7 @@ export default function OrderForm({
           placeholder='Email'
           className={dirtyFields.email ? 'input-dirty' : ''}
           {...register('email', {
+            disabled: isSubmitting || loading,
             required: 'Email is required',
             pattern: {
               value:
@@ -162,16 +170,18 @@ export default function OrderForm({
 
       <fieldset>
         <input
-          type='text'
+          type='tel'
           name='phone'
           placeholder='Phone #'
           className={dirtyFields.phone ? 'input-dirty' : ''}
           {...register('phone', {
+            disabled: isSubmitting || loading,
             required: 'Phone number is required',
             pattern: {
               value:
                 /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim,
-              message: 'Please enter a valid phone number',
+              message:
+                'Please enter a valid phone number, ex. 1112223333 or 111-222-3333',
             },
             minLength: {
               value: 10,
@@ -198,6 +208,7 @@ export default function OrderForm({
           }
           rows={3}
           {...register('orderNotes', {
+            disabled: isSubmitting || loading,
             minLength: {
               value: 10,
               message: 'Tell us more please',
