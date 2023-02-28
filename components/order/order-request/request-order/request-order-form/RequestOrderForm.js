@@ -2,17 +2,18 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useCart } from '../../../../context/cartState';
+import { useCart } from '../../../../../context/cartState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useSession } from 'next-auth/react';
 
 import Oval from 'react-loader-spinner';
-import { OrderFormStyles } from './OrderFormStyles';
+import { RequestOrderFormStyles } from './RequestOrderFormStyles';
 
-const CREATE_ORDER_MUTATION = gql`
-  mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
-    createOrder(data: $data) {
+const CREATE_ORDER_REQUEST_MUTATION = gql`
+  mutation CREATE_ORDER_REQUEST_MUTATION(
+    $data: OrderRequestInput!
+  ) {
+    createOrderRequest(data: $data) {
       data {
         id
       }
@@ -20,16 +21,14 @@ const CREATE_ORDER_MUTATION = gql`
   }
 `;
 
-export default function OrderForm({
+export default function RequestOrderForm({
   totalCost,
   tax,
-  totalCharge,
   count,
   items_details,
   single_items,
-  me,
 }) {
-  const { setCart } = useCart();
+  const { setCart, cartReload, setCartReload } = useCart();
 
   const {
     register,
@@ -44,28 +43,23 @@ export default function OrderForm({
   } = useForm({
     mode: 'onBlur',
     defaultValues: {
-      name: me?.username || '',
-      company: me?.company || '',
-      email: me?.email || '',
-      phone: me?.phone || '',
+      name: '',
+      company: '',
+      email: '',
+      phone: '',
       orderNotes: '',
     },
   });
 
-  const { data: session } = useSession();
-
   const router = useRouter();
 
-  const [createOrder, { loading, error }] = useMutation(
-    CREATE_ORDER_MUTATION,
-    {}
-  );
+  const [createOrderRequest, { loading, error}] =
+    useMutation(CREATE_ORDER_REQUEST_MUTATION, {});
 
   const onSubmitForm = async values => {
     const orderDetails = {
       total: totalCost,
       tax: tax,
-      charge: totalCharge,
       totalItems: count,
       name: values.name,
       company: values.company,
@@ -76,16 +70,13 @@ export default function OrderForm({
 
     try {
       const orderDetailsJson = JSON.stringify(orderDetails);
-      const itemsDetailsJson =
-        JSON.stringify(items_details);
 
-      await createOrder({
+      await createOrderRequest({
         variables: {
           data: {
             order_details: orderDetailsJson,
-            items_details: itemsDetailsJson,
+            items_details: items_details,
             single_items: single_items,
-            user: me?.id || session?.id,
           },
         },
       });
@@ -96,12 +87,15 @@ export default function OrderForm({
         router.push('/');
       }, 0);
     } catch (err) {
+      toast.error(
+        'An unexpected error occurred, please refresh the page and try again'
+      );
       console.log(err.message);
     }
   };
 
   return (
-    <OrderFormStyles
+    <RequestOrderFormStyles
       isDirty={isDirty}
       onSubmit={handleSubmit(onSubmitForm)}
     >
@@ -135,9 +129,9 @@ export default function OrderForm({
           className={
             dirtyFields.company ? 'input-dirty' : ''
           }
-          {...register('company', {
+          {...register('company'), {
             disabled: isSubmitting || loading,
-          })}
+          }}
         />
         {
           <div className='input-error'>
@@ -170,7 +164,7 @@ export default function OrderForm({
 
       <fieldset>
         <input
-          type='tel'
+          type='text'
           name='phone'
           placeholder='Phone #'
           className={dirtyFields.phone ? 'input-dirty' : ''}
@@ -180,8 +174,7 @@ export default function OrderForm({
             pattern: {
               value:
                 /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim,
-              message:
-                'Please enter a valid phone number, ex. 1112223333 or 111-222-3333',
+              message: 'Please enter a valid phone number',
             },
             minLength: {
               value: 10,
@@ -208,7 +201,6 @@ export default function OrderForm({
           }
           rows={3}
           {...register('orderNotes', {
-            disabled: isSubmitting || loading,
             minLength: {
               value: 10,
               message: 'Tell us more please',
@@ -231,11 +223,7 @@ export default function OrderForm({
 
       <button
         type='submit'
-        disabled={
-          single_items.length <= 0 ||
-          isSubmitting ||
-          loading
-        }
+        disabled={isSubmitting || loading}
       >
         {isSubmitting || loading ? (
           <div>
@@ -247,9 +235,9 @@ export default function OrderForm({
             />
           </div>
         ) : (
-          <div>confirm order</div>
+          <div>request order</div>
         )}
       </button>
-    </OrderFormStyles>
+    </RequestOrderFormStyles>
   );
 }

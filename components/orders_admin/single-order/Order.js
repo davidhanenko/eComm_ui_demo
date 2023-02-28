@@ -6,7 +6,10 @@ import { useMutation } from '@apollo/client';
 
 import { ALL_ORDERS_QUERY } from '../../../pages/orders/index';
 import DropdownSelect from '../../shared/pagination/dropdown/DropdownSelect';
-import { ORDER_STATUS_OPTIONS, TAX_VALUE } from '../../../config';
+import {
+  ORDER_STATUS_OPTIONS,
+  TAX_VALUE,
+} from '../../../config';
 import OrderItem from './order-item/OrderItem';
 import { OrderStyles } from './OrderStyles';
 
@@ -31,8 +34,6 @@ export default function Order({ order }) {
     order?.attributes?.status
   );
 
-
-
   // items included in current order (get from db - parse if JSON or use as object)
   const orderItems =
     typeof order?.attributes?.itemDetails === 'object'
@@ -45,9 +46,9 @@ export default function Order({ order }) {
       ? order?.attributes?.orderDetails
       : JSON.parse(order?.attributes?.orderDetails);
 
-  const charge = orderDetails?.charge;
-  const tax = charge * TAX_VALUE;
-  const totalCharge = charge + tax;
+  const total = orderDetails?.total.toFixed(2);
+  const tax = orderDetails?.total.toFixed(2);
+  const totalCharge = orderDetails?.charge.toFixed(2);
 
   const [
     updateOrder,
@@ -99,9 +100,9 @@ export default function Order({ order }) {
               Total items in order -{' '}
               {orderDetails?.totalItems}
             </p>
-            <p>Total cost - ${charge.toFixed(2)}</p>
-            <p>Tax - ${tax.toFixed(2)}</p>
-            <p>Total charge - ${totalCharge.toFixed(2)}</p>
+            <p>Total cost - ${total}</p>
+            <p>Tax - ${tax}</p>
+            <p>Total charge - ${totalCharge}</p>
             <p>Shipping - </p>
           </section>
           <section className='top-right'>
@@ -115,14 +116,16 @@ export default function Order({ order }) {
       <hr />
 
       {Object.values(orderItems).map((item, i) => (
-        <OrderItem item={item} key={item.id + i} />
+        <OrderItem
+          item={item}
+          index={i + 1}
+          key={`${item.id}-${i}`}
+        />
       ))}
 
       <hr />
       <div className='order-notes'>
-        <sub>
-          Notes related to current order leaved by customer
-        </sub>
+        {orderDetails?.orderNotes && <sub>Notes:</sub>}
         <p>{orderDetails?.orderNotes}</p>
       </div>
 

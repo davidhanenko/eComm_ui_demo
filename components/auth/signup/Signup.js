@@ -1,17 +1,25 @@
+import Link from 'next/link';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import {
+  signIn,
+  signOut,
+  useSession,
+} from 'next-auth/react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Oval from 'react-loader-spinner';
+import { FcGoogle } from 'react-icons/fc';
+import LoaderContainer from '../../shared/loaders/loader-container/LoaderContainer';
 
 import {
   SignupStyles,
   FormStyles,
   FooterStyles,
+  SignUpSessionStyles,
 } from './SignupStyles';
-import Oval from 'react-loader-spinner';
+import { GoogleBtnStyles } from '../signin/SigninStyles';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -26,7 +34,6 @@ const SIGNUP_MUTATION = gql`
         password: $password
       }
     ) {
-      jwt
       user {
         id
         email
@@ -61,8 +68,7 @@ export default function Signup() {
   const [registerUser, { loading, error }] =
     useMutation(SIGNUP_MUTATION);
 
-  // router
-  const router = useRouter();
+  const { data: session } = useSession();
 
   const onSubmitForm = async values => {
     try {
@@ -79,24 +85,41 @@ export default function Signup() {
           `You are signed up with ${data?.register?.user?.email}`,
           {
             position: 'top-right',
-            autoClose: 5000,
+            autoClose: 8000,
           }
         );
 
         reset();
-        router.push('/');
       }
     } catch (err) {
       toast.error(`${err?.message}`, {
         position: 'top-right',
-        autoClose: 4000,
+        autoClose: 5000,
       });
     }
   };
 
-  return (
+  if (loading) return <LoaderContainer height={'40vh'} />;
+
+  return !session ? (
     <SignupStyles>
-      <h1>Sign up</h1>
+      <GoogleBtnStyles
+        className='google-btn'
+        onClick={() =>
+          signIn('google', {
+            redirect: false,
+          })
+        }
+      >
+        <div>
+          Sign up with google
+          <FcGoogle className='icon-google' />
+        </div>
+      </GoogleBtnStyles>
+
+      <div className='divider'>or</div>
+
+      <h3>Create an account</h3>
 
       <FormStyles
         isDirty={isDirty}
@@ -114,13 +137,14 @@ export default function Signup() {
           <input
             type='text'
             name='username'
-            id='nausernamee'
+            id='username'
             autoComplete='username'
             placeholder='Full name'
             className={
               dirtyFields.username ? 'input-dirty' : ''
             }
             {...register('username', {
+              disabled: isSubmitting || loading,
               required: 'Name is required',
               minLength: {
                 value: 5,
@@ -154,6 +178,7 @@ export default function Signup() {
               dirtyFields.email ? 'input-dirty' : ''
             }
             {...register('email', {
+              disabled: isSubmitting || loading,
               required: 'Email is required',
               pattern: {
                 value:
@@ -186,6 +211,7 @@ export default function Signup() {
               dirtyFields.password ? 'input-dirty' : ''
             }
             {...register('password', {
+              disabled: isSubmitting || loading,
               required: 'You must specify a password',
               minLength: {
                 value: 5,
@@ -220,6 +246,7 @@ export default function Signup() {
                 : ''
             }
             {...register('repeatPassword', {
+              disabled: isSubmitting || loading,
               required: 'Please re-enter your password',
               validate: value => {
                 const { password } = getValues();
@@ -252,10 +279,23 @@ export default function Signup() {
       <FooterStyles>
         <p className='is-account'>
           Already have an account -{' '}
-          <Link href='/user/signin'> Sign in</Link>{' '}
+          <span onClick={() => signIn()}>Sign in</span>
         </p>
         <p className='terms'>Terms of use</p>
       </FooterStyles>
     </SignupStyles>
+  ) : (
+    <SignUpSessionStyles>
+      <p>
+        Successfully signed up with{' '}
+        <span>{`${session?.user?.email}`}</span>
+      </p>
+      <hr />
+      <Link href={`/auth/account/${session?.id}`}>
+        Go to your Account
+      </Link>{' '}
+      <span> or use the navigation to continue</span>
+      <button onClick={() => signOut()}>Sign Out</button>
+    </SignUpSessionStyles>
   );
 }

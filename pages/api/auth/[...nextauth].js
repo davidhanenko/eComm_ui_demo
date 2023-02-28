@@ -54,6 +54,7 @@ const authOptions = {
   session: {
     jwt: true,
     maxAge: 60 * 60 * 24,
+    updateAge: 2 * 24 * 60 * 60,
   },
 
   secret: process.env.NEXTAUTH_SECRET,
@@ -87,9 +88,9 @@ const authOptions = {
   theme: {
     colorScheme: 'light',
   },
-  // pages: {
-  //   signIn: '/auth/signin',
-  // },
+  pages: {
+    signIn: '/auth/signin',
+  },
 };
 
 const Auth = (req, res) => NextAuth(req, res, authOptions);

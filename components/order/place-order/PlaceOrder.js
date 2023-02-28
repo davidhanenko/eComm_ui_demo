@@ -4,6 +4,7 @@ import OrderItem from './order-item/OrderItem';
 import OrderForm from './order-form/OrderForm';
 import { TAX_VALUE } from '../../../config';
 import useUser from '../../auth/User';
+import RequestOrderComponent from '../order-request/request-component/RequestOrderComponent';
 
 export default function PlaceOrder() {
   const {
@@ -18,7 +19,7 @@ export default function PlaceOrder() {
   );
 
   const tax = costFromCart * TAX_VALUE;
-  const TotalCharge = (costFromCart + tax).toFixed(2);
+  const totalCharge = (costFromCart + tax).toFixed(2);
 
   return (
     <PlaceOrderStyles>
@@ -47,17 +48,21 @@ export default function PlaceOrder() {
         <section className='charge-section'>
           <p>Total cost - ${costFromCart?.toFixed(2)}</p>
           <p>Tax - ${tax?.toFixed(2)}</p>
-          <p>Total charge - ${TotalCharge}</p>
+          <p>Total charge - ${totalCharge}</p>
+          <p>Total items in order - {count}</p>
 
-          {me && (
+          {me ? (
             <OrderForm
-              totalCost={costFromCart}
+              totalCost={costFromCart.toFixed(2)}
+              tax={tax.toFixed(2)}
+              totalCharge={totalCharge}
               count={count}
-              items_details={JSON.stringify(cart)}
+              items_details={cart}
               single_items={[...ids]}
-              tax={tax}
               me={me}
             />
+          ) : (
+            <RequestOrderComponent />
           )}
         </section>
       </main>

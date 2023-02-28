@@ -1,28 +1,23 @@
 import Link from 'next/link';
-
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {
-  SignupStyles,
+  SigninStyles,
+  GoogleBtnStyles,
   FormStyles,
   FooterStyles,
 } from './SigninStyles';
 import Oval from 'react-loader-spinner';
+import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
-import {
-  getSession,
-  signIn,
-  signOut,
-  useSession,
-} from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 
 export default function Signin({ providers }) {
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: {
       errors,
       isSubmitting,
@@ -38,43 +33,62 @@ export default function Signin({ providers }) {
   });
 
   const router = useRouter();
-
+  const urlToRedirect = router?.query?.callbackUrl;
   const onSubmitForm = async values => {
     try {
       const res = await signIn('credentials', {
         email: values.email,
         password: values.password,
-        // redirect: false,
+        redirect: false,
       });
 
       if (res.error) {
         if (res.status === 401) {
           toast.error(
-            'Wrong email or password, please check credentials',
+            'Wrong email or password, please check credentials and try again',
             {
               position: 'top-right',
-              autoClose: 5000,
+              autoClose: 8000,
             }
           );
         }
       }
-      console.log(res);
-      router.push('/');
+      if (res.ok) {
+        reset();
+        urlToRedirect
+          ? router.push(urlToRedirect)
+          : router.push('/');
+      }
     } catch (err) {
-      toast.error(`${err?.message}`, {
-        position: 'top-right',
-        autoClose: 4000,
-      });
+      toast.error(
+        'An unexpected error happens, please try again',
+        {
+          position: 'top-right',
+          autoClose: 5000,
+        }
+      );
     }
   };
 
   return (
-    <SignupStyles>
-      <h1>Sign in</h1>
+    <SigninStyles>
+      <GoogleBtnStyles
+        className='google-btn'
+        onClick={() =>
+          signIn(providers.google.id, {
+            callbackUrl: urlToRedirect,
+          })
+        }
+      >
+        <div>
+          Sign in with google
+          <FcGoogle className='icon-google' />
+        </div>
+      </GoogleBtnStyles>
 
-      <button onClick={() => signIn(providers.google.id)}>
-        google
-      </button>
+      <div className='divider'>or</div>
+
+      <h3>Sign in with email</h3>
 
       <FormStyles
         isDirty={isDirty}
@@ -99,6 +113,7 @@ export default function Signin({ providers }) {
               dirtyFields.email ? 'input-dirty' : ''
             }
             {...register('email', {
+              disabled: isSubmitting,
               required: 'Email is required',
               pattern: {
                 value:
@@ -131,6 +146,7 @@ export default function Signin({ providers }) {
               dirtyFields.password ? 'input-dirty' : ''
             }
             {...register('password', {
+              disabled: isSubmitting,
               required: 'Password is required',
             })}
           />
@@ -158,10 +174,13 @@ export default function Signin({ providers }) {
       <FooterStyles>
         <p className='is-account'>
           Don't have an account yet -{' '}
-          <Link href='/user/signup'> Sign up</Link>{' '}
+          <Link href='/auth/signup'> Sign up</Link>{' '}
         </p>
+        <Link href='/auth/password/request-password-reset'>
+          Forgot password?
+        </Link>
         <p className='terms'>Terms of use</p>
       </FooterStyles>
-    </SignupStyles>
+    </SigninStyles>
   );
 }

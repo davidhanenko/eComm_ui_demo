@@ -8,6 +8,7 @@ import { GiShoppingCart } from 'react-icons/gi';
 export default function AddToCart({
   id,
   itemDetailsId,
+  title,
   size,
   price,
   type,
@@ -15,7 +16,6 @@ export default function AddToCart({
   link,
 }) {
   const { cart, setCart } = useCart();
-
   // add item to cart
   const handleAdd = () => {
     // check if there is same item in the cart
@@ -36,6 +36,7 @@ export default function AddToCart({
           {
             cartId: `${id}-${price}-${typeValue}`,
             itemDetailsId,
+            title,
             size,
             price,
             type,

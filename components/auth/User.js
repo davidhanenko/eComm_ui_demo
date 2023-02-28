@@ -7,6 +7,9 @@ const CURRENT_USER_QUERY = gql`
       id
       username
       email
+      role {
+        name
+      }
     }
   }
 `;

@@ -12,6 +12,7 @@ import '../styles/fonts.css';
 import LayoutWrapper from '../components/layouts/LayoutWrapper';
 import { PaginationStateProvider } from '../context/paginationState';
 import { CartStateProvider } from '../context/cartState';
+import { MessageStateProvider } from '../context/messageState';
 import { useApollo } from '../lib/apollo';
 
 // smoothscroll polyfill - safari
@@ -42,9 +43,11 @@ function MyApp({
         <ScrollProvider>
           <CartStateProvider>
             <PaginationStateProvider>
-              <LayoutWrapper {...pageProps}>
-                <Component {...pageProps} />
-              </LayoutWrapper>
+              <MessageStateProvider>
+                <LayoutWrapper {...pageProps}>
+                  <Component {...pageProps} />
+                </LayoutWrapper>
+              </MessageStateProvider>
             </PaginationStateProvider>
           </CartStateProvider>
         </ScrollProvider>

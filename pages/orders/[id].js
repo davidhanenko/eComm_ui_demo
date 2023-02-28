@@ -23,8 +23,7 @@ export const ORDER_QUERY = gql`
 export default function OrderPage(props) {
   const order = props?.order?.data;
 
-  // return <Order order={order} />;
-  return <h1>resd</h1>;
+  return <Order order={order} />;
 }
 
 export const getServerSideProps = async ctx => {
@@ -32,13 +31,14 @@ export const getServerSideProps = async ctx => {
     headers: ctx?.req?.headers,
   });
   const layout = 'main';
-  const session = await getServerSession(
-    ctx.req,
-    ctx.res,
-    authOptions
-  );
 
   try {
+    const session = await getServerSession(
+      ctx.req,
+      ctx.res,
+      authOptions
+    );
+
     if (!session) {
       return {
         redirect: {

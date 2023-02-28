@@ -116,6 +116,7 @@ export default function ItemDetails({
       <AddToCart
         id={id}
         itemDetailsId={filteredDetails[index]?.id || null}
+        title={item?.itemTitle}
         price={filteredDetails[index]?.price || item?.price}
         size={filteredDetails[index]?.size || item?.size}
         type={filteredDetails[index]?.type}

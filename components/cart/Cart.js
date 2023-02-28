@@ -102,10 +102,6 @@ export default function Cart() {
                   key={cartItem?.cartId}
                   cartId={cartItem?.cartId}
                   quantity={cartItem?.quantity}
-                  sizeProp={cartItem?.size}
-                  priceProp={cartItem?.price}
-                  typeProp={cartItem?.type}
-                  typeValueProp={cartItem?.typeValue}
                   link={cartItem?.link}
                   itemDetailsId={cartItem?.itemDetailsId}
                 />

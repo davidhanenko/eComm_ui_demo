@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { UserDropdownStyles } from './UserDropdownStyles';
 import {
@@ -5,7 +6,9 @@ import {
   signOut,
   useSession,
 } from 'next-auth/react';
-import { useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useMessage } from '../../../context/messageState';
 
 export default function UserDropdown({
   userOpen,
@@ -14,6 +17,7 @@ export default function UserDropdown({
 }) {
   const router = useRouter();
   const { data: session } = useSession();
+  const { message, setMessage } = useMessage();
 
   const dropdownRef = useRef(null);
 
@@ -48,6 +52,16 @@ export default function UserDropdown({
       );
     };
   }, [userOpen]);
+
+  useEffect(() => {
+    if (message) {
+      toast.success(`${message}`, {
+        position: 'top-right',
+        autoClose: 5000,
+      });
+      setMessage(null);
+    }
+  }, [message]);
 
   return (
     <UserDropdownStyles

@@ -2,10 +2,12 @@ import gql from 'graphql-tag';
 import Orders from '../../components/orders_admin/orders/Orders';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../api/auth/[...nextauth]';
+
 import {
   addApolloState,
   initializeApollo,
 } from '../../lib/apollo';
+import useUser from '../../components/auth/User';
 
 export const ALL_ORDERS_QUERY = gql`
   query ALL_ORDERS_QUERY {
@@ -25,8 +27,18 @@ export const ALL_ORDERS_QUERY = gql`
 
 export default function OrdersPage(props) {
   const orders = props?.orders?.data;
+  const {me} = useUser();
 
-  return <Orders orders={orders} />;
+  if (
+    me?.role?.name !== process.env.NEXT_PUBLIC_ADMIN_TEST
+  ) {
+    return <h1>test</h1>;
+  }
+  return (
+    <>
+      <Orders orders={orders} />
+    </>
+  );
 }
 
 export const getServerSideProps = async ctx => {

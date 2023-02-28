@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
 const SignupStyles = styled.div`
-  margin-top: calc(var(--navHeight) + var(--searchHeight));
-
+  min-height: 40vh;
   width: 450px;
-  margin: 15rem auto;
+  margin: 18rem auto;
   text-align: center;
 
-  h1 {
-    font-size: 3.5rem;
+  box-shadow: 0px 0px 3px 1px var(--blue5);
+  padding: 5rem 3rem;
+
+  h3 {
+    font-size: 2.3rem;
     color: var(--blue3);
+    font-weight: 400;
   }
 
   @media (max-width: 800px) {
@@ -18,24 +21,52 @@ const SignupStyles = styled.div`
 
   @media (max-width: 600px) {
     width: 90vw;
+    padding: 5rem 1rem;
+  }
+
+  .divider {
+    margin: 3rem auto;
+    position: relative;
+    width: 80%;
+    color: var(--blue3);
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 50%;
+      left: 0;
+      width: 45%;
+      height: 1px;
+      background-color: var(--blue5);
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 50%;
+      right: 0;
+      width: 45%;
+      height: 1px;
+      background-color: var(--blue5);
+    }
   }
 `;
 
 const FormStyles = styled.form`
-  margin-top: 5rem;
+  /* margin-top: 5rem; */
 
   fieldset {
     border: 1px solid transparent;
     outline: none;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1.8rem;
     padding: 0 2rem;
     position: relative;
 
     label {
       display: flex;
       justify-self: start;
-      color: var(--gray);
+      color: var(--lightGray);
       font-size: 1.4rem;
+      user-select: none;
     }
 
     input,
@@ -68,7 +99,7 @@ const FormStyles = styled.form`
     }
 
     .input-error {
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: var(--red);
       position: absolute;
       left: 2rem;
@@ -117,8 +148,9 @@ const FooterStyles = styled.footer`
     font-size: 1.3rem;
   }
 
-  a {
+  span {
     color: var(--blue3);
+    cursor: pointer;
 
     @media (hover: hover) {
       &:hover {
@@ -128,4 +160,75 @@ const FooterStyles = styled.footer`
   }
 `;
 
-export { SignupStyles, FormStyles, FooterStyles };
+const SignUpSessionStyles = styled.div`
+  min-height: 30vh;
+
+  width: 450px;
+  margin: 18rem auto;
+  padding: 5rem 3rem;
+  text-align: center;
+  height: 100%;
+
+  box-shadow: 0px 0px 3px 1px var(--blue5);
+
+  p {
+    font-size: 2rem;
+    color: var(--dark);
+  }
+
+  span {
+    color: var(--blue1);
+  }
+
+  hr {
+    margin: 5rem 0;
+    border: none;
+    height: 1px;
+    background-color: var(--blue5);
+  }
+
+  a {
+    color: var(--blue3);
+
+    @media (hover: hover) {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  button {
+    display: block;
+    margin: 2rem auto;
+    border: none;
+    outline: none;
+    background: none;
+    color: var(--blue3);
+    cursor: pointer;
+  }
+
+  @media (hover: hover) {
+    a,
+    button {
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    width: 90vw;
+    padding: 5rem 1rem;
+
+    p {
+      font-size: 1.6rem;
+    }
+  }
+`;
+
+export {
+  SignupStyles,
+  FormStyles,
+  FooterStyles,
+  SignUpSessionStyles,
+};

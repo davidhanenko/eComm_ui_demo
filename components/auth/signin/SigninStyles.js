@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
-const SignupStyles = styled.div`
-  margin-top: calc(var(--navHeight) + var(--searchHeight));
-
+const SigninStyles = styled.div`
   width: 450px;
-  margin: 15rem auto;
+  margin: 18rem auto;
   text-align: center;
+  min-height: 50vh;
 
-  h1 {
-    font-size: 3.5rem;
+  box-shadow: 0px 0px 3px 1px var(--blue5);
+  padding: 5rem 3rem;
+
+  h3 {
+    font-size: 2.5rem;
     color: var(--blue3);
+    font-weight: 400;
   }
 
   @media (max-width: 800px) {
@@ -18,11 +21,74 @@ const SignupStyles = styled.div`
 
   @media (max-width: 600px) {
     width: 90vw;
+    padding: 5rem 1rem;
+  }
+
+  .divider {
+    margin: 3rem auto;
+    position: relative;
+    width: 80%;
+    color: var(--blue3);
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 50%;
+      left: 0;
+      width: 45%;
+      height: 1px;
+      background-color: var(--blue5);
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 50%;
+      right: 0;
+      width: 45%;
+      height: 1px;
+      background-color: var(--blue5);
+    }
+  }
+`;
+
+const GoogleBtnStyles = styled.button`
+  height: 4rem;
+  padding: 1.5rem;
+  margin-top: 4rem;
+  background-color: var(--lightGray);
+  color: var(--white);
+  border-radius: 2rem;
+  border: none;
+  text-transform: uppercase;
+  transition: all 0.25s;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--blue4);
+    }
+
+    div {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .icon-google {
+        font-size: 1.8rem;
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1.1rem;
   }
 `;
 
 const FormStyles = styled.form`
-  margin-top: 5rem;
+  margin-top: 3rem;
 
   fieldset {
     border: 1px solid transparent;
@@ -85,7 +151,7 @@ const FormStyles = styled.form`
     width: 20rem;
     height: 4rem;
     padding: 1rem;
-    margin-top: 4rem;
+    margin-top: 1rem;
     background-color: var(--blue3);
     color: var(--white);
     border-radius: 2rem;
@@ -106,6 +172,7 @@ const FormStyles = styled.form`
 
     @media (max-width: 600px) {
       padding: 1.25rem;
+      font-size: 1.1rem;
     }
   }
 `;
@@ -119,6 +186,7 @@ const FooterStyles = styled.footer`
 
   a {
     color: var(--blue3);
+    font-size: 1.3rem;
 
     @media (hover: hover) {
       &:hover {
@@ -128,4 +196,9 @@ const FooterStyles = styled.footer`
   }
 `;
 
-export { SignupStyles, FormStyles, FooterStyles };
+export {
+  SigninStyles,
+  GoogleBtnStyles,
+  FormStyles,
+  FooterStyles,
+};

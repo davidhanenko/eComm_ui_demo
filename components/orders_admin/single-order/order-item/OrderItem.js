@@ -39,12 +39,12 @@ export const ORDER_ITEM_QUERY = gql`
   }
 `;
 
-export default function OrderItem({ item }) {
+export default function OrderItem({ item, index }) {
   const { data, error, loading } = useQuery(
     ORDER_ITEM_QUERY,
     {
       variables: {
-        id: item?.id,
+        id: item?.cartId.split('-')[0],
       },
     }
   );
@@ -57,6 +57,7 @@ export default function OrderItem({ item }) {
 
   return (
     <OrderItemStyles>
+      <p className='item-number'>{index}.</p>
       <div className='item-img'>
         {itemData?.image?.data[0]?.attributes?.url && (
           <Image
@@ -71,37 +72,31 @@ export default function OrderItem({ item }) {
       <div className='item-wrapper'>
         <div className='top-line'>
           <h4>
-            {itemData?.itemTitle &&
-              capitalizeStr(itemData?.itemTitle)}
+            {item?.title && capitalizeStr(item?.title)}
           </h4>
           <div>
-            {itemDetails?.type && (
+            {item?.type && (
               <span className='item-type'>
-                {itemDetails?.type} -{' '}
+                {item?.type} -{' '}
               </span>
             )}
-            <span>{itemDetails?.typeValue}</span>
+            <span>{item?.typeValue}</span>
           </div>
           <p>
-            {itemDetails?.size || itemData?.size
-              ? `Size - ${
-                  itemDetails?.size || itemData?.size
-                }`
-              : itemDetails?.size || itemData?.size}
+            {item?.size
+              ? `Size - ${item?.size}`
+              : item?.size}
           </p>
         </div>
         <div className='lower-line'>
-          <p>Qty - {item?.qty}</p>
+          <p>Qty - {item?.quantity}</p>
 
-          {itemDetails?.price || itemData?.price ? (
-            <p>
-              Price - $
-              {itemDetails?.price?.toFixed(2) ||
-                itemData?.price?.toFixed(2)}
-              
-            </p>
+          {item?.price ? (
+            <p>Price - ${item?.price?.toFixed(2)}</p>
           ) : (
-            <p className='price-not-available' >Price not available</p>
+            <p className='price-not-available'>
+              Price not available
+            </p>
           )}
         </div>
       </div>
