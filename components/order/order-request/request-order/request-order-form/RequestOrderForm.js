@@ -53,7 +53,7 @@ export default function RequestOrderForm({
 
   const router = useRouter();
 
-  const [createOrderRequest, { loading, error}] =
+  const [createOrderRequest, { loading, error }] =
     useMutation(CREATE_ORDER_REQUEST_MUTATION, {});
 
   const onSubmitForm = async values => {
@@ -129,9 +129,9 @@ export default function RequestOrderForm({
           className={
             dirtyFields.company ? 'input-dirty' : ''
           }
-          {...register('company'), {
+          {...register('company', {
             disabled: isSubmitting || loading,
-          }}
+          })}
         />
         {
           <div className='input-error'>
