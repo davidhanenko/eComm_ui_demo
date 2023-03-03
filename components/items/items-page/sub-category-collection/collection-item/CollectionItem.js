@@ -36,8 +36,8 @@ export default function CollectionItem({
           <Image
             className='item-img'
             src={item?.image?.data[0]?.attributes?.url}
-            width={200}
-            height={200}
+            width={150}
+            height={150}
             objectFit='scale-down'
             alt={item?.itemTitle}
             placeholder='blur'

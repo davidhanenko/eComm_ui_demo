@@ -20,6 +20,7 @@ const DropdownBtnStyles = styled.button`
   background: transparent;
   cursor: pointer;
   display: none;
+
   @media (max-width: 850px) {
     display: flex;
     align-self: center;
@@ -62,7 +63,7 @@ const DropdownMenuStyles = styled.ul`
 
     ${props =>
       props.dropdownOpen &&
-      `visibility: visible; opacity: 0.9; transform: translateY(-2%);`}
+      `visibility: visible; opacity: 0.97; transform: translateY(-2%);`}
   }
 
   .no-items {
@@ -77,13 +78,13 @@ const DropdownItemStyles = styled.li`
   font-weight: 300;
   text-transform: capitalize;
   cursor: pointer;
-  line-height: 1.8rem;
-  padding: 1rem;
+  line-height: 1.6rem;
+  padding: 0.6rem;
   transition: all 0.25s;
   a {
     text-decoration: none;
     color: var(--dark);
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     transition: all 0.25s;
   }
   @media (hover: hover) {

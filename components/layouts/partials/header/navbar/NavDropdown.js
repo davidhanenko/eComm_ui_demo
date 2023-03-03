@@ -19,9 +19,9 @@ import {
 // navbar dropdown item
 const DropdownItem = React.forwardRef(
   ({ href, onClick, dropdownItem }, ref) => {
-    // item title
+    // item' title
     const title = dropdownItem.title;
-    // item 1st image
+    // item' 1st image
     const imgUrl =
       dropdownItem?.category?.data[0]?.attributes
         ?.singleItem?.data[0]?.attributes?.image?.data[0]
@@ -91,9 +91,11 @@ const NavDropdown = React.forwardRef(function NavDropdown(
 
   return (
     <NavDropdownStyles onMouseLeave={handleMouseLeave}>
-      <div className='dropdown-btns-group'>
+      <div
+        className='dropdown-btns-group'
+        onMouseOver={handleMouseEnter}
+      >
         <a
-          onMouseOver={handleMouseEnter}
           href={href}
           ref={ref}
           className={

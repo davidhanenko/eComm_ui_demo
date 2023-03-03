@@ -13,7 +13,7 @@ const CategoriesStyles = styled.div`
     color: var(--darkBlue);
     font-size: 3rem;
     font-weight: 300;
-    z-index: 3;
+    z-index: 1;
     margin: 0 auto;
     left: 50%;
     top: 50%;

@@ -6,9 +6,9 @@ const NavDropdownStyles = styled.div`
   width: 100%;
 
   .dropdown-btns-group {
-    @media (max-width: 850px) {
-      display: flex;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: end;
   }
 `;
 
@@ -16,15 +16,22 @@ const DropdownBtnStyles = styled.button`
   padding: 0;
   outline: none;
   border: none;
-  background: transparent;
+
   cursor: pointer;
-  @media (max-width: 850px) {
-    position: relative;
-    right: 0rem;
-  }
+
   svg {
     color: var(--blue1);
     transform: scale(2);
+  }
+
+  @media (max-width: 850px) {
+    position: relative;
+    right: 0rem;
+    background: transparent;
+
+    svg {
+      margin-left: 1rem;
+    }
   }
 `;
 
@@ -67,15 +74,14 @@ const DropdownItemStyles = styled.li`
   list-style: none;
   text-transform: capitalize;
   cursor: pointer;
-  line-height: 2rem;
+
   font-weight: 300;
-  padding: 0.6rem;
 
   .item-title-img {
     display: flex;
     align-items: center;
     justify-content: start;
-    margin-right: 5rem;
+    margin-right: 2rem;
     width: 100%;
   }
 
@@ -111,8 +117,7 @@ const DropdownItemStyles = styled.li`
   }
 
   @media (max-width: 850px) {
-    line-height: 1.7rem;
-    font-size: 2rem;
+    font-size: 1.4rem;
     a {
       display: block;
     }

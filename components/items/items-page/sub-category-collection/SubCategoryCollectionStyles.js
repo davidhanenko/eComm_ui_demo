@@ -3,6 +3,9 @@ import styled from 'styled-components';
 const SubCategoryCollectionStyles = styled.div`
   padding: 5rem 5rem;
 
+  @media (min-width: 850px) {
+    margin-top: var(--layoutHeaderHeight);
+  }
   @media (max-width: 500px) {
     padding: 5rem 1rem;
   }
@@ -31,13 +34,13 @@ const SubCategoryCollectionStyles = styled.div`
   }
 
   .collection-container {
-    margin: 10rem 0;
+    margin: 10rem auto;
     display: grid;
     grid-gap: 2rem;
     justify-content: center;
     grid-template-columns: repeat(
       auto-fill,
-      minmax(250px, 1fr)
+      minmax(200px, 1fr)
     );
     @media (max-width: 500px) {
       grid-gap: 1rem;
