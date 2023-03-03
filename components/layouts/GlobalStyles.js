@@ -31,8 +31,11 @@ const GlobalStyles = createGlobalStyle`
   
     --maxWidth: 1400px;
     --minWidth: 850px;          
-    --navHeight: 100px;
-    --searchHeight: 30px; 
+    --navHeight: 60px;
+    --searchHeight: 25px; 
+    --menuHeight: 45px;
+    --menuTreeHeight: 25px;
+    --layoutHeaderHeight: calc(var(--navHeight) + var(--searchHeight) + var(--menuHeight) + var(--menuTreeHeight));  
     --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
 
     --goToTopZ: 5;

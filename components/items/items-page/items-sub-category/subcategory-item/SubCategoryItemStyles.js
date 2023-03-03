@@ -6,9 +6,9 @@ const SubCategoryItemStyles = styled.div`
   .subcategory-title {
     color: var(--blue2);
     font-weight: 400;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     text-transform: uppercase;
-    padding: 1rem 0 1.5rem 0;
+    padding: 0rem 0 1.5rem 0;
     margin: 0;
     transition: all 0.25s;
 
@@ -35,7 +35,7 @@ const SubCategoryItemStyles = styled.div`
     position: relative;
     width: 100%;
     height: 100%;
-    max-width: 200px;
+    max-width: 150px;
 
     p {
       position: absolute;

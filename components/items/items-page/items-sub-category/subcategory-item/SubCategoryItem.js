@@ -79,8 +79,8 @@ export default function SubCategoryListItem({
                 subCategoryItem?.image?.data[0]?.attributes
                   ?.url
               }
-              width={200}
-              height={200}
+              width={150}
+              height={150}
               objectFit='scale-down'
               alt={subCategoryItem?.itemTitle}
               placeholder='blur'
@@ -94,8 +94,8 @@ export default function SubCategoryListItem({
           <div className='no-item'>
             <Image
               src={placeholderImg}
-              width={200}
-              height={200}
+              width={150}
+              height={150}
               alt='image coming soon'
             />
             <h4 className='subcategory-title'>

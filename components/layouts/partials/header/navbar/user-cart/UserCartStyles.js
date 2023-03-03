@@ -5,7 +5,7 @@ const UserCartStyles = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-right: 3rem;
   .user {
     padding: 0 1rem;
@@ -20,9 +20,6 @@ const UserCartStyles = styled.div`
         color: var(--darkBlue);
       }
     }
-  }
-  @media (max-width: 850px) {
-    font-size: 3rem;
   }
 
   @media print {

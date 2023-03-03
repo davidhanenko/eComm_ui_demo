@@ -6,7 +6,7 @@ const CollectionItemStyles = styled.div`
   text-align: center;
   position: relative;
 
-  @media (max-width: 576px) {
+  @media (max-width: 600px) {
     margin: 2rem 0.5rem;
   }
 
@@ -25,7 +25,7 @@ const CollectionItemStyles = styled.div`
     opacity: 0.7;
     z-index: 2;
 
-    @media (max-width: 576px) {
+    @media (max-width: 600px) {
       font-size: 1.2rem;
     }
   }
@@ -34,7 +34,7 @@ const CollectionItemStyles = styled.div`
     text-transform: uppercase;
     color: var(--blue1);
     font-weight: 400;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin: 0;
     transition: all 0.25s;
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const HeaderStyles = styled.header`
   background: var(--white);
   margin: 0;
-  padding: 0;
+  padding: 0.7rem 0 0 0;
   max-height: var(--navHeight);
   position: fixed;
   top: 0;
@@ -30,7 +30,7 @@ const Logo = styled.div`
   display: flex;
   grid-auto-columns: min-content;
   place-self: start center;
-  font-size: 5rem;
+  font-size: 3rem;
   line-height: 1rem;
   margin-left: 2rem;
   z-index: 2;

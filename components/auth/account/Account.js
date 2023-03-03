@@ -20,7 +20,7 @@ const USER_QUERY = gql`
           phone
           company
           deliveryAddress: delivery_address
-          orders {
+          orders(sort: ["createdAt:desc"]) {
             data {
               id
               attributes {
@@ -72,43 +72,55 @@ export default function Account({ id }) {
   const { data: session } = useSession();
 
   const user = data?.usersPermissionsUser?.data;
-  const orders = user.attributes?.orders?.data;
+  const orders = user?.attributes?.orders?.data;
 
   return (
     <AccountStyles>
-      {parseInt(user?.id) === session?.id && (
-        <>
-          <section className='user'>
-            <h3>{user?.attributes?.username}</h3>
-            <hr />
-            <p>{user?.attributes?.email}</p>
-            <p>{user?.attributes?.phone}</p>
-            <p>{user?.attributes?.company}</p>
-            <p>{user?.attributes?.deliveryAddress}</p>
+      <header>
+        <h2>Welcome to your account</h2>
+        <p>
+          Review your orders status, add or update your
+          information
+        </p>
+      </header>
+      <div className='account-container'>
+        {parseInt(user?.id) === session?.id && (
+          <>
+            <section className='user'>
+              <h3>{user?.attributes?.username}</h3>
+              <hr />
+              <p>{user?.attributes?.email}</p>
+              <p>{user?.attributes?.phone}</p>
+              <p>{user?.attributes?.company}</p>
+              <p>{user?.attributes?.deliveryAddress}</p>
 
-            <hr />
+              <hr />
 
-            <div className='edit-container'>
-              <Link href={`${session?.id}/edit`}>
-                Update Account
-              </Link>
-              <span className='divider'>|</span>
-              {!session?.user?.email && (
-                <Link href='/auth/password/change-password'>
-                  Change password
+              <div className='edit-container'>
+                <Link href={`${session?.id}/edit`}>
+                  Update Account
                 </Link>
-              )}
-            </div>
-          </section>
-          <section className='orders'>
-            <h4>Orders</h4>
-            {orders &&
-              orders?.map(order => (
-                <OrderItem key={order?.id} order={order} />
-              ))}
-          </section>
-        </>
-      )}
+                <span className='divider'>|</span>
+                {!session?.user?.email && (
+                  <Link href='/auth/password/change-password'>
+                    Change password
+                  </Link>
+                )}
+              </div>
+            </section>
+            <section className='orders'>
+              <h4>Orders</h4>
+              {orders &&
+                orders?.map(order => (
+                  <OrderItem
+                    key={order?.id}
+                    order={order}
+                  />
+                ))}
+            </section>
+          </>
+        )}
+      </div>
     </AccountStyles>
   );
 }
@@ -126,6 +138,7 @@ function OrderItem({ order }) {
   const tax = orderDetails?.tax;
   const charge = orderDetails?.charge;
   const date = order?.attributes?.createdAt;
+  const totalItems = orderDetails?.totalItems;
 
   const localDate = new Date(date).toLocaleDateString(
     'en-US'
@@ -138,13 +151,14 @@ function OrderItem({ order }) {
     <OrderItemStyles>
       <section className='left-side'>
         <p>Order id - {order.id}</p>
-        <span>Created -</span>
+        <p>Order status - {order?.attributes?.status}</p>
+        <span>Created - </span>
         <span>{localDate}</span>
         <span>at</span>
         <span>{localTime}</span>
-        <p>Order status - {order?.attributes?.status}</p>
       </section>
       <section className='right-side'>
+        <p>Items in order - {totalItems}</p>
         <p>Total: ${total}</p>
         <p>Tax: ${tax}</p>
         <p>Total charge: ${charge}</p>

@@ -8,13 +8,14 @@ import Toast from './errors/Error';
 import { HeaderStyles, Logo } from './HeaderStyles';
 
 export default function Header() {
+
   return (
     <NavStateProvider>
       <HeaderStyles>
         <Toast />
         <div className='navbar'>
           <Logo>
-            <Link href='/'>a2z</Link>
+            <Link href='/'>LOGO</Link>
           </Logo>
           <Nav />
         </div>

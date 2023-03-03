@@ -2,9 +2,10 @@ import styled from 'styled-components';
 
 const ItemsCategoryStyles = styled.div`
   padding: 5rem 3rem 10rem 3rem;
+  margin-top: var(--layoutHeaderHeight);
 
   .items-category-title {
-    font-size: 3.7rem;
+    font-size: 2.5rem;
     text-transform: uppercase;
     font-weight: 400;
     margin-bottom: 1rem;
@@ -20,7 +21,7 @@ const ItemsCategoryStyles = styled.div`
     margin-bottom: 10rem;
     background-color: var(--blue3);
     width: 75%;
-    margin-left:0;
+    margin-left: 0;
   }
 
   .category-container {
@@ -29,7 +30,7 @@ const ItemsCategoryStyles = styled.div`
     justify-content: center;
     grid-template-columns: repeat(
       auto-fill,
-      minmax(250px, 1fr)
+      minmax(200px, 1fr)
     );
     @media (max-width: 500px) {
       grid-template-columns: repeat(

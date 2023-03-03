@@ -16,7 +16,7 @@ const SearchStyles = styled.div`
 
   .search-icon {
     position: fixed;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: grey;
     padding-left: 0.5rem;
     z-index: 3;
