@@ -37,31 +37,6 @@ const USER_QUERY = gql`
   }
 `;
 
-const USER_ORDERS_QUERY = gql`
-  query USER_ORDERS_QUERY($id: ID!) {
-    orders(
-      filters: {
-        users_permissions_user: { id: { eqi: $id } }
-      }
-    ) {
-      data {
-        id
-        attributes {
-          order_details
-          items_details
-          status
-          createdAt
-          users_permissions_user {
-            data {
-              id
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 export default function Account({ id }) {
   const { data, loading, error } = useQuery(USER_QUERY, {
     variables: {

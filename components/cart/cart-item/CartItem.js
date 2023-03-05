@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-// import Link from 'next/link';
-import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import {
   CartItemStyles,
@@ -24,7 +22,6 @@ export default function CartItem({
 }) {
   const { cart, setCart, cartReload } = useCart();
   const [qty, setQty] = useState(quantity);
-
   const { data, loading } = useQuery(ORDER_ITEM_QUERY, {
     variables: {
       id: cartId?.split('-')[0],

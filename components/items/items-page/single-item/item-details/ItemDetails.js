@@ -46,7 +46,7 @@ export default function ItemDetails({
     setFilteredDetails(
       itemDetails.filter(el => el.value === value)
     );
-    // set index to 0 to select and highlight 1st type-size-value combination
+    // set index as 0 to select and highlight 1st type-size-value combination
     setIndex(0);
   }, [value]);
 

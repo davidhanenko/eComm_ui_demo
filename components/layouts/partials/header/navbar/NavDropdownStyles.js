@@ -16,9 +16,9 @@ const DropdownBtnStyles = styled.button`
   padding: 0;
   outline: none;
   border: none;
-
   cursor: pointer;
-
+  background: transparent;
+  
   svg {
     color: var(--blue1);
     transform: scale(2);
@@ -28,7 +28,6 @@ const DropdownBtnStyles = styled.button`
     position: relative;
     right: 0rem;
     background: transparent;
-
     svg {
       margin-left: 1rem;
     }

@@ -13,6 +13,7 @@ const animation = keyframes`
 `;
 
 const CartCountStyles = styled.div`
+  user-select: none;
   margin: 0;
   margin-bottom: 1.75rem;
   background-color: var(--red);
