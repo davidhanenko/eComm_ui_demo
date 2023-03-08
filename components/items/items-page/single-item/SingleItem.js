@@ -14,7 +14,7 @@ export default function SingleItem({ singleItem, link }) {
   ]);
 
   // sort by prices to show list of available sizes of item in asc order
-  sizePrice.sort((a, b) => a.price - b.price);
+  sizePrice.sort((a, b) => a.size - b.size);
 
   // functions from image slider/carousel
   const SLIDE_COUNT =

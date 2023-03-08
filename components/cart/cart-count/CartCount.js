@@ -9,9 +9,10 @@ export default function CartCount() {
 
   useEffect(() => {
     setCount(
-      cart.reduce((count, el) => count + el.quantity, 0)
+      cart &&
+        cart.reduce((count, el) => count + el.quantity, 0)
     );
-  }, [cart]);
+  }, [cart, count]);
 
   useEffect(() => {
     setAnimate(true);

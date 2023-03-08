@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const SingleItemStyles = styled.div`
-  margin: 15rem 0;
+  margin-top: calc(var(--layoutHeaderHeight) + 10rem);
   display: flex;
   flex-wrap: wrap;
   @media (max-width: 720px) {
