@@ -5,7 +5,7 @@ const UserDropdownStyles = styled.div`
   right: 0;
   top: var(--navHeight);
   background-color: var(--white);
-  box-shadow: 0px 0px 3px 1px var(--offWhite);
+  box-shadow: 0 1px 2px 1px var(--offWhite);
   width: 150px;
   display: flex;
   flex-direction: column;
@@ -16,6 +16,10 @@ const UserDropdownStyles = styled.div`
   transform: translateX(150%);
 
   ${props => props.userOpen && `transform: translateX(0%);`}
+
+  @media(max-width: 850px) {
+    top: calc(var(--searchHeight) + 1rem);
+  }
 
   hr {
     width: 100%;

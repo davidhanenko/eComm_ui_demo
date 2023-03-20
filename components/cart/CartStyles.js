@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const CartStyles = styled.div`
   position: absolute;
   right: 0;
-  top: calc(var(--navHeight) + var(--searchHeight));
+  top: var(--navHeight);
   width: 40%;
   z-index: calc(var(--goToTopZ) + 2);
   background: var(--white);
@@ -13,7 +13,7 @@ const CartStyles = styled.div`
     100vh - var(--navHeight) + var(--searchHeight) - 5rem
   );
   height: 100%;
-  right: -150%;
+  right: -180%;
 
   transition: all 0.35s;
   transition-timing-function: cubic-bezier(
@@ -22,6 +22,7 @@ const CartStyles = styled.div`
     0.18,
     1.01
   );
+
   ${props => props.isCartOpen && `right:0;`};
 
   display: grid;
@@ -33,6 +34,12 @@ const CartStyles = styled.div`
 
   @media (max-width: 900px) {
     width: 65%;
+  }
+
+  @media (max-width: 850px) {
+    top: calc(
+      var(--navHeightSm) + var(--searchHeight) + 1rem
+    );
   }
 
   @media (max-width: 700px) {
@@ -73,11 +80,15 @@ const CartStyles = styled.div`
     }
 
     .cart-empty {
-      list-style: none;
-      font-size: 1.8rem;
-      font-weight: 300;
-      padding-left: 3rem;
-      color: var(--blue1);
+      text-align: center;
+      padding-top: 5rem;
+
+      p {
+        font-size: 1.8rem;
+        font-weight: 300;
+        margin-top: 5rem;
+        color: var(--blue1);
+      }
     }
   }
 

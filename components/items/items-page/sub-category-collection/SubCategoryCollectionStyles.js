@@ -4,7 +4,7 @@ const SubCategoryCollectionStyles = styled.div`
   padding: 5rem 5rem;
 
   @media (min-width: 850px) {
-    margin-top: var(--layoutHeaderHeight);
+    /* margin-top: var(--layoutHeaderHeight); */
   }
   @media (max-width: 500px) {
     padding: 5rem 1rem;

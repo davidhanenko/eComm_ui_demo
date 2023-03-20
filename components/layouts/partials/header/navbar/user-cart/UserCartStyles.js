@@ -5,20 +5,26 @@ const UserCartStyles = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin-right: 3rem;
+
+  @media (max-width: 850px) {
+    margin-right: 1rem;
+  }
+
   .user {
     padding: 0 1rem;
   }
   .user,
   .cart {
-    transition: all 0.2s;
-    @media (hover: hover) {
-      &:hover {
-        cursor: pointer;
-        transform: scale(1.2);
-        color: var(--darkBlue);
-      }
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+      color: var(--darkBlue);
     }
   }
 

@@ -30,6 +30,9 @@ export default function FooterLinks() {
       <h4>Links</h4>
       <ul>
         <LinkStyles>
+          <Link href={'/'}>home</Link>
+        </LinkStyles>
+        <LinkStyles>
           <Link href={'/about'}>about</Link>
         </LinkStyles>
         <LinkStyles>

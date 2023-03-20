@@ -22,6 +22,7 @@ export default function CartItem({
 }) {
   const { cart, setCart, cartReload } = useCart();
   const [qty, setQty] = useState(quantity);
+
   const { data, loading } = useQuery(ORDER_ITEM_QUERY, {
     variables: {
       id: cartId?.split('-')[0],
@@ -29,12 +30,13 @@ export default function CartItem({
     fetchPolicy: 'no-cache',
     ssr: false,
   });
+
   const cartItem = data?.singleItem?.data;
 
   const itemDetails = itemDetailsId
-    ? cartItem?.attributes?.sizePrice?.filter(
+    ? cartItem?.attributes?.sizePrice?.find(
         el => el.id === itemDetailsId
-      )[0]
+      )
     : null;
 
   const title = cartItem?.attributes?.itemTitle;

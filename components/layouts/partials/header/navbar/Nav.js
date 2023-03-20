@@ -181,9 +181,11 @@ export default function Nav(props) {
             toggle={toggleNav}
           />
         </NavButtonStyles>
-        <UserCart />
+        <div className='lower-row'>
+          <Search />
+          <UserCart />
+        </div>
       </NavStyles>
-      <Search />
     </>
   );
 }

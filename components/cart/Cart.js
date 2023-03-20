@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/client';
 import { useEffect, useRef, useState } from 'react';
@@ -6,6 +7,8 @@ import { useCart } from '../../context/cartState';
 import { useSession } from 'next-auth/react';
 import CartItem from './cart-item/CartItem';
 import { CartStyles } from './CartStyles';
+
+import emptyCartImg from '../../public/img/empty-cart.png';
 
 import Modal from './modal/Modal';
 import { MdClose } from 'react-icons/md';
@@ -51,8 +54,6 @@ export default function Cart() {
     totalCost,
     setTotalCost,
   } = useCart();
-
-  console.log(cart);
 
   // user session
   const { data: session } = useSession();
@@ -135,7 +136,6 @@ export default function Cart() {
       }
 
       setCart(Object.keys(obj).map(el => (el = obj[el])));
-      
     } else {
       const cartData = localStorage.getItem('cart')
         ? JSON.parse(localStorage.getItem('cart'))
@@ -145,38 +145,6 @@ export default function Cart() {
         setCart(cartData);
     }
   }, [session, userLoading]);
-
-  // if user session - merge items from user cart with items from localStorage -> remove items from local storage after merge
-  // useEffect(() => {
-  //   if (userData) {
-  //     const cartData = localStorage.getItem('cart')
-  //       ? JSON.parse(localStorage.getItem('cart'))
-  //       : '[]';
-
-  //     const userCart =
-  //       JSON.parse(
-  //         userData?.usersPermissionsUser?.data?.attributes
-  //           ?.cart
-  //       ) ?? [];
-
-  //     const newCart = [...cartData, ...userCart];
-
-  //     // clear cart in localStorage
-  //     localStorage.setItem('cart', '[]');
-
-  //     let obj = {};
-
-  //     for (let el of newCart) {
-  //       if (!obj[el.cartId]) {
-  //         obj[el.cartId] = el;
-  //       } else {
-  //         obj[el.cartId].quantity += el.quantity;
-  //       }
-  //     }
-
-  //     setCart(Object.keys(obj).map(el => (el = obj[el])));
-  //   }
-  // }, [session, userLoading]);
 
   // calc total cost for all items in the cart
   useEffect(() => {
@@ -225,9 +193,9 @@ export default function Cart() {
           </button>
         </header>
         <div className='cart-body'>
-          <ul>
-            {cart && cart.length > 0 ? (
-              cart.map(cartItem => (
+          {cart && cart.length > 0 ? (
+            <ul>
+              {cart.map(cartItem => (
                 <CartItem
                   key={cartItem?.cartId}
                   cartId={cartItem?.cartId}
@@ -235,11 +203,18 @@ export default function Cart() {
                   link={cartItem?.link}
                   itemDetailsId={cartItem?.itemDetailsId}
                 />
-              ))
-            ) : (
-              <li className='cart-empty'>Cart is empty</li>
-            )}
-          </ul>
+              ))}
+            </ul>
+          ) : (
+            <div className='cart-empty'>
+              <Image
+                src={emptyCartImg}
+                width={150}
+                height={150}
+              />
+              <p>Cart is empty</p>
+            </div>
+          )}
         </div>
         <footer>
           {totalCost > 0 && (

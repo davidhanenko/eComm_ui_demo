@@ -3,13 +3,12 @@ import styled from 'styled-components';
 const FooterStyles = styled.footer`
   background: var(--blue2);
   color: var(--white);
-  padding: 1rem;
+  padding: 2rem 4rem;
 
   position: relative;
   width: 100vw;
   bottom: 0;
   margin: 0;
-  padding: 2rem 0;
 
   .footer-container {
     margin: 2rem auto;
@@ -21,6 +20,10 @@ const FooterStyles = styled.footer`
       auto-fit,
       minmax(300px, 1fr)
     );
+
+    @media (max-width: 600px) {
+      text-align: center;
+    }
   }
 
   h4 {
@@ -45,13 +48,14 @@ const LinkStyles = styled.li`
   text-transform: capitalize;
   a {
     text-decoration: none;
+    font-weight: 300;
     color: inherit;
-    font-size: 1.6rem;
-    transition: color 0.2s;
+    font-size: 1.5rem;
+    transition: color 0.25s;
 
     @media (hover: hover) {
       &:hover {
-        color: var(--darkBlue);
+        text-decoration: underline;
       }
     }
   }
@@ -62,15 +66,14 @@ const LinkStyles = styled.li`
 `;
 
 const FooterServicesStyles = styled.section`
-  padding-left: 2rem;
   ul {
     padding: 0;
   }
+
+ 
 `;
 
 const FooterContactsStyles = styled.section`
-  padding-left: 2rem;
-
   p {
     font-size: 1.4rem;
 
@@ -85,7 +88,7 @@ const FooterContactsStyles = styled.section`
     height: 1px;
     border: none;
     background-color: var(--blue4);
-    width: 60%;
+    width: 100%;
   }
 
   .hours {
@@ -94,7 +97,6 @@ const FooterContactsStyles = styled.section`
 `;
 
 const FooterLinksStyles = styled.section`
-  padding-left: 2rem;
   ul {
     padding: 0;
   }
@@ -110,11 +112,10 @@ const FooterSocialStyles = styled.section`
     color: var(--white);
     cursor: pointer;
     margin: 0 1rem;
-    transition: all 0.3s;
+    transition: all 0.25s;
     @media (hover: hover) {
       &:hover {
         color: var(--blue4);
-        transform: translateY(-10%);
       }
     }
   }

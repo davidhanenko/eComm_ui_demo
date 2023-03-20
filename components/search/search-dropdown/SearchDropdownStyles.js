@@ -2,20 +2,19 @@ import styled from 'styled-components';
 
 const SearchDropdownStyles = styled.ul`
   position: absolute;
-  left: 2rem;
+  /* left: 2rem; */
   top: calc(var(--searchHeight) / 2);
   list-style: none;
   padding-left: 0;
   padding-bottom: 10rem;
-  min-width: 30rem;
-  max-width: 45rem;
+  min-width: 100%;
   overflow-wrap: break-word;
   background: var(--blue3);
   box-shadow: 1px 4px 15px 1px var(--gray);
 
-  @media (max-width: 600px) {
+  /* @media (max-width: 600px) {
     width: 80vw;
-  }
+  } */
 
   .no-items {
     padding: 8rem 1rem 0 1rem;

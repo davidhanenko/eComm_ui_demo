@@ -10,21 +10,53 @@ const glow = keyframes`
   }
 `;
 
-const SearchInputStyles = styled.input`
-  border: 1px solid var(--blue4);
-  height: 100%;
+const SearchInputStyles = styled.div`
   width: 100%;
-  outline: 0;
-  padding-left: 3rem;
-  background: var(--offWhite);
   position: relative;
+  display: flex;
 
-  &::placeholder {
-    color: var(--gray);
-    font-weight: 100;
+  input {
+    border: none;
+    height: 100%;
+    width: 100%;
+    outline: 0;
+    padding-left: 0.5rem;
+    background: var(--offWhite);
+
+    &::placeholder {
+      color: var(--gray);
+      font-weight: 100;
+    }
+    &:focus {
+      outline: none;
+      border: 1px solid var(--blue4);
+    }
+    &.loading {
+      animation: ${glow} 0.6s ease-in-out infinite alternate;
+    }
   }
-  &.loading {
-    animation: ${glow} 0.6s ease-in-out infinite alternate;
+
+  .search-btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .search-icon {
+      font-size: 2rem;
+      color: var(--blue3);
+      transition: all 0.25s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
   }
 `;
 

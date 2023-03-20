@@ -40,7 +40,6 @@ export default function Search() {
 
   return (
     <SearchStyles>
-      <MdSearch className='search-icon' />
       <SearchInput />
     </SearchStyles>
   );

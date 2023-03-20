@@ -7,7 +7,7 @@ const GlobalStyles = createGlobalStyle`
   html {
     font-family: 'Roboto', sans-serif;
 
-    --bg: #adc0d52e;
+    --bg: #e8e8e8;
 
     --darkBlue:#020270;
     --blue1: #0008a3;
@@ -31,8 +31,9 @@ const GlobalStyles = createGlobalStyle`
   
     --maxWidth: 1400px;
     --minWidth: 850px;          
-    --navHeight: 60px;
-    --searchHeight: 25px; 
+    --navHeight: 100px;
+    --navHeightSm: 70px;
+    --searchHeight: 30px; 
     --menuHeight: 45px;
     --menuTreeHeight: 25px;
     --layoutHeaderHeight: calc(var(--navHeight) + var(--searchHeight) + var(--menuHeight) + var(--menuTreeHeight));  
