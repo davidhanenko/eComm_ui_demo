@@ -13,9 +13,11 @@ const animation = keyframes`
 `;
 
 const CartCountStyles = styled.div`
+  position: absolute;
+  right: -1.5rem;
+  top: -0.4rem;
   user-select: none;
   margin: 0;
-  margin-bottom: 1.75rem;
   background-color: var(--red);
   width: 1.75rem;
   height: 1.75rem;
@@ -24,13 +26,14 @@ const CartCountStyles = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  animation: ${props => props.animate && animation} 0.7s
+  animation: ${props => props.animate && animation} 0.5s
     cubic-bezier(0, 0, 0, 0.4);
   div {
+    box-sizing: content-box;
     margin: 0;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--white);
-    line-height: 1.3rem;
+    line-height: 1;
     font-feature-settings: 'tnum';
     font-variant-numeric: tabular-nums;
   }

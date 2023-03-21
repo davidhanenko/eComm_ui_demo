@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const SingleItemStyles = styled.div`
-  margin-top: calc(var(--layoutHeaderHeight) + 10rem);
+  margin-top: 10rem;
   display: flex;
   flex-wrap: wrap;
   @media (max-width: 720px) {
@@ -43,10 +43,10 @@ const SingleItemStyles = styled.div`
     flex: 1 1 0;
 
     .single-item-title {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-weight: 400;
       text-align: start;
-      text-transform: uppercase;
+      text-transform: capitalize;
       color: var(--dark);
       margin: 0 0 1rem 0;
     }

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const ImagesSliderStyles = styled.div`
   position: relative;
-  /* background-color: #f7f7f7; */
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -57,7 +56,6 @@ const ImagesSliderStyles = styled.div`
     background-color: transparent;
     touch-action: manipulation;
     position: absolute;
-    z-index: 2;
     top: 50%;
     transform: translateY(-50%);
     border: 0;

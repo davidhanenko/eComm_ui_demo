@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const FooterStyles = styled.footer`
-  background: var(--blue2);
+  background: var(--blue3);
   color: var(--white);
   padding: 2rem 4rem;
 

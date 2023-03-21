@@ -2,13 +2,14 @@ import styled from 'styled-components';
 
 const OrderFormStyles = styled.form`
   margin-top: 5rem;
+  max-width: 450px;
 
   fieldset {
     border: 1px solid transparent;
     max-height: 12rem;
     outline: none;
     margin-bottom: 2rem;
-    padding: 0 2rem;
+    padding: 0;
     position: relative;
 
     input,

@@ -17,6 +17,9 @@ const PlaceOrderStyles = styled.div`
   main {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding: 3rem;
+    background-color: var(--white);
+    box-shadow: 0 0 2px 1px var(--white);
 
     .items-section {
       padding-right: 3rem;
@@ -43,6 +46,10 @@ const PlaceOrderStyles = styled.div`
 
   @media (max-width: 600px) {
     padding: 2rem 1.5rem;
+
+    main {
+      padding: 1rem;
+    }
   }
 `;
 

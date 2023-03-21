@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { MdExpandMore, MdExpandLess } from 'react-icons/md';
+import {
+  AiFillCaretUp,
+  AiFillCaretDown,
+} from 'react-icons/ai';
 
 import { useMenu } from '../../context/menuState';
 
@@ -67,9 +70,11 @@ const MenuDropdown = React.forwardRef(function MenuDropdown(
 
   return (
     <DropdownStyles onMouseLeave={handleMouseLeave}>
-      <div className='dropdown-btns-group'>
+      <div
+        className='dropdown-btns-group'
+        onMouseOver={handleMouseEnter}
+      >
         <a
-          onMouseOver={handleMouseEnter}
           href={props.href}
           ref={ref}
           className={`${
@@ -86,11 +91,12 @@ const MenuDropdown = React.forwardRef(function MenuDropdown(
           type='button'
           onClick={showDropdown}
           disabled={!isMenuOpen || width > 850}
+          aria-label='Open and Close menu dropdown'
         >
-          {dropdownOpen && isMenuOpen ? (
-            <MdExpandLess />
+          {dropdownOpen ? (
+            <AiFillCaretUp />
           ) : (
-            <MdExpandMore />
+            <AiFillCaretDown />
           )}
         </DropdownBtnStyles>
       </div>

@@ -17,13 +17,30 @@ const DropdownBtnStyles = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
-  @media (max-width: 850px) {
-    position: relative;
-    right: 0rem;
-  }
+
   svg {
-    color: var(--blue1);
-    transform: scale(2);
+    color: inherit;
+    transform: scale(1.3);
+  }
+
+  @media (max-width: 850px) {
+    border: 0.1px solid var(--blue4);
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+
+    transition: all 0.2s;
+
+    svg {
+      width: 100%;
+    }
+
+    &:hover {
+      background: var(--blue4);
+    }
   }
 `;
 
@@ -31,7 +48,7 @@ const DropdownMenuStyles = styled.ul`
   padding-left: 2rem;
   z-index: calc(var(--goToTopZ) + 3);
   display: none;
-  margin: -2rem 0 3rem 0;
+  margin-bottom: 3rem;
 
   ${props =>
     props.isDropdownOpen && `display: block; opacity:0.99;`}
@@ -43,7 +60,7 @@ const DropdownMenuStyles = styled.ul`
     transform: translateY(10%);
     background: var(--white);
     position: fixed;
-    width: 200px;
+    width: 250px;
     margin: 0;
     padding: 2rem 0;
     padding-bottom: 10rem;
@@ -52,46 +69,57 @@ const DropdownMenuStyles = styled.ul`
 
     ${props =>
       props.isDropdownOpen &&
-      `visibility: visible; opacity: 0.9; transform: translateY(-2%);`};
+      `visibility: visible; opacity: 0.96; transform: translateY(-2%);`};
   }
 `;
 
 const DropdownItemStyles = styled.li`
   list-style: none;
   text-transform: capitalize;
-  padding: 0.6rem;
+  user-select: none;
 
-  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  a {
-    .item-title-img {
-      font-weight: 300;
-      letter-spacing: 1px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      margin-right: 5rem;
-      width: 100%;
+  a.item-link {
+    @media (min-width: 850px) {
+      margin: 0;
+      padding-left: 0;
+      width: 90%;
+      border-bottom: 1px solid var(--blue4);
     }
-    .item-image {
-      img {
-        transition: all 0.3s;
-        transform: translateX(100%);
-        background-color: var(--white);
-        @media (max-width: 850px) and (hover: none) and (pointer: coarse) {
-          display: none;
-          width: 0;
-          height: 0;
-        }
+  }
+
+  .item-title-img {
+    font-weight: 300;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    justify-content: start;
+    margin-right: 5rem;
+  }
+  .item-image {
+    img {
+      transition: all 0.3s;
+      transform: translateX(100%);
+
+      @media (max-width: 850px) and (hover: none) and (pointer: coarse) {
+        display: none;
+        width: 0;
+        height: 0;
       }
     }
-    p {
-      margin: 0;
-      padding-left: 1rem;
-    }
+  }
+  p {
+    margin: 0;
+    padding-left: 1rem;
+    width: 80%;
+  }
 
-    /* @media (hover: hover) { */
+  @media (hover: hover) {
     &:hover {
       .item-image {
         img {
@@ -99,10 +127,10 @@ const DropdownItemStyles = styled.li`
         }
       }
     }
+  }
 
-    @media (max-width: 850px) {
-      font-size: 1.6rem;
-    }
+  @media (max-width: 850px) {
+    font-size: 1.5rem;
   }
 `;
 

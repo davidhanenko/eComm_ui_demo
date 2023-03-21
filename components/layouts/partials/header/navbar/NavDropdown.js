@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MdExpandMore, MdExpandLess } from 'react-icons/md';
+
+import {
+  AiFillCaretUp,
+  AiFillCaretDown,
+} from 'react-icons/ai';
 
 import { useNav } from '../../../../../context/navState';
 import useWindowDimensions from '../../../../../lib/windowDimensions';
@@ -34,6 +38,7 @@ const DropdownItem = React.forwardRef(
           href={href}
           onClick={() => closeSideNav()}
           ref={ref}
+          className='item-link'
         >
           <div className='item-title-img'>
             <span className='item-image'>
@@ -112,10 +117,10 @@ const NavDropdown = React.forwardRef(function NavDropdown(
           disabled={!navOpen || width > TOGGLE_WIDTH}
           aria-label='Open and Close dropdown'
         >
-          {dropdownOpen && navOpen ? (
-            <MdExpandLess />
+          {dropdownOpen ? (
+            <AiFillCaretUp />
           ) : (
-            <MdExpandMore />
+            <AiFillCaretDown />
           )}
         </DropdownBtnStyles>
       </div>
@@ -145,3 +150,6 @@ const NavDropdown = React.forwardRef(function NavDropdown(
 });
 
 export default NavDropdown;
+
+
+

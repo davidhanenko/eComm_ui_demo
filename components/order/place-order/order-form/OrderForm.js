@@ -40,6 +40,7 @@ export default function OrderForm({
       isSubmitting,
       dirtyFields,
       isDirty,
+      isValid,
     },
   } = useForm({
     mode: 'onBlur',
@@ -233,6 +234,8 @@ export default function OrderForm({
         type='submit'
         disabled={
           single_items.length <= 0 ||
+          !isDirty ||
+          !isValid ||
           isSubmitting ||
           loading
         }

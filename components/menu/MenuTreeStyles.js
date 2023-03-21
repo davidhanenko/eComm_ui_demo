@@ -4,18 +4,23 @@ const MenuTreeStyles = styled.ul`
   background: var(--blue3);
   margin: 0;
   padding: 0.7rem 3rem;
+
+  display: flex;
+  align-items: center;
+
+  height: var(--menuTreeHeight);
 `;
 
 const TreeNodeStyles = styled.li`
   display: inline;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 300;
   text-transform: capitalize;
   a {
     user-select: none;
     color: var(--white);
     text-decoration: none;
-    transition: all 0.3s;
+    transition: all 0.25s;
     @media (hover: hover) {
       &:hover {
         color: var(--gray);
@@ -29,8 +34,8 @@ const TreeNodeStyles = styled.li`
     }
   }
   &:before {
-    content: ' / ';
-    padding: 0 0.2rem;
+    content: '/';
+    margin:0 0.5rem;
   }
   &:first-of-type {
     &:before {

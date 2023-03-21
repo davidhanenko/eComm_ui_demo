@@ -37,8 +37,8 @@ export default function UserCart() {
         ref={node => setCartRefState(node)}
       >
         <GiShoppingCart onClick={toggleCart} />
+        <CartCount />
       </div>
-      <CartCount />
     </UserCartStyles>
   );
 }

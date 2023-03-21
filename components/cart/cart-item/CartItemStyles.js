@@ -3,10 +3,15 @@ import styled from 'styled-components';
 const CartItemStyles = styled.li`
   list-style: none;
   width: 100%;
-  padding: 1.5rem 2rem 1.5rem 1rem;
-  margin: 0 0 2rem 0;
+  padding: 2rem 2rem 2rem 1rem;
+  margin: 0 0 0rem 0;
   display: grid;
   grid-template-columns: auto 1fr auto;
+  border-bottom: 1px solid var(--blue5);
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 
   .item-img {
     padding: 0 2rem 0 1rem;
@@ -75,13 +80,24 @@ const CartItemStyles = styled.li`
       }
 
       .no-item-price {
+        display: inline;
         font-size: 1.5rem;
         line-height: 1.6rem;
         font-weight: 300;
+        margin-left: 1rem;
+
+        a {
+          color: var(--blue3);
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
       }
 
       @media (max-width: 650px) {
         font-size: 1.3rem;
+        padding-bottom: 0.5rem;
       }
     }
   }
@@ -100,6 +116,10 @@ const CartItemStyles = styled.li`
         }
       }
     }
+  }
+
+  @media (max-width: 650px) {
+    padding-bottom: 5rem;
   }
 `;
 

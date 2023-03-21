@@ -117,7 +117,7 @@ export default function ItemsMenu({}) {
       <ItemsMenuStyles
         isMenuOpen={isMenuOpen}
         btnClicked={btnClicked}
-      >
+      > 
         <div className='menu-header'>
           <MenuButtonStyles
             ref={btnRef}

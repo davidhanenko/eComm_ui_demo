@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const ItemsCategoryStyles = styled.div`
   padding: 5rem 3rem 10rem 3rem;
-  margin-top: var(--layoutHeaderHeight);
 
   .items-category-title {
     font-size: 2.5rem;

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const HeaderStyles = styled.header`
   background: var(--blue5);
   margin: 0;
-  /* padding: 0.7rem 0 0 0; */
   max-height: var(--navHeight);
   position: fixed;
   top: 0;

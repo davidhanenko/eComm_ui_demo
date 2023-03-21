@@ -8,10 +8,10 @@ import { useSession } from 'next-auth/react';
 import CartItem from './cart-item/CartItem';
 import { CartStyles } from './CartStyles';
 
-import emptyCartImg from '../../public/img/empty-cart.png';
 
 import Modal from './modal/Modal';
 import { MdClose } from 'react-icons/md';
+import EmptyCart from '../shared/EmptyCart';
 
 const USER_CART_QUERY = gql`
   query USER_CART_QUERY($id: ID!) {
@@ -206,20 +206,13 @@ export default function Cart() {
               ))}
             </ul>
           ) : (
-            <div className='cart-empty'>
-              <Image
-                src={emptyCartImg}
-                width={150}
-                height={150}
-              />
-              <p>Cart is empty</p>
-            </div>
+            <EmptyCart />
           )}
         </div>
         <footer>
           {totalCost > 0 && (
             <div className='cart-total'>
-              <p>Cart total - ${totalCost.toFixed(2)}</p>
+              <p>Cart subtotal - ${totalCost.toFixed(2)}</p>
               <sub>
                 Plus cost of items without a defined price{' '}
               </sub>

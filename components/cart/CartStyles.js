@@ -74,21 +74,12 @@ const CartStyles = styled.div`
   .cart-body {
     padding: 0 1rem;
     overflow-y: scroll;
+
+    border-top: 1px solid var(--blue3);
+    border-bottom: 1px solid var(--blue3);
     ul {
       padding: 0;
       margin: 0;
-    }
-
-    .cart-empty {
-      text-align: center;
-      padding-top: 5rem;
-
-      p {
-        font-size: 1.8rem;
-        font-weight: 300;
-        margin-top: 5rem;
-        color: var(--blue1);
-      }
     }
   }
 
@@ -99,7 +90,7 @@ const CartStyles = styled.div`
     padding: 2rem 2rem 4rem 2rem;
     font-size: 1.3rem;
     height: 10rem;
-    border-top: 1px solid var(--blue3);
+    /* border-top: 1px solid var(--blue3); */
 
     p {
       font-weight: 300;

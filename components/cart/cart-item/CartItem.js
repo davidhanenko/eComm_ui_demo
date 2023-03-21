@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   CartItemStyles,
   QtyControlStyles,
@@ -22,6 +27,7 @@ export default function CartItem({
 }) {
   const { cart, setCart, cartReload } = useCart();
   const [qty, setQty] = useState(quantity);
+  const router = useRouter();
 
   const { data, loading } = useQuery(ORDER_ITEM_QUERY, {
     variables: {
@@ -68,12 +74,22 @@ export default function CartItem({
 
   const handleQuantity = e => {
     const result = e.target.value.replace(/\D/g, '');
-
-    setQty(result <= 0 ? '' : result);
+    if (result <= 99) {
+      setQty(result <= 0 ? '' : result);
+    } else {
+      toast.error('25 items maximum allowed', {
+        autoClose: 3000,
+      });
+    }
   };
 
   const incQuantity = e => {
-    setQty(prev => ++prev);
+    if (qty === 99) {
+      toast.error('99 items maximum allowed', {
+        autoClose: 3000,
+      });
+    }
+    setQty(prev => (prev <= 98 ? ++prev : prev));
   };
 
   const decQuantity = e => {
@@ -93,6 +109,10 @@ export default function CartItem({
   const handleDelete = () => {
     setCart(cart?.filter(el => el?.cartId !== cartId));
   };
+
+  // const handleContactsRedirect = () => {
+
+  // }
 
   if (loading)
     return <ThreeDots type='ThreeDots' color='#B85C38' />;
@@ -161,6 +181,7 @@ export default function CartItem({
             </p>
           ) : (
             <p className='no-item-price'>
+              <a href={'/contacts'}>contact us</a>&nbsp;
               contact us about this item
             </p>
           )}

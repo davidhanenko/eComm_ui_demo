@@ -25,7 +25,6 @@ const NavStyles = styled.nav`
     place-self: end;
 
     @media (max-width: 850px) {
-
       padding: 3rem 0;
       overflow-y: scroll;
       position: fixed;
@@ -63,6 +62,7 @@ const NavStyles = styled.nav`
       letter-spacing: 2px;
       position: relative;
       transition: all 0.25s;
+      user-select: none;
       @media (hover: hover) {
         &:hover,
         &:focus {
@@ -71,10 +71,10 @@ const NavStyles = styled.nav`
         }
       }
       @media (max-width: 850px) {
+        border-bottom: 1px solid var(--blue4);
         margin: 1rem 2rem;
         padding: 0;
         width: 20rem;
-        border-bottom: 1px solid var(--blue4);
       }
     }
     *:focus {
@@ -100,10 +100,14 @@ const NavStyles = styled.nav`
     @media (max-width: 850px) {
       width: 100%;
       background: var(--gray);
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 2rem;
       position: absolute;
       top: var(--navHeightSm);
       left: 0;
+    }
+
+    @media (max-width: 550px) {
+      padding: 0.5rem 1rem;
     }
   }
 `;

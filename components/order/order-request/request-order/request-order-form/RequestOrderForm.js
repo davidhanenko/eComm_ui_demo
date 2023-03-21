@@ -39,6 +39,7 @@ export default function RequestOrderForm({
       isSubmitting,
       dirtyFields,
       isDirty,
+      isValid,
     },
   } = useForm({
     mode: 'onBlur',
@@ -223,7 +224,9 @@ export default function RequestOrderForm({
 
       <button
         type='submit'
-        disabled={isSubmitting || loading}
+        disabled={
+          !isDirty || !isValid || isSubmitting || loading
+        }
       >
         {isSubmitting || loading ? (
           <div>

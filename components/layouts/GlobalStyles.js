@@ -35,7 +35,7 @@ const GlobalStyles = createGlobalStyle`
     --navHeightSm: 70px;
     --searchHeight: 30px; 
     --menuHeight: 45px;
-    --menuTreeHeight: 25px;
+    --menuTreeHeight: 35px;
     --layoutHeaderHeight: calc(var(--navHeight) + var(--searchHeight) + var(--menuHeight) + var(--menuTreeHeight));  
     --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
 

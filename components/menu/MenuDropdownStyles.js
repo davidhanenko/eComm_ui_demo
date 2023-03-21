@@ -4,11 +4,14 @@ const DropdownStyles = styled.div`
   align-self: center;
   display: inline-block;
 
+  position: relative;
+
   .dropdown-btns-group {
-    @media (max-width: 850px) {
-      display: flex;
-      padding-top: 0.2rem;
-      padding-bottom: 0.2rem;
+    display: flex;
+    align-items: center;
+
+    .link-title {
+      padding: 0;
     }
   }
 `;
@@ -19,17 +22,35 @@ const DropdownBtnStyles = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
-  display: none;
 
-  @media (max-width: 850px) {
-    display: flex;
-    align-self: center;
-    position: fixed;
-    right: 2rem;
-  }
+  display: flex;
+
   svg {
     color: var(--gray);
-    transform: scale(2);
+    transform: scale(1.3);
+    margin-left: 0.3rem;
+  }
+
+  @media (max-width: 650px) {
+    position: fixed;
+    right: 2rem;
+    border: 0.1px solid var(--blue4);
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    transition: all 0.2s;
+
+    svg {
+      margin: 0;
+      height: 100%;
+    }
+
+    &:hover {
+      background: var(--blue4);
+    }
   }
 `;
 
@@ -38,32 +59,37 @@ const DropdownMenuStyles = styled.ul`
   opacity: 0;
   z-index: 5;
   display: none;
-  height: 0;
+  width: 250px;
   visibility: hidden;
-  transition: all 0.25s;
+  padding-bottom: 2rem;
 
   ${props =>
     props.dropdownOpen &&
-    `opacity: 1; visibility: visible; display: block; max-height: 100%;`}
+    `opacity: 1; visibility: visible; display: flex; flex-direction: column;`}
 
-  @media (min-width: 850px) {
-    overflow-y: hidden;
+  @media (min-width: 650px) {
     background: var(--blue3);
+    box-shadow: 1px 3px 8px 1px var(--blue3);
+    opacity: 0;
+
     margin-top: 0.5rem;
     min-height: 25rem;
-    height: fit-content;
-    width: 30vw;
+    width: 220px;
+    padding: 2rem 2rem 3rem 2rem;
+
     position: absolute;
-    padding: 2rem 5rem 3rem 3rem;
-    opacity: 0;
     visibility: hidden;
     transform: translateY(10%);
-    display: block;
-    box-shadow: 1px 3px 15px 1px var(--darkBlue);
+    right: 0;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+
+    transition: all 0.2s;
 
     ${props =>
       props.dropdownOpen &&
-      `visibility: visible; opacity: 0.97; transform: translateY(-2%);`}
+      `visibility: visible; opacity: 0.96; transform: translateY(-2%);`}
   }
 
   .no-items {
@@ -74,19 +100,26 @@ const DropdownMenuStyles = styled.ul`
 `;
 
 const DropdownItemStyles = styled.li`
-  list-style: '-';
+  list-style: none;
   font-weight: 300;
   text-transform: capitalize;
   cursor: pointer;
-  line-height: 1.6rem;
-  padding: 0.6rem;
-  transition: all 0.25s;
+  margin: 0.7rem 0;
+  padding-bottom: 0.5rem;
+
+  transition: all 0.2s;
+
+  width: 100%;
+  border-bottom: 1px solid var(--blue5);
+
   a {
     text-decoration: none;
     color: var(--dark);
     font-size: 1.4rem;
-    transition: all 0.25s;
+    display: block;
+    transition: all 0.2s;
   }
+
   @media (hover: hover) {
     &:hover {
       color: var(--offWhite);

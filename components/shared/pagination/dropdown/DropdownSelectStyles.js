@@ -4,7 +4,7 @@ const DropdownSelectStyles = styled.div`
   display: inline;
   margin-left: 1rem;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 
   #sort-btn {
     cursor: pointer;
