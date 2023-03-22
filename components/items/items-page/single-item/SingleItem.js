@@ -4,7 +4,7 @@ import ReactMarkdown from 'react-markdown';
 
 import { SingleItemStyles } from './SingleItemStyles';
 import ImagesSlider from '../../../shared/sliders/images-slider/ImagesSlider';
-import placeholderImg from '../../../../public/img/1px.png';
+
 import ItemPlaceholder from '../../../shared/placeholders/SingleItemPlaceholder';
 import ItemDetails from './item-details/ItemDetails';
 

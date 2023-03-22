@@ -76,7 +76,6 @@ export function ChangePassword() {
       reset();
       router.push(`/auth/account/${session?.id}`);
     } catch (err) {
-      console.log(err);
       toast.error(
         'An unexpected error happen, please check your credentials and try again',
         {

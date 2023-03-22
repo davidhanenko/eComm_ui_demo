@@ -60,7 +60,6 @@ export function ForgotPswdReq() {
         reset();
       }
     } catch (err) {
-      console.log(err);
       toast.error(
         'An unexpected error happen, please try again ',
         {

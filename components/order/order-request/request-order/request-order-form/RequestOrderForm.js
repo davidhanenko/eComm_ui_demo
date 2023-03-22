@@ -91,7 +91,7 @@ export default function RequestOrderForm({
       toast.error(
         'An unexpected error occurred, please refresh the page and try again'
       );
-      console.log(err.message);
+
     }
   };
 

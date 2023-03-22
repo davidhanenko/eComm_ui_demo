@@ -33,10 +33,10 @@ export default function FooterLinks() {
           <Link href={'/'}>home</Link>
         </LinkStyles>
         <LinkStyles>
-          <Link href={'/about'}>about</Link>
+          <Link href={'/about'}>about us</Link>
         </LinkStyles>
         <LinkStyles>
-          <Link href={'/contacts'}>contacts</Link>
+          <Link href={'/contacts'}>contacts us</Link>
         </LinkStyles>
         {links &&
           links?.length > 0 &&
@@ -44,7 +44,7 @@ export default function FooterLinks() {
             <LinkStyles key={link?.id}>
               <Link href={`${link?.attributes?.link}`}>
                 <a target='_blank' rel='noreferrer'>
-                  {link?.attributes?.title}
+                  Our {link?.attributes?.title} store
                 </a>
               </Link>
             </LinkStyles>

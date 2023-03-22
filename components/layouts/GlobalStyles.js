@@ -30,6 +30,7 @@ const GlobalStyles = createGlobalStyle`
     --orange: #B85C38;
   
     --maxWidth: 1400px;
+    --midWidth: 1200px;
     --minWidth: 850px;          
     --navHeight: 100px;
     --navHeightSm: 70px;
@@ -37,7 +38,8 @@ const GlobalStyles = createGlobalStyle`
     --menuHeight: 45px;
     --menuTreeHeight: 35px;
     --layoutHeaderHeight: calc(var(--navHeight) + var(--searchHeight) + var(--menuHeight) + var(--menuTreeHeight));  
-    --bs: 0 12px 24px 0 rgba(0,0,0,0.09);
+    --bs: 0 4px 10px 0 rgba(0,0,0,0.15);
+    --bsGray: rgba(0,0,0,0.15);
 
     --goToTopZ: 5;
 

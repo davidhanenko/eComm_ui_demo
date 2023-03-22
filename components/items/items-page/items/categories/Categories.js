@@ -46,7 +46,7 @@ export default function Categories({
   const categories = data?.itemsCategories?.data;
 
   return loading ? (
-    <LoaderContainer height={'5rem'} />
+    <LoaderContainer height={'300px'} />
   ) : (
     <CategoriesStyles>
       <Link

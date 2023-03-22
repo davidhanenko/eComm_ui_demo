@@ -3,14 +3,16 @@ import { useQuery } from '@apollo/client';
 
 import { ToastContainer } from 'react-toastify';
 
-import HeadLine from './headline/HeadLine';
 import EmailForm from './email-form/EmailForm';
 import Map from './map/Map';
-import { ContactsStyles } from './ContactsStyles';
+import {
+  ContactsInfoStyles,
+  ContactsStyles,
+} from './ContactsStyles';
 import LoaderContainer from '../shared/loaders/loader-container/LoaderContainer';
 
-const CONTACT_FORM_QUERY = gql`
-  query CONTACT_FORM_QUERY {
+const CONTACTS_QUERY = gql`
+  query CONTACTS_QUERY {
     contact {
       data {
         id
@@ -19,6 +21,10 @@ const CONTACT_FORM_QUERY = gql`
           telephone2
           email
           email2
+          addressLine1
+          addressLine2
+          hours
+          hours2
           headline: headlineHead
           headlineText
         }
@@ -28,21 +34,20 @@ const CONTACT_FORM_QUERY = gql`
 `;
 
 export default function Contacts() {
-  const { data, loading } = useQuery(CONTACT_FORM_QUERY);
+  const { data, loading } = useQuery(CONTACTS_QUERY);
 
-  const emailTo =
-    data?.contact?.data?.attributes?.email2;
-  const headline =
-    data?.contact?.data?.attributes?.headline;
-  const headlineText =
-    data?.contact?.data?.attributes?.headlineText;
+  const contacts = data?.contact?.data?.attributes;
 
-    
-    if (loading)
+  const emailTo = contacts?.email2;
+  const headline = contacts?.headline;
+  const headlineText = contacts?.headlineText;
+
+
+  if (loading)
     return (
       <ContactsStyles>
         {' '}
-        <LoaderContainer height={'10rem'} />;
+        <LoaderContainer height={'80vh'} />;
       </ContactsStyles>
     );
 
@@ -55,14 +60,33 @@ export default function Contacts() {
         closeOnClick
         draggable
       />
-      <EmailForm emailTo={emailTo} />
-      <div className='map-container'>
-        <HeadLine
-          headline={headline}
-          headlineText={headlineText}
-        />
-        <Map />
+
+      <h2>Contact Us</h2>
+      <h3 className='head1'>{headline}</h3>
+      <p className='head2'>{headlineText}</p>
+      <div className='contacts-container'>
+        <EmailForm emailTo={emailTo} />
+
+        <ContactsInfoStyles>
+          <p className='phone'>{contacts?.telephone1}</p>
+          <p className='phone'>{contacts?.telephone2}</p>
+          <p className='email'>{contacts?.email}</p>
+
+          <hr />
+
+          <p className='address'>
+            {contacts?.addressLine1}
+          </p>
+          <p className='address'>
+            {contacts?.addressLine2}
+          </p>
+
+          <p className='hours'>{contacts?.hours}</p>
+          <p className='hours'>{contacts?.hours2}</p>
+        </ContactsInfoStyles>
       </div>
+
+      <Map />
     </ContactsStyles>
   );
 }

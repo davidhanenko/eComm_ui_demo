@@ -7,25 +7,12 @@ const EmailFormStyles = styled.form`
   display: flex;
   justify-content: center;
 
-  margin: 2rem;
-
-  h2 {
-    text-align: center;
-    font-size: 3rem;
-    padding-bottom: 2rem;
-    color: var(--dark);
-    font-weight: 400;
-    text-transform: uppercase;
-    background: transparent;
-  }
-
   .form {
     background: var(--white);
-    box-shadow: 0px 0px 3px 1px var(--blue5);
+    box-shadow: var(--bs);
 
-    padding: 2rem;
-    width: 100%;
-    max-width: 600px;
+    padding:3rem 2rem;
+    width: 450px;
 
     .input-field {
       border: 1px solid transparent;

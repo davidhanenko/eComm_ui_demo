@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const DropdownStyles = styled.div`
   align-self: center;
   display: inline-block;
-
   position: relative;
 
   .dropdown-btns-group {
@@ -57,11 +56,11 @@ const DropdownBtnStyles = styled.button`
 const DropdownMenuStyles = styled.ul`
   margin: 0;
   opacity: 0;
-  z-index: 5;
   display: none;
   width: 250px;
   visibility: hidden;
   padding-bottom: 2rem;
+  z-index: 5;
 
   ${props =>
     props.dropdownOpen &&
@@ -77,19 +76,20 @@ const DropdownMenuStyles = styled.ul`
     width: 220px;
     padding: 2rem 2rem 3rem 2rem;
 
-    position: absolute;
     visibility: hidden;
     transform: translateY(10%);
     right: 0;
     height: fit-content;
     display: flex;
     flex-direction: column;
-
+    position: absolute;
+    z-index: 5;
+    
     transition: all 0.2s;
 
     ${props =>
       props.dropdownOpen &&
-      `visibility: visible; opacity: 0.96; transform: translateY(-2%);`}
+      `visibility: visible; opacity: 0.98; transform: translateY(-2%);`}
   }
 
   .no-items {

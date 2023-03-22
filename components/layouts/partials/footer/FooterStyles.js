@@ -31,6 +31,13 @@ const FooterStyles = styled.footer`
     font-weight: 400;
     margin: 0;
     margin-bottom: 0.5rem;
+
+    border-bottom: 1px solid var(--blue5);
+    width: 50%;
+
+    @media (max-width: 600px) {
+      width: 100%;
+    }
   }
 
   p {
@@ -69,30 +76,11 @@ const FooterServicesStyles = styled.section`
   ul {
     padding: 0;
   }
-
- 
 `;
 
-const FooterContactsStyles = styled.section`
-  p {
-    font-size: 1.4rem;
-
-    &:first-of-type,
-    &:last-of-type {
-      font-size: 1.7rem;
-    }
-  }
-
-  hr {
-    margin: 2rem 0;
-    height: 1px;
-    border: none;
-    background-color: var(--blue4);
-    width: 100%;
-  }
-
-  .hours {
-    margin-top: 2rem;
+const FooterInfoStyles = styled.section`
+  ul {
+    padding: 0;
   }
 `;
 
@@ -124,7 +112,7 @@ const FooterSocialStyles = styled.section`
 export {
   FooterStyles,
   LinkStyles,
-  FooterContactsStyles,
+  FooterInfoStyles,
   FooterSocialStyles,
   FooterLinksStyles,
   FooterServicesStyles,

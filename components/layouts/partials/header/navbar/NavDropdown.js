@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -19,6 +21,50 @@ import {
   DropdownMenuStyles,
   NavDropdownStyles,
 } from './NavDropdownStyles';
+
+const SERVICE_NAV_QUERY = gql`
+  query SERVICE_NAV_QUERY($service: String!) {
+    services(filters: { service: { eqi: $service } }) {
+      data {
+        id
+        attributes {
+          service
+          items {
+            data {
+              id
+              attributes {
+                title
+                category: items_categories {
+                  data {
+                    id
+                    attributes {
+                      categoryTitle
+                      singleItem: single_items {
+                        data {
+                          id
+                          attributes {
+                            image {
+                              data {
+                                id
+                                attributes {
+                                  url
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 // navbar dropdown item
 const DropdownItem = React.forwardRef(
@@ -69,10 +115,15 @@ const NavDropdown = React.forwardRef(function NavDropdown(
   const { navOpen } = useNav();
   const { width } = useWindowDimensions();
 
-  const router = useRouter();
+  const { data, loading } = useQuery(SERVICE_NAV_QUERY, {
+    variables: {
+      service: props.serviceTitle,
+    },
+  });
 
-  //  props from Nav
-  const { href, title, items } = props;
+  const service = data?.services?.data[0]?.attributes;
+
+  const router = useRouter();
 
   const showDropdown = () => setDropdownOpen(!dropdownOpen);
 
@@ -101,15 +152,16 @@ const NavDropdown = React.forwardRef(function NavDropdown(
         onMouseOver={handleMouseEnter}
       >
         <a
-          href={href}
+          href={`/${service?.service}`}
           ref={ref}
           className={
-            router.asPath.split('/')[1] === title
+            router.asPath.split('/')[1] ===
+            props.serviceTitle
               ? 'active-link'
               : ''
           }
         >
-          {title}
+          {props.serviceTitle}
         </a>
         <DropdownBtnStyles
           type='button'
@@ -127,10 +179,10 @@ const NavDropdown = React.forwardRef(function NavDropdown(
 
       {
         <DropdownMenuStyles isDropdownOpen={dropdownOpen}>
-          {items?.map(item => (
+          {service?.items?.data?.map(item => (
             <Link
               href={{
-                pathname: `/${title}/[items]`,
+                pathname: `/${service?.service}/[items]`,
                 query: {
                   items: item?.attributes?.title,
                 },
@@ -150,6 +202,3 @@ const NavDropdown = React.forwardRef(function NavDropdown(
 });
 
 export default NavDropdown;
-
-
-

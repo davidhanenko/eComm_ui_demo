@@ -5,6 +5,8 @@ const NavDropdownStyles = styled.div`
   align-self: center;
   width: 100%;
   .dropdown-btns-group {
+    
+    cursor: pointer;
     @media (max-width: 850px) {
       display: flex;
     }

@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
 import Link from 'next/link';
 import Hamburger from 'hamburger-react';
 
@@ -14,56 +12,7 @@ import { TOGGLE_WIDTH } from '../../../../../config';
 import Search from '../../../../search/Search';
 import UserCart from './user-cart/UserCart';
 
-const SERVICES_NAV_QUERY = gql`
-  query SERVICES_NAV_QUERY {
-    services {
-      data {
-        id
-        attributes {
-          service
-          items {
-            data {
-              id
-              attributes {
-                title
-                category: items_categories {
-                  data {
-                    id
-                    attributes {
-                      categoryTitle
-                      singleItem: single_items {
-                        data {
-                          id
-                          attributes {
-                            image {
-                              data {
-                                id
-                                attributes {
-                                  url
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
 export default function Nav(props) {
-  const { data, loading } = useQuery(SERVICES_NAV_QUERY);
-
-  // services to spread in nav
-  const services = data?.services?.data;
-
   const navRef = useRef(null);
 
   const {
@@ -148,27 +97,26 @@ export default function Nav(props) {
         ref={navRef}
       >
         <div className='nav-links'>
-          {services?.map(service => (
-            <Link
-              key={service.id}
-              href={`/${service?.attributes?.service}`}
-              passHref
-            >
-              <NavDropdown
-                title={service?.attributes?.service}
-                items={service?.attributes?.items?.data}
-              />
-            </Link>
-          ))}
+          <Link href='/products'>
+            <NavDropdown serviceTitle='products' />
+          </Link>
+
+          <Link href='/tools'>
+            <NavDropdown serviceTitle='tools' />
+          </Link>
+
           <Link href='/' passHref>
             <LinkBtn title={'home'} page={''} />
           </Link>
           <Link href='/about' passHref>
-            <LinkBtn title={'about'} page={'about'} />
+            <LinkBtn title={'about us'} page={'about'} />
           </Link>
 
           <Link href='/contacts' passHref>
-            <LinkBtn title={'contacts'} page={'contacts'} />
+            <LinkBtn
+              title={'contact us'}
+              page={'contacts'}
+            />
           </Link>
         </div>
         <NavButtonStyles

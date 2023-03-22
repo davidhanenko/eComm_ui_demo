@@ -75,7 +75,6 @@ export default function EmailForm({ emailTo }) {
       onSubmit={handleSubmit(onSubmitForm)}
     >
       <div className='form'>
-        <h2>Contact Us</h2>
 
         <fieldset className='input-field'>
           <label
