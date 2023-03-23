@@ -1,49 +1,75 @@
 import styled from 'styled-components';
 
 const SingleItemStyles = styled.div`
-  margin-top: 10rem;
-  display: flex;
-  flex-wrap: wrap;
-  @media (max-width: 720px) {
-    flex-direction: column;
-    margin: 10rem 0;
+  padding: 12rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @media (max-width: 700px) {
+    display: block;
+    padding: 8rem 0;
   }
 
   .item-image-container {
-    max-width: 450px;
-    max-height: 450px;
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     padding: 3rem;
-    text-transform: uppercase;
-    flex: 1 1 0;
-    position: relative;
 
-    .not-available {
-      position: absolute;
-      right: 0rem;
-      top: 8rem;
-      text-transform: uppercase;
-      color: var(--orange);
-      background-color: var(--lightGray);
-      transform: rotate(45deg);
-      padding: 0 3rem;
-      z-index: 2;
+    .item-image {
+      width: 100%;
+      height: 100%;
+      max-width: 400px;
+      max-height: 400px;
+    }
 
-      @media (max-width: 576px) {
-        font-size: 1.2rem;
+    .availability {
+      width: 100%;
+      border: 1px solid var(--lightGray);
+      padding: 0.5rem 1rem;
+      margin-top: 3rem;
+      text-transform: capitalize;
+
+      display: flex;
+      justify-content: space-between;
+
+      .not-available {
+        display: flex;
+        align-items: center;
+        font-size: 1.6rem;
+
+        svg {
+          font-size: 2.5rem;
+          margin-right: 1rem;
+          color: var(--red);
+        }
+      }
+
+      .is-available {
+        display: flex;
+        align-items: center;
+        font-size: 1.6rem;
+
+        svg {
+          font-size: 2.5rem;
+          margin-right: 1rem;
+          color: var(--green);
+        }
+      }
+
+      .available-quantity {
       }
     }
   }
 
   .item-description-container {
-    max-width: 50%;
-    padding: 0 5rem 0 1rem;
+    padding: 3rem;
     flex: 1 1 0;
 
     .single-item-title {
-      font-size: 2.5rem;
+      font-size: 2.2rem;
       font-weight: 400;
       text-align: start;
       text-transform: capitalize;

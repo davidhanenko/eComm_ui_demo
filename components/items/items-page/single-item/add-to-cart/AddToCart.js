@@ -14,6 +14,7 @@ export default function AddToCart({
   type,
   typeValue,
   link,
+  qty,
 }) {
   const { cart, setCart } = useCart();
 
@@ -48,9 +49,11 @@ export default function AddToCart({
         ]);
   };
 
+  console.log(qty);
+
   return (
     <AddToCartStyles>
-      <button onClick={handleAdd}>
+      <button onClick={handleAdd} disabled={qty === 0}>
         add to <GiShoppingCart className='cart-icon' />{' '}
       </button>
     </AddToCartStyles>

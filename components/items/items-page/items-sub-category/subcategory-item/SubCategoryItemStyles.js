@@ -1,29 +1,41 @@
 import styled from 'styled-components';
 
 const SubCategoryItemStyles = styled.div`
-  padding: 1rem;
+  border: 1px solid var(--lightGray1);
+  box-shadow: var(--bs);
+  display: grid;
 
-  .subcategory-title {
-    color: var(--blue2);
-    font-weight: 400;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-    padding: 0rem 0 1.5rem 0;
-    margin: 0;
-    transition: all 0.25s;
+  transition: all 0.25s;
 
-    @media (max-width: 600px) {
-      font-size: 1.3rem;
+  a {
+    min-width: 100%;
+    min-height: 100%;
+    padding: 2rem;
+
+    .subcategory-title {
+      color: var(--blue2);
+      font-weight: 400;
+      font-size: 1.6rem;
+      text-transform: capitalize;
+      letter-spacing: 0.5px;
+      transition: all 0.25s;
+
+      @media (max-width: 600px) {
+        font-size: 1.3rem;
+      }
+    }
+
+    .sub-image {
+      transition: all 0.25s;
     }
   }
 
-  .sub-image {
-    transition: all 0.25s;
-  }
   @media (hover: hover) {
     &:hover {
+      box-shadow: var(--bsHover);
+
       .subcategory-title {
-        color: var(--blue4);
+        letter-spacing: 0.1px;
       }
 
       .sub-image {
@@ -31,6 +43,7 @@ const SubCategoryItemStyles = styled.div`
       }
     }
   }
+
   .no-item {
     position: relative;
     width: 100%;

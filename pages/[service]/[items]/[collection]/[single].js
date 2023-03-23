@@ -19,10 +19,11 @@ export const SINGLE_ITEM_QUERY = gql`
           price
           size
           description
-          available
+          isAvailable: is_available
           minPrice
           callForPrice
           storeLink
+          quantity
           sizePrice {
             ... on ComponentItemDetailsItemDetails {
               id
@@ -30,6 +31,7 @@ export const SINGLE_ITEM_QUERY = gql`
               price
               type
               value: type_value
+              quantity
             }
           }
           image {

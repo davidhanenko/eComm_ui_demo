@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { SubCategoryItemStyles } from './SubCategoryItemStyles';
 import placeholderImg from '../../../../../public/img/1px.png';
+import LoaderContainer from '../../../../shared/loaders/loader-container/LoaderContainer';
 
 const SUBCATEGORY_ITEMS_QUERY = gql`
   query SUBCATEGORY_ITEMS_QUERY($itemsCategory: String!) {
@@ -60,7 +61,11 @@ export default function SubCategoryListItem({
   const subCategoryItem =
     data?.singleItems?.data[0]?.attributes;
 
-  return (
+  return loading ? (
+    <SubCategoryItemStyles>
+      <LoaderContainer height={'250px'} />
+    </SubCategoryItemStyles>
+  ) : (
     <SubCategoryItemStyles>
       <Link
         href={{

@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
     --orange: #B85C38;
     --gray: #423F3E;
     --lightGray: #a7a7a7;
+    --lightGray1: #d6ded1;
     --red: #cb4154;
 
     --green: #84bd28;
@@ -38,7 +39,11 @@ const GlobalStyles = createGlobalStyle`
     --menuHeight: 45px;
     --menuTreeHeight: 35px;
     --layoutHeaderHeight: calc(var(--navHeight) + var(--searchHeight) + var(--menuHeight) + var(--menuTreeHeight));  
-    --bs: 0 4px 10px 0 rgba(0,0,0,0.15);
+
+    --bs: 0 4px 10px 0 #43704a40;
+    --bs2: 0 2px 8px 0 rgba(0,0,0,0.15);
+    --bs3: 0 2px 8px 3px rgba(0,0,0,0.15);
+    --bsHover: 0 2px 6px 0 #43704a30;
     --bsGray: rgba(0,0,0,0.15);
 
     --goToTopZ: 5;

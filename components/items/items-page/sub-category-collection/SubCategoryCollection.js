@@ -6,7 +6,6 @@ import Head from 'next/head';
 import { usePagination } from '../../../../context/paginationState';
 import capitalizeStr from '../../../../helpers/capitalizeStr';
 
-
 import { SubCategoryCollectionStyles } from './SubCategoryCollectionStyles';
 import CollectionItem from './collection-item/CollectionItem';
 
@@ -32,7 +31,7 @@ const ITEMS_SUBCATEGORY_COLLECTION_QUERY = gql`
           itemTitle
           price
           description
-          available
+          isAvailable: is_available
           image {
             data {
               id
@@ -76,7 +75,6 @@ export default function SubCategoryCollection({
       },
     }
   );
-
 
   const collectionItems = data?.singleItems?.data;
 

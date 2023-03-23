@@ -31,12 +31,12 @@ const ItemDetailsStyles = styled.div`
       margin-right: 1rem;
       text-transform: capitalize;
       font-weight: 400;
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
   }
 
   .available-sizes {
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: var(--dark);
     font-weight: 400;
     margin: 0;
@@ -44,7 +44,7 @@ const ItemDetailsStyles = styled.div`
   .size-input-btn {
     font-size: 1.5rem;
     font-weight: 300;
-    margin: 0.5rem 0.5rem 2rem 0.5rem;
+    margin: 0.5rem 1rem 2rem 0rem;
     padding: 1rem 2rem;
     border: none;
     background: var(--blue3);
