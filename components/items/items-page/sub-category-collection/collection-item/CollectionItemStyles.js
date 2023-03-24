@@ -30,6 +30,13 @@ const CollectionItemStyles = styled.div`
       }
     }
 
+    hr {
+      height: 1px;
+      border: none;
+      background-color: var(--green);
+      transition: all 0.25s;
+    }
+
     .collection-item-title {
       text-transform: capitalize;
       color: var(--gray);
@@ -50,6 +57,10 @@ const CollectionItemStyles = styled.div`
   @media (hover: hover) {
     &:hover {
       box-shadow: var(--bsHover);
+
+      hr {
+        transform: scaleX(0.95);
+      }
       .collection-item-title {
         letter-spacing: 0.1px;
       }

@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const SingleItemStyles = styled.div`
-  padding: 12rem 0;
+  padding: 6rem 0 10rem 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
 
   @media (max-width: 700px) {
     display: block;
-    padding: 8rem 0;
+    padding: 2rem 0 10rem 0;
   }
 
   .item-image-container {
@@ -28,38 +28,36 @@ const SingleItemStyles = styled.div`
     .availability {
       width: 100%;
       border: 1px solid var(--lightGray);
-      padding: 0.5rem 1rem;
+      padding: 0rem 1rem;
       margin-top: 3rem;
       text-transform: capitalize;
 
-      display: flex;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: auto auto auto;
 
-      .not-available {
-        display: flex;
-        align-items: center;
-        font-size: 1.6rem;
-
-        svg {
-          font-size: 2.5rem;
-          margin-right: 1rem;
-          color: var(--red);
-        }
+      @media (max-width: 900px) {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .is-available {
-        display: flex;
-        align-items: center;
-        font-size: 1.6rem;
-
-        svg {
-          font-size: 2.5rem;
-          margin-right: 1rem;
-          color: var(--green);
-        }
+      .red-times {
+        font-size: 2.5rem;
+        margin-right: 0.5rem;
+        color: var(--red);
       }
 
-      .available-quantity {
+      .green-check {
+        font-size: 2.2rem;
+        margin-right: 0.5rem;
+        color: var(--green);
+      }
+
+      .is-available,
+      .not-available,
+      .available-pickup,
+      .available-delivery {
+        display: flex;
+        align-items: center;
+        font-size: 1.4rem;
       }
     }
   }

@@ -91,6 +91,7 @@ export default function SubCategoryListItem({
               placeholder='blur'
               blurDataURL={placeholderImg}
             />
+            <hr />
             <h4 className='subcategory-title'>
               {subCategoryTitle}
             </h4>
@@ -103,6 +104,7 @@ export default function SubCategoryListItem({
               height={150}
               alt='image coming soon'
             />
+
             <h4 className='subcategory-title'>
               {subCategoryTitle}
             </h4>

@@ -20,6 +20,8 @@ export const SINGLE_ITEM_QUERY = gql`
           size
           description
           isAvailable: is_available
+          inStore: pickup_in_store
+          isDelivery: available_for_delivery
           minPrice
           callForPrice
           storeLink

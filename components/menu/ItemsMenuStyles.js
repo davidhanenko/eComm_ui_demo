@@ -60,7 +60,7 @@ const ItemsMenuStyles = styled.div`
   }
   .side-menu-links {
     background: var(--blue3);
-    box-shadow: 1px 1px 4px 1px var(--blue3);
+    box-shadow: 1px 1px 4px 0px var(--blue3);
     display: none;
     position: absolute;
     width: 300px;
@@ -69,7 +69,7 @@ const ItemsMenuStyles = styled.div`
     transform: translateX(-100%);
     transition: all 0.25s;
     z-index: 5;
-    top: calc(100% + var(--menuTreeHeight));
+    top: 100%;
     left: 0;
 
     ${props =>

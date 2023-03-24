@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 
-import { AiOutlineCheckCircle } from 'react-icons/ai';
+import { FaRegCheckCircle } from 'react-icons/fa';
 import { FaRegTimesCircle } from 'react-icons/fa';
 
 import { SingleItemStyles } from './SingleItemStyles';
@@ -77,21 +77,37 @@ export default function SingleItem({ singleItem, link }) {
           {singleItem?.attributes?.isAvailable === false ||
           qty === 0 ? (
             <div className='not-available'>
-              <FaRegTimesCircle /> <p> not available</p>
+              <FaRegTimesCircle className='red-times' />{' '}
+              <p> not available</p>
             </div>
           ) : (
             <div className='is-available'>
               {' '}
-              <AiOutlineCheckCircle /> <p>In Stock</p>
+              <FaRegCheckCircle className='green-check' />{' '}
+              <p>In Stock</p>
             </div>
           )}
 
-          <div className='available-quantity'>
-            {(qty === 0 || qty > 0) && (
-              <p>items available - {qty}</p>
-            )}
+          <div className='available-pickup'>
+            {!singleItem?.attributes?.inStore ? (
+              <FaRegTimesCircle className='red-times' />
+            ) : (
+              <FaRegCheckCircle className='green-check' />
+            )}{' '}
+            <p>pickup in store</p>
+          </div>
 
-            {/* {qty > 0 && <p>items available - {qty}</p>} */}
+          <div className='available-delivery'>
+            {singleItem?.attributes?.isDelivery && (
+              <div>
+                singleItem?.attributes?.isDelivery === false
+                ? (
+                <FaRegTimesCircle className='red-times' />
+                ) : (
+                <FaRegCheckCircle className='green-check' />
+                )<p>available for delivery</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

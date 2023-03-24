@@ -5,10 +5,6 @@ const MenuTreeStyles = styled.ul`
   margin: 0;
   padding: 0.7rem 3rem;
 
-  display: flex;
-  align-items: center;
-
-  height: var(--menuTreeHeight);
 `;
 
 const TreeNodeStyles = styled.li`
@@ -35,7 +31,7 @@ const TreeNodeStyles = styled.li`
   }
   &:before {
     content: '/';
-    margin:0 0.5rem;
+    margin: 0 0.5rem;
   }
   &:first-of-type {
     &:before {

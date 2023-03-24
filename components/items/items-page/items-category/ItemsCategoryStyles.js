@@ -34,10 +34,10 @@ const ItemsCategoryStyles = styled.div`
       auto-fill,
       minmax(250px, 1fr)
     );
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       grid-template-columns: repeat(
         auto-fill,
-        minmax(135px, 1fr)
+        minmax(150px, 1fr)
       );
     }
   }

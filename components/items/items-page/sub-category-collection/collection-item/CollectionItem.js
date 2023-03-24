@@ -43,6 +43,9 @@ export default function CollectionItem({
             placeholder='blur'
             blurDataURL={placeholderImg}
           />
+          
+          <hr />
+
           <h4 className='collection-item-title'>
             {item?.itemTitle}
           </h4>

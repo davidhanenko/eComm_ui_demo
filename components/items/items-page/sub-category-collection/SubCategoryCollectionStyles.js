@@ -3,9 +3,7 @@ import styled from 'styled-components';
 const SubCategoryCollectionStyles = styled.div`
   padding: 5rem 5rem;
 
-  @media (min-width: 850px) {
-    /* margin-top: var(--layoutHeaderHeight); */
-  }
+
   @media (max-width: 500px) {
     padding: 5rem 1rem;
   }
@@ -44,7 +42,7 @@ const SubCategoryCollectionStyles = styled.div`
     @media (max-width: 500px) {
       grid-template-columns: repeat(
         auto-fill,
-        minmax(135px, 1fr)
+        minmax(150px, 1fr)
       );
     }
   }

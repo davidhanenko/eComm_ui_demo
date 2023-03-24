@@ -12,8 +12,15 @@ const SubCategoryItemStyles = styled.div`
     min-height: 100%;
     padding: 2rem;
 
+    hr {
+      height: 1px;
+      border: none;
+      background-color: var(--green);
+      transition: all 0.25s;
+    }
+
     .subcategory-title {
-      color: var(--blue2);
+      color: var(--gray);
       font-weight: 400;
       font-size: 1.6rem;
       text-transform: capitalize;
@@ -33,6 +40,9 @@ const SubCategoryItemStyles = styled.div`
   @media (hover: hover) {
     &:hover {
       box-shadow: var(--bsHover);
+      hr {
+        transform: scale(0.95);
+      }
 
       .subcategory-title {
         letter-spacing: 0.1px;
