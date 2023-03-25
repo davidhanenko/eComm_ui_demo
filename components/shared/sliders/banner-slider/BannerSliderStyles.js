@@ -59,14 +59,13 @@ const BannerSliderStyles = styled.div`
     top: 50%;
     transform: translateY(-50%);
     border: 0;
-    width: 30px;
-    height: 30px;
-    transition: all 0.3s;
+    width: 25px;
+    height: 25px;
     justify-content: center;
     align-items: center;
     transform: scale(0);
     fill: transparent;
-    transition: all 0.3s;
+    transition: all 0.25s;
     padding: 0;
   }
 

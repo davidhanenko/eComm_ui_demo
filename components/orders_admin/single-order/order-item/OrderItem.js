@@ -98,6 +98,13 @@ export default function OrderItem({ item, index }) {
               Price not available
             </p>
           )}
+          {item?.price ? (
+            <p>Total - ${(item?.price * item?.quantity).toFixed(2)}</p>
+          ) : (
+            <p className='price-not-available'>
+              Price not available
+            </p>
+          )}
         </div>
       </div>
     </OrderItemStyles>

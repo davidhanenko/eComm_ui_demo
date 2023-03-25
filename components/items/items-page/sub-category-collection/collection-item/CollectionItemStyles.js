@@ -5,6 +5,7 @@ const CollectionItemStyles = styled.div`
   text-align: center;
   border: 1px solid var(--lightGray1);
   box-shadow: var(--bs);
+  background: var(--white);
   display: grid;
 
   transition: all 0.25s;

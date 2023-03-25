@@ -2,17 +2,18 @@ import styled from 'styled-components';
 
 const SigninStyles = styled.div`
   width: 450px;
-  margin: 18rem auto;
+  margin: 15rem auto;
   text-align: center;
   min-height: 50vh;
 
-  box-shadow: 0px 0px 3px 1px var(--blue5);
-  padding: 5rem 3rem;
+  box-shadow: 0px 0px 3px 1px var(--green);
+  padding: 2rem;
 
   h3 {
     font-size: 2.5rem;
     color: var(--blue3);
     font-weight: 400;
+    margin: 0;
   }
 
   @media (max-width: 800px) {
@@ -25,10 +26,10 @@ const SigninStyles = styled.div`
   }
 
   .divider {
-    margin: 3rem auto;
+    margin: 2rem auto;
     position: relative;
     width: 80%;
-    color: var(--blue3);
+    color: var(--green);
 
     &::before {
       content: '';
@@ -37,7 +38,7 @@ const SigninStyles = styled.div`
       left: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue5);
+      background-color: var(--green);
     }
     &::after {
       content: '';
@@ -46,7 +47,7 @@ const SigninStyles = styled.div`
       right: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue5);
+      background-color: var(--green);
     }
   }
 `;
@@ -88,12 +89,12 @@ const GoogleBtnStyles = styled.button`
 `;
 
 const FormStyles = styled.form`
-  margin-top: 3rem;
+  margin-top: 2rem;
 
   fieldset {
     border: 1px solid transparent;
     outline: none;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     padding: 0 2rem;
     position: relative;
 

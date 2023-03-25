@@ -51,10 +51,7 @@ function OrdersItem({ order }) {
             {localDate} &nbsp; {localTime}
           </p>
           <div>
-            <p>
-              Total charge - $
-              {orderDetails?.totalCharge.toFixed(2)}
-            </p>
+            <p>Total charge - ${orderDetails?.charge}</p>
             <p>Items - {orderDetails?.totalItems}</p>
           </div>
 

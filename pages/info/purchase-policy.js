@@ -5,12 +5,10 @@ export default function PurchasePolicyPage(props) {
 }
 
 export async function getStaticProps() {
-  const layout = 'main';
-  const page = 'purchase_policy';
   return {
     props: {
-      layout,
-      page,
+      layout: 'main',
+      page: 'purchase_policy',
     },
   };
 }

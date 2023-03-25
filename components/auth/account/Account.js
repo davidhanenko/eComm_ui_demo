@@ -1,13 +1,23 @@
+import Link from 'next/link';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 
 import { useSession } from 'next-auth/react';
-import Link from 'next/link';
 
 import {
   AccountStyles,
-  OrderItemStyles,
+  SingleOrderStyles,
 } from './AccountStyles';
+import LoaderContainer from '../../shared/loaders/loader-container/LoaderContainer';
+
+import Order from './order/Order';
 
 const USER_QUERY = gql`
   query USER_QUERY($id: ID!) {
@@ -44,10 +54,36 @@ export default function Account({ id }) {
     },
   });
 
+  const [currentOrder, setCurrentOrder] = useState(-1);
+
+  const orderRef = useRef(null);
+
   const { data: session } = useSession();
+  const router = useRouter();
 
   const user = data?.usersPermissionsUser?.data;
   const orders = user?.attributes?.orders?.data;
+
+  if (user && parseInt(user?.id) !== session?.id) {
+    router.push('/');
+  }
+
+  const handleOrderSelect = e => {
+    setCurrentOrder(
+      orders?.find(el => el.id === e.target.dataset.id)
+    );
+  };
+
+  useEffect(() => {
+    orderRef?.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    });
+  }, [currentOrder, orderRef]);
+
+  if (loading) {
+    return <LoaderContainer height={'80vh'} />;
+  }
 
   return (
     <AccountStyles>
@@ -58,6 +94,8 @@ export default function Account({ id }) {
           information
         </p>
       </header>
+
+      <hr />
       <div className='account-container'>
         {parseInt(user?.id) === session?.id && (
           <>
@@ -85,22 +123,30 @@ export default function Account({ id }) {
             </section>
             <section className='orders'>
               <h4>Orders</h4>
-              {orders &&
-                orders?.map(order => (
-                  <OrderItem
-                    key={order?.id}
-                    order={order}
-                  />
-                ))}
+              <div className='orders-container'>
+                {orders &&
+                  orders?.map(order => (
+                    <SingleOrder
+                      key={order?.id}
+                      order={order}
+                      handleOrderSelect={handleOrderSelect}
+                    />
+                  ))}
+              </div>
             </section>
           </>
+        )}
+      </div>
+      <div ref={orderRef}>
+        {currentOrder !== -1 && (
+          <Order order={currentOrder} />
         )}
       </div>
     </AccountStyles>
   );
 }
 
-function OrderItem({ order }) {
+function SingleOrder({ order, handleOrderSelect }) {
   let orderDetails = order?.attributes?.order_details;
   let itemsDetails = order?.attributes?.items_details;
 
@@ -123,9 +169,14 @@ function OrderItem({ order }) {
   );
 
   return (
-    <OrderItemStyles>
+    <SingleOrderStyles>
+      <div
+        onClick={handleOrderSelect}
+        className='order-overlay'
+        data-id={order.id}
+      ></div>
       <section className='left-side'>
-        <p>Order id - {order.id}</p>
+        <p className='order-id'>Order ID - {order.id}</p>
         <p>Order status - {order?.attributes?.status}</p>
         <span>Created - </span>
         <span>{localDate}</span>
@@ -138,6 +189,6 @@ function OrderItem({ order }) {
         <p>Tax: ${tax}</p>
         <p>Total charge: ${charge}</p>
       </section>
-    </OrderItemStyles>
+    </SingleOrderStyles>
   );
 }

@@ -3,16 +3,17 @@ import styled from 'styled-components';
 const SignupStyles = styled.div`
   min-height: 40vh;
   width: 450px;
-  margin: 18rem auto;
+  margin: 15rem auto;
   text-align: center;
 
-  box-shadow: 0px 0px 3px 1px var(--blue5);
-  padding: 5rem 3rem;
+  box-shadow: 0px 0px 3px 1px var(--green);
+  padding: 2rem;
 
   h3 {
-    font-size: 2.3rem;
-    color: var(--blue3);
+    font-size: 2.5rem;
+    color: var(--green);
     font-weight: 400;
+    margin: 0;
   }
 
   @media (max-width: 800px) {
@@ -25,10 +26,10 @@ const SignupStyles = styled.div`
   }
 
   .divider {
-    margin: 3rem auto;
+    margin: 2rem auto;
     position: relative;
     width: 80%;
-    color: var(--blue3);
+    color: var(--green);
 
     &::before {
       content: '';
@@ -37,7 +38,7 @@ const SignupStyles = styled.div`
       left: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue5);
+      background-color: var(--green);
     }
     &::after {
       content: '';
@@ -46,13 +47,12 @@ const SignupStyles = styled.div`
       right: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue5);
+      background-color: var(--green);
     }
   }
 `;
 
 const FormStyles = styled.form`
-  /* margin-top: 5rem; */
 
   fieldset {
     border: 1px solid transparent;
@@ -116,7 +116,7 @@ const FormStyles = styled.form`
     width: 20rem;
     height: 4rem;
     padding: 1rem;
-    margin-top: 4rem;
+    margin-top: 3rem;
     background-color: var(--blue3);
     color: var(--white);
     border-radius: 2rem;
@@ -169,7 +169,7 @@ const SignUpSessionStyles = styled.div`
   text-align: center;
   height: 100%;
 
-  box-shadow: 0px 0px 3px 1px var(--blue5);
+  box-shadow: 0px 0px 3px 1px var(--green);
 
   p {
     font-size: 2rem;
@@ -184,7 +184,7 @@ const SignUpSessionStyles = styled.div`
     margin: 5rem 0;
     border: none;
     height: 1px;
-    background-color: var(--blue5);
+    background-color: var(--green);
   }
 
   a {

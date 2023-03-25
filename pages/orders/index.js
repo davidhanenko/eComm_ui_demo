@@ -27,13 +27,15 @@ export const ALL_ORDERS_QUERY = gql`
 
 export default function OrdersPage(props) {
   const orders = props?.orders?.data;
-  const {me} = useUser();
+  // const { me } = useUser();
 
-  if (
-    me?.role?.name !== process.env.NEXT_PUBLIC_ADMIN_TEST
-  ) {
-    return <h1>test</h1>;
-  }
+  // console.log(me);
+
+  // if (
+  //   me?.role?.name !== process.env.NEXT_PUBLIC_ADMIN_TEST
+  // ) {
+  //   return <h1>test</h1>;
+  // }
   return (
     <>
       <Orders orders={orders} />

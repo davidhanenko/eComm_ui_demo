@@ -132,6 +132,7 @@ export default function ItemDetails({
         typeValue={filteredDetails[index]?.value}
         link={link}
         isAvailable={item?.isAvailable}
+        qty={qty}
       />
     </ItemDetailsStyles>
   );

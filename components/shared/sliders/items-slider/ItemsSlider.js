@@ -38,11 +38,11 @@ const ItemsSlider = ({ slides, itemsByIndex, service, loading}) => {
   }, [embla, onSelect]);
 
   useEffect(() => {
-    if (width <= 850) {
+    if (width <= 1000) {
       setPrevBtnEnabled(true);
       setNextBtnEnabled(true);
     }
-     if (width > 850) {
+     if (width > 1000) {
        setPrevBtnEnabled(false);
        setNextBtnEnabled(false);
      }

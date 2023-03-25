@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import styled from 'styled-components';
-import emptyCartImg from '../../public/img/empty-cart.png';
+import emptyCartImg from '../../public/img/empty-cart-2.png';
 
 const EmptyCartStyles = styled.div`
   text-align: center;
@@ -17,7 +17,7 @@ const EmptyCartStyles = styled.div`
 export default function EmptyCart() {
   return (
     <EmptyCartStyles>
-      <Image src={emptyCartImg} width={150} height={150} />
+      <Image src={emptyCartImg} width={200} height={200} />
       <p>Cart is empty</p>
     </EmptyCartStyles>
   );

@@ -6,7 +6,7 @@ const EditAccountStyles = styled.main`
   margin: 18rem auto;
   text-align: center;
 
-  box-shadow: 0px 0px 3px 1px var(--blue5);
+  box-shadow: var(--bs);
   padding: 5rem 3rem;
 
   h3 {

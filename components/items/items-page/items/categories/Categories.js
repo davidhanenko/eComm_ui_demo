@@ -59,6 +59,7 @@ export default function Categories({
         }}
       >
         <a>
+          <div className='overlay'></div>
           <p className='service-item-title'>{itemsTitle}</p>
           <div className='category-items'>
             {categories &&

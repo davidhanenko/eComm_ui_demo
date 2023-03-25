@@ -46,9 +46,9 @@ export default function Order({ order }) {
       ? order?.attributes?.orderDetails
       : JSON.parse(order?.attributes?.orderDetails);
 
-  const total = orderDetails?.total.toFixed(2);
-  const tax = orderDetails?.total.toFixed(2);
-  const totalCharge = orderDetails?.charge.toFixed(2);
+  const total = orderDetails?.total;
+  const tax = orderDetails?.tax;
+  const totalCharge = orderDetails?.charge;
 
   const [
     updateOrder,
@@ -100,7 +100,7 @@ export default function Order({ order }) {
               Total items in order -{' '}
               {orderDetails?.totalItems}
             </p>
-            <p>Total cost - ${total}</p>
+            <p>Subtotal - ${total}</p>
             <p>Tax - ${tax}</p>
             <p>Total charge - ${totalCharge}</p>
             <p>Shipping - </p>

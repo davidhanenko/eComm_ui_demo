@@ -15,13 +15,24 @@ export default function AddToCart({
   typeValue,
   link,
   isAvailable,
+  qty,
 }) {
   const { cart, setCart } = useCart();
 
-
-
   // add item to cart
   const handleAdd = () => {
+    if (!isAvailable || qty === 0) {
+      toast.info(
+        'Current item or item with selected type and size is not available at this moment',
+        {
+          position: 'top-right',
+          autoClose: 4000,
+        }
+      );
+
+      return;
+    }
+
     // check if there is same item in the cart
     const itemIsInCart = cart.some(
       el => el.cartId === `${id}-${price}-${typeValue}`
@@ -53,7 +64,7 @@ export default function AddToCart({
 
   return (
     <AddToCartStyles>
-      <button onClick={handleAdd} disabled={!isAvailable}>
+      <button onClick={handleAdd}>
         add to <GiShoppingCart className='cart-icon' />{' '}
       </button>
     </AddToCartStyles>

@@ -12,16 +12,11 @@ const UserCartStyles = styled.div`
     margin-right: 2rem;
   }
 
-  .user {
-    padding: 0 1rem;
-  }
-  .cart {
-    position: relative;
-  }
   .user,
   .cart {
     display: flex;
     align-items: center;
+    position: relative;
 
     svg {
       transition: all 0.2s ease;
@@ -30,6 +25,26 @@ const UserCartStyles = styled.div`
         cursor: pointer;
         transform: scale(1.2);
         color: var(--darkBlue);
+      }
+    }
+  }
+
+  .user {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+
+    .user-title {
+      display: none;
+      @media (min-width: 850px) {
+        display: block;
+        position: absolute;
+        top: 100%;
+        font-size: 1.1rem;
+        margin: 0;
+        width: 100px;
+        text-align: center;
+        user-select: none;
       }
     }
   }

@@ -76,7 +76,7 @@ export default function UserDropdown({
           >
             Account
           </button>
-          <p className='user-title'>
+          <p className='user-title-dropdown'>
             {session?.user?.name}
           </p>
         </>

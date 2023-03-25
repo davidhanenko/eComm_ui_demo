@@ -5,12 +5,10 @@ export default function ReturnPolicyPage(props) {
 }
 
 export async function getStaticProps() {
-  const layout = 'main';
-  const page = 'c-19';
   return {
     props: {
-      layout,
-      page,
+      layout: 'main',
+      page: 'c-19',
     },
   };
 }

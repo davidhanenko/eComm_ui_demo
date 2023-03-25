@@ -4,6 +4,7 @@ const SubCategoryItemStyles = styled.div`
   border: 1px solid var(--lightGray1);
   box-shadow: var(--bs);
   display: grid;
+  background: var(--white);
 
   transition: all 0.25s;
 

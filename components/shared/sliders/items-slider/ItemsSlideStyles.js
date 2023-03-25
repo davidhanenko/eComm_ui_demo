@@ -3,29 +3,24 @@ import styled from 'styled-components';
 const ItemsSlideStyles = styled.div`
   background: transparent;
   cursor: pointer;
-  margin: 0 1rem 1rem 1rem;
   position: relative;
-  padding: 1rem;
+  padding: 2rem;
   overflow: none;
+  margin: 0.5rem;
+  box-shadow: var(--bs);
 
   .item-title {
     display: flex;
     justify-content: center;
 
     font-size: 2.5rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 400;
-    color: var(--blue3);
+    color: var(--gray);
     z-index: 3;
     transition: all 0.25s;
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       font-size: 2.8rem;
-    }
-
-    @media (hover: hover) {
-      &:hover {
-        color: var(--orange);
-      }
     }
   }
 
@@ -35,7 +30,9 @@ const ItemsSlideStyles = styled.div`
 
   @media (hover: hover) {
     &:hover {
-      .item-image {
+      .item-title {
+        letter-spacing: 0.75px;
+      }.item-image {
         transform: scale(1.05);
       }
     }

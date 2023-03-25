@@ -21,13 +21,15 @@ export default function FooterInfo() {
           </Link>
         </LinkStyles>
         <LinkStyles>
-          <Link href={'info/privacy-policy'}>privacy policy</Link>
+          <Link href={'/info/privacy-policy'}>
+            privacy policy
+          </Link>
         </LinkStyles>
         <LinkStyles>
           <Link href={'/about'}>our brand</Link>
         </LinkStyles>
         <LinkStyles>
-          <Link href={'info/c-19'}>COVID-19</Link>
+          <Link href={'/info/c-19'}>COVID-19</Link>
         </LinkStyles>
       </ul>
     </FooterInfoStyles>
