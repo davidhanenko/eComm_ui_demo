@@ -25,7 +25,7 @@ const OrderItemStyles = styled.section`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 80vw;
+    width: 100%;
 
     .item-type {
       text-transform: capitalize;

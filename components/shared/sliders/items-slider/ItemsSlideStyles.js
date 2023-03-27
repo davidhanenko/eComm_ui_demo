@@ -18,23 +18,30 @@ const ItemsSlideStyles = styled.div`
     font-weight: 400;
     color: var(--gray);
     z-index: 3;
-    transition: all 0.25s;
+    transition: all 0.2s;
     @media (max-width: 600px) {
       font-size: 2.8rem;
     }
   }
 
   .item-image {
-    transition: transform 0.25s;
+    transition: transform 0.2s;
   }
 
-  @media (hover: hover) {
-    &:hover {
-      .item-title {
-        letter-spacing: 0.75px;
-      }.item-image {
-        transform: scale(1.05);
-      }
+  hr {
+    background-color: var(--yellow2);
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    .item-title {
+      letter-spacing: 0.75px;
+    }
+    .item-image {
+      transform: scale(1.05);
+    }
+    hr {
+      transform: scaleX(1.03);
     }
   }
 

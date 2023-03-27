@@ -6,18 +6,18 @@ import {
   useState,
 } from 'react';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 
 import { useSession } from 'next-auth/react';
 
+import Order from './order/Order';
+import DateAndTime from '../../shared/DateAndTime';
 import {
   AccountStyles,
   SingleOrderStyles,
 } from './AccountStyles';
 import LoaderContainer from '../../shared/loaders/loader-container/LoaderContainer';
-
-import Order from './order/Order';
 
 const USER_QUERY = gql`
   query USER_QUERY($id: ID!) {
@@ -158,15 +158,7 @@ function SingleOrder({ order, handleOrderSelect }) {
   const total = orderDetails?.total;
   const tax = orderDetails?.tax;
   const charge = orderDetails?.charge;
-  const date = order?.attributes?.createdAt;
   const totalItems = orderDetails?.totalItems;
-
-  const localDate = new Date(date).toLocaleDateString(
-    'en-US'
-  );
-  const localTime = new Date(date).toLocaleTimeString(
-    'en-US'
-  );
 
   return (
     <SingleOrderStyles>
@@ -178,10 +170,7 @@ function SingleOrder({ order, handleOrderSelect }) {
       <section className='left-side'>
         <p className='order-id'>Order ID - {order.id}</p>
         <p>Order status - {order?.attributes?.status}</p>
-        <span>Created - </span>
-        <span>{localDate}</span>
-        <span>at</span>
-        <span>{localTime}</span>
+        <DateAndTime date={order?.attributes?.createdAt} />
       </section>
       <section className='right-side'>
         <p>Items in order - {totalItems}</p>

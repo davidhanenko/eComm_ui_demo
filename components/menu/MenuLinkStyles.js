@@ -26,20 +26,15 @@ const MenuLinkStyles = styled.div`
 
     @media (hover: hover) {
       &:hover {
-        color: var(--blue2);
+        color: var(--yellow2);
       }
     }
   }
 
   .active {
-    color: var(--blue2);
+    color: var(--yellow2);
   }
 
-  @media (min-width: 650px) {
-    .active {
-      color: var(--blue3);
-    }
-  }
 `;
 
 export { MenuLinkStyles };

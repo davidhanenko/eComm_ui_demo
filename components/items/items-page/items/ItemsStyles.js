@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const ItemsStyles = styled.div`
-  padding: 5rem 5rem 10rem 5rem;
+  padding: 10rem 5rem 10rem 5rem;
 
   header {
     h2 {
@@ -13,8 +13,6 @@ const ItemsStyles = styled.div`
 
     hr {
       margin-bottom: 5rem;
-      border: none;
-      height: 1px;
       background-color: lightgreen;
     }
   }

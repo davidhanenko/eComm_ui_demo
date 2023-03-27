@@ -56,7 +56,7 @@ const CartStyles = styled.div`
       background: transparent;
       margin: 2rem 2rem 0 0;
       transition: all 0.25s;
-      color: var(--blue2);
+      color: var(--red);
 
       .btn-icon {
         font-size: 3rem;
@@ -90,7 +90,6 @@ const CartStyles = styled.div`
     padding: 2rem 2rem 4rem 2rem;
     font-size: 1.3rem;
     height: 10rem;
-    /* border-top: 1px solid var(--blue3); */
 
     p {
       font-weight: 300;
@@ -110,7 +109,7 @@ const CartStyles = styled.div`
 
     .modal-trigger {
       cursor: pointer;
-      color: var(--blue3);
+      color: var(--linkBlue);
       text-decoration: underline;
     }
 
@@ -118,14 +117,15 @@ const CartStyles = styled.div`
       padding: 1rem;
       text-transform: uppercase;
       border: none;
-      background: var(--blue3);
+      background: var(--green);
       border-radius: 2rem;
       color: var(--white);
+      transition: background 0.2s;
 
       @media (hover: hover) {
         &:hover {
           cursor: pointer;
-          background: var(--blue2);
+          background: var(--green1);
         }
       }
     }

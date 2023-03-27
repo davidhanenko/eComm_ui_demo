@@ -13,6 +13,7 @@ const AccountStyles = styled.main`
     h2 {
       font-size: 2.5rem;
       margin: 0;
+      color: var(--gray);
     }
 
     p {
@@ -21,8 +22,6 @@ const AccountStyles = styled.main`
   }
 
   hr {
-    height: 1px;
-    border: none;
     background-color: var(--green);
     margin: 2rem 0 3rem 0;
   }
@@ -45,8 +44,8 @@ const AccountStyles = styled.main`
 
       h3 {
         font-size: 2.4rem;
-        color: var(--gray);
-        font-weight: 400;
+        color: var(--green4);
+        font-weight: 600;
         text-transform: capitalize;
       }
 
@@ -64,7 +63,7 @@ const AccountStyles = styled.main`
         }
 
         a {
-          color: var(--blue3);
+          color: var(--linkBlue);
           transition: all 0.2s;
 
           @media (hover: hover) {
@@ -78,22 +77,22 @@ const AccountStyles = styled.main`
 
     .orders {
       padding: 0 2rem;
-      height: 75vh;
+      height: 600px;
       overflow-y: hidden;
 
       h4 {
         text-align: center;
         font-size: 2.2rem;
-        color: var(--blue2);
+        color: var(--gray);
         background-color: var(--white);
-        font-weight: 400;
+        font-weight: 600;
         margin: 1rem 0;
       }
 
       .orders-container {
         overflow-y: scroll;
-        height: 80%;
-        padding: 0 2rem;
+        height: 100%;
+        padding: 2rem 2rem 8rem 2rem;
       }
     }
 

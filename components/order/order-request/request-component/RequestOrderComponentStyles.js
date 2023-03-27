@@ -11,8 +11,6 @@ const RequestOrderComponentStyles = styled.div`
   }
 
   hr {
-    height: 1px;
-    border: none;
     background-color: var(--blue4);
   }
 

@@ -11,8 +11,9 @@ const ItemsCategoryStyles = styled.div`
     font-size: 2.5rem;
     text-transform: capitalize;
     font-weight: 400;
+    letter-spacing: 0.75px;
     margin-bottom: 1rem;
-    color: var(--dark);
+    color: var(--gray);
     @media (max-width: 850px) {
       font-size: 2.5rem;
     }

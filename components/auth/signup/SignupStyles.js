@@ -53,7 +53,6 @@ const SignupStyles = styled.div`
 `;
 
 const FormStyles = styled.form`
-
   fieldset {
     border: 1px solid transparent;
     outline: none;
@@ -182,8 +181,6 @@ const SignUpSessionStyles = styled.div`
 
   hr {
     margin: 5rem 0;
-    border: none;
-    height: 1px;
     background-color: var(--green);
   }
 

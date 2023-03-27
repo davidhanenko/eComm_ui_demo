@@ -58,7 +58,7 @@ const NavStyles = styled.nav`
     a {
       padding: 0.2rem 0.25rem 0.2rem 1rem;
       margin: 0.5rem 0 0.5rem 0.5rem;
-      color: var(--blue1);
+      color: var(--gray);
       letter-spacing: 2px;
       position: relative;
       transition: all 0.25s;
@@ -67,7 +67,7 @@ const NavStyles = styled.nav`
         &:hover,
         &:focus {
           text-decoration: none;
-          color: var(--blue3);
+          color: var(--yellow2);
         }
       }
       @media (max-width: 850px) {
@@ -81,7 +81,7 @@ const NavStyles = styled.nav`
       outline: none !important;
     }
     .active-link {
-      color: var(--blue3);
+      color: var(--yellow2);
     }
     @media (max-width: 850px) {
       width: 100%;

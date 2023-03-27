@@ -25,7 +25,7 @@ const DropdownBtnStyles = styled.button`
   display: flex;
 
   svg {
-    color: var(--gray);
+    color: var(--gray1);
     transform: scale(1.3);
     margin-left: 0.3rem;
   }
@@ -33,7 +33,7 @@ const DropdownBtnStyles = styled.button`
   @media (max-width: 650px) {
     position: fixed;
     right: 2rem;
-    border: 0.1px solid var(--blue4);
+    border: 0.1px solid var(--yellow2);
     height: 2.5rem;
     width: 2.5rem;
     display: flex;
@@ -67,8 +67,8 @@ const DropdownMenuStyles = styled.ul`
     `opacity: 1; visibility: visible; display: flex; flex-direction: column;`}
 
   @media (min-width: 650px) {
-    background: var(--blue3);
-    box-shadow: 1px 3px 8px 1px var(--blue3);
+    background: var(--green2);
+    box-shadow: 1px 3px 8px 1px var(--green2);
     opacity: 0;
 
     margin-top: 0.5rem;
@@ -110,7 +110,7 @@ const DropdownItemStyles = styled.li`
   transition: all 0.2s;
 
   width: 100%;
-  border-bottom: 1px solid var(--blue5);
+  border-bottom: 1px solid var(--yellow2);
 
   a {
     text-decoration: none;
@@ -122,10 +122,10 @@ const DropdownItemStyles = styled.li`
 
   @media (hover: hover) {
     &:hover {
-      color: var(--offWhite);
+      color: var(--white);
       a {
         text-decoration: none;
-        color: var(--offWhite);
+        color: var(--white);
       }
     }
   }

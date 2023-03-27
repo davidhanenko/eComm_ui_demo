@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import DateAndTime from '../../shared/DateAndTime';
 import {
   OrdersStyles,
   OrdersItemStyles,
-} from './OrdersStyles';
+} from './OrdersStyles';  
 
 export default function Orders({ orders }) {
   return (
@@ -27,12 +28,6 @@ function OrdersItem({ order }) {
 
   // created at / date
   const date = order?.attributes?.createdAt;
-  const localDate = new Date(date).toLocaleDateString(
-    'en-US'
-  );
-  const localTime = new Date(date).toLocaleTimeString(
-    'en-US'
-  );
 
   return (
     <Link
@@ -46,10 +41,7 @@ function OrdersItem({ order }) {
       {orderDetails && (
         <OrdersItemStyles>
           <p>ID - {order?.id}</p>
-
-          <p>
-            {localDate} &nbsp; {localTime}
-          </p>
+          <DateAndTime date={date} />
           <div>
             <p>Total charge - ${orderDetails?.charge}</p>
             <p>Items - {orderDetails?.totalItems}</p>

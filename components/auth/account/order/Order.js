@@ -1,4 +1,5 @@
 import OrderItem from './order-item/OrderItem';
+import DateAndTime from '../../../shared/DateAndTime';
 import { OrderStyles } from './OrderStyles';
 
 export default function Order({ order }) {
@@ -13,17 +14,9 @@ export default function Order({ order }) {
       ? order?.attributes?.order_details
       : JSON.parse(order?.attributes?.order_details);
 
-  const date = order?.attributes?.createdAt;
   const total = orderDetails?.total;
   const tax = orderDetails?.tax;
   const totalCharge = orderDetails?.charge;
-
-  const localDate = new Date(date).toLocaleDateString(
-    'en-US'
-  );
-  const localTime = new Date(date).toLocaleTimeString(
-    'en-US'
-  );
 
   return (
     <OrderStyles>
@@ -31,11 +24,9 @@ export default function Order({ order }) {
         <div className='order-title'>
           <div>
             <h2>Order ID - {order?.id}</h2>
-
-            <span>Created - </span>
-            <span>{localDate}</span>
-            <span>at</span>
-            <span>{localTime}</span>
+            <DateAndTime
+              date={order?.attributes?.createdAt}
+            />
           </div>
           <p>
             Order status -{' '}

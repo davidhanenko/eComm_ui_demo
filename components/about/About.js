@@ -50,6 +50,7 @@ export default function About() {
   return (
     <AboutStyles>
       <h1>About Our Company</h1>
+      <hr />
       <h3>{aboutUs?.header[0]?.header}</h3>
       <p>{aboutUs?.header[0]?.paragraph}</p>
 

@@ -7,6 +7,10 @@ const ItemsMainPageStyles = styled.section`
   padding: 5rem 2rem;
   box-shadow: var(--bs);
 
+  @media (min-width: 1400px) {
+    margin: 5rem 0;
+  }
+
   @media (max-width: 900px) {
     margin: 10rem 1rem;
   }
@@ -15,7 +19,7 @@ const ItemsMainPageStyles = styled.section`
     font-size: 4rem;
     text-transform: capitalize;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--green4);
     margin: 0;
   }
 
@@ -27,8 +31,6 @@ const ItemsMainPageStyles = styled.section`
   }
 
   hr {
-    border: none;
-    height: 1px;
     background-color: var(--green);
     margin: 2rem 0;
   }

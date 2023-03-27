@@ -45,8 +45,6 @@ export default function Slide({
                 width={300}
                 height={300}
                 layout='responsive'
-                // placeholder='blur'
-                // blurDataURL={placeholderImg}
               />
             ) : (
               <div className='no-items'>
@@ -64,6 +62,8 @@ export default function Slide({
                 </div>
               </div>
             )}
+
+            <hr />
             <h3 className='item-title'>
               {itemsByIndex(index)?.attributes?.title}
             </h3>

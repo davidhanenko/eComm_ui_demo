@@ -71,12 +71,12 @@ const ItemsSliderStyles = styled.div`
     cursor: pointer;
 
     svg {
-      fill: var(--blue2);
+      fill: var(--green4);
     }
     @media (hover: hover) {
       &:hover {
         svg {
-          fill: var(--blue3);
+          fill: var(--green2);
         }
       }
     }

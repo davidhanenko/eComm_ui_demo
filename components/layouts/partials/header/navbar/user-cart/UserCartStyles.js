@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const UserCartStyles = styled.div`
-  color: var(--blue3);
+  color: var(--yellow2);
   display: flex;
   justify-content: end;
   align-items: center;
@@ -24,7 +24,7 @@ const UserCartStyles = styled.div`
       &:hover {
         cursor: pointer;
         transform: scale(1.2);
-        color: var(--darkBlue);
+        color: var(--white);
       }
     }
   }

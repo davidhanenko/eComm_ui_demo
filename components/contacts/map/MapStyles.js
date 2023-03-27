@@ -10,7 +10,7 @@ const MapStyles = styled.div`
     font-weight: 400;
     letter-spacing: 1px;
     text-align: center;
-    color: var(--blue3);
+    color: var(--green4);
   }
   
   .map-wrap {

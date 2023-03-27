@@ -10,6 +10,8 @@ const FooterStyles = styled.footer`
   bottom: 0;
   margin: 0;
 
+  box-shadow: 0 -1px 3px 1px var(--green);
+
   .footer-container {
     margin: 2rem auto;
     width: 100%;
@@ -32,7 +34,7 @@ const FooterStyles = styled.footer`
     margin: 0;
     margin-bottom: 0.5rem;
 
-    border-bottom: 1px solid var(--blue5);
+    border-bottom: 1px solid var(--yellow2);
     width: 50%;
 
     @media (max-width: 600px) {

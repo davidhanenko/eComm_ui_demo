@@ -4,13 +4,13 @@ const ContactsStyles = styled.div`
   margin-top: var(--navHeight);
   padding: 8rem 8rem 15rem 8rem;
   background-color: var(--offWhite);
-  color: var(--dark);
+  color: var(--gray);
 
   h2 {
     font-size: 3rem;
     margin: 0 0 2rem 0;
     font-weight: 500;
-    color: var(--blue3);
+    color: var(--green4);
     background: transparent;
   }
 
@@ -55,11 +55,10 @@ const ContactsInfoStyles = styled.section`
   justify-content: space-around;
   height: fit-content;
 
-  color: var(--gray);
 
   p {
     font-size: 1.5rem;
-    margin: 0.5rem 0;
+    margin: 0;
   }
 
   .phone {
@@ -69,14 +68,11 @@ const ContactsInfoStyles = styled.section`
   .email {
     font-style: italic;
     margin: 0.5rem 0;
-    color: var(--blue2);
   }
 
   hr {
     margin: 2rem 0;
-    height: 1px;
-    border: none;
-    background-color: var(--blue4);
+    background-color: var(--yellow2);
     width: 75%;
   }
 

@@ -7,28 +7,43 @@ const GlobalStyles = createGlobalStyle`
   html {
     font-family: 'Roboto', sans-serif;
 
-    --bg: #e8e8e8;
+    --bg: #f0f0f0;
 
     --darkBlue:#020270;
     --blue1: #0008a3;
     --blue2: #0900ff;
-    --blue3: #0095ff;
-    --blue4: #79c1e0;
-    --blue5: #c0e5f9;
+    --blue3: #87C159;
+    --blue4: #fcc82e;
+    --blue5: #058240;
 
+    --linkBlue: #0095ff;
+    
+    --green: #84bd28;
+    --green1: #058240;
+    --green2: #87C159;
+    --green3: #D3F2E9;
+    --green4: #7CA8A1;
+    --green5: #058240;
+
+    --yellow1: #f4d169;
+    --yellow2: #F3C301;
+    --orange: #B85C38;
+
+
+    --lightGray: #a7a7a7;
+    --lightGray1: #d6ded1;
+    --gray: #423F3E;
+    --gray1: #505050;
     --dark: #171010;
     --white: #f6f6f6;
     --offWhite: #e8e8e8; 
-    --orange: #B85C38;
-    --gray: #423F3E;
-    --lightGray: #a7a7a7;
-    --lightGray1: #d6ded1;
+ 
     --red: #cb4154;
 
-    --green: #84bd28;
+
     --greenHover: #658d25;
 
-    --orange: #B85C38;
+
   
     --maxWidth: 1400px;
     --midWidth: 1200px;
@@ -70,6 +85,15 @@ const GlobalStyles = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  p{
+    color: var(--gray1);
+  }
+
+   hr {
+      height: 1px;
+      border: none;
+    }
 
   input, textarea {
     font-family: 'Roboto', sans-serif;

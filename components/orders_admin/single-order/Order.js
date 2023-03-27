@@ -12,6 +12,7 @@ import {
 } from '../../../config';
 import OrderItem from './order-item/OrderItem';
 import { OrderStyles } from './OrderStyles';
+import DateAndTime from '../../shared/DateAndTime';
 
 const UPDATE_ORDER_STATUS = gql`
   mutation UPDATE_ORDER_STATUS(
@@ -79,7 +80,12 @@ export default function Order({ order }) {
     <OrderStyles>
       <header>
         <div className='order-title'>
-          <h2>Order ID - {order?.id}</h2>
+          <div>
+            <h2>Order ID - {order?.id}</h2>
+            <DateAndTime
+              date={order?.attributes.createdAt}
+            />
+          </div>
           <div className='status-select'>
             <span>Order status</span>
             <DropdownSelect

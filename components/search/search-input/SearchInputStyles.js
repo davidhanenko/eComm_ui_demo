@@ -2,11 +2,11 @@ import styled, { keyframes } from 'styled-components';
 
 const glow = keyframes`
   from {
-    box-shadow: 0 0 0px var(--blue4);
+    box-shadow: 0 0 0px var(--green);
   }
 
   to {
-    box-shadow: 0 0 4px 2px var(--blue4);
+    box-shadow: 0 0 4px 2px var(--green);
   }
 `;
 
@@ -50,7 +50,7 @@ const SearchInputStyles = styled.div`
 
     .search-icon {
       font-size: 2rem;
-      color: var(--blue3);
+      color: var(--yellow2);
       transition: all 0.25s;
 
       &:hover {

@@ -47,7 +47,12 @@ const ReturnPolicyPageStyles = styled.main`
     h1 {
       margin: 0;
       text-transform: capitalize;
+      color: var(--green4);
     }
+  }
+
+  hr {
+    background-color: var(--green);
   }
 
   section {
@@ -55,6 +60,7 @@ const ReturnPolicyPageStyles = styled.main`
     h5 {
       font-size: 1.6rem;
       margin: 3rem 0 1rem 0;
+      color: var(--gray);
     }
 
     p {

@@ -12,9 +12,7 @@ const OrderStyles = styled.div`
   }
 
   hr {
-    height: 1px;
     margin: 3rem 0;
-    border: none;
     background-color: var(--green);
   }
 
@@ -37,6 +35,7 @@ const OrderStyles = styled.div`
         padding: 0.5rem 1rem;
         color: var(--white);
         margin: 1rem 0;
+        text-transform: uppercase;
       }
 
       .pending {
@@ -72,6 +71,14 @@ const OrderStyles = styled.div`
         padding: 1rem;
         h4 {
           margin-bottom: 1rem;
+        }
+      }
+
+      @media (max-width: 600px) {
+        display: block;
+
+        .top-right {
+          margin-top: 3rem;
         }
       }
     }

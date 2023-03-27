@@ -13,18 +13,17 @@ const SearchResultsContainerStyles = styled.div`
     font-weight: 400;
     font-size: 3rem;
     background: transparent;
-    color: var(--dark);
+    color: var(--gray);
     margin-bottom: 15rem;
   }
   span {
     font-style: italic;
     font-weight: 700;
-    color: var(--darkBlue);
+    color: var(--green4);
   }
   .total-items {
     font-size: 1.3rem;
     border-bottom: 1px solid var(--blue3);
-    width: 55%;
 
     @media (max-width: 750px) {
       width: 100%;
@@ -35,7 +34,7 @@ const SearchResultsContainerStyles = styled.div`
 const AllSearchResultsStyles = styled.div`
   text-align: center;
   display: grid;
-  grid-gap: 3rem;
+  grid-gap: 1rem;
   justify-content: center;
   grid-template-columns: repeat(
     auto-fill,

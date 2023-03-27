@@ -9,9 +9,7 @@ const OrderStyles = styled.div`
   }
 
   hr {
-    height: 1px;
     margin: 3rem 0;
-    border: none;
     background-color: var(--blue3);
   }
 
@@ -27,6 +25,7 @@ const OrderStyles = styled.div`
 
       h2 {
         font-size: 2.7rem;
+        margin: 0;
       }
     }
 

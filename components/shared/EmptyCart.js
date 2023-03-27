@@ -10,7 +10,7 @@ const EmptyCartStyles = styled.div`
     font-size: 1.8rem;
     font-weight: 300;
     margin-top: 5rem;
-    color: var(--blue3);
+    color: var(--green4);
   }
 `;
 

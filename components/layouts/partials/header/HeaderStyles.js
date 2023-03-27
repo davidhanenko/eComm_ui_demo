@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 const HeaderStyles = styled.header`
-  background: var(--blue5);
+  background: var(--green4);
   margin: 0;
   max-height: var(--navHeight);
   position: fixed;
   top: 0;
   z-index: 10;
   width: 100%;
+  box-shadow: var(--bs);
 
   @media (max-width: 850px) {
     max-height: var(--navHeightSm);

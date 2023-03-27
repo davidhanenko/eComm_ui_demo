@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const MenuTreeStyles = styled.ul`
-  background: var(--blue3);
+  background: var(--green2);
   margin: 0;
   padding: 0.7rem 3rem;
 

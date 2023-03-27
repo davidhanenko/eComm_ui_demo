@@ -32,15 +32,13 @@ const CollectionItemStyles = styled.div`
     }
 
     hr {
-      height: 1px;
-      border: none;
-      background-color: var(--green);
+      background-color: var(--yellow2);
       transition: all 0.25s;
     }
 
     .collection-item-title {
       text-transform: capitalize;
-      color: var(--gray);
+      color: var(--green4);
       font-weight: 400;
       font-size: 1.6rem;
       letter-spacing: 0.5px;

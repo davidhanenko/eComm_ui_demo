@@ -9,7 +9,7 @@ const AddToCartStyles = styled.div`
     cursor: pointer;
     padding: 0.75rem 1.5rem;
     text-transform: uppercase;
-    background: var(--blue1);
+    background: var(--green2);
     color: var(--white);
     border: none;
     border-radius: 2rem;
@@ -23,12 +23,10 @@ const AddToCartStyles = styled.div`
       margin-left: 0.5rem;
     }
 
-    @media (hover: hover) {
       &:hover {
-        /* box-shadow: inset 0px 0px 15px 10px var(--darkBlue); */
-        background: var(--blue2);
+        background: var(--green1);
       }
-    }
+    
 
     @media(max-width: 850px) {
       margin-top: 3rem;

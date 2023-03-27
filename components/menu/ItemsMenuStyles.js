@@ -27,7 +27,7 @@ const ItemsMenuStyles = styled.div`
     font-size: 2.3rem;
     text-transform: uppercase;
     font-weight: 400;
-    color: var(--darkBlue);
+    color: var(--gray);
     margin: 0;
     transition: transform 0.25s;
 
@@ -36,7 +36,7 @@ const ItemsMenuStyles = styled.div`
       font-size: 2.8rem;
       padding-left: 1rem;
       font-weight: 200;
-      color: var(--blue4);
+      color: var(--yellow2);
     }
 
     @media (max-width: 650px) {

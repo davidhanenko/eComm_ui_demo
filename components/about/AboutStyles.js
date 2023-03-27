@@ -12,10 +12,17 @@ const AboutStyles = styled.main`
   h1 {
     font-size: 3rem;
     letter-spacing: 2px;
+    color: var(--dark);
+  }
+
+  hr {
+    background-color: var(--yellow2);
+    margin: 2rem 0 3rem 0;
   }
 
   h3 {
     font-size: 2rem;
+    color: var(--gray);
   }
 
   p {

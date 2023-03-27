@@ -14,14 +14,12 @@ const SubCategoryItemStyles = styled.div`
     padding: 2rem;
 
     hr {
-      height: 1px;
-      border: none;
-      background-color: var(--green);
+      background-color: var(--yellow2);
       transition: all 0.25s;
     }
 
     .subcategory-title {
-      color: var(--gray);
+      color: var(--green4);
       font-weight: 400;
       font-size: 1.6rem;
       text-transform: capitalize;

@@ -7,8 +7,8 @@ const GoToTopButtonStyles = styled.button`
   bottom: 5%;
   height: 4rem;
   width: 4rem;
-  color: var(--blue3);
-  border: 1px solid var(--blue3);
+  color: var(--green4);
+  border: 1px solid var(--green4);
   background-color: transparent;
   border-radius: 50%;
   transition: all 0.25s;
@@ -17,7 +17,7 @@ const GoToTopButtonStyles = styled.button`
   ${props => props.visible && `display: block`};
   @media (hover: hover) {
     &:hover {
-      background-color: var(--blue5);
+      background-color: var(--yellow2);
       border-color: transparent;
     }
   }

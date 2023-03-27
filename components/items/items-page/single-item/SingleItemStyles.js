@@ -68,16 +68,14 @@ const SingleItemStyles = styled.div`
 
     .single-item-title {
       font-size: 2.2rem;
-      font-weight: 400;
+      font-weight: 600;
       text-align: start;
       text-transform: capitalize;
-      color: var(--dark);
+      color: var(--green4);
       margin: 0 0 1rem 0;
     }
 
     hr {
-      height: 1px;
-      border: none;
       background-color: var(--blue3);
     }
 
