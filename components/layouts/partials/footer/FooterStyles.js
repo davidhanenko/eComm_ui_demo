@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const FooterStyles = styled.footer`
-  background: var(--blue3);
+  background: var(--green2);
   color: var(--white);
   padding: 2rem 4rem;
 
@@ -105,7 +105,7 @@ const FooterSocialStyles = styled.section`
     transition: all 0.25s;
     @media (hover: hover) {
       &:hover {
-        color: var(--blue4);
+        color: var(--yellow);
       }
     }
   }

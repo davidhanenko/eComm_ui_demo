@@ -76,7 +76,7 @@ const SingleItemStyles = styled.div`
     }
 
     hr {
-      background-color: var(--blue3);
+      background-color: var(--green2);
     }
 
     .single-item-description {

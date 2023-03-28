@@ -12,7 +12,7 @@ const PaginationContainerStyles = styled.div`
 `;
 
 const ItemsPerPageSelectStyles = styled.div`
-  display: inline;
+  display: inline-block;
   margin-left: 2rem;
   p {
     display: inline;
@@ -22,8 +22,12 @@ const ItemsPerPageSelectStyles = styled.div`
 `;
 
 const ItemsSortSelectStyles = styled.div`
-  display: inline;
+  display: inline-block;
   margin-left: 1rem;
+
+  #sort-btn {
+    width: 150px;
+  }
 `;
 
 const PagesControlStyles = styled.div`

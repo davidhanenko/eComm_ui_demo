@@ -4,8 +4,8 @@ const OrderItemStyles = styled.div`
   display: flex;
   align-items: center;
   margin: 2rem 1rem;
-
-  border-bottom: 0.5px dashed var(--blue4);
+  padding-bottom: 0.5rem;
+  border-bottom: 0.5px dashed var(--yellow);
 
   .item-img {
     padding-right: 2rem;

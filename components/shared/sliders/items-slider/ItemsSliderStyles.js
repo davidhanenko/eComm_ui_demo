@@ -72,6 +72,7 @@ const ItemsSliderStyles = styled.div`
 
     svg {
       fill: var(--green4);
+      transition: fill 0.2s;
     }
     @media (hover: hover) {
       &:hover {

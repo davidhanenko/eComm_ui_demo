@@ -50,7 +50,7 @@ const UserDropdownStyles = styled.div`
     @media (max-width: 850px) {
       display: block;
       font-size: 1.2rem;
-      text-transform: lowercase;
+      text-transform: capitalize;
       text-align: center;
       color: var(--dark);
     }

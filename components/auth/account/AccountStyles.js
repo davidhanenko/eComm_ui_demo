@@ -13,7 +13,7 @@ const AccountStyles = styled.main`
     h2 {
       font-size: 2.5rem;
       margin: 0;
-      color: var(--gray);
+      color: var(--gray1);
     }
 
     p {

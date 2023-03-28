@@ -11,21 +11,22 @@ const EditAccountStyles = styled.main`
 
   h3 {
     font-size: 2.3rem;
-    color: var(--blue3);
+    color: var(--green2);
     font-weight: 400;
+    text-transform: capitalize;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--green4);
   }
 
   .back-to-account-btn {
     margin-top: 3rem;
 
     a {
-      color: var(--blue3);
+      color: var(--linkBlue);
       transition: all 0.2s;
 
-      @media (hover: hover) {
-        &:hover {
-          text-decoration: underline;
-        }
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

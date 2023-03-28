@@ -59,8 +59,8 @@ const ItemsMenuStyles = styled.div`
     }
   }
   .side-menu-links {
-    background: var(--blue3);
-    box-shadow: 1px 1px 4px 0px var(--blue3);
+    background: var(--green2);
+    box-shadow: 1px 1px 4px 0px var(--green2);
     display: none;
     position: absolute;
     width: 300px;

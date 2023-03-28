@@ -45,7 +45,7 @@ const OrderStyles = styled.div`
         background-color: var(--green);
       }
       .in-progress {
-        background-color: var(--blue3);
+        background-color: var(--green2);
       }
       .rejected {
         background-color: var(--red);

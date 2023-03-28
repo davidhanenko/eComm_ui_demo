@@ -5,7 +5,6 @@ const NavDropdownStyles = styled.div`
   align-self: center;
   width: 100%;
   .dropdown-btns-group {
-    
     cursor: pointer;
     @media (max-width: 850px) {
       display: flex;
@@ -26,7 +25,7 @@ const DropdownBtnStyles = styled.button`
   }
 
   @media (max-width: 850px) {
-    border: 0.1px solid var(--blue4);
+    border: 0.1px solid var(--yellow);
     height: 2.5rem;
     width: 2.5rem;
     display: flex;
@@ -41,7 +40,7 @@ const DropdownBtnStyles = styled.button`
     }
 
     &:hover {
-      background: var(--blue4);
+      background: var(--yellow);
     }
   }
 `;
@@ -50,7 +49,6 @@ const DropdownMenuStyles = styled.ul`
   padding-left: 2rem;
   z-index: calc(var(--goToTopZ) + 3);
   display: none;
-  margin-bottom: 3rem;
 
   ${props =>
     props.isDropdownOpen && `display: block; opacity:0.99;`}
@@ -63,7 +61,7 @@ const DropdownMenuStyles = styled.ul`
     background: var(--white);
     position: fixed;
     width: 250px;
-    margin: 0;
+    margin: 0.4rem 0 0 0;
     padding: 2rem 0;
     padding-bottom: 10rem;
     transition: all 0.25s;
@@ -87,9 +85,9 @@ const DropdownItemStyles = styled.li`
   a.item-link {
     @media (min-width: 850px) {
       margin: 0;
-      padding-left: 0;
+      padding: 0.5rem 0;
       width: 90%;
-      border-bottom: 1px solid var(--blue4);
+      border-bottom: 1px solid var(--yellow);
     }
   }
 

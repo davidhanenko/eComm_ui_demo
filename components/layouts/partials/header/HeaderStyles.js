@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const HeaderStyles = styled.header`
-  background: var(--green4);
+  background: var(--green3);
   margin: 0;
   max-height: var(--navHeight);
   position: fixed;

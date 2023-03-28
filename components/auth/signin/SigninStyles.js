@@ -11,7 +11,7 @@ const SigninStyles = styled.div`
 
   h3 {
     font-size: 2.5rem;
-    color: var(--blue3);
+    color: var(--green4);
     font-weight: 400;
     margin: 0;
   }
@@ -66,7 +66,7 @@ const GoogleBtnStyles = styled.button`
 
   @media (hover: hover) {
     &:hover {
-      background-color: var(--blue4);
+      background-color: var(--yellow);
     }
 
     div {
@@ -107,8 +107,8 @@ const FormStyles = styled.form`
 
     input,
     textarea {
-      border: 1px solid var(--blue4);
-      color: var(--dark);
+      border: 1px solid var(--yellow);
+      color: var(--gray);
       outline: none;
       background: transparent;
       padding: 0.6rem 0.5rem;
@@ -119,7 +119,8 @@ const FormStyles = styled.form`
       transition: all 0.25s ease;
 
       &:focus {
-        border: 1px solid var(--blue2);
+        border: 1px solid var(--green2);
+        box-shadow: 0px 0px 2px 1px var(--green2);
       }
 
       &::placeholder {
@@ -130,13 +131,13 @@ const FormStyles = styled.form`
     }
 
     .input-dirty {
-      border: 1px solid var(--blue2);
-      box-shadow: 0px 0px 2px 1px var(--blue5);
+      border: 1px solid var(--green2);
     }
 
     .input-error {
       font-size: 1rem;
       color: var(--red);
+      font-weight: 300;
       position: absolute;
       left: 2rem;
       bottom: -1.8rem;
@@ -153,7 +154,7 @@ const FormStyles = styled.form`
     height: 4rem;
     padding: 1rem;
     margin-top: 1rem;
-    background-color: var(--blue3);
+    background-color: var(--green2);
     color: var(--white);
     border-radius: 2rem;
     border: none;
@@ -167,7 +168,7 @@ const FormStyles = styled.form`
     @media (hover: hover) {
       &:hover {
         cursor: pointer;
-        background-color: var(--blue2);
+        background-color: var(--yellow);
       }
     }
 
@@ -186,8 +187,9 @@ const FooterStyles = styled.footer`
   }
 
   a {
-    color: var(--blue3);
+    color: var(--linkBlue);
     font-size: 1.3rem;
+    transition: all 0.2s;
 
     @media (hover: hover) {
       &:hover {

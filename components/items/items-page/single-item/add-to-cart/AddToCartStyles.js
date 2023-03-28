@@ -16,7 +16,7 @@ const AddToCartStyles = styled.div`
     outline: none;
     display: flex;
     align-items: center;
-    transition: all 0.3s;
+    transition: all 0.2s;
 
     .cart-icon {
       font-size: 2rem;
@@ -24,7 +24,7 @@ const AddToCartStyles = styled.div`
     }
 
       &:hover {
-        background: var(--green1);
+        background: var(--yellow);
       }
     
 

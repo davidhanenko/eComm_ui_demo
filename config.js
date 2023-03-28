@@ -7,6 +7,8 @@ export const TAX_VALUE = 0.08875;
 
 export const SORT_ITEMS_BY_DEFAULT = 'itemTitle:asc';
 
+export const SORT_ORDERS_BY_DEFAULT = 'createdAt:desc';
+
 export const TOGGLE_WIDTH = 850;
 
 export const SORTING_OPTIONS = [
@@ -28,6 +30,17 @@ export const SORTING_OPTIONS = [
   },
   { title: 'Price, \u2191', option: 'minPrice:asc' },
   { title: 'Price, \u2193', option: 'minPrice:desc' },
+];
+
+export const SORTING_OPTIONS_ORDERS = [
+  {
+    title: 'New to Old',
+    option: 'createdAt:desc',
+  },
+  {
+    title: 'Old to New',
+    option: 'createdAt:asc',
+  },
 ];
 
 export const PER_PAGE_OPTIONS = [

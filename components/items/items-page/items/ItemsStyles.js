@@ -5,15 +5,16 @@ const ItemsStyles = styled.div`
 
   header {
     h2 {
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       letter-spacing: 0.5px;
       font-weight: 400;
       margin-bottom: 1rem;
+      color: var(--green4);
     }
 
     hr {
       margin-bottom: 5rem;
-      background-color: lightgreen;
+      background-color: var(--yellow);
     }
   }
 

@@ -13,8 +13,8 @@ const RequestOrderFormStyles = styled.form`
 
     input,
     textarea {
-      border: 1px solid var(--blue4);
-      color: var(--dark);
+      border: 1px solid var(--yellow);
+      color: var(--gray);
       outline: none;
       background: transparent;
       padding: 0.6rem 0.5rem;
@@ -25,7 +25,8 @@ const RequestOrderFormStyles = styled.form`
       transition: all 0.25s ease;
 
       &:focus {
-        border: 1px solid var(--blue2);
+        border: 1px solid var(--green2);
+        box-shadow: 0px 0px 2px 0px var(--green2);
         margin-left: 5px;
       }
 
@@ -35,13 +36,13 @@ const RequestOrderFormStyles = styled.form`
     }
 
     .input-dirty {
-      border: 1px solid var(--blue2);
-      box-shadow: 0px 0px 2px 1px var(--blue5);
+      border: 1px solid var(--green2);
     }
 
     .input-error {
       font-size: 1rem;
       color: var(--red);
+      font-weight: 300;
       position: absolute;
       left: 2rem;
       bottom: -1.8rem;
@@ -58,22 +59,20 @@ const RequestOrderFormStyles = styled.form`
     height: 4rem;
     padding: 1rem;
     margin-bottom: 3rem;
-    background-color: var(--blue3);
+    background-color: var(--green2);
     color: var(--white);
     border-radius: 2rem;
     border: none;
     text-transform: uppercase;
-    transition: all 0.25s;
+    transition: all 0.2s;
 
     div {
       width: 100%;
     }
 
-    @media (hover: hover) {
-      &:hover {
-        cursor: pointer;
-        background-color: var(--blue2);
-      }
+    &:hover {
+      cursor: pointer;
+      background-color: var(--yellow);
     }
 
     @media (max-width: 600px) {

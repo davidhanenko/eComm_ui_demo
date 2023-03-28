@@ -1,3 +1,4 @@
+import Head from 'next/head';
 
 import gql from 'graphql-tag';
 import {
@@ -10,7 +11,6 @@ import { PaginationStateProvider } from '../../context/paginationState';
 
 import AllSearchResults from '../../components/search/search-page/AllSearchResults';
 import Pagination from '../../components/shared/pagination/Pagination';
-
 
 // query to found quantity of found items
 const SEARCH_PAGINATION_QUERY = gql`
@@ -50,10 +50,13 @@ export default function SearchPage(props) {
   // url for pagination component
   const currentUrl = `/search/${props?.searchTerm}`;
 
-
-
   return (
     <PaginationStateProvider>
+      <Head>
+        <title>
+          Search results for - {props?.searchTerm}
+        </title>
+      </Head>
       <PaginationStyles>
         <Pagination
           page={page || 1}

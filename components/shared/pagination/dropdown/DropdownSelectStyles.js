@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 const DropdownSelectStyles = styled.div`
-  display: inline;
+  display: inline-block;
   margin-left: 1rem;
   position: relative;
-  z-index: 0;
+  z-index: 1;
 
   #sort-btn {
     cursor: pointer;
-    border: 1px solid gray;
+    border: 1px solid var(--gray);
     background: transparent;
     padding: 0.5rem 1rem;
     color: var(--dark);
+
     svg {
       color: var(--dark);
       transform: scale(1.7);
@@ -25,7 +26,7 @@ const DropdownSelectStyles = styled.div`
     margin: 0;
     width: 100%;
     opacity: 0;
-    z-index: 1;
+    z-index: 3;
     visibility: hidden;
     background: var(--offWhite);
     position: absolute;
@@ -46,7 +47,7 @@ const DropdownSelectStyles = styled.div`
 
       @media (hover: hover) {
         &:hover {
-          background: var(--blue5);
+          background: var(--green3);
         }
       }
     }

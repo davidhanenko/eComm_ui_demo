@@ -1,14 +1,48 @@
 import styled from 'styled-components';
 
 const OrdersStyles = styled.ul`
-  margin-top: calc(
-    var(--navHeight) + var(--searchHeight) + 5rem
-  );
+  margin-top: 1rem;
   padding: 0rem 5rem 10rem 5rem;
 
-  h1 {
-    font-size: 4rem;
-    color: var(--blue2);
+  header {
+    display: grid;
+    grid-template-columns: 2;
+    grid-template-rows: 3;
+    h1 {
+      font-size: 4rem;
+      color: var(--green4);
+      margin: 0;
+      grid-row: 1;
+      grid-column: 1;
+    }
+
+    .filter-orders {
+      grid-row: 2;
+      grid-column: 2;
+      justify-self: end;
+      position: relative;
+      #sort-btn {
+        min-width: 150px;
+        display: flex;
+        justify-content: space-between;
+
+        svg {
+          right: 0;
+        }
+      }
+
+      #sort-dropdown {
+        width: 150px;
+        top: 100%;
+      }
+    }
+    hr {
+      grid-column: 1/3;
+      grid-row: 3;
+      width: 100%;
+      margin-bottom: 4rem;
+      background-color: var(--yellow);
+    }
   }
 
   @media (max-width: 800px) {
@@ -26,7 +60,7 @@ const OrdersItemStyles = styled.li`
   display: grid;
   grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
   color: var(--gray);
-  box-shadow: 1px 1px 4px 1px var(--blue5);
+  box-shadow: var(--bs);
   transition: all 0.25s;
 
   p {
@@ -42,13 +76,13 @@ const OrdersItemStyles = styled.li`
     text-align: center;
   }
   .pending {
-    background-color: #ffde36;
+    background-color: var(--yellow1);
   }
   .fulfilled {
     background-color: var(--green);
   }
   .in-progress {
-    background-color: var(--blue3);
+    background-color: var(--linkBlue);
   }
   .rejected {
     background-color: var(--red);
@@ -67,7 +101,7 @@ const OrdersItemStyles = styled.li`
   @media (hover: hover) {
     &:hover {
       cursor: pointer;
-      box-shadow: 2px 2px 6px 3px var(--blue5);
+      box-shadow: var(--bsHover);
     }
   }
 `;

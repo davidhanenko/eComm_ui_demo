@@ -10,7 +10,7 @@ const ForgotPswdReqStyles = styled.div`
 
   h1 {
     font-size: 2.6rem;
-    color: var(--blue3);
+    color: var(--green2);
     font-weight: 400;
   }
 
@@ -30,7 +30,7 @@ const ForgotPswdReqStyles = styled.div`
     margin-top: 4rem;
     a {
       font-size: 1.3rem;
-      color: var(--blue3);
+      color: var(--green2);
     }
   }
 `;

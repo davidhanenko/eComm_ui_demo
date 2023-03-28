@@ -75,8 +75,8 @@ const CartStyles = styled.div`
     padding: 0 1rem;
     overflow-y: scroll;
 
-    border-top: 1px solid var(--blue3);
-    border-bottom: 1px solid var(--blue3);
+    border-top: 1px solid var(--green2);
+    border-bottom: 1px solid var(--green2);
     ul {
       padding: 0;
       margin: 0;
@@ -125,7 +125,7 @@ const CartStyles = styled.div`
       @media (hover: hover) {
         &:hover {
           cursor: pointer;
-          background: var(--green1);
+          background: var(--yellow);
         }
       }
     }

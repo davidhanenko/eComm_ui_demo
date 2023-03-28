@@ -27,7 +27,7 @@ const ItemDetailsStyles = styled.div`
     align-items: center;
 
     span {
-      color: var(--gray);
+      color: var(--gray1);
       margin-right: 1rem;
       text-transform: capitalize;
       font-weight: 400;
@@ -37,7 +37,7 @@ const ItemDetailsStyles = styled.div`
 
   .available-sizes {
     font-size: 1.7rem;
-    color: var(--gray);
+    color: var(--gray1);
     font-weight: 400;
     margin: 0;
   }
@@ -47,7 +47,7 @@ const ItemDetailsStyles = styled.div`
     margin: 0.5rem 1rem 2rem 0rem;
     padding: 1rem 2rem;
     border: none;
-    background: var(--green1);
+    background: var(--green3);
     color: var(--white);
     transition: background 0.2s;
     cursor: pointer;

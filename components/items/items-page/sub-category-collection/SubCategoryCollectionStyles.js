@@ -7,10 +7,11 @@ const SubCategoryCollectionStyles = styled.div`
   @media (max-width: 500px) {
     padding: 5rem 1rem;
   }
+  
 
   .collection-title {
     text-transform: capitalize;
-    color: var(--blue1);
+    color: var(--green4);
     font-size: 2.5rem;
     font-weight: 400;
     margin-bottom: 0;
@@ -26,7 +27,7 @@ const SubCategoryCollectionStyles = styled.div`
     height: 1px;
     border: none;
     margin-bottom: 10rem;
-    background-color: var(--green);
+    background-color: var(--green2);
     margin-left: 0;
   }
 

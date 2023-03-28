@@ -71,7 +71,7 @@ const NavStyles = styled.nav`
         }
       }
       @media (max-width: 850px) {
-        border-bottom: 1px solid var(--blue4);
+        border-bottom: 1px solid var(--yellow);
         margin: 1rem 2rem;
         padding: 0;
         width: 20rem;

@@ -44,13 +44,6 @@ class MyDocument extends Document {
             name='robots'
             content='noindex, nofollow'
           ></meta>
-          {/* <link
-            rel='preload'
-            href='/fonts/roboto-flex-v9-latin-regular.woff2'
-            as='font'
-            type='font/woff2'
-            crossOrigin='anonymous'
-          /> */}
         </Head>
         <body>
           <Main />

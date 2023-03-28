@@ -66,9 +66,16 @@ const ImagesSliderStyles = styled.div`
     fill: blue;
     padding: 0;
 
+    svg {
+      fill: var(--yellow);
+      transition: fill 0.2s;
+    }
+
     @media (hover: hover) {
       &:hover {
-        fill: lightblue;
+        svg {
+          fill: var(--green3);
+        }
       }
     }
   }

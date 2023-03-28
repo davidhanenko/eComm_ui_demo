@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const RequestOrderComponentStyles = styled.div`
   margin-top: 10rem;
   padding: 3rem 1rem;
-  border: 1px solid var(--blue4);
+  border: 1px solid var(--yellow);
   font-size: 1.3rem;
 
   @media (max-width: 600px) {
@@ -11,14 +11,15 @@ const RequestOrderComponentStyles = styled.div`
   }
 
   hr {
-    background-color: var(--blue4);
+    background-color: var(--yellow);
   }
 
   .sign-in-first {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
+    transition: all 0.2s;
     span {
-      color: var(--blue3);
+      color: var(--linkBlue);
       cursor: pointer;
       &:hover {
         text-decoration: underline;
@@ -36,14 +37,14 @@ const RequestOrderComponentStyles = styled.div`
     a {
       margin-right: 1.5rem;
       padding: 1rem;
-      background-color: var(--blue4);
+      background-color: var(--yellow);
       color: white;
       border-radius: 2rem;
       transition: all 0.2s;
 
       @media (hover: hover) {
         &:hover {
-          background-color: var(--blue3);
+          background-color: var(--green2);
         }
       }
     }

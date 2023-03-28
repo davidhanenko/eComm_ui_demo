@@ -21,7 +21,7 @@ const CollectionItemStyles = styled.div`
       left: 0;
       width: 100%;
       text-transform: uppercase;
-      color: var(--blue3);
+      color: var(--green2);
       background-color: var(--blue5);
       opacity: 0.7;
       z-index: 2;

@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 
+import { FaChevronLeft } from 'react-icons/fa';
+
 import { ALL_ORDERS_QUERY } from '../../../pages/orders/index';
 import DropdownSelect from '../../shared/pagination/dropdown/DropdownSelect';
 import {
@@ -137,7 +139,9 @@ export default function Order({ order }) {
 
       <footer>
         <Link href={'/orders'}>
-          <button>&lt; Back to orders</button>
+          <button>
+            <FaChevronLeft /> Back to orders
+          </button>
         </Link>
       </footer>
     </OrderStyles>

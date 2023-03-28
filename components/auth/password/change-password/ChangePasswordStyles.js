@@ -10,7 +10,7 @@ const ChangePswdStyles = styled.div`
 
   h1 {
     font-size: 2.6rem;
-    color: var(--blue3);
+    color: var(--green2);
     font-weight: 400;
   }
 

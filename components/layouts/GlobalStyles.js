@@ -12,19 +12,20 @@ const GlobalStyles = createGlobalStyle`
     --darkBlue:#020270;
     --blue1: #0008a3;
     --blue2: #0900ff;
-    --blue3: #87C159;
-    --blue4: #fcc82e;
+    /* --blue3: #87C159; */
     --blue5: #058240;
-
+    
     --linkBlue: #0095ff;
     
     --green: #84bd28;
     --green1: #058240;
     --green2: #87C159;
-    --green3: #D3F2E9;
-    --green4: #7CA8A1;
+    --green3: #7CA8A1;
+    --green4: #4f7771;
     --green5: #058240;
+    /* 7CA8A1 */
 
+    --yellow: #fcc82e;
     --yellow1: #f4d169;
     --yellow2: #F3C301;
     --orange: #B85C38;

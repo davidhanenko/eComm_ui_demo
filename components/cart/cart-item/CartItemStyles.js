@@ -7,7 +7,7 @@ const CartItemStyles = styled.li`
   margin: 0 0 0rem 0;
   display: grid;
   grid-template-columns: auto 1fr auto;
-  border-bottom: 1px solid var(--blue5);
+  border-bottom: 1px solid var(--yellow1);
 
   &:last-of-type {
     border-bottom: none;
@@ -51,7 +51,7 @@ const CartItemStyles = styled.li`
           content: '|';
           font-weight: 300;
           margin: 0 1rem;
-          color: var(--blue3);
+          color: var(--green2);
         }
       }
       @media (max-width: 650px) {
@@ -87,7 +87,7 @@ const CartItemStyles = styled.li`
         margin-left: 1rem;
 
         a {
-          color: var(--blue3);
+          color: var(--green2);
 
           &:hover {
             text-decoration: underline;
@@ -132,8 +132,8 @@ const QtyControlStyles = styled.div`
     cursor: pointer;
     width: 2.3rem;
     height: 100%;
-    border: 1px solid var(--blue5);
-    background-color: var(--blue4);
+    border: 1px solid var(--green3);
+    background-color: var(--green3);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,7 +151,7 @@ const QtyControlStyles = styled.div`
     height: 100%;
     width: 3rem;
     text-align: center;
-    border: 1px solid var(--blue5);
+    border: 1px solid var(--green3);
     font-size: 1.6rem;
 
     &::-webkit-outer-spin-button,

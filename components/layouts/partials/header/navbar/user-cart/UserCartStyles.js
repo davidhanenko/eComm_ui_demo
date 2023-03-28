@@ -37,6 +37,7 @@ const UserCartStyles = styled.div`
     .user-title {
       display: none;
       @media (min-width: 850px) {
+        text-transform: capitalize;
         display: block;
         position: absolute;
         top: 100%;

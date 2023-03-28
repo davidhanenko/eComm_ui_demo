@@ -12,6 +12,10 @@ const PlaceOrderStyles = styled.div`
 
   header {
     margin-bottom: 5rem;
+
+    h1 {
+      color: var(--green3);
+    }
   }
 
   main {
@@ -26,7 +30,7 @@ const PlaceOrderStyles = styled.div`
     }
     .charge-section {
       padding: 0 0 3rem 3rem;
-      border-left: 1px solid var(--blue3);
+      border-left: 1px solid var(--green2);
     }
   }
   @media (max-width: 850px) {

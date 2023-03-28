@@ -34,8 +34,9 @@ const FoundItemStyles = styled.div`
 
     @media (hover: hover) {
       &:hover {
+        box-shadow: var(--bsHover);
         .item-img {
-          transform: scale(0.9);
+          transform: scale(0.95);
         }
       }
     }

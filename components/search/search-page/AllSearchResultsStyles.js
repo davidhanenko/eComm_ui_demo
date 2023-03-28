@@ -23,7 +23,7 @@ const SearchResultsContainerStyles = styled.div`
   }
   .total-items {
     font-size: 1.3rem;
-    border-bottom: 1px solid var(--blue3);
+    border-bottom: 1px solid var(--green2);
 
     @media (max-width: 750px) {
       width: 100%;

@@ -23,7 +23,7 @@ const CategoriesStyles = styled.div`
       left: 0;
       z-index: 1;
 
-      transition: all 0.25s;
+      transition: all 0.2s;
     }
     .service-item-title {
       position: absolute;

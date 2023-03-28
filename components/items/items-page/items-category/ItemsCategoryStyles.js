@@ -13,7 +13,7 @@ const ItemsCategoryStyles = styled.div`
     font-weight: 400;
     letter-spacing: 0.75px;
     margin-bottom: 1rem;
-    color: var(--gray);
+    color: var(--green4);
     @media (max-width: 850px) {
       font-size: 2.5rem;
     }
@@ -23,7 +23,7 @@ const ItemsCategoryStyles = styled.div`
     height: 1px;
     border: none;
     margin-bottom: 10rem;
-    background-color: lightgreen;
+    background-color: var(--green2);
     margin-left: 0;
   }
 
