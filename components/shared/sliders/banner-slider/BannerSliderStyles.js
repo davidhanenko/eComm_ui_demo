@@ -67,19 +67,21 @@ const BannerSliderStyles = styled.div`
     fill: transparent;
     transition: all 0.25s;
     padding: 0;
+
+    svg {
+      fill: var(--yellow);
+    }
   }
 
- 
-    &:hover {
-      .embla__button {
-        transform: scale(1);
-        transition: all 0.3s;
-        svg {
-          fill: var(--green4);
-        }
+  &:hover {
+    .embla__button {
+      transform: scale(1);
+      transition: all 0.3s;
+      svg {
+        opacity: 0.5;
       }
     }
-  
+  }
 
   .embla__button:disabled {
     cursor: default;
@@ -96,7 +98,8 @@ const BannerSliderStyles = styled.div`
     @media (hover: hover) {
       &:hover {
         svg {
-          fill: var(--green2);
+          fill: var(--green4);
+          opacity: 1;
         }
       }
     }
@@ -107,7 +110,8 @@ const BannerSliderStyles = styled.div`
     @media (hover: hover) {
       &:hover {
         svg {
-          fill: var(--green2);
+          fill: var(--green4);
+          opacity: 1;
         }
       }
     }

@@ -115,7 +115,7 @@ const NavStyles = styled.nav`
 const NavButtonStyles = styled.button`
   display: none;
   border: none;
-  color: var(--darkBlue);
+  color: var(--gray);
   background: transparent;
   @media (max-width: 850px) {
     display: block;

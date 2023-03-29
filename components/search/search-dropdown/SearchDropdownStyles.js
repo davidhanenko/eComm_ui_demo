@@ -69,17 +69,14 @@ const AllResultsStyles = styled.a`
 
   @media (hover: hover) {
     &:hover {
-      background: var(--green);
-      p {
-        color: var(--white);
-      }
+      background: var(--yellow);
     }
   }
 `;
 
 const CloseBtnStyles = styled.button`
   position: absolute;
-  top: 0;
+  bottom: 100%;
   right: -3rem;
   width: 3rem;
   height: 3rem;

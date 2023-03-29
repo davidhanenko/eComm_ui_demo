@@ -14,6 +14,7 @@ const PaginationContainerStyles = styled.div`
 const ItemsPerPageSelectStyles = styled.div`
   display: inline-block;
   margin-left: 2rem;
+
   p {
     display: inline;
     text-transform: capitalize;
@@ -33,6 +34,7 @@ const ItemsSortSelectStyles = styled.div`
 const PagesControlStyles = styled.div`
   display: inline;
   margin-right: 2rem;
+  font-size: 1.3rem;
 
   @media (max-width: 850px) {
     display: flex;

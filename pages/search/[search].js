@@ -34,9 +34,7 @@ const SEARCH_PAGINATION_QUERY = gql`
 
 // styles fot the pagination component on search page
 const PaginationStyles = styled.div`
-  margin-top: calc(
-    var(--navHeight) + var(--searchHeight) + 5rem
-  );
+  margin-top: calc(var(--navHeight) + var(--searchHeight));
 `;
 
 export default function SearchPage(props) {

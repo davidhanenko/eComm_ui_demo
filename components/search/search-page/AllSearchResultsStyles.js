@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const SearchResultsContainerStyles = styled.div`
   max-width: var(--maxWidth);
-  padding: 10rem 5rem 15rem 5rem;
+  padding: 5rem 5rem 15rem 5rem;
 
   min-height: 60vh;
   @media (max-width: 500px) {
@@ -11,15 +11,16 @@ const SearchResultsContainerStyles = styled.div`
 
   h3 {
     font-weight: 400;
-    font-size: 3rem;
+    font-size: 2.5rem;
     background: transparent;
     color: var(--gray);
     margin-bottom: 15rem;
   }
   span {
     font-style: italic;
-    font-weight: 700;
-    color: var(--green4);
+    font-weight: 600;
+    color: var(--green3);
+    text-decoration: underline;
   }
   .total-items {
     font-size: 1.3rem;

@@ -9,6 +9,8 @@ const ItemsSlideStyles = styled.div`
   margin: 0.5rem;
   box-shadow: var(--bs);
 
+  transition: transform 0.2s;
+
   .item-title {
     display: flex;
     justify-content: center;
@@ -16,7 +18,7 @@ const ItemsSlideStyles = styled.div`
     font-size: 2.5rem;
     text-transform: capitalize;
     font-weight: 400;
-    color: var(--gray);
+    color: var(--green3);
     z-index: 3;
     transition: all 0.2s;
     @media (max-width: 600px) {
@@ -34,6 +36,8 @@ const ItemsSlideStyles = styled.div`
   }
 
   &:hover {
+    box-shadow: var(--bsHover);
+
     .item-title {
       letter-spacing: 0.75px;
     }

@@ -35,6 +35,7 @@ const Logo = styled.div`
   transform: skew(-7deg);
   align-items: center;
   align-self: center;
+  cursor: pointer;
   a {
     color: var(--blue1);
     text-transform: uppercase;

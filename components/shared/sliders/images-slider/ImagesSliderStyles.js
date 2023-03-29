@@ -68,6 +68,7 @@ const ImagesSliderStyles = styled.div`
 
     svg {
       fill: var(--yellow);
+      opacity: 0.5;
       transition: fill 0.2s;
     }
 
@@ -75,6 +76,7 @@ const ImagesSliderStyles = styled.div`
       &:hover {
         svg {
           fill: var(--green3);
+          opacity: 0.8;
         }
       }
     }

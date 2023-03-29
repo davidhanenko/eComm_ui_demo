@@ -9,11 +9,6 @@ const GlobalStyles = createGlobalStyle`
 
     --bg: #f0f0f0;
 
-    --darkBlue:#020270;
-    --blue1: #0008a3;
-    --blue2: #0900ff;
-    /* --blue3: #87C159; */
-    --blue5: #058240;
     
     --linkBlue: #0095ff;
     
@@ -23,7 +18,6 @@ const GlobalStyles = createGlobalStyle`
     --green3: #7CA8A1;
     --green4: #4f7771;
     --green5: #058240;
-    /* 7CA8A1 */
 
     --yellow: #fcc82e;
     --yellow1: #f4d169;
@@ -41,10 +35,6 @@ const GlobalStyles = createGlobalStyle`
  
     --red: #cb4154;
 
-
-    --greenHover: #658d25;
-
-
   
     --maxWidth: 1400px;
     --midWidth: 1200px;
@@ -54,7 +44,7 @@ const GlobalStyles = createGlobalStyle`
     --searchHeight: 30px; 
     --menuHeight: 45px;
     --menuTreeHeight: 35px;
-    --layoutHeaderHeight: calc(var(--navHeight) + var(--searchHeight) + var(--menuHeight) + var(--menuTreeHeight));  
+   
 
     --bs: 0 4px 10px 0 #43704a40;
     --bs2: 0 2px 8px 0 rgba(0,0,0,0.15);

@@ -46,7 +46,7 @@ const OrdersStyles = styled.ul`
   }
 
   @media (max-width: 800px) {
-    padding: 0 2rem;
+    padding: 0 2rem 5rem 2rem;
   }
 `;
 

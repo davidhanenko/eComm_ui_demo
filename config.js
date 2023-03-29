@@ -1,7 +1,7 @@
 export const DEV_ENDPOINT = 'http://localhost:1337/graphql';
 export const PROD_ENDPOINT = `${process.env.NEXT_PUBLIC_API_URL}/graphql`;
 
-export const PER_PAGE_DEFAULT = 6;
+export const PER_PAGE_DEFAULT = 4;
 
 export const TAX_VALUE = 0.08875;
 
@@ -28,8 +28,8 @@ export const SORTING_OPTIONS = [
     title: 'New to Old',
     option: 'createdAt:desc',
   },
-  { title: 'Price, \u2191', option: 'minPrice:asc' },
-  { title: 'Price, \u2193', option: 'minPrice:desc' },
+  { title: 'Price, Low to High', option: 'minPrice:asc' },
+  { title: 'Price, High to Low', option: 'minPrice:desc' },
 ];
 
 export const SORTING_OPTIONS_ORDERS = [
@@ -45,24 +45,20 @@ export const SORTING_OPTIONS_ORDERS = [
 
 export const PER_PAGE_OPTIONS = [
   {
-    title: '2',
-    option: 2,
-  },
-  {
     title: '4',
     option: 4,
-  },
-  {
-    title: '6',
-    option: 6,
   },
   {
     title: '8',
     option: 8,
   },
   {
-    title: '10',
-    option: 10,
+    title: '12',
+    option: 12,
+  },
+  {
+    title: '24',
+    option: 24,
   },
 ];
 

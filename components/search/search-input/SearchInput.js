@@ -116,6 +116,7 @@ export default function SearchInput() {
       <button
         className='search-btn'
         onClick={handleSearchInputSubmit}
+        disabled={term === ''}
       >
         <MdSearch
           className='search-icon'
