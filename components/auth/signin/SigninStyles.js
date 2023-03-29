@@ -197,6 +197,10 @@ const FooterStyles = styled.footer`
       }
     }
   }
+
+  .modal-trigger {
+    margin: 1rem 0;
+  }
 `;
 
 export {

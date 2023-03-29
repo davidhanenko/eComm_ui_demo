@@ -5,12 +5,12 @@ const ResetPswdStyles = styled.div`
   margin: 18rem auto;
   text-align: center;
   min-height: 50vh;
-  box-shadow: 0px 0px 3px 1px var(--blue5);
+  box-shadow: 0px 0px 3px 1px var(--green2);
   padding: 5rem 3rem;
 
   h1 {
     font-size: 2.6rem;
-    color: var(--green2);
+    color: var(--green4);
     font-weight: 400;
   }
 

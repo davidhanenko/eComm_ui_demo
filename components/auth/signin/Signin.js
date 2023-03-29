@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +13,7 @@ import Oval from 'react-loader-spinner';
 import { FcGoogle } from 'react-icons/fc';
 import { useRouter } from 'next/router';
 import { signIn } from 'next-auth/react';
+import Modal from '../../shared/modal/Modal';
 
 export default function Signin({ providers }) {
   const {
@@ -179,7 +181,9 @@ export default function Signin({ providers }) {
         <Link href='/auth/password/request-password-reset'>
           Forgot password?
         </Link>
-        <p className='terms'>Terms of use</p>
+        <div className='modal-trigger'>
+          <Modal modalTitle={'terms of use'} />
+        </div>
       </FooterStyles>
     </SigninStyles>
   );

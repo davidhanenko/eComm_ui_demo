@@ -78,6 +78,17 @@ export default function SubCategoryCollection({
 
   const collectionItems = data?.singleItems?.data;
 
+  if (!loading && collectionItems?.length === 0) {
+    return (
+      <SubCategoryCollectionStyles>
+        <div className='collection-container'>
+          <div className='no-items'>
+            <p>Nothing here yet...</p>
+          </div>
+        </div>
+      </SubCategoryCollectionStyles>
+    );
+  }
   return (
     <SubCategoryCollectionStyles>
       <Head>
@@ -101,20 +112,15 @@ export default function SubCategoryCollection({
       <hr className='title-underline' />
 
       <div className='collection-container'>
-        {collectionItems?.length > 0 ? (
-          collectionItems?.map(item => (
-            <CollectionItem
-              key={item?.id}
-              item={item?.attributes}
-              items={items}
-              collection={collection}
-            />
-          ))
-        ) : (
-          <div className='no-items'>
-            <p>Nothing here yet...</p>
-          </div>
-        )}
+        {collectionItems?.map(item => (
+          <CollectionItem
+            key={item?.id}
+            item={item?.attributes}
+            items={items}
+            collection={collection}
+            loading={loading}
+          />
+        ))}
       </div>
     </SubCategoryCollectionStyles>
   );

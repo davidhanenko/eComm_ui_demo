@@ -294,7 +294,7 @@ export default function Signup() {
       <Link href={`/auth/account/${session?.id}`}>
         Go to your Account
       </Link>{' '}
-      <span> or use the navigation to continue</span>
+      <p> or use the navigation to continue</p>
       <button onClick={() => signOut()}>Sign Out</button>
     </SignUpSessionStyles>
   );

@@ -1,4 +1,4 @@
-import Image from 'next/image';
+
 import gql from 'graphql-tag';
 import { useMutation, useQuery } from '@apollo/client';
 import { useEffect, useRef, useState } from 'react';

@@ -169,15 +169,19 @@ const SignUpSessionStyles = styled.div`
   text-align: center;
   height: 100%;
 
-  box-shadow: 0px 0px 3px 1px var(--green);
+  box-shadow: 0px 0px 3px 1px var(--green2);
 
   p {
     font-size: 2rem;
     color: var(--gray);
+
+    &:last-of-type {
+      font-size: 1.5rem;
+    }
   }
 
   span {
-    color: var(--blue1);
+    color: var(--green3);
   }
 
   hr {
@@ -186,8 +190,8 @@ const SignUpSessionStyles = styled.div`
   }
 
   a {
-    color: var(--green2);
-
+    color: var(--linkBlue);
+  
     @media (hover: hover) {
       &:hover {
         text-decoration: underline;
@@ -201,7 +205,7 @@ const SignUpSessionStyles = styled.div`
     border: none;
     outline: none;
     background: none;
-    color: var(--green2);
+    color: var(--linkBlue);
     cursor: pointer;
   }
 
