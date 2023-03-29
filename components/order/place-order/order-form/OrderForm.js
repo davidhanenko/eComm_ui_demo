@@ -28,6 +28,7 @@ export default function OrderForm({
   items_details,
   single_items,
   me,
+  user,
 }) {
   const { setCart } = useCart();
 
@@ -46,9 +47,9 @@ export default function OrderForm({
     mode: 'onBlur',
     defaultValues: {
       name: me?.username || '',
-      company: me?.company || '',
+      company: user?.company || '',
       email: me?.email || '',
-      phone: me?.phone || '',
+      phone: user?.phone || '',
       orderNotes: '',
     },
   });
