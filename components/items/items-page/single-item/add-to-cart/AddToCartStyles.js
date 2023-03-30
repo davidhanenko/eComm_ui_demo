@@ -18,17 +18,20 @@ const AddToCartStyles = styled.div`
     align-items: center;
     transition: all 0.2s;
 
+    user-select: none;
+
     .cart-icon {
       font-size: 2rem;
       margin-left: 0.5rem;
     }
 
+    @media (hover: hover) {
       &:hover {
         background: var(--yellow);
       }
-    
+    }
 
-    @media(max-width: 850px) {
+    @media (max-width: 850px) {
       margin-top: 3rem;
     }
   }
