@@ -59,7 +59,7 @@ export default function ServicePage(props) {
               props?.services?.data[0]?.attributes
                 ?.metatags[0]?.metaTitle
             )}{' '}
-          - A2Z
+          - Demo-Ui
         </title>
         <meta
           name='description'

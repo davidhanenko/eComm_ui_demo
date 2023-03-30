@@ -61,7 +61,7 @@ export default function SingleItemPage(props) {
             capitalizeStr(
               singleItem?.attributes?.itemTitle
             )}{' '}
-          - A2Z
+          - Demo-UI
         </title>
         <meta
           name='description'

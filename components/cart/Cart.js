@@ -14,6 +14,7 @@ import { CartStyles } from './CartStyles';
 import Modal from './modal/Modal';
 import { MdClose } from 'react-icons/md';
 import EmptyCart from '../shared/EmptyCart';
+import useUser from '../auth/User';
 
 const USER_CART_QUERY = gql`
   query USER_CART_QUERY($id: ID!) {
@@ -57,12 +58,14 @@ export default function Cart() {
     setTotalCost,
   } = useCart();
 
+  const me = useUser();
+
   // user session
   const { data: session } = useSession();
 
   // get user query
   const [
-    fetchUserCart,
+    fetchCart,
     { data: userData, loading: userLoading },
   ] = useLazyQuery(USER_CART_QUERY, {
     variables: {
@@ -70,8 +73,14 @@ export default function Cart() {
     },
   });
 
+  useEffect(() => {
+    if (me) {
+      fetchCart();
+    }
+  }, [me, session]);
+
   //  update user cart mutation
-  const [updateUsersPermissionsUser, { data, error }] =
+  const [updateUsersPermissionsUser, { error }] =
     useMutation(UPDATE_USER_CART_MUTATION);
 
   // purchase policy modal window state
@@ -108,57 +117,48 @@ export default function Cart() {
     };
   }, [isCartOpen]);
 
-  useEffect(() => {
-    if (session) {
-      fetchUserCart();
-    }
-  }, [session]);
-
   // check if cart has items before set initial state
   // if yes - fill cart with items from local storage
   useEffect(() => {
-    if (userData) {
-      const cartData =
-        JSON.parse(localStorage.getItem('cart')).length > 0
-          ? JSON.parse(localStorage.getItem('cart'))
-          : [];
+    const mergeCart = async () => {
+      if (me) {
+        if (userData) {
+          const cartData = await JSON.parse(
+            localStorage.getItem('cart') ?? '[]'
+          );
 
-      const userCart =
-        typeof userData?.usersPermissionsUser?.data
-          ?.attributes?.cart !== 'object'
-          ? JSON.parse(
-              userData?.usersPermissionsUser?.data
-                ?.attributes?.cart
-            )
-          : userData?.usersPermissionsUser?.data?.attributes
-              ?.cart ?? [];
+          const userCart = JSON.parse(
+            userData?.usersPermissionsUser?.data?.attributes
+              ?.cart
+          );
 
-      const newCart = [...cartData, ...userCart];
+          const newCart = [...cartData, ...userCart];
 
-      // clear cart in localStorage
-      localStorage.setItem('cart', '[]');
+          let obj = {};
 
-      let obj = {};
+          for (let el of newCart) {
+            if (!obj[el.cartId]) {
+              obj[el.cartId] = el;
+            } else {
+              obj[el.cartId].quantity += el.quantity;
+            }
+          }
 
-      for (let el of newCart) {
-        if (!obj[el.cartId]) {
-          obj[el.cartId] = el;
-        } else {
-          obj[el.cartId].quantity += el.quantity;
+          // updated/merged cart
+          setCart(
+            Object.keys(obj).map(el => (el = obj[el]))
+          );
+
+          localStorage.setItem('cart', '[]');
         }
+      } else {
+        setCart(
+          await JSON.parse(localStorage.getItem('cart'))
+        );
       }
-
-      setCart(Object.keys(obj).map(el => (el = obj[el])));
-    } else {
-      const cartData =
-        JSON.parse(localStorage.getItem('cart')).length > 0
-          ? JSON.parse(localStorage.getItem('cart'))
-          : [];
-
-      if (cartData !== null || cartData?.length > 0)
-        setCart(cartData);
-    }
-  }, [userData]);
+    };
+    mergeCart();
+  }, [userLoading]);
 
   // calc total cost for all items in the cart
   useEffect(() => {
@@ -173,30 +173,21 @@ export default function Cart() {
       );
 
       // update user cart
-      if (session) {
-        // console.log('test', data, cart);
+      if (me) {
         await updateUsersPermissionsUser({
           variables: {
-            id: session?.id,
+            id: me?.id,
             data: { cart: JSON.stringify(cart) },
           },
         });
       } else {
         // set items from cart to localStorage
-        if (
-          JSON.parse(localStorage.getItem('cart')).length >
-          0
-        ) {
-          localStorage.setItem(
-            'cart',
-            JSON.stringify(cart)
-          );
-        }
+        localStorage.setItem('cart', JSON.stringify(cart));
       }
     };
 
     handleCart();
-  }, [cart, totalCost, count, session]);
+  }, [cart, totalCost, count]);
 
   const handlePlaceOrder = () => {
     closeCart();

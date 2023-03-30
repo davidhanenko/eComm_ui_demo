@@ -143,7 +143,6 @@ export default function Account({ id }) {
 
 function SingleOrder({ order, handleOrderSelect }) {
   let orderDetails = order?.attributes?.order_details;
-  let itemsDetails = order?.attributes?.items_details;
 
   orderDetails =
     typeof orderDetails !== 'object'

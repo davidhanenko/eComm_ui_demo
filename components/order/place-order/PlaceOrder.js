@@ -11,42 +11,13 @@ import useUser from '../../auth/User';
 import RequestOrderComponent from '../order-request/request-component/RequestOrderComponent';
 import EmptyCart from '../../shared/EmptyCart';
 
-const CURRENT_USER_QUERY = gql`
-  query CURRENT_USER_QUERY($id: ID!) {
-    usersPermissionsUser(id: $id) {
-      data {
-        id
-        attributes {
-          username
-          email
-          phone
-          company
-        }
-      }
-    }
-  }
-`;
-
 export default function PlaceOrder() {
-  const [user, setUser] = useState();
   const {
     cart,
     count,
     totalCost: costFromCart,
   } = useCart();
   const me = useUser();
-
-
-
-  const { data } = useQuery(CURRENT_USER_QUERY, {
-    variables: {
-      id: me?.id,
-    },
-  });
-
-  useEffect(() => {
-    setUser(data?.usersPermissionsUser?.data?.attributes);
-  }, [me, user]);
 
   const ids = cart.map(
     el => (el = el.cartId.split('-')[0])
@@ -98,7 +69,6 @@ export default function PlaceOrder() {
               items_details={cart}
               single_items={[...ids]}
               me={me}
-              user={user}
             />
           ) : (
             <RequestOrderComponent />

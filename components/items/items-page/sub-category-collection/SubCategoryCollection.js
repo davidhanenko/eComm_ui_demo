@@ -99,7 +99,7 @@ export default function SubCategoryCollection({
                 ?.itemsCategories?.data[0]?.attributes
                 ?.categoryTitle
             )}{' '}
-          - A2Z
+          - Demo-UI
         </title>
       </Head>
       <h3 className='collection-title'>

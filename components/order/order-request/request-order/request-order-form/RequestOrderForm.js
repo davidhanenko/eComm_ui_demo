@@ -28,7 +28,7 @@ export default function RequestOrderForm({
   items_details,
   single_items,
 }) {
-  const { setCart, cartReload, setCartReload } = useCart();
+  const { setCart } = useCart();
 
   const {
     register,
@@ -107,11 +107,14 @@ export default function RequestOrderForm({
           placeholder='Full name'
           className={dirtyFields.name ? 'input-dirty' : ''}
           {...register('name', {
-            disabled: isSubmitting || loading,
             required: 'Name is required',
             minLength: {
               value: 3,
               message: 'Seems to short',
+            },
+            maxLength: {
+              value: 35,
+              message: 'Name is too long',
             },
           })}
         />
@@ -131,7 +134,6 @@ export default function RequestOrderForm({
             dirtyFields.company ? 'input-dirty' : ''
           }
           {...register('company', {
-            disabled: isSubmitting || loading,
           })}
         />
         {
@@ -147,7 +149,6 @@ export default function RequestOrderForm({
           placeholder='Email'
           className={dirtyFields.email ? 'input-dirty' : ''}
           {...register('email', {
-            disabled: isSubmitting || loading,
             required: 'Email is required',
             pattern: {
               value:
@@ -170,7 +171,6 @@ export default function RequestOrderForm({
           placeholder='Phone #'
           className={dirtyFields.phone ? 'input-dirty' : ''}
           {...register('phone', {
-            disabled: isSubmitting || loading,
             required: 'Phone number is required',
             pattern: {
               value:

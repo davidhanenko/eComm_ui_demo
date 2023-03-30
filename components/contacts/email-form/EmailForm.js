@@ -43,8 +43,8 @@ export default function EmailForm({ emailTo }) {
         to: emailTo,
         from: values.email,
         subject: values.subject
-          ? `${values.subject} - from A2Z`
-          : 'Email from A2Z website',
+          ? `${values.subject} - from Demo-UI`
+          : 'Email from Demo-UI website',
         text: `<h3>My name is ${values.name}</h3> <h3>My email - <em>${values.email}</em></h3>
         <p>${values.emailMessage}</p>`,
       },
