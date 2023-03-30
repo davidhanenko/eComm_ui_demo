@@ -71,7 +71,7 @@ export default function Cart() {
   });
 
   //  update user cart mutation
-  const [updateUsersPermissionsUser, { error }] =
+  const [updateUsersPermissionsUser, { data, error }] =
     useMutation(UPDATE_USER_CART_MUTATION);
 
   // purchase policy modal window state
@@ -112,17 +112,16 @@ export default function Cart() {
     if (session) {
       fetchUserCart();
     }
-    console.log('run', session);
   }, [session]);
-
 
   // check if cart has items before set initial state
   // if yes - fill cart with items from local storage
   useEffect(() => {
     if (userData) {
-      const cartData = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : '[]';
+      const cartData =
+        JSON.parse(localStorage.getItem('cart')).length > 0
+          ? JSON.parse(localStorage.getItem('cart'))
+          : [];
 
       const userCart =
         typeof userData?.usersPermissionsUser?.data
@@ -151,14 +150,15 @@ export default function Cart() {
 
       setCart(Object.keys(obj).map(el => (el = obj[el])));
     } else {
-      const cartData = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : '[]';
+      const cartData =
+        JSON.parse(localStorage.getItem('cart')).length > 0
+          ? JSON.parse(localStorage.getItem('cart'))
+          : [];
 
       if (cartData !== null || cartData?.length > 0)
         setCart(cartData);
     }
-  }, [session, userLoading]);
+  }, [userData]);
 
   // calc total cost for all items in the cart
   useEffect(() => {
@@ -174,6 +174,7 @@ export default function Cart() {
 
       // update user cart
       if (session) {
+        // console.log('test', data, cart);
         await updateUsersPermissionsUser({
           variables: {
             id: session?.id,
@@ -182,12 +183,20 @@ export default function Cart() {
         });
       } else {
         // set items from cart to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
+        if (
+          JSON.parse(localStorage.getItem('cart')).length >
+          0
+        ) {
+          localStorage.setItem(
+            'cart',
+            JSON.stringify(cart)
+          );
+        }
       }
     };
 
     handleCart();
-  }, [cart, totalCost, count]);
+  }, [cart, totalCost, count, session]);
 
   const handlePlaceOrder = () => {
     closeCart();

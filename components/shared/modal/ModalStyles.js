@@ -9,6 +9,7 @@ const ModalStyles = styled.button`
   cursor: pointer;
   transition: all 0.2s;
   text-transform: capitalize;
+  background: none;
 
   &:hover {
     text-decoration: underline;

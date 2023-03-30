@@ -36,6 +36,8 @@ export default function PlaceOrder() {
   } = useCart();
   const me = useUser();
 
+
+
   const { data } = useQuery(CURRENT_USER_QUERY, {
     variables: {
       id: me?.id,
