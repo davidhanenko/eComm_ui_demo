@@ -65,7 +65,7 @@ export default function AddToCart({
   return (
     <AddToCartStyles>
       <button onClick={handleAdd}>
-        add to <GiShoppingCart className='cart-icon' />{' '}
+        add to <GiShoppingCart className='cart-icon' />
       </button>
     </AddToCartStyles>
   );

@@ -6,7 +6,7 @@ const SubCategoryItemStyles = styled.div`
   display: grid;
   background: var(--white);
 
-  transition: all 0.25s;
+  transition: all 0.2s;
 
   a {
     min-width: 100%;
@@ -15,7 +15,7 @@ const SubCategoryItemStyles = styled.div`
 
     hr {
       background-color: var(--yellow2);
-      transition: all 0.25s;
+      transition: all 0.2s;
     }
 
     .subcategory-title {
@@ -24,7 +24,9 @@ const SubCategoryItemStyles = styled.div`
       font-size: 1.6rem;
       text-transform: capitalize;
       letter-spacing: 0.5px;
-      transition: all 0.25s;
+      transition: all 0.2s;
+
+      height: 3rem;
 
       @media (max-width: 600px) {
         font-size: 1.3rem;
@@ -32,24 +34,22 @@ const SubCategoryItemStyles = styled.div`
     }
 
     .sub-image {
-      transition: all 0.25s;
+      transition: all 0.2s;
     }
   }
 
-  @media (hover: hover) {
-    &:hover {
-      box-shadow: var(--bsHover);
-      hr {
-        transform: scale(0.95);
-      }
+  &:hover {
+    box-shadow: var(--bsHover);
+    hr {
+      transform: scale(0.95);
+    }
 
-      .subcategory-title {
-        letter-spacing: 0.1px;
-      }
+    .subcategory-title {
+      letter-spacing: 0.1px;
+    }
 
-      .sub-image {
-        transform: scale(0.95);
-      }
+    .sub-image {
+      transform: scale(0.95);
     }
   }
 

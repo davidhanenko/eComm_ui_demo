@@ -8,7 +8,7 @@ const CollectionItemStyles = styled.div`
   background: var(--white);
   display: grid;
 
-  transition: all 0.25s;
+  transition: all 0.2s;
 
   a {
     min-width: 100%;
@@ -33,7 +33,7 @@ const CollectionItemStyles = styled.div`
 
     hr {
       background-color: var(--yellow2);
-      transition: all 0.25s;
+      transition: all 0.2s;
     }
 
     .collection-item-title {
@@ -42,7 +42,7 @@ const CollectionItemStyles = styled.div`
       font-weight: 400;
       font-size: 1.6rem;
       letter-spacing: 0.5px;
-      transition: all 0.25s;
+      transition: all 0.2s;
 
       @media (max-width: 600px) {
         font-size: 1.3rem;
@@ -50,23 +50,22 @@ const CollectionItemStyles = styled.div`
     }
 
     .item-img {
-      transition: all 0.25s;
+      transition: all 0.2s;
     }
   }
-  @media (hover: hover) {
-    &:hover {
-      box-shadow: var(--bsHover);
 
-      hr {
-        transform: scaleX(0.95);
-      }
-      .collection-item-title {
-        letter-spacing: 0.1px;
-      }
+  &:hover {
+    box-shadow: var(--bsHover);
 
-      .item-img {
-        transform: scale(0.95);
-      }
+    hr {
+      transform: scaleX(0.95);
+    }
+    .collection-item-title {
+      letter-spacing: 0.1px;
+    }
+
+    .item-img {
+      transform: scale(0.95);
     }
   }
 `;

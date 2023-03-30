@@ -20,6 +20,10 @@ const DropdownSelectStyles = styled.div`
       transform: scale(1.7);
       margin-left: 1rem;
     }
+
+    @media (max-width: 600px) {
+      font-size: 1.4rem;
+    }
   }
 
   #sort-dropdown {

@@ -8,6 +8,7 @@ import capitalizeStr from '../../../../helpers/capitalizeStr';
 
 import { SubCategoryCollectionStyles } from './SubCategoryCollectionStyles';
 import CollectionItem from './collection-item/CollectionItem';
+import LoaderContainer from '../../../shared/loaders/loader-container/LoaderContainer';
 
 const ITEMS_SUBCATEGORY_COLLECTION_QUERY = gql`
   query ITEMS_SUBCATEGORY_COLLECTION_QUERY(
@@ -78,13 +79,15 @@ export default function SubCategoryCollection({
 
   const collectionItems = data?.singleItems?.data;
 
-  if (!loading && collectionItems?.length === 0) {
+  const arr = new Array(itemsCount).fill(1);
+
+  if (loading) {
     return (
       <SubCategoryCollectionStyles>
         <div className='collection-container'>
-          <div className='no-items'>
-            <p>Nothing here yet...</p>
-          </div>
+          {arr?.map((item, i) => (
+            <LoaderContainer key={i} height={'250px'} />
+          ))}
         </div>
       </SubCategoryCollectionStyles>
     );
@@ -118,9 +121,16 @@ export default function SubCategoryCollection({
             item={item?.attributes}
             items={items}
             collection={collection}
-            loading={loading}
           />
         ))}
+        {collectionItems &&
+          collectionItems?.length === 0 && (
+            <div className='collection-container'>
+              <div className='no-items'>
+                <p>Nothing here yet...</p>
+              </div>
+            </div>
+          )}
       </div>
     </SubCategoryCollectionStyles>
   );

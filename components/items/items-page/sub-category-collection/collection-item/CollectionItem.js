@@ -2,26 +2,16 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import LoaderContainer from '../../../../shared/loaders/loader-container/LoaderContainer';
 import { CollectionItemStyles } from './CollectionItemStyles';
 
 export default function CollectionItem({
   item,
   items,
   collection,
-  loading,
 }) {
   const router = useRouter();
   // current service
   const service = router.asPath.split('/')[1];
-
-  if (loading) {
-    return (
-      <CollectionItemStyles>
-        <LoaderContainer height={'250px'} />
-      </CollectionItemStyles>
-    );
-  }
 
   return (
     <CollectionItemStyles>

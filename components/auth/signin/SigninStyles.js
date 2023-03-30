@@ -64,7 +64,7 @@ const GoogleBtnStyles = styled.button`
   transition: all 0.25s;
   cursor: pointer;
 
-  @media (hover: hover) {
+  /* @media (hover: hover) { */
     &:hover {
       background-color: var(--yellow);
     }
@@ -81,7 +81,7 @@ const GoogleBtnStyles = styled.button`
         margin-left: 1rem;
       }
     }
-  }
+  /* } */
 
   @media (max-width: 600px) {
     font-size: 1.1rem;
@@ -165,12 +165,12 @@ const FormStyles = styled.form`
       width: 100%;
     }
 
-    @media (hover: hover) {
+    /* @media (hover: hover) { */
       &:hover {
         cursor: pointer;
         background-color: var(--yellow);
       }
-    }
+    /* } */
 
     @media (max-width: 600px) {
       padding: 1.25rem;

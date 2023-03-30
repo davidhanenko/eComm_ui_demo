@@ -25,11 +25,11 @@ const AddToCartStyles = styled.div`
       margin-left: 0.5rem;
     }
 
-    @media (hover: hover) {
+    /* @media (hover: hover) { */
       &:hover {
         background: var(--yellow);
       }
-    }
+    /* } */
 
     @media (max-width: 850px) {
       margin-top: 3rem;

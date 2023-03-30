@@ -41,6 +41,7 @@ const PagesControlStyles = styled.div`
     justify-content: end;
     padding-top: 3rem;
     align-items: center;
+    font-size: 1.4rem;
   }
 
   a {
