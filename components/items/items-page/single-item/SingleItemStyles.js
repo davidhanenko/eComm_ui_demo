@@ -53,11 +53,18 @@ const SingleItemStyles = styled.div`
 
       .is-available,
       .not-available,
-      .available-pickup,
-      .available-delivery {
+      .available-pickup {
         display: flex;
         align-items: center;
         font-size: 1.4rem;
+      }
+
+      .available-delivery {
+        span {
+          display: flex;
+          align-items: center;
+          font-size: 1.4rem;
+        }
       }
     }
   }

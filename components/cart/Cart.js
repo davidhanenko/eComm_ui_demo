@@ -1,13 +1,15 @@
-
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/client';
+import {
+  useLazyQuery,
+  useMutation,
+  useQuery,
+} from '@apollo/client';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useCart } from '../../context/cartState';
 import { useSession } from 'next-auth/react';
 import CartItem from './cart-item/CartItem';
 import { CartStyles } from './CartStyles';
-
 
 import Modal from './modal/Modal';
 import { MdClose } from 'react-icons/md';
@@ -59,14 +61,14 @@ export default function Cart() {
   const { data: session } = useSession();
 
   // get user query
-  const { data: userData, loading: userLoading } = useQuery(
-    USER_CART_QUERY,
-    {
-      variables: {
-        id: session?.id,
-      },
-    }
-  );
+  const [
+    fetchUserCart,
+    { data: userData, loading: userLoading },
+  ] = useLazyQuery(USER_CART_QUERY, {
+    variables: {
+      id: session?.id,
+    },
+  });
 
   //  update user cart mutation
   const [updateUsersPermissionsUser, { error }] =
@@ -106,6 +108,14 @@ export default function Cart() {
     };
   }, [isCartOpen]);
 
+  useEffect(() => {
+    if (session) {
+      fetchUserCart();
+    }
+    console.log('run', session);
+  }, [session]);
+
+
   // check if cart has items before set initial state
   // if yes - fill cart with items from local storage
   useEffect(() => {
@@ -115,10 +125,14 @@ export default function Cart() {
         : '[]';
 
       const userCart =
-        JSON.parse(
-          userData?.usersPermissionsUser?.data?.attributes
-            ?.cart
-        ) ?? [];
+        typeof userData?.usersPermissionsUser?.data
+          ?.attributes?.cart !== 'object'
+          ? JSON.parse(
+              userData?.usersPermissionsUser?.data
+                ?.attributes?.cart
+            )
+          : userData?.usersPermissionsUser?.data?.attributes
+              ?.cart ?? [];
 
       const newCart = [...cartData, ...userCart];
 

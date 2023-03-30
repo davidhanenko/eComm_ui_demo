@@ -74,7 +74,6 @@ const ReturnPolicyPageStyles = styled.main`
 `;
 
 export default function Policy({ page }) {
-
   const { data, loading } = useQuery(POLICY_QUERY, {
     variables: {
       page: page,
@@ -90,8 +89,6 @@ export default function Policy({ page }) {
   const imageUrl =
     data?.infoPages?.data[0]?.attributes?.image1?.data
       ?.attributes?.url;
-
-  console.log(data);
 
   if (loading) {
     return <LoaderContainer height={'100vh'} />;

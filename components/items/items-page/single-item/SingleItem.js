@@ -99,14 +99,15 @@ export default function SingleItem({ singleItem, link }) {
 
           <div className='available-delivery'>
             {singleItem?.attributes?.isDelivery && (
-              <div>
-                singleItem?.attributes?.isDelivery === false
-                ? (
-                <FaRegTimesCircle className='red-times' />
+              <span>
+                {singleItem?.attributes?.isDelivery ===
+                false ? (
+                  <FaRegTimesCircle className='red-times' />
                 ) : (
-                <FaRegCheckCircle className='green-check' />
-                )<p>available for delivery</p>
-              </div>
+                  <FaRegCheckCircle className='green-check' />
+                )}
+                <p>available for delivery</p>
+              </span>
             )}
           </div>
         </div>
