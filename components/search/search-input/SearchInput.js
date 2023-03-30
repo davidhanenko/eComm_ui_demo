@@ -117,6 +117,7 @@ export default function SearchInput() {
         className='search-btn'
         onClick={handleSearchInputSubmit}
         disabled={term === ''}
+        aria-label='Search'
       >
         <MdSearch
           className='search-icon'

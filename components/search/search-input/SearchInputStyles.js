@@ -29,7 +29,7 @@ const SearchInputStyles = styled.div`
     }
     &:focus {
       outline: none;
-      border: 1px solid var(yellow);
+      border: 1px solid var(--yellow);
     }
     &.loading {
       animation: ${glow} 0.6s ease-in-out infinite alternate;

@@ -127,7 +127,7 @@ const SlideStyles = styled.div`
       transform-origin: top;
       animation: ${slideHeaderAnimation} 1s;
     }
-    h4 {
+    p {
       font-size: 2rem;
       color: white;
       margin: 0;
