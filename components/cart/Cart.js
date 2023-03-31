@@ -118,45 +118,42 @@ export default function Cart() {
 
   // check if cart has items before set initial state
   // if yes - fill cart with items from local storage
-  // useEffect(() => {
-  //   const mergeCart = async () => {
-  //     if (session) {
-  //         const cartData = await JSON.parse(
-  //           localStorage.getItem('cart') ?? '[]'
-  //         );
+  useEffect(() => {
+    const mergeCart = async () => {
+      if (session) {
+        const cartData = await JSON.parse(
+          localStorage.getItem('cart') ?? '[]'
+        );
 
-  //         const userCart = JSON.parse(
-  //           userData?.usersPermissionsUser?.data?.attributes
-  //             ?.cart
-  //         );
+        const userCart = JSON.parse(
+          userData?.usersPermissionsUser?.data?.attributes
+            ?.cart
+        );
 
-  //         const newCart = [...cartData, ...userCart];
+        const newCart = [...cartData, ...userCart];
 
-  //         let obj = {};
+        let obj = {};
 
-  //         for (let el of newCart) {
-  //           if (!obj[el.cartId]) {
-  //             obj[el.cartId] = el;
-  //           } else {
-  //             obj[el.cartId].quantity += el.quantity;
-  //           }
-  //         }
+        for (let el of newCart) {
+          if (!obj[el.cartId]) {
+            obj[el.cartId] = el;
+          } else {
+            obj[el.cartId].quantity += el.quantity;
+          }
+        }
 
-  //         // updated/merged cart
-  //         setCart(
-  //           Object.keys(obj).map(el => (el = obj[el]))
-  //         );
+        // updated/merged cart
+        setCart(Object.keys(obj).map(el => (el = obj[el])));
 
-  //         localStorage.setItem('cart', '[]');
-        
-  //     } else {
-  //       setCart(
-  //         await JSON.parse(localStorage.getItem('cart'))
-  //       );
-  //     }
-  //   };
-  //   mergeCart();
-  // }, [userLoading]);
+        localStorage.setItem('cart', '[]');
+      } else {
+        setCart(
+          await JSON.parse(localStorage.getItem('cart'))
+        );
+      }
+    };
+    mergeCart();
+  }, [userLoading]);
 
   // calc total cost for all items in the cart
   useEffect(() => {
@@ -184,9 +181,10 @@ export default function Cart() {
       }
     };
 
-    handleCart();
+    setTimeout(() => {
+      handleCart();
+    }, 100);
   }, [cart, totalCost, count]);
-
   const handlePlaceOrder = () => {
     closeCart();
     router.push('/place-order');
