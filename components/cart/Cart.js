@@ -63,14 +63,14 @@ export default function Cart() {
   const { data: session } = useSession();
 
   // get user query
-  const [
-    fetchCart,
-    { data: userData, loading: userLoading },
-  ] = useLazyQuery(USER_CART_QUERY, {
-    variables: {
-      id: session?.id,
-    },
-  });
+  const { data: userData, loading: userLoading } = useQuery(
+    USER_CART_QUERY,
+    {
+      variables: {
+        id: session?.id,
+      },
+    }
+  );
 
   //  update user cart mutation
   const [updateUsersPermissionsUser, { error }] =
@@ -82,11 +82,11 @@ export default function Cart() {
   const router = useRouter();
   const cartRef = useRef(null);
 
-  useEffect(() => {
-    if (session) {
-      fetchCart();
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session) {
+  //     fetchCart();
+  //   }
+  // }, [session]);
 
   // close cart on click outside
   useEffect(() => {
