@@ -121,30 +121,34 @@ export default function Cart() {
   useEffect(() => {
     const mergeCart = () => {
       if (session) {
-        const cartData = JSON.parse(
-          localStorage.getItem('cart') ?? '[]'
-        );
+        if (userData) {
+          const cartData = JSON.parse(
+            localStorage.getItem('cart') ?? '[]'
+          );
 
-        const userCart = JSON.parse(
-          userData?.usersPermissionsUser?.data?.attributes
-            ?.cart
-        );
+          const userCart = JSON.parse(
+            userData?.usersPermissionsUser?.data?.attributes
+              ?.cart
+          );
 
-        const newCart = [...cartData, ...userCart];
+          const newCart = [...cartData, ...userCart];
 
-        let obj = {};
+          let obj = {};
 
-        for (let el of newCart) {
-          if (!obj[el.cartId]) {
-            obj[el.cartId] = el;
-          } else {
-            obj[el.cartId].quantity += el.quantity;
+          for (let el of newCart) {
+            if (!obj[el.cartId]) {
+              obj[el.cartId] = el;
+            } else {
+              obj[el.cartId].quantity += el.quantity;
+            }
           }
-        }
 
-        // updated/merged cart
-        setCart(Object.keys(obj).map(el => (el = obj[el])));
-        localStorage.setItem('cart', '[]');
+          // updated/merged cart
+          setCart(
+            Object.keys(obj).map(el => (el = obj[el]))
+          );
+          localStorage.setItem('cart', '[]');
+        }
       } else {
         setCart(JSON.parse(localStorage.getItem('cart')));
       }
@@ -152,7 +156,7 @@ export default function Cart() {
     setTimeout(() => {
       mergeCart();
     }, 100);
-  }, []);
+  }, [userLoading]);
 
   // calc total cost for all items in the cart
   useEffect(() => {
@@ -180,8 +184,9 @@ export default function Cart() {
         console.log(localStorage.getItem('cart'));
       }
     };
-
-    handleCart();
+    setTimeout(() => {
+      handleCart();
+    }, 300);
   }, [cart, totalCost, count]);
 
   const handlePlaceOrder = () => {
