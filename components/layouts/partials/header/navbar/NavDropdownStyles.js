@@ -20,12 +20,12 @@ const DropdownBtnStyles = styled.button`
   cursor: pointer;
 
   svg {
-    color: inherit;
+    color: var(--gray);
     transform: scale(1.3);
   }
 
   @media (max-width: 850px) {
-    border: 0.1px solid var(--yellow);
+    border: 1px solid var(--yellow);
     height: 2.5rem;
     width: 2.5rem;
     display: flex;

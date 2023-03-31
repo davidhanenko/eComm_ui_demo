@@ -9,9 +9,14 @@ import {
 } from '../../lib/apollo';
 
 import capitalizeStr from '../../helpers/capitalizeStr';
+import LoaderContainer from '../../components/shared/loaders/loader-container/LoaderContainer';
 
-const Items = dynamic(() =>
-  import('../../components/items/items-page/items/Items')
+const Items = dynamic(
+  () =>
+    import('../../components/items/items-page/items/Items'),
+  {
+    loading: () => <LoaderContainer height={'500px'} />,
+  }
 );
 
 export const ITEMS_PAGE_QUERY = gql`

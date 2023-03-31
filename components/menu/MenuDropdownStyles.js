@@ -33,7 +33,7 @@ const DropdownBtnStyles = styled.button`
   @media (max-width: 650px) {
     position: fixed;
     right: 2rem;
-    border: 0.1px solid var(--yellow);
+    border: 1px solid var(--yellow);
     height: 2.5rem;
     width: 2.5rem;
     display: flex;

@@ -21,17 +21,17 @@ export default function AddToCart({
 
   // add item to cart
   const handleAdd = () => {
-    // if (!isAvailable || qty === 0) {
-    //   toast.info(
-    //     'Current item or item with selected type and size is not available at this moment',
-    //     {
-    //       position: 'top-right',
-    //       autoClose: 4000,
-    //     }
-    //   );
+    if (!isAvailable || qty === 0) {
+      toast.info(
+        'Current item or item with selected type and size is not available at this moment',
+        {
+          position: 'top-right',
+          autoClose: 4000,
+        }
+      );
 
-    //   return;
-    // }
+      return;
+    }
 
     // check if there is same item in the cart
     const itemIsInCart = cart.some(

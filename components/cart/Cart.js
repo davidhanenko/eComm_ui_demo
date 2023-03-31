@@ -58,8 +58,7 @@ export default function Cart() {
     setTotalCost,
   } = useCart();
 
-  const me = useUser();
-
+  // const me = useUser();
   // user session
   const { data: session } = useSession();
 
@@ -73,12 +72,6 @@ export default function Cart() {
     },
   });
 
-  useEffect(() => {
-    if (me) {
-      fetchCart();
-    }
-  }, [me, session]);
-
   //  update user cart mutation
   const [updateUsersPermissionsUser, { error }] =
     useMutation(UPDATE_USER_CART_MUTATION);
@@ -88,6 +81,12 @@ export default function Cart() {
 
   const router = useRouter();
   const cartRef = useRef(null);
+
+  useEffect(() => {
+    if (session) {
+      fetchCart();
+    }
+  }, [session]);
 
   // close cart on click outside
   useEffect(() => {
@@ -121,7 +120,7 @@ export default function Cart() {
   // if yes - fill cart with items from local storage
   useEffect(() => {
     const mergeCart = async () => {
-      if (me) {
+      if (session) {
         if (userData) {
           const cartData = await JSON.parse(
             localStorage.getItem('cart') ?? '[]'
@@ -173,10 +172,10 @@ export default function Cart() {
       );
 
       // update user cart
-      if (me) {
+      if (session) {
         await updateUsersPermissionsUser({
           variables: {
-            id: me?.id,
+            id: session?.id,
             data: { cart: JSON.stringify(cart) },
           },
         });
