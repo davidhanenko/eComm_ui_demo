@@ -14,36 +14,36 @@ import { CartStyles } from './CartStyles';
 import Modal from './modal/Modal';
 import { MdClose } from 'react-icons/md';
 import EmptyCart from '../shared/EmptyCart';
-import useUser from '../auth/User';
+// import useUser from '../auth/User';
 
-const USER_CART_QUERY = gql`
-  query USER_CART_QUERY($id: ID!) {
-    usersPermissionsUser(id: $id) {
-      data {
-        id
-        attributes {
-          cart
-        }
-      }
-    }
-  }
-`;
+// const USER_CART_QUERY = gql`
+//   query USER_CART_QUERY($id: ID!) {
+//     usersPermissionsUser(id: $id) {
+//       data {
+//         id
+//         attributes {
+//           cart
+//         }
+//       }
+//     }
+//   }
+// `;
 
-const UPDATE_USER_CART_MUTATION = gql`
-  mutation UPDATE_USER_CART_MUTATION(
-    $id: ID!
-    $data: UsersPermissionsUserInput!
-  ) {
-    updateUsersPermissionsUser(id: $id, data: $data) {
-      data {
-        id
-        attributes {
-          cart
-        }
-      }
-    }
-  }
-`;
+// const UPDATE_USER_CART_MUTATION = gql`
+//   mutation UPDATE_USER_CART_MUTATION(
+//     $id: ID!
+//     $data: UsersPermissionsUserInput!
+//   ) {
+//     updateUsersPermissionsUser(id: $id, data: $data) {
+//       data {
+//         id
+//         attributes {
+//           cart
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export default function Cart() {
   const {
@@ -63,18 +63,18 @@ export default function Cart() {
   const { data: session } = useSession();
 
   // get user query
-  const [
-    fetchCart,
-    { data: userData, loading: userLoading },
-  ] = useLazyQuery(USER_CART_QUERY, {
-    variables: {
-      id: session?.id,
-    },
-  });
+  // const [
+  //   fetchCart,
+  //   { data: userData, loading: userLoading },
+  // ] = useLazyQuery(USER_CART_QUERY, {
+  //   variables: {
+  //     id: session?.id,
+  //   },
+  // });
 
   //  update user cart mutation
-  const [updateUsersPermissionsUser, { error }] =
-    useMutation(UPDATE_USER_CART_MUTATION);
+  // const [updateUsersPermissionsUser, { error }] =
+  //   useMutation(UPDATE_USER_CART_MUTATION);
 
   // purchase policy modal window state
   const [showModal, setShowModal] = useState(false);
@@ -82,11 +82,11 @@ export default function Cart() {
   const router = useRouter();
   const cartRef = useRef(null);
 
-  useEffect(() => {
-    if (session) {
-      fetchCart();
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session) {
+  //     fetchCart();
+  //   }
+  // }, [session]);
 
   // close cart on click outside
   useEffect(() => {
@@ -118,45 +118,51 @@ export default function Cart() {
 
   // check if cart has items before set initial state
   // if yes - fill cart with items from local storage
+  // useEffect(() => {
+  //   const mergeCart = () => {
+  //     if (session) {
+  //       if (userData) {
+  //         const cartData = JSON.parse(
+  //           localStorage.getItem('cart') ?? '[]'
+  //         );
+
+  //         const userCart = JSON.parse(
+  //           userData?.usersPermissionsUser?.data?.attributes
+  //             ?.cart
+  //         );
+
+  //         const newCart = [...cartData, ...userCart];
+
+  //         let obj = {};
+
+  //         for (let el of newCart) {
+  //           if (!obj[el.cartId]) {
+  //             obj[el.cartId] = el;
+  //           } else {
+  //             obj[el.cartId].quantity += el.quantity;
+  //           }
+  //         }
+
+  //         // updated/merged cart
+  //         setCart(
+  //           Object.keys(obj).map(el => (el = obj[el]))
+  //         );
+  //         localStorage.setItem('cart', '[]');
+  //       }
+  //     } else {
+  //       setCart(JSON.parse(localStorage.getItem('cart')));
+  //     }
+  //   };
+  //   setTimeout(() => {
+  //     mergeCart();
+  //   }, 100);
+  // }, [userLoading]);
+
   useEffect(() => {
-    const mergeCart = () => {
-      if (session) {
-        if (userData) {
-          const cartData = JSON.parse(
-            localStorage.getItem('cart') ?? '[]'
-          );
-
-          const userCart = JSON.parse(
-            userData?.usersPermissionsUser?.data?.attributes
-              ?.cart
-          );
-
-          const newCart = [...cartData, ...userCart];
-
-          let obj = {};
-
-          for (let el of newCart) {
-            if (!obj[el.cartId]) {
-              obj[el.cartId] = el;
-            } else {
-              obj[el.cartId].quantity += el.quantity;
-            }
-          }
-
-          // updated/merged cart
-          setCart(
-            Object.keys(obj).map(el => (el = obj[el]))
-          );
-          localStorage.setItem('cart', '[]');
-        }
-      } else {
-        setCart(JSON.parse(localStorage.getItem('cart')));
-      }
-    };
-    setTimeout(() => {
-      mergeCart();
-    }, 100);
-  }, [userLoading]);
+    if (sessionStorage.getItem('cart')) {
+      setCart(JSON.parse(sessionStorage.getItem('cart')));
+    }
+  }, []);
 
   // calc total cost for all items in the cart
   useEffect(() => {
@@ -171,22 +177,20 @@ export default function Cart() {
       );
 
       // update user cart
-      if (session) {
-        await updateUsersPermissionsUser({
-          variables: {
-            id: session?.id,
-            data: { cart: JSON.stringify(cart) },
-          },
-        });
-      } else {
-        // set items from cart to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-        console.log(localStorage.getItem('cart'));
-      }
+      // if (session) {
+      //   await updateUsersPermissionsUser({
+      //     variables: {
+      //       id: session?.id,
+      //       data: { cart: JSON.stringify(cart) },
+      //     },
+      //   });
+      // } else {
+      // set items from cart to localStorage
+      sessionStorage.setItem('cart', JSON.stringify(cart));
+      // }
     };
-    setTimeout(() => {
-      handleCart();
-    }, 300);
+
+    handleCart();
   }, [cart, totalCost, count]);
 
   const handlePlaceOrder = () => {

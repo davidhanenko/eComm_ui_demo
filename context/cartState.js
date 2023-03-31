@@ -43,7 +43,8 @@ function CartStateProvider({ children }) {
         setCartRefState,
         modalCloseBtnRef,
         setModalCloseBtnRef,
-       cartReload, setCartReload
+        cartReload,
+        setCartReload,
       }}
     >
       {children}

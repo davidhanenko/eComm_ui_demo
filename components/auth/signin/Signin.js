@@ -50,7 +50,7 @@ export default function Signin({ providers }) {
             'Wrong email or password, please check credentials and try again',
             {
               position: 'top-right',
-              autoClose: 8000,
+              autoClose: 6000,
             }
           );
         }
