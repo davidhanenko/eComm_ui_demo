@@ -121,7 +121,7 @@ export default function Cart() {
   useEffect(() => {
     const mergeCart = async () => {
       if (session) {
-        if (userData) {
+        
           const cartData = await JSON.parse(
             localStorage.getItem('cart') ?? '[]'
           );
@@ -149,7 +149,7 @@ export default function Cart() {
           );
 
           localStorage.setItem('cart', '[]');
-        }
+        
       } else {
         setCart(
           await JSON.parse(localStorage.getItem('cart'))
