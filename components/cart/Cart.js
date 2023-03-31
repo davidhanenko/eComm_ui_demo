@@ -63,14 +63,14 @@ export default function Cart() {
   const { data: session } = useSession();
 
   // get user query
-  const { data: userData, loading: userLoading } = useQuery(
-    USER_CART_QUERY,
-    {
-      variables: {
-        id: session?.id,
-      },
-    }
-  );
+  const [
+    fetchCart,
+    { data: userData, loading: userLoading },
+  ] = useLazyQuery(USER_CART_QUERY, {
+    variables: {
+      id: session?.id,
+    },
+  });
 
   //  update user cart mutation
   const [updateUsersPermissionsUser, { error }] =
@@ -82,11 +82,11 @@ export default function Cart() {
   const router = useRouter();
   const cartRef = useRef(null);
 
-  // useEffect(() => {
-  //   if (session) {
-  //     fetchCart();
-  //   }
-  // }, [session]);
+  useEffect(() => {
+    if (session) {
+      fetchCart();
+    }
+  }, [session]);
 
   // close cart on click outside
   useEffect(() => {
@@ -119,9 +119,9 @@ export default function Cart() {
   // check if cart has items before set initial state
   // if yes - fill cart with items from local storage
   useEffect(() => {
-    const mergeCart = async () => {
+    const mergeCart = () => {
       if (session) {
-        const cartData = await JSON.parse(
+        const cartData = JSON.parse(
           localStorage.getItem('cart') ?? '[]'
         );
 
@@ -144,16 +144,15 @@ export default function Cart() {
 
         // updated/merged cart
         setCart(Object.keys(obj).map(el => (el = obj[el])));
-
         localStorage.setItem('cart', '[]');
       } else {
-        setCart(
-          await JSON.parse(localStorage.getItem('cart'))
-        );
+        setCart(JSON.parse(localStorage.getItem('cart')));
       }
     };
-    mergeCart();
-  }, [userLoading]);
+    setTimeout(() => {
+      mergeCart();
+    }, 100);
+  }, []);
 
   // calc total cost for all items in the cart
   useEffect(() => {
@@ -178,13 +177,13 @@ export default function Cart() {
       } else {
         // set items from cart to localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
+        console.log(localStorage.getItem('cart'));
       }
     };
 
-    setTimeout(() => {
-      handleCart();
-    }, 100);
+    handleCart();
   }, [cart, totalCost, count]);
+
   const handlePlaceOrder = () => {
     closeCart();
     router.push('/place-order');
