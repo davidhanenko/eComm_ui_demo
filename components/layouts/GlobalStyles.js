@@ -73,6 +73,10 @@ const GlobalStyles = createGlobalStyle`
     scroll-behavior: smooth;
     background: var(--bg);
   }
+  button, input {
+    --webkit-appearance: none;
+    appearance: none;
+  }
   a {
     text-decoration: none;
   }
