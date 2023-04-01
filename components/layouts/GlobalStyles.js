@@ -76,6 +76,7 @@ const GlobalStyles = createGlobalStyle`
   button, input {
     --webkit-appearance: none;
     appearance: none;
+    border-radius:0;
   }
   a {
     text-decoration: none;
@@ -92,6 +93,7 @@ const GlobalStyles = createGlobalStyle`
 
   input, textarea {
     font-family: 'Roboto', sans-serif;
+    border-radius:0;
   }
  
 `;

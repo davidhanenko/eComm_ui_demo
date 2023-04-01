@@ -145,6 +145,10 @@ const QtyControlStyles = styled.div`
     &:nth-child(1) {
       border-radius: 5px 0 0 5px;
     }
+
+    svg {
+      z-index: 5;
+    }
   }
 
   input {

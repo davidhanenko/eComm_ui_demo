@@ -55,6 +55,7 @@ const ItemsSliderStyles = styled.div`
   .embla__button {
     outline: 0;
     background-color: var(--offWhite);
+    opacity: 0.5;
     box-sizing: content-box;
     padding: 1rem;
     border-radius: 50%;
@@ -78,7 +79,7 @@ const ItemsSliderStyles = styled.div`
     @media (hover: hover) {
       &:hover {
         svg {
-          opacity: 0.8;
+          opacity: 1;
           fill: var(--green3);
         }
       }

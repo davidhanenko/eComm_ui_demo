@@ -49,6 +49,14 @@ const ItemsSlideStyles = styled.div`
     }
   }
 
+  @media (max-width: 600px) {
+    box-shadow: none;
+
+    &:hover {
+      box-shadow: none;
+    }
+  }
+
   .no-items {
     height: 100%;
     width: 100%;
