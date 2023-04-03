@@ -55,7 +55,7 @@ To get a local copy up and running follow these steps.
 
 Go to http://localhost:7777 for the Next.js frontend application.
 
-The app uses Strapi CMS as a backend, there you will be abble to create content needed for the application. It's located in [separate repository](https://github.com/davidhanenko/cms_demo). 
+The app uses Strapi CMS as a backend, there you will be able to create content needed for the application. It's located in [separate repository](https://github.com/davidhanenko/cms_demo). 
 After starting backend will be available at http://localhost:1337/admin.
 
 
