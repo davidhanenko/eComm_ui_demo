@@ -73,7 +73,7 @@ const ItemsSliderStyles = styled.div`
 
     svg {
       fill: var(--yellow);
-      opacity: 0.5;
+      opacity: 0.7;
       transition: fill 0.2s;
     }
     @media (hover: hover) {
@@ -100,7 +100,7 @@ const ItemsSliderStyles = styled.div`
     left: -50px;
 
     @media (max-width: 600px) {
-      left: 10px;
+      left: 0px;
     }
   }
 
@@ -108,7 +108,7 @@ const ItemsSliderStyles = styled.div`
     right: -50px;
 
     @media (max-width: 600px) {
-      right: 10px;
+      right: 0px;
     }
   }
 `;

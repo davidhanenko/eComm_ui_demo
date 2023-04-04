@@ -146,6 +146,8 @@ const QtyControlStyles = styled.div`
       border-radius: 5px 0 0 5px;
     }
 
+    z-index: 0;
+
     svg {
       z-index: 5;
     }

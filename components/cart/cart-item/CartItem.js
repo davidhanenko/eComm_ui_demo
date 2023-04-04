@@ -77,7 +77,7 @@ export default function CartItem({
     if (result <= 99) {
       setQty(result <= 0 ? '' : result);
     } else {
-      toast.error('25 items maximum allowed', {
+      toast.error('99 items maximum allowed', {
         autoClose: 3000,
       });
     }
@@ -110,9 +110,6 @@ export default function CartItem({
     setCart(cart?.filter(el => el?.cartId !== cartId));
   };
 
-  // const handleContactsRedirect = () => {
-
-  // }
 
   if (loading)
     return <ThreeDots type='ThreeDots' color='#B85C38' />;
@@ -165,7 +162,10 @@ export default function CartItem({
               value={qty}
               onChange={handleQuantity}
             />
-            <button onClick={incQuantity}>
+            <button
+              onClick={incQuantity}
+              disabled={qty >= 99}
+            >
               <FaPlus />
             </button>
           </QtyControlStyles>
@@ -181,8 +181,8 @@ export default function CartItem({
             </p>
           ) : (
             <p className='no-item-price'>
-              <a href={'/contacts'}>contact us</a>&nbsp;
-              contact us about this item
+              <a href={'/contacts'}>contact us</a>
+              &nbsp;about this item
             </p>
           )}
         </div>
