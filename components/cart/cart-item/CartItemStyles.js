@@ -137,6 +137,7 @@ const QtyControlStyles = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 
     &:nth-child(2n + 1) {
       border-radius: 0 5px 5px 0;
@@ -146,9 +147,8 @@ const QtyControlStyles = styled.div`
       border-radius: 5px 0 0 5px;
     }
 
-    z-index: 0;
-
     svg {
+      position: absolute;
       z-index: 5;
     }
   }
