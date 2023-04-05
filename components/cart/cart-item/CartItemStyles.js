@@ -151,6 +151,12 @@ const QtyControlStyles = styled.div`
       position: absolute;
       z-index: 5;
     }
+
+    &:not(:disabled) {
+      svg {
+        fill: var(--dak);
+      }
+    }
   }
 
   input {

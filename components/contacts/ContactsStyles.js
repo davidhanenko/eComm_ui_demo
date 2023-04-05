@@ -39,9 +39,15 @@ const ContactsStyles = styled.div`
 
   .contacts-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(450px, 1fr)
+    );
     grid-gap: 5rem;
     margin: 7rem 0;
+
+    display: flex;
+    justify-content: center;
 
     @media (max-width: 850px) {
       display: block;
@@ -50,11 +56,13 @@ const ContactsStyles = styled.div`
 `;
 
 const ContactsInfoStyles = styled.section`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: fit-content;
 
+
+  background: var(--white);
+  height: 100%;
+  width: 450px;
+  padding: 3rem;
+  box-shadow: var(--bs);
 
   p {
     font-size: 1.5rem;

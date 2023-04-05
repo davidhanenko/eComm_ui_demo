@@ -28,7 +28,7 @@ export default function Map() {
   return (
     <MapStyles>
       <div className='map-wrap'>
-      <h4>Find Us</h4>
+
         <div id='map' ref={googlemap} />
       </div>
     </MapStyles>

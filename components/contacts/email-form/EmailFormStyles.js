@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const EmailFormStyles = styled.form`
   color: var(--dark);
-  flex: 1 1 400px;
+  /* flex: 1 1 400px; */
 
   display: flex;
   justify-content: center;
@@ -11,7 +11,7 @@ const EmailFormStyles = styled.form`
     background: var(--white);
     box-shadow: var(--bs);
 
-    padding:3rem 2rem;
+    padding: 3rem 2rem;
     width: 450px;
 
     .input-field {
