@@ -9,7 +9,7 @@ import { DropdownSelectStyles } from './DropdownSelectStyles';
 // select handler(function)
 
 export default function DropdownSelect({
-  options,
+  options = [],
   select,
   handleSelect,
 }) {

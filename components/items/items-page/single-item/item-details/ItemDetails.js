@@ -53,6 +53,7 @@ export default function ItemDetails({
     setIndex(0);
   }, [value]);
 
+  // get quantity of selected item by type
   useEffect(() => {
     if (itemDetails) {
       setQty(filteredDetails[index]?.quantity);
