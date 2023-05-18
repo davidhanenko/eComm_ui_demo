@@ -49,7 +49,7 @@ export default function SubCategoryListItem({
   itemsTitle,
   service,
 }) {
-  const { data, error, loading } = useQuery(
+  const { data,loading } = useQuery(
     SUBCATEGORY_ITEMS_QUERY,
     {
       variables: {

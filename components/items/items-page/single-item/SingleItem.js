@@ -11,7 +11,11 @@ import ImagesSlider from '../../../shared/sliders/images-slider/ImagesSlider';
 import ItemPlaceholder from '../../../shared/placeholders/SingleItemPlaceholder';
 import ItemDetails from './item-details/ItemDetails';
 
-export default function SingleItem({ singleItem, link }) {
+export default function SingleItem({
+  singleItem,
+  link,
+  placeholder,
+}) {
   const [sizePrice, setSizePrise] = useState([
     ...singleItem?.attributes?.sizePrice,
   ]);
@@ -70,6 +74,8 @@ export default function SingleItem({ singleItem, link }) {
               height={300}
               objectFit='scale-down'
               layout='responsive'
+              placeholder='blur'
+              blurDataURL={placeholder}
             />
           )}
         </div>

@@ -4,6 +4,7 @@ import {
   addApolloState,
   initializeApollo,
 } from '../../../../lib/apollo';
+import { getPlaiceholder } from 'plaiceholder';
 
 import capitalizeStr from '../../../../helpers/capitalizeStr';
 
@@ -76,6 +77,7 @@ export default function SingleItemPage(props) {
         <SingleItem
           singleItem={singleItem}
           link={props?.resolvedUrl}
+          placeholder={props?.base64}
         />
       )}
     </>
@@ -104,10 +106,17 @@ export const getServerSideProps = async ctx => {
         notFound: true,
       };
     }
+
+    const { base64 } = await getPlaiceholder(
+      singleItems?.data[0]?.attributes?.image?.data[0]
+        ?.attributes?.url
+    );
+
     return addApolloState(client, {
       props: {
         singleItems: singleItems || null,
         resolvedUrl: resolvedUrl || null,
+        base64: base64 || null,
       },
     });
   } catch {

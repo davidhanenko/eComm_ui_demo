@@ -4,16 +4,16 @@ import smoothscroll from 'smoothscroll-polyfill';
 import { ApolloProvider } from '@apollo/client';
 import { ScrollProvider } from '../lib/useScroll';
 import { SessionProvider } from 'next-auth/react';
-import 'react-toastify/dist/ReactToastify.css';
-
-import '../styles/nprogress.css';
-import '../styles/fonts.css';
-
-import LayoutWrapper from '../components/layouts/LayoutWrapper';
 import { PaginationStateProvider } from '../context/paginationState';
 import { CartStateProvider } from '../context/cartState';
 import { MessageStateProvider } from '../context/messageState';
+import LayoutWrapper from '../components/layouts/LayoutWrapper';
 import { useApollo } from '../lib/apollo';
+
+import 'react-toastify/dist/ReactToastify.css';
+import '../styles/nprogress.css';
+import '../styles/fonts.css';
+
 
 // smoothscroll polyfill - safari
 if (typeof window !== 'undefined') {
