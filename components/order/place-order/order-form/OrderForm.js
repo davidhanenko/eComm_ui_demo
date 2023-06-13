@@ -120,7 +120,7 @@ export default function OrderForm({
             required: 'Name is required',
             minLength: {
               value: 3,
-              message: 'Seems to short',
+              message: 'Seems too short',
             },
             maxLength: {
               value: 35,

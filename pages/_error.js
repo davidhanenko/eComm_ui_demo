@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Styles404 = styled.div`
+const Styles = styled.div`
   margin-top: var(--navHeight);
   height: 50vh;
   position: relative;
@@ -16,9 +16,9 @@ const Styles404 = styled.div`
 
 export default function Page404(props) {
   return (
-    <Styles404>
-      <h1>404 | Page Not Found</h1>
-    </Styles404>
+    <Styles>
+      <h1>500 | Server error, we'll be back ASAP</h1>
+    </Styles>
   );
 }
 

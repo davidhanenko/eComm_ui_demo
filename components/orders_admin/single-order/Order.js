@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/client';
 
 import { FaChevronLeft } from 'react-icons/fa';
 
-import { ALL_ORDERS_QUERY } from '../../../pages/orders/index';
+import { ALL_ORDERS_QUERY } from '../orders/Orders';
 import DropdownSelect from '../../shared/pagination/dropdown/DropdownSelect';
 import {
   ORDER_STATUS_OPTIONS,

@@ -10,7 +10,6 @@ import {
   addApolloState,
   initializeApollo,
 } from '../../lib/apollo';
-import useUser from '../../components/auth/User';
 import { PaginationStateProvider } from '../../context/paginationState';
 import Pagination from '../../components/shared/pagination/Pagination';
 import {
