@@ -3,10 +3,9 @@ import { PrevButton, NextButton } from '../SliderButtons';
 import { useEmblaCarousel } from 'embla-carousel/react';
 import ImagesSliderStyles from './ImagesSliderStyles';
 
-import useWindowDimensions from '../../../../lib/windowDimensions';
-
-
 import ImageSlide from './ImageSlide';
+import useMediaQuery from '../../../../lib/useMediaQuery';
+import { TOGGLE_WIDTH } from '../../../../config';
 
 const ImagesSlider = ({ slides, itemsByIndex, title }) => {
   const [viewportRef, embla] = useEmblaCarousel({
@@ -17,7 +16,7 @@ const ImagesSlider = ({ slides, itemsByIndex, title }) => {
     loop: true,
   });
 
-  const { width } = useWindowDimensions();
+  const isToggled = useMediaQuery(TOGGLE_WIDTH);
 
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
@@ -39,11 +38,11 @@ const ImagesSlider = ({ slides, itemsByIndex, title }) => {
   }, [embla, onSelect]);
 
   useEffect(() => {
-    if (width <= 850) {
+    if (isToggled) {
       setPrevBtnEnabled(true);
       setNextBtnEnabled(true);
     }
-  }, [width]);
+  }, [isToggled]);
 
 
   return (

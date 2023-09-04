@@ -11,7 +11,6 @@ import {
 } from 'react-icons/ai';
 
 import { useNav } from '../../../../../context/navState';
-import useWindowDimensions from '../../../../../lib/windowDimensions';
 
 import { TOGGLE_WIDTH } from '../../../../../config';
 
@@ -21,6 +20,7 @@ import {
   DropdownMenuStyles,
   NavDropdownStyles,
 } from './NavDropdownStyles';
+import useMediaQuery from '../../../../../lib/useMediaQuery';
 
 const SERVICE_NAV_QUERY = gql`
   query SERVICE_NAV_QUERY($service: String!) {
@@ -113,7 +113,8 @@ const NavDropdown = React.forwardRef(function NavDropdown(
 ) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { navOpen } = useNav();
-  const { width } = useWindowDimensions();
+
+  const isToggled = useMediaQuery(TOGGLE_WIDTH);
 
   const { data, loading } = useQuery(SERVICE_NAV_QUERY, {
     variables: {
@@ -137,13 +138,13 @@ const NavDropdown = React.forwardRef(function NavDropdown(
 
   useEffect(() => {
     let isMounted = true;
-    if (width >= TOGGLE_WIDTH) {
+    if (!isToggled && isMounted) {
       setDropdownOpen(false);
     }
     return () => {
       isMounted = false;
     };
-  }, [width]);
+  }, [isToggled]);
 
   return (
     <NavDropdownStyles onMouseLeave={handleMouseLeave}>
@@ -166,7 +167,7 @@ const NavDropdown = React.forwardRef(function NavDropdown(
         <DropdownBtnStyles
           type='button'
           onClick={showDropdown}
-          disabled={!navOpen || width > TOGGLE_WIDTH}
+          disabled={!navOpen || !isToggled}
           aria-label='Open and Close dropdown'
         >
           {dropdownOpen ? (

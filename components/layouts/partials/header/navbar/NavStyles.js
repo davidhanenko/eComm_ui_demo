@@ -42,7 +42,7 @@ const NavStyles = styled.nav`
         `grid-auto-flow: row; opacity: 1; transform: translate(0, var(--navHeight)); transition: all 0.3s;`};
       ${props =>
         !props.open &&
-        props.width <= 850 &&
+        props.isToggled &&
         `grid-auto-flow: row; transform: translateX(100%); transition: all 0.3s;`};
       @media (pointer: coarse) {
         ${props =>

@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Hamburger from 'hamburger-react';
 
-import useWindowDimensions from '../../../../../lib/windowDimensions';
 import { useNav } from '../../../../../context/navState';
 
 import NavDropdown from './NavDropdown';
@@ -11,6 +10,7 @@ import { NavStyles, NavButtonStyles } from './NavStyles';
 import { TOGGLE_WIDTH } from '../../../../../config';
 import Search from '../../../../search/Search';
 import UserCart from './user-cart/UserCart';
+import useMediaQuery from '../../../../../lib/useMediaQuery';
 
 export default function Nav(props) {
   const navRef = useRef(null);
@@ -23,7 +23,7 @@ export default function Nav(props) {
     setNavBtnClick,
   } = useNav();
 
-  const { width } = useWindowDimensions();
+  const isToggled = useMediaQuery(TOGGLE_WIDTH);
 
   // close toggled nav on click outside
   useEffect(() => {
@@ -58,13 +58,13 @@ export default function Nav(props) {
   // close nav when width more than 850px/toggleWidth
   useEffect(() => {
     let isMounted = true;
-    if (width >= TOGGLE_WIDTH) {
+    if (!isToggled && isMounted) {
       closeSideNav();
     }
     return () => {
       isMounted = false;
     };
-  }, [width]);
+  }, [isToggled]);
 
   const router = useRouter();
 
@@ -93,7 +93,7 @@ export default function Nav(props) {
       <NavStyles
         open={navOpen}
         btnClick={navBtnClick}
-        width={width}
+        isToggled={isToggled}
         ref={navRef}
       >
         <div className='nav-links'>
