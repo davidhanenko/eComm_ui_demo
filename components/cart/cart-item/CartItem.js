@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   CartItemStyles,
   QtyControlStyles,
@@ -22,6 +26,7 @@ export default function CartItem({
 }) {
   const { cart, setCart, cartReload } = useCart();
   const [qty, setQty] = useState(quantity);
+
   const { data, loading } = useQuery(ORDER_ITEM_QUERY, {
     variables: {
       id: cartId?.split('-')[0],
@@ -29,12 +34,13 @@ export default function CartItem({
     fetchPolicy: 'no-cache',
     ssr: false,
   });
+
   const cartItem = data?.singleItem?.data;
 
   const itemDetails = itemDetailsId
-    ? cartItem?.attributes?.sizePrice?.filter(
+    ? cartItem?.attributes?.sizePrice?.find(
         el => el.id === itemDetailsId
-      )[0]
+      )
     : null;
 
   const title = cartItem?.attributes?.itemTitle;
@@ -64,26 +70,38 @@ export default function CartItem({
     );
   }, [cartReload, data]);
 
-  const handleQuantity = e => {
+  const handleCartItemQuantity = e => {
     const result = e.target.value.replace(/\D/g, '');
-
-    setQty(result <= 0 ? '' : result);
+    if (result <= 99) {
+      setQty(result <= 0 ? '' : result);
+    } else {
+      toast.error('99 items maximum allowed', {
+        autoClose: 3000,
+      });
+    }
   };
 
-  const incQuantity = e => {
-    setQty(prev => ++prev);
+
+  const increaseCartItemQuantity = e => {
+    if (qty === 99) {
+      toast.error('99 items maximum allowed', {
+        autoClose: 3000,
+      });
+    }
+    setQty(prev => (prev <= 98 ? ++prev : prev));
   };
 
-  const decQuantity = e => {
+  const decreaseCartItemQuantity = e => {
     setQty(prev => (prev < 2 ? 1 : --prev));
   };
 
+  // update cart on item quantity change
   useEffect(() => {
     setCart(
-      cart.map(el =>
-        el.cartId === cartId
-          ? { ...el, quantity: +qty }
-          : el
+      cart.map(cartItem =>
+        cartItem.cartId === cartId
+          ? { ...cartItem, quantity: +qty }
+          : cartItem
       )
     );
   }, [qty]);
@@ -91,6 +109,7 @@ export default function CartItem({
   const handleDelete = () => {
     setCart(cart?.filter(el => el?.cartId !== cartId));
   };
+
 
   if (loading)
     return <ThreeDots type='ThreeDots' color='#B85C38' />;
@@ -129,7 +148,7 @@ export default function CartItem({
         <div className='price-amount-container'>
           <QtyControlStyles>
             <button
-              onClick={decQuantity}
+              onClick={decreaseCartItemQuantity}
               disabled={qty <= 1}
             >
               <FaMinus />
@@ -141,9 +160,12 @@ export default function CartItem({
               max='25'
               step='1'
               value={qty}
-              onChange={handleQuantity}
+              onChange={handleCartItemQuantity}
             />
-            <button onClick={incQuantity}>
+            <button
+              onClick={increaseCartItemQuantity}
+              disabled={qty >= 99}
+            >
               <FaPlus />
             </button>
           </QtyControlStyles>
@@ -159,7 +181,8 @@ export default function CartItem({
             </p>
           ) : (
             <p className='no-item-price'>
-              contact us about this item
+              <a href={'/contacts'}>contact us</a>
+              &nbsp;about this item
             </p>
           )}
         </div>

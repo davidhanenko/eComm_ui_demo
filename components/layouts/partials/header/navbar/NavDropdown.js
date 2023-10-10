@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
-import { MdExpandMore, MdExpandLess } from 'react-icons/md';
+
+import {
+  AiFillCaretUp,
+  AiFillCaretDown,
+} from 'react-icons/ai';
 
 import { useNav } from '../../../../../context/navState';
-import useWindowDimensions from '../../../../../lib/windowDimensions';
 
 import { TOGGLE_WIDTH } from '../../../../../config';
 
@@ -15,6 +20,51 @@ import {
   DropdownMenuStyles,
   NavDropdownStyles,
 } from './NavDropdownStyles';
+import useMediaQuery from '../../../../../lib/useMediaQuery';
+
+const SERVICE_NAV_QUERY = gql`
+  query SERVICE_NAV_QUERY($service: String!) {
+    services(filters: { service: { eqi: $service } }) {
+      data {
+        id
+        attributes {
+          service
+          items {
+            data {
+              id
+              attributes {
+                title
+                category: items_categories {
+                  data {
+                    id
+                    attributes {
+                      categoryTitle
+                      singleItem: single_items {
+                        data {
+                          id
+                          attributes {
+                            image {
+                              data {
+                                id
+                                attributes {
+                                  url
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 // navbar dropdown item
 const DropdownItem = React.forwardRef(
@@ -34,6 +84,7 @@ const DropdownItem = React.forwardRef(
           href={href}
           onClick={() => closeSideNav()}
           ref={ref}
+          className='item-link'
         >
           <div className='item-title-img'>
             <span className='item-image'>
@@ -62,12 +113,18 @@ const NavDropdown = React.forwardRef(function NavDropdown(
 ) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { navOpen } = useNav();
-  const { width } = useWindowDimensions();
+
+  const isToggled = useMediaQuery(TOGGLE_WIDTH);
+
+  const { data, loading } = useQuery(SERVICE_NAV_QUERY, {
+    variables: {
+      service: props.serviceTitle,
+    },
+  });
+
+  const service = data?.services?.data[0]?.attributes;
 
   const router = useRouter();
-
-  //  props from Nav
-  const { href, title, items } = props;
 
   const showDropdown = () => setDropdownOpen(!dropdownOpen);
 
@@ -81,13 +138,13 @@ const NavDropdown = React.forwardRef(function NavDropdown(
 
   useEffect(() => {
     let isMounted = true;
-    if (width >= TOGGLE_WIDTH) {
+    if (!isToggled && isMounted) {
       setDropdownOpen(false);
     }
     return () => {
       isMounted = false;
     };
-  }, [width]);
+  }, [isToggled]);
 
   return (
     <NavDropdownStyles onMouseLeave={handleMouseLeave}>
@@ -96,36 +153,37 @@ const NavDropdown = React.forwardRef(function NavDropdown(
         onMouseOver={handleMouseEnter}
       >
         <a
-          href={href}
+          href={`/${service?.service}`}
           ref={ref}
           className={
-            router.asPath.split('/')[1] === title
+            router.asPath.split('/')[1] ===
+            props.serviceTitle
               ? 'active-link'
               : ''
           }
         >
-          {title}
+          {props.serviceTitle}
         </a>
         <DropdownBtnStyles
           type='button'
           onClick={showDropdown}
-          disabled={!navOpen || width > TOGGLE_WIDTH}
+          disabled={!navOpen || !isToggled}
           aria-label='Open and Close dropdown'
         >
-          {dropdownOpen && navOpen ? (
-            <MdExpandLess />
+          {dropdownOpen ? (
+            <AiFillCaretUp />
           ) : (
-            <MdExpandMore />
+            <AiFillCaretDown />
           )}
         </DropdownBtnStyles>
       </div>
 
       {
         <DropdownMenuStyles isDropdownOpen={dropdownOpen}>
-          {items?.map(item => (
+          {service?.items?.data?.map(item => (
             <Link
               href={{
-                pathname: `/${title}/[items]`,
+                pathname: `/${service?.service}/[items]`,
                 query: {
                   items: item?.attributes?.title,
                 },

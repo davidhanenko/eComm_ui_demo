@@ -4,7 +4,7 @@
   pointer-events: none;
 }
 #nprogress .bar {
-  background: var(--blue3);
+  background: var(--green2);
   position: fixed;
   z-index: 1031;
   top: 0;
@@ -21,7 +21,7 @@
   right: 0px;
   width: 100px;
   height: 100%;
-  box-shadow: 0 0 10px var(--blue3), 0 0 5px var(--blue3);
+  box-shadow: 0 0 10px var(--green2), 0 0 5px var(--green2);
   opacity: 1;
 
   -webkit-transform: rotate(3deg) translate(0px, -4px);
@@ -44,8 +44,8 @@
   box-sizing: border-box;
 
   border: solid 2px transparent;
-  border-top-color: var(--blue3);
-  border-left-color: var(--blue3);
+  border-top-color: var(--green2);
+  border-left-color: var(--green2);
   border-radius: 50%;
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;
@@ -80,8 +80,8 @@
 }
 
 h6 {
-  color: #accbda;
-  color: #e8e8e8;
-  color: #ffde36;
-  background: #362222a9;
+  color: #4f7771;
+  color: #f1f822;
+  color: #f4d169;
+  background: #171b13;
 }

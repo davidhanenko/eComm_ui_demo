@@ -9,10 +9,8 @@ const OrderStyles = styled.div`
   }
 
   hr {
-    height: 1px;
     margin: 3rem 0;
-    border: none;
-    background-color: var(--blue3);
+    background-color: var(--green2);
   }
 
   header {
@@ -27,6 +25,8 @@ const OrderStyles = styled.div`
 
       h2 {
         font-size: 2.7rem;
+        margin: 0;
+        color: var(--green4);
       }
     }
 
@@ -56,14 +56,22 @@ const OrderStyles = styled.div`
   }
   footer {
     button {
+      display: flex;
+      align-items: center;
       text-transform: uppercase;
       padding: 1rem;
       margin-top: 5rem;
-      border: 1px solid var(--blue3);
+      border: 1px solid var(--green2);
       cursor: pointer;
 
+      transition: all 0.2s;
+
+      svg {
+        margin-right: 1rem;
+      }
+
       &:hover {
-        background-color: var(--blue5);
+        background-color: var(--yellow);
         outline: none;
       }
     }

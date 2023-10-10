@@ -1,3 +1,7 @@
+import { useEffect, useState } from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
+
 import { useCart } from '../../../context/cartState';
 import { PlaceOrderStyles } from './PlaceOrderStyles';
 import OrderItem from './order-item/OrderItem';
@@ -5,6 +9,7 @@ import OrderForm from './order-form/OrderForm';
 import { TAX_VALUE } from '../../../config';
 import useUser from '../../auth/User';
 import RequestOrderComponent from '../order-request/request-component/RequestOrderComponent';
+import EmptyCart from '../../shared/EmptyCart';
 
 export default function PlaceOrder() {
   const {
@@ -37,18 +42,22 @@ export default function PlaceOrder() {
       </header>
       <main>
         <section className='items-section'>
-          {cart.map(orderItem => (
-            <OrderItem
-              orderItem={orderItem}
-              key={orderItem?.cartId}
-            />
-          ))}
+          {count === 0 ? (
+            <EmptyCart />
+          ) : (
+            cart.map(orderItem => (
+              <OrderItem
+                orderItem={orderItem}
+                key={orderItem?.cartId}
+              />
+            ))
+          )}
         </section>
 
         <section className='charge-section'>
-          <p>Total cost - ${costFromCart?.toFixed(2)}</p>
+          <p>Subtotal - ${costFromCart?.toFixed(2)}</p>
           <p>Tax - ${tax?.toFixed(2)}</p>
-          <p>Total charge - ${totalCharge}</p>
+          <p>Total - ${totalCharge}</p>
           <p>Total items in order - {count}</p>
 
           {me ? (

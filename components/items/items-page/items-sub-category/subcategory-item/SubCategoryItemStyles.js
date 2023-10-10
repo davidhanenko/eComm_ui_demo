@@ -1,36 +1,58 @@
 import styled from 'styled-components';
 
 const SubCategoryItemStyles = styled.div`
-  padding: 1rem;
+  border: 1px solid var(--lightGray1);
+  box-shadow: var(--bs);
+  display: grid;
+  background: var(--white);
 
-  .subcategory-title {
-    color: var(--blue2);
-    font-weight: 400;
-    font-size: 1.6rem;
-    text-transform: uppercase;
-    padding: 0rem 0 1.5rem 0;
-    margin: 0;
-    transition: all 0.25s;
+  transition: all 0.2s;
 
-    @media (max-width: 600px) {
-      font-size: 1.3rem;
+  a {
+    min-width: 100%;
+    min-height: 100%;
+    padding: 2rem;
+
+    hr {
+      background-color: var(--yellow2);
+      transition: all 0.2s;
+    }
+
+    .subcategory-title {
+      color: var(--green4);
+      font-weight: 400;
+      font-size: 1.6rem;
+      text-transform: capitalize;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+
+      height: 3rem;
+
+      @media (max-width: 600px) {
+        font-size: 1.3rem;
+      }
+    }
+
+    .sub-image {
+      transition: all 0.2s;
     }
   }
 
-  .sub-image {
-    transition: all 0.25s;
-  }
-  @media (hover: hover) {
-    &:hover {
-      .subcategory-title {
-        color: var(--blue4);
-      }
+  &:hover {
+    box-shadow: var(--bsHover);
+    hr {
+      transform: scale(0.95);
+    }
 
-      .sub-image {
-        transform: scale(0.95);
-      }
+    .subcategory-title {
+      letter-spacing: 0.1px;
+    }
+
+    .sub-image {
+      transform: scale(0.95);
     }
   }
+
   .no-item {
     position: relative;
     width: 100%;

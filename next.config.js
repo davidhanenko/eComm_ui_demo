@@ -1,6 +1,8 @@
-const nextConfig = {
+const { withPlaiceholder } = require('@plaiceholder/next');
+
+module.exports = withPlaiceholder({
   reactStrictMode: true,
-  
+
   compiler: {
     styledComponents: true,
   },
@@ -26,6 +28,4 @@ const nextConfig = {
       },
     ];
   },
-};
-
-module.exports = nextConfig;
+});

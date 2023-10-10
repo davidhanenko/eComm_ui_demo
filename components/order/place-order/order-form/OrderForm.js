@@ -10,6 +10,10 @@ import { useSession } from 'next-auth/react';
 import Oval from 'react-loader-spinner';
 import { OrderFormStyles } from './OrderFormStyles';
 
+const PHONE_REGEX = new RegExp(
+  /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim
+);
+
 const CREATE_ORDER_MUTATION = gql`
   mutation CREATE_ORDER_MUTATION($data: OrderInput!) {
     createOrder(data: $data) {
@@ -40,14 +44,15 @@ export default function OrderForm({
       isSubmitting,
       dirtyFields,
       isDirty,
+      isValid,
     },
   } = useForm({
-    mode: 'onBlur',
+    mode: 'onChange',
     defaultValues: {
-      name: me?.username || '',
-      company: me?.company || '',
-      email: me?.email || '',
-      phone: me?.phone || '',
+      name: me?.username ?? '',
+      company: '',
+      email: me?.email ?? '',
+      phone: '',
       orderNotes: '',
     },
   });
@@ -93,7 +98,7 @@ export default function OrderForm({
       setTimeout(() => {
         reset();
         setCart([]);
-        router.push('/');
+        router.push('/order-placed');
       }, 0);
     } catch (err) {
       console.log(err.message);
@@ -112,17 +117,20 @@ export default function OrderForm({
           placeholder='Full name'
           className={dirtyFields.name ? 'input-dirty' : ''}
           {...register('name', {
-            disabled: isSubmitting || loading,
             required: 'Name is required',
             minLength: {
               value: 3,
-              message: 'Seems to short',
+              message: 'Seems too short',
+            },
+            maxLength: {
+              value: 35,
+              message: 'Name is too long',
             },
           })}
         />
         {
           <div className='input-error'>
-            {errors?.name?.message}
+            {errors.name && errors.name.message}
           </div>
         }
       </fieldset>
@@ -135,13 +143,11 @@ export default function OrderForm({
           className={
             dirtyFields.company ? 'input-dirty' : ''
           }
-          {...register('company', {
-            disabled: isSubmitting || loading,
-          })}
+          {...register('company')}
         />
         {
           <div className='input-error'>
-            {errors?.company?.message}
+            {errors.company && errors.company.message}
           </div>
         }
       </fieldset>
@@ -152,7 +158,6 @@ export default function OrderForm({
           placeholder='Email'
           className={dirtyFields.email ? 'input-dirty' : ''}
           {...register('email', {
-            disabled: isSubmitting || loading,
             required: 'Email is required',
             pattern: {
               value:
@@ -163,23 +168,21 @@ export default function OrderForm({
         />
         {
           <span className='input-error'>
-            {errors?.email?.message}
+            {errors.email && errors.email.message}
           </span>
         }
       </fieldset>
 
       <fieldset>
         <input
-          type='tel'
+          type='text'
           name='phone'
           placeholder='Phone #'
           className={dirtyFields.phone ? 'input-dirty' : ''}
           {...register('phone', {
-            disabled: isSubmitting || loading,
             required: 'Phone number is required',
             pattern: {
-              value:
-                /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/gim,
+              value: PHONE_REGEX,
               message:
                 'Please enter a valid phone number, ex. 1112223333 or 111-222-3333',
             },
@@ -195,7 +198,7 @@ export default function OrderForm({
         />
         {
           <div className='input-error'>
-            {errors?.phone?.message}
+            {errors?.phone && errors.phone.message}
           </div>
         }
       </fieldset>
@@ -208,7 +211,6 @@ export default function OrderForm({
           }
           rows={3}
           {...register('orderNotes', {
-            disabled: isSubmitting || loading,
             minLength: {
               value: 10,
               message: 'Tell us more please',
@@ -217,7 +219,8 @@ export default function OrderForm({
         />
         {
           <span className='input-error'>
-            {errors?.orderNotes?.message}
+            {errors?.orderNotes &&
+              errors.orderNotes.message}
           </span>
         }
       </fieldset>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/client';
+import { MdSearch } from 'react-icons/md';
 
 import debounce from 'lodash.debounce';
 
@@ -75,7 +76,10 @@ export default function SearchInput() {
 
   // go to search results page after input submit
   const handleSearchInputSubmit = event => {
-    if (event.key === 'Enter') {
+    if (
+      event.key === 'Enter' ||
+      event.target.dataset.search === 'search'
+    ) {
       router.push({
         pathname: '/search/[searchQuery]',
         query: {
@@ -100,8 +104,8 @@ export default function SearchInput() {
   }, [term]);
 
   return (
-    <>
-      <SearchInputStyles
+    <SearchInputStyles>
+      <input
         type='text'
         placeholder='Search...'
         onChange={onChangeHandler}
@@ -109,6 +113,18 @@ export default function SearchInput() {
         className={loading ? 'loading' : ''}
         onKeyDown={handleSearchInputSubmit}
       />
+      <button
+        className='search-btn'
+        onClick={handleSearchInputSubmit}
+        disabled={term === ''}
+        aria-label='Search'
+      >
+        <MdSearch
+          className='search-icon'
+          data-search='search'
+        />
+      </button>
+
       {term && (
         <SearchDropdown
           foundItems={itemsToRender}
@@ -117,6 +133,6 @@ export default function SearchInput() {
           foundItemsCount={foundItemsCount}
         />
       )}
-    </>
+    </SearchInputStyles>
   );
 }

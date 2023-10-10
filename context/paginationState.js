@@ -7,7 +7,6 @@ import {
 
 import {
   PER_PAGE_DEFAULT,
-  SORT_ITEMS_BY_DEFAULT,
 } from '../config';
 
 const LocalStateContext = createContext();
@@ -15,9 +14,7 @@ const LocalStateProvider = LocalStateContext.Provider;
 
 function PaginationStateProvider({ children }) {
   const [itemsPerPage, setItemsPerPage] = useState();
-  const [sortItemsBy, setSortItemsBy] = useState(
-    SORT_ITEMS_BY_DEFAULT
-  );
+  const [sortItemsBy, setSortItemsBy] = useState();
 
   // get amount of items showed per page from session storage depend on selected option
   useEffect(() => {
@@ -26,7 +23,6 @@ function PaginationStateProvider({ children }) {
     );
     const itemsPerPage = !!value ? value : PER_PAGE_DEFAULT;
     return setItemsPerPage(itemsPerPage);
-
   }, [itemsPerPage]);
 
   return (

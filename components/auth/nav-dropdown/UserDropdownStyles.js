@@ -5,7 +5,7 @@ const UserDropdownStyles = styled.div`
   right: 0;
   top: var(--navHeight);
   background-color: var(--white);
-  box-shadow: 0px 0px 3px 1px var(--offWhite);
+  box-shadow: 0 1px 2px 1px var(--offWhite);
   width: 150px;
   display: flex;
   flex-direction: column;
@@ -17,16 +17,18 @@ const UserDropdownStyles = styled.div`
 
   ${props => props.userOpen && `transform: translateX(0%);`}
 
+  @media(max-width: 850px) {
+    top: calc(var(--searchHeight) + 1rem);
+  }
+
   hr {
     width: 100%;
     margin: 1rem 0;
-    height: 1px;
-    border: none;
-    background-color: var(--blue4);
+    background-color: var(--yellow2);
   }
 
   button {
-    color: var(--blue3);
+    color: var(--green4);
     border: none;
     background: transparent;
     margin: 0.5rem auto;
@@ -38,16 +40,20 @@ const UserDropdownStyles = styled.div`
 
     @media (hover: hover) {
       &:hover {
-        color: var(--blue2);
+        color: var(--yellow2);
       }
     }
   }
 
-  .user-title {
-    font-size: 1.2rem;
-    text-transform: lowercase;
-    text-align: center;
-    color: var(--dark);
+  .user-title-dropdown {
+    display: none;
+    @media (max-width: 850px) {
+      display: block;
+      font-size: 1.2rem;
+      text-transform: capitalize;
+      text-align: center;
+      color: var(--dark);
+    }
   }
 `;
 export { UserDropdownStyles };

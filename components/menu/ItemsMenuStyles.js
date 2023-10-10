@@ -1,92 +1,102 @@
 import styled from 'styled-components';
 
 const ItemsMenuStyles = styled.div`
+  margin-top: var(--navHeight);
   background: transparent;
+  padding: 1rem;
   width: 100%;
-  z-index: 3;
-  padding-bottom: 1rem;
+  z-index: 1;
   user-select: none;
-  position: fixed;
-  top: calc(var(--navHeight) + var(--searchHeight));
-  background-color: var(--white);
+
+  position: relative;
+
+  display: flex;
+  align-self: center;
 
   @media (max-width: 850px) {
-    overflow-x: hidden;
-    background: transparent;
-    padding-bottom: 3rem;
+    padding-top: 3rem;
   }
   .menu-header {
+    padding-left: 2rem;
+    position: relative;
+
     display: flex;
     align-items: center;
-    height: var(--menuHeight);
-    padding: 1rem 0 0 2rem;
-    position: relative;
-    background-color: var(--white);
-    width: 100%;
-
-    @media (max-width: 850px) {
-    }
   }
   .main-title {
-    font-size: 2rem;
+    font-size: 2.3rem;
     text-transform: uppercase;
     font-weight: 400;
-    color: var(--darkBlue);
+    color: var(--gray);
     margin: 0;
-    transition: transform 0.35s;
-    @media (max-width: 850px) {
+    transition: transform 0.25s;
+
+    &:after {
+      content: '|';
+      font-size: 2.8rem;
+      padding-left: 1rem;
+      font-weight: 200;
+      color: var(--yellow2);
+    }
+
+    @media (max-width: 650px) {
       transform: translateX(6rem);
-      font-size: 1.7rem;
+      font-size: 2rem;
+
+      &:after {
+        display: none;
+      }
     }
   }
   .menu-links {
-    padding-left: 3rem;
+    padding-left: 2rem;
     display: flex;
+    letter-spacing: 0.5px;
     flex-wrap: wrap;
-    align-items: center;
-    @media (max-width: 850px) {
+
+    @media (max-width: 650px) {
       display: none;
     }
   }
-
   .side-menu-links {
-    flex-direction: column;
-    align-items: flex-start;
-    background: var(--blue3);
-    box-shadow: 1px 1px 4px 1px var(--blue3);
+    background: var(--green2);
+    box-shadow: 1px 1px 4px 0px var(--green2);
     display: none;
+    position: absolute;
     width: 300px;
-    margin-top: var(--menuTreeHeight);
-    padding: 3rem;
+    padding: 2rem 3rem;
     opacity: 0;
     transform: translateX(-100%);
     transition: all 0.25s;
     z-index: 5;
+    top: 100%;
+    left: 0;
+
     ${props =>
       props.isMenuOpen &&
-      `transform: translateX(0%); opacity: 0.97;`};
+      `transform: translateX(0%); opacity: 0.98;`};
     ${props =>
       !props.btnClicked &&
       ` -webkit-transition: none !important;
        -moz-transition: none !important;
         -ms-transition: none !important;
         -o-transition: none !important;`};
-    @media (max-width: 850px) {
+    @media (max-width: 650px) {
       display: block;
       padding-bottom: 3rem;
     }
 
-    @media (max-width: 350px) {
-      width: 100%;
+    @media (max-width: 500px) {
+      width: 90%;
     }
   }
 `;
 
 const MenuButtonStyles = styled.div`
   display: none;
-  transition: all 0.5s;
-  transform: scale(0.6);
-  @media (max-width: 850px) {
+  transition: all 0.3s;
+  transform: scale(0.7);
+  @media (max-width: 650px) {
     display: block;
     position: absolute;
   }

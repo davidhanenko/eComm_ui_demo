@@ -47,7 +47,6 @@ export function ForgotPswdReq() {
         },
       });
 
-
       if (data?.forgotPassword?.ok) {
         toast.success(
           `Email with the link to reset your password was sent to ${values?.email}. If you are registered user use it to reset your password `,
@@ -56,11 +55,9 @@ export function ForgotPswdReq() {
             autoClose: 10000,
           }
         );
-
         reset();
       }
     } catch (err) {
-      console.log(err);
       toast.error(
         'An unexpected error happen, please try again ',
         {
@@ -82,14 +79,14 @@ export function ForgotPswdReq() {
         <fieldset>
           <label
             className={
-              dirtyFields.name ? 'label-dirty' : ''
+              dirtyFields.email ? 'label-dirty' : ''
             }
             htmlFor='email'
           >
             Email
           </label>
           <input
-            type='text'
+            type='email'
             name='email'
             id='email'
             autoComplete='email'
@@ -98,7 +95,6 @@ export function ForgotPswdReq() {
               dirtyFields.email ? 'input-dirty' : ''
             }
             {...register('email', {
-              disabled: isSubmitting || loading,
               required: 'Email is required',
               pattern: {
                 value:

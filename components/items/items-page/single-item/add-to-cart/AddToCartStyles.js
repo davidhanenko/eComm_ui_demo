@@ -9,14 +9,16 @@ const AddToCartStyles = styled.div`
     cursor: pointer;
     padding: 0.75rem 1.5rem;
     text-transform: uppercase;
-    background: var(--blue1);
+    background: var(--green2);
     color: var(--white);
     border: none;
     border-radius: 2rem;
     outline: none;
     display: flex;
     align-items: center;
-    transition: all 0.3s;
+    transition: all 0.2s;
+
+    user-select: none;
 
     .cart-icon {
       font-size: 2rem;
@@ -24,13 +26,13 @@ const AddToCartStyles = styled.div`
     }
 
     @media (hover: hover) {
-      &:hover {
-        /* box-shadow: inset 0px 0px 15px 10px var(--darkBlue); */
-        background: var(--blue2);
-      }
+    &:hover,
+    &:active {
+      background: var(--yellow);
+    }
     }
 
-    @media(max-width: 850px) {
+    @media (max-width: 850px) {
       margin-top: 3rem;
     }
   }

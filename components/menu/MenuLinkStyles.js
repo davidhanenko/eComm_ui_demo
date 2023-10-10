@@ -1,34 +1,40 @@
 import styled from 'styled-components';
 
 const MenuLinkStyles = styled.div`
-  font-size: 1.3rem;
-  margin-right: 1rem;
+  font-size: 1.5rem;
+  margin-right: 3rem;
+
+  display: flex;
+  align-items: center;
+
   a {
     text-decoration: none;
+    letter-spacing: 0.5px;
   }
   .link-title {
-    margin: 0rem 1rem;
-    padding: 1rem;
+    margin: 0rem;
+    padding: 1rem 0.3rem;
     color: var(--dark);
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 400;
     transition: all 0.25s;
+
+    @media (max-width: 650px) {
+      margin: 1rem;
+
+    }
+
     @media (hover: hover) {
       &:hover {
-        color: var(--blue2);
+        color: var(--yellow2);
       }
     }
   }
 
   .active {
-    color: var(--blue2);
+    color: var(--yellow2);
   }
 
-  @media (min-width: 850px) {
-    .active {
-      color: var(--blue3);
-    }
-  }
 `;
 
 export { MenuLinkStyles };

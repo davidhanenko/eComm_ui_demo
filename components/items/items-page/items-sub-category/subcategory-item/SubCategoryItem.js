@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { SubCategoryItemStyles } from './SubCategoryItemStyles';
 import placeholderImg from '../../../../../public/img/1px.png';
+import LoaderContainer from '../../../../shared/loaders/loader-container/LoaderContainer';
 
 const SUBCATEGORY_ITEMS_QUERY = gql`
   query SUBCATEGORY_ITEMS_QUERY($itemsCategory: String!) {
@@ -48,7 +49,7 @@ export default function SubCategoryListItem({
   itemsTitle,
   service,
 }) {
-  const { data, error, loading } = useQuery(
+  const { data,loading } = useQuery(
     SUBCATEGORY_ITEMS_QUERY,
     {
       variables: {
@@ -60,7 +61,11 @@ export default function SubCategoryListItem({
   const subCategoryItem =
     data?.singleItems?.data[0]?.attributes;
 
-  return (
+  return loading ? (
+    <SubCategoryItemStyles>
+      <LoaderContainer height={'250px'} />
+    </SubCategoryItemStyles>
+  ) : (
     <SubCategoryItemStyles>
       <Link
         href={{
@@ -86,6 +91,7 @@ export default function SubCategoryListItem({
               placeholder='blur'
               blurDataURL={placeholderImg}
             />
+            <hr />
             <h4 className='subcategory-title'>
               {subCategoryTitle}
             </h4>
@@ -98,6 +104,7 @@ export default function SubCategoryListItem({
               height={150}
               alt='image coming soon'
             />
+
             <h4 className='subcategory-title'>
               {subCategoryTitle}
             </h4>

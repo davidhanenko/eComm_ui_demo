@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const SearchStyles = styled.div`
-  position: absolute;
+  /* position: absolute; */
   display: flex;
-  width: 100%;
+  width: 350px;
   height: var(--searchHeight);
   opacity: 1;
   transition: all 0.25s;
@@ -14,13 +14,7 @@ const SearchStyles = styled.div`
     opacity: 0;
     height: 0;`};
 
-  .search-icon {
-    position: fixed;
-    font-size: 2.5rem;
-    color: grey;
-    padding-left: 0.5rem;
-    z-index: 3;
-  }
+
 `;
 
 export { SearchStyles };

@@ -15,8 +15,8 @@ const ItemPlaceholder = ({ i }) => {
       height={24}
       speed={2}
       viewBox='0 0 120 24'
-      backgroundColor='#a7a7a7'
-      foregroundColor='#362222'
+      backgroundColor='#7ca8a15c'
+      foregroundColor='#7ca8a129'
       uniqueKey={i}
     >
       <rect

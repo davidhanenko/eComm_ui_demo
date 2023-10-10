@@ -9,14 +9,16 @@ export default function ItemDetails({
   item,
   link,
   id,
+  qty,
+  setQty,
 }) {
-  const [index, setIndex] = useState(0);
   const [value, setValue] = useState(
     itemDetails[0]?.value || null
   );
   const [filteredDetails, setFilteredDetails] = useState(
     []
   );
+  const [index, setIndex] = useState(0);
 
   // define type of item if any
   const type = itemDetails[0]?.type ?? null;
@@ -37,6 +39,7 @@ export default function ItemDetails({
     let sizeIndex = filteredDetails.findIndex(
       el => el.size === e.target.value
     );
+
     // save index to display appropriate price in the component according to it
     setIndex(sizeIndex);
   };
@@ -49,6 +52,13 @@ export default function ItemDetails({
     // set index as 0 to select and highlight 1st type-size-value combination
     setIndex(0);
   }, [value]);
+
+  // get quantity of selected item by type
+  useEffect(() => {
+    if (itemDetails) {
+      setQty(filteredDetails[index]?.quantity);
+    }
+  }, [index, filteredDetails]);
 
   return (
     <ItemDetailsStyles>
@@ -122,6 +132,8 @@ export default function ItemDetails({
         type={filteredDetails[index]?.type}
         typeValue={filteredDetails[index]?.value}
         link={link}
+        isAvailable={item?.isAvailable}
+        qty={qty}
       />
     </ItemDetailsStyles>
   );

@@ -1,28 +1,26 @@
 import styled from 'styled-components';
 
 const HeaderStyles = styled.header`
-  background: var(--white);
+  background: var(--green3);
   margin: 0;
-  padding: 0.7rem 0 0 0;
   max-height: var(--navHeight);
   position: fixed;
   top: 0;
-  width: 100%;
   z-index: 10;
+  width: 100%;
+  box-shadow: var(--bs);
 
+  @media (max-width: 850px) {
+    max-height: var(--navHeightSm);
+  }
 
   .navbar {
     height: var(--navHeight);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: auto 1fr;
     @media (max-width: 850px) {
-      /* grid-template-rows: var(--navHeight); */
+      height: var(--navHeightSm);
     }
-  }
-  .search-scrolled {
-    transition: all 0.5s;
-    opacity: 0;
-    height: 0;
   }
 `;
 
@@ -37,6 +35,7 @@ const Logo = styled.div`
   transform: skew(-7deg);
   align-items: center;
   align-self: center;
+  cursor: pointer;
   a {
     color: var(--blue1);
     text-transform: uppercase;

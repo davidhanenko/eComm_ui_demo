@@ -1,4 +1,4 @@
-import Head from 'next/head';
+
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
@@ -105,9 +105,6 @@ export default function AllSearchResults({
   return (
     <>
       <SearchResultsContainerStyles>
-        <Head>
-          <title>A2Z-Search results</title>
-        </Head>
 
         {itemsCount > 0 ? (
           <h3>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Styles404 = styled.div`
-  margin-top: calc(var(--navHeight) + var(--searchHeight));
+  margin-top: var(--navHeight);
   height: 50vh;
   position: relative;
 

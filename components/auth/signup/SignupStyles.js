@@ -3,16 +3,17 @@ import styled from 'styled-components';
 const SignupStyles = styled.div`
   min-height: 40vh;
   width: 450px;
-  margin: 18rem auto;
+  margin: 15rem auto;
   text-align: center;
 
-  box-shadow: 0px 0px 3px 1px var(--blue5);
-  padding: 5rem 3rem;
+  box-shadow: 0px 0px 3px 1px var(--green);
+  padding: 2rem;
 
   h3 {
-    font-size: 2.3rem;
-    color: var(--blue3);
+    font-size: 2.5rem;
+    color: var(--green4);
     font-weight: 400;
+    margin: 0;
   }
 
   @media (max-width: 800px) {
@@ -25,10 +26,10 @@ const SignupStyles = styled.div`
   }
 
   .divider {
-    margin: 3rem auto;
+    margin: 2rem auto;
     position: relative;
     width: 80%;
-    color: var(--blue3);
+    color: var(--green);
 
     &::before {
       content: '';
@@ -37,7 +38,7 @@ const SignupStyles = styled.div`
       left: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue5);
+      background-color: var(--green);
     }
     &::after {
       content: '';
@@ -46,14 +47,12 @@ const SignupStyles = styled.div`
       right: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue5);
+      background-color: var(--green);
     }
   }
 `;
 
 const FormStyles = styled.form`
-  /* margin-top: 5rem; */
-
   fieldset {
     border: 1px solid transparent;
     outline: none;
@@ -71,8 +70,8 @@ const FormStyles = styled.form`
 
     input,
     textarea {
-      border: 1px solid var(--blue4);
-      color: var(--dark);
+      border: 1px solid var(--yellow);
+      color: var(--gray);
       outline: none;
       background: transparent;
       padding: 0.6rem 0.5rem;
@@ -83,7 +82,8 @@ const FormStyles = styled.form`
       transition: all 0.25s ease;
 
       &:focus {
-        border: 1px solid var(--blue2);
+        border: 1px solid var(--green2);
+        box-shadow: 0px 0px 2px 1px var(--green2);
       }
 
       &::placeholder {
@@ -94,13 +94,13 @@ const FormStyles = styled.form`
     }
 
     .input-dirty {
-      border: 1px solid var(--blue2);
-      box-shadow: 0px 0px 2px 1px var(--blue5);
+      border: 1px solid var(--green2);
     }
 
     .input-error {
       font-size: 1.05rem;
       color: var(--red);
+      font-weight: 300;
       position: absolute;
       left: 2rem;
       bottom: -1.8rem;
@@ -116,8 +116,8 @@ const FormStyles = styled.form`
     width: 20rem;
     height: 4rem;
     padding: 1rem;
-    margin-top: 4rem;
-    background-color: var(--blue3);
+    margin-top: 3rem;
+    background-color: var(--green2);
     color: var(--white);
     border-radius: 2rem;
     border: none;
@@ -131,7 +131,7 @@ const FormStyles = styled.form`
     @media (hover: hover) {
       &:hover {
         cursor: pointer;
-        background-color: var(--blue2);
+        background-color: var(--yellow);
       }
     }
 
@@ -149,7 +149,7 @@ const FooterStyles = styled.footer`
   }
 
   span {
-    color: var(--blue3);
+    color: var(--linkBlue);
     cursor: pointer;
 
     @media (hover: hover) {
@@ -169,27 +169,29 @@ const SignUpSessionStyles = styled.div`
   text-align: center;
   height: 100%;
 
-  box-shadow: 0px 0px 3px 1px var(--blue5);
+  box-shadow: 0px 0px 3px 1px var(--green2);
 
   p {
     font-size: 2rem;
-    color: var(--dark);
+    color: var(--gray);
+
+    &:last-of-type {
+      font-size: 1.5rem;
+    }
   }
 
   span {
-    color: var(--blue1);
+    color: var(--green3);
   }
 
   hr {
     margin: 5rem 0;
-    border: none;
-    height: 1px;
-    background-color: var(--blue5);
+    background-color: var(--green2);
   }
 
   a {
-    color: var(--blue3);
-
+    color: var(--linkBlue);
+  
     @media (hover: hover) {
       &:hover {
         text-decoration: underline;
@@ -203,7 +205,7 @@ const SignUpSessionStyles = styled.div`
     border: none;
     outline: none;
     background: none;
-    color: var(--blue3);
+    color: var(--linkBlue);
     cursor: pointer;
   }
 

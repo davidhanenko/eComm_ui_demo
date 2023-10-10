@@ -12,6 +12,8 @@ const ITEMS_MAIN_PAGE_QUERY = gql`
       data {
         id
         attributes {
+          service
+          underTitleHeader: under_title_header
           items {
             data {
               id
@@ -62,6 +64,9 @@ export default function ItemsMainPage({ service }) {
     data?.services?.data[0]?.attributes?.items?.data
       ?.length;
 
+  const underTitleHeader =
+    data?.services?.data[0]?.attributes?.underTitleHeader;
+
   const slides = Array.from(Array(SLIDE_COUNT).keys());
   // func from Embla Carousel docs
   const itemsByIndex = index =>
@@ -75,15 +80,19 @@ export default function ItemsMainPage({ service }) {
     <>
       <ItemsMainPageStyles>
         {service && <h2>{service}</h2>}
+        {underTitleHeader && <h4>{underTitleHeader}</h4>}
+        <hr />
         {loading ? (
           <LoaderContainer height='40vh' />
         ) : (
-          <ItemsSlider
-            slides={slides}
-            itemsByIndex={itemsByIndex}
-            service={service}
-            loading={loading}
-          />
+          <div className='items-slider'>
+            <ItemsSlider
+              slides={slides}
+              itemsByIndex={itemsByIndex}
+              service={service}
+              loading={loading}
+            />
+          </div>
         )}
       </ItemsMainPageStyles>
     </>

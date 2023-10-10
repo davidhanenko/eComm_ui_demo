@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const CartStyles = styled.div`
   position: absolute;
   right: 0;
-  top: calc(var(--navHeight) + var(--searchHeight));
+  top: var(--navHeight);
   width: 40%;
   z-index: calc(var(--goToTopZ) + 2);
   background: var(--white);
@@ -13,7 +13,7 @@ const CartStyles = styled.div`
     100vh - var(--navHeight) + var(--searchHeight) - 5rem
   );
   height: 100%;
-  right: -150%;
+  right: -180%;
 
   transition: all 0.35s;
   transition-timing-function: cubic-bezier(
@@ -22,6 +22,7 @@ const CartStyles = styled.div`
     0.18,
     1.01
   );
+
   ${props => props.isCartOpen && `right:0;`};
 
   display: grid;
@@ -33,6 +34,12 @@ const CartStyles = styled.div`
 
   @media (max-width: 900px) {
     width: 65%;
+  }
+
+  @media (max-width: 850px) {
+    top: calc(
+      var(--navHeightSm) + var(--searchHeight) + 1rem
+    );
   }
 
   @media (max-width: 700px) {
@@ -49,7 +56,7 @@ const CartStyles = styled.div`
       background: transparent;
       margin: 2rem 2rem 0 0;
       transition: all 0.25s;
-      color: var(--blue2);
+      color: var(--red);
 
       .btn-icon {
         font-size: 3rem;
@@ -67,17 +74,12 @@ const CartStyles = styled.div`
   .cart-body {
     padding: 0 1rem;
     overflow-y: scroll;
+
+    border-top: 1px solid var(--green2);
+    border-bottom: 1px solid var(--green2);
     ul {
       padding: 0;
       margin: 0;
-    }
-
-    .cart-empty {
-      list-style: none;
-      font-size: 1.8rem;
-      font-weight: 300;
-      padding-left: 3rem;
-      color: var(--blue1);
     }
   }
 
@@ -88,7 +90,6 @@ const CartStyles = styled.div`
     padding: 2rem 2rem 4rem 2rem;
     font-size: 1.3rem;
     height: 10rem;
-    border-top: 1px solid var(--blue3);
 
     p {
       font-weight: 300;
@@ -108,7 +109,7 @@ const CartStyles = styled.div`
 
     .modal-trigger {
       cursor: pointer;
-      color: var(--blue3);
+      color: var(--linkBlue);
       text-decoration: underline;
     }
 
@@ -116,14 +117,15 @@ const CartStyles = styled.div`
       padding: 1rem;
       text-transform: uppercase;
       border: none;
-      background: var(--blue3);
+      background: var(--green);
       border-radius: 2rem;
       color: var(--white);
+      transition: background 0.2s;
 
       @media (hover: hover) {
         &:hover {
           cursor: pointer;
-          background: var(--blue2);
+          background: var(--yellow);
         }
       }
     }

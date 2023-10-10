@@ -2,30 +2,17 @@ import styled from 'styled-components';
 
 const EmailFormStyles = styled.form`
   color: var(--dark);
-  flex: 1 1 400px;
+  /* flex: 1 1 400px; */
 
   display: flex;
   justify-content: center;
 
-  margin: 2rem;
-
-  h2 {
-    text-align: center;
-    font-size: 3rem;
-    padding-bottom: 2rem;
-    color: var(--dark);
-    font-weight: 400;
-    text-transform: uppercase;
-    background: transparent;
-  }
-
   .form {
     background: var(--white);
-    box-shadow: 0px 0px 3px 1px var(--blue5);
+    box-shadow: var(--bs);
 
-    padding: 2rem;
-    width: 100%;
-    max-width: 600px;
+    padding: 3rem 2rem;
+    width: 450px;
 
     .input-field {
       border: 1px solid transparent;
@@ -36,17 +23,16 @@ const EmailFormStyles = styled.form`
       padding: 0;
 
       &:focus-within label {
-        color: var(--dark);
+        color: var(--gray);
         opacity: 1;
-        background: var(--blue3);
+        background: var(--green4);
         width: 7rem;
         max-height: 12rem;
       }
 
       input,
       textarea {
-        border: 1px solid var(--blue4);
-        color: var(--dark);
+        border: 1px solid var(--green2);
         outline: none;
         background: transparent;
         padding: 0.9rem 0.5rem;
@@ -57,7 +43,7 @@ const EmailFormStyles = styled.form`
         transition: all 0.25s ease;
 
         &:focus {
-          border: 1px solid var(--blue2);
+          border: 1px solid var(--yellow2);
           margin-left: 7rem;
           width: calc(100% - 7rem);
         }
@@ -80,9 +66,8 @@ const EmailFormStyles = styled.form`
       }
 
       .label-dirty {
-        color: var(--dark);
         opacity: 1;
-        background: var(--blue3);
+        background: var(--green4);
         width: 7rem;
       }
 
@@ -101,7 +86,7 @@ const EmailSendBtn = styled.button`
   display: inline-block;
   padding: 1.5rem 2.5rem;
   border: none;
-  color: var(--blue3);
+  color: var(--white);
   text-transform: uppercase;
   font-size: 1.6rem;
   letter-spacing: 0.15rem;
@@ -119,7 +104,7 @@ const EmailSendBtn = styled.button`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--blue2);
+    background-color: var(--green2);
     z-index: -2;
   }
   &:before {
@@ -129,7 +114,7 @@ const EmailSendBtn = styled.button`
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: var(--blue3);
+    background-color: var(--green4);
     transition: all 0.3s;
     z-index: -1;
   }

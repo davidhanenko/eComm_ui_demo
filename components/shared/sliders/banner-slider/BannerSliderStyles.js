@@ -59,25 +59,26 @@ const BannerSliderStyles = styled.div`
     top: 50%;
     transform: translateY(-50%);
     border: 0;
-    width: 30px;
-    height: 30px;
-    transition: all 0.3s;
+    width: 25px;
+    height: 25px;
     justify-content: center;
     align-items: center;
     transform: scale(0);
     fill: transparent;
-    transition: all 0.3s;
+    transition: all 0.25s;
     padding: 0;
+
+    svg {
+      fill: var(--yellow);
+    }
   }
 
-  @media (hover: hover) {
-    &:hover {
-      .embla__button {
-        transform: scale(1);
-        transition: all 0.3s;
-        svg {
-          fill: var(--brown);
-        }
+  &:hover {
+    .embla__button {
+      transform: scale(1);
+      transition: all 0.3s;
+      svg {
+        opacity: 0.5;
       }
     }
   }
@@ -97,7 +98,8 @@ const BannerSliderStyles = styled.div`
     @media (hover: hover) {
       &:hover {
         svg {
-          fill: var(--orange);
+          fill: var(--green4);
+          opacity: 1;
         }
       }
     }
@@ -108,7 +110,8 @@ const BannerSliderStyles = styled.div`
     @media (hover: hover) {
       &:hover {
         svg {
-          fill: var(--orange);
+          fill: var(--green4);
+          opacity: 1;
         }
       }
     }
@@ -138,7 +141,7 @@ const BannerSliderStyles = styled.div`
   }
 
   .embla__dot:after {
-    background-color: var(--brown);
+    background-color: var(--lightGray);
     width: 100%;
     height: 4px;
     border-radius: 2px;
@@ -146,7 +149,7 @@ const BannerSliderStyles = styled.div`
   }
 
   .embla__dot.is-selected:after {
-    background-color: var(--orange);
+    background-color: var(--green4);
     opacity: 1;
   }
 `;

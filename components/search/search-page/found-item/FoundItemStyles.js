@@ -1,30 +1,43 @@
 import styled from 'styled-components';
 
 const FoundItemStyles = styled.div`
-  h4 {
-    font-weight: 300;
-    margin: 0;
-    color: var(--blue2);
-    font-size: 2rem;
+  box-shadow: var(--bs);
 
-    &::first-letter {
-      text-transform: capitalize;
+  a {
+    padding: 2rem;
+    display: grid;
+    grid-auto-rows: auto 1fr 1fr;
+    height: 100%;
+
+    h4 {
+      font-weight: 300;
+      margin: 0;
+      color: var(--green4);
+      font-size: 1.7rem;
+
+      &::first-letter {
+        text-transform: capitalize;
+      }
     }
-  }
-  .price-from {
-    font-weight: 100;
-    color: var(--gray);
-    font-style: italic;
-  }
+    .price-from {
+      font-weight: 100;
+      font-size: 1.4rem;
+      color: var(--gray);
+      font-style: italic;
+      grid-row: 2;
+      place-self: end center;
+    }
 
-  .item-img {
-    transition: all 0.3s;
-  }
+    .item-img {
+      transition: all 0.2s;
+    }
 
-  @media (hover: hover) {
-    &:hover {
-      .item-img {
-        transform: scale(0.9);
+    @media (hover: hover) {
+      &:hover {
+        box-shadow: var(--bsHover);
+        .item-img {
+          transform: scale(0.95);
+        }
       }
     }
   }

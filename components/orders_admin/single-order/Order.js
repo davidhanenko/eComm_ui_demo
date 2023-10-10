@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 
-import { ALL_ORDERS_QUERY } from '../../../pages/orders/index';
+import { FaChevronLeft } from 'react-icons/fa';
+
+import { ALL_ORDERS_QUERY } from '../orders/Orders';
 import DropdownSelect from '../../shared/pagination/dropdown/DropdownSelect';
 import {
   ORDER_STATUS_OPTIONS,
@@ -12,6 +14,7 @@ import {
 } from '../../../config';
 import OrderItem from './order-item/OrderItem';
 import { OrderStyles } from './OrderStyles';
+import DateAndTime from '../../shared/DateAndTime';
 
 const UPDATE_ORDER_STATUS = gql`
   mutation UPDATE_ORDER_STATUS(
@@ -31,7 +34,7 @@ const UPDATE_ORDER_STATUS = gql`
 
 export default function Order({ order }) {
   const [status, setStatus] = useState(
-    order?.attributes?.status
+    order?.attributes?.status || null
   );
 
   // items included in current order (get from db - parse if JSON or use as object)
@@ -46,9 +49,9 @@ export default function Order({ order }) {
       ? order?.attributes?.orderDetails
       : JSON.parse(order?.attributes?.orderDetails);
 
-  const total = orderDetails?.total.toFixed(2);
-  const tax = orderDetails?.total.toFixed(2);
-  const totalCharge = orderDetails?.charge.toFixed(2);
+  const total = orderDetails?.total;
+  const tax = orderDetails?.tax;
+  const totalCharge = orderDetails?.charge;
 
   const [
     updateOrder,
@@ -75,11 +78,18 @@ export default function Order({ order }) {
     setStatus(e.target.value);
   };
 
+
+
   return (
     <OrderStyles>
       <header>
         <div className='order-title'>
-          <h2>Order ID - {order?.id}</h2>
+          <div>
+            <h2>Order ID - {order?.id}</h2>
+            <DateAndTime
+              date={order?.attributes.createdAt}
+            />
+          </div>
           <div className='status-select'>
             <span>Order status</span>
             <DropdownSelect
@@ -100,7 +110,7 @@ export default function Order({ order }) {
               Total items in order -{' '}
               {orderDetails?.totalItems}
             </p>
-            <p>Total cost - ${total}</p>
+            <p>Subtotal - ${total}</p>
             <p>Tax - ${tax}</p>
             <p>Total charge - ${totalCharge}</p>
             <p>Shipping - </p>
@@ -131,7 +141,9 @@ export default function Order({ order }) {
 
       <footer>
         <Link href={'/orders'}>
-          <button>&lt; Back to orders</button>
+          <button>
+            <FaChevronLeft /> Back to orders
+          </button>
         </Link>
       </footer>
     </OrderStyles>

@@ -1,5 +1,9 @@
 import gql from 'graphql-tag';
-import { useMutation, useQuery } from '@apollo/client';
+import {
+  useLazyQuery,
+  useMutation,
+  useQuery,
+} from '@apollo/client';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useCart } from '../../context/cartState';
@@ -9,35 +13,37 @@ import { CartStyles } from './CartStyles';
 
 import Modal from './modal/Modal';
 import { MdClose } from 'react-icons/md';
+import EmptyCart from '../shared/EmptyCart';
+// import useUser from '../auth/User';
 
-const USER_CART_QUERY = gql`
-  query USER_CART_QUERY($id: ID!) {
-    usersPermissionsUser(id: $id) {
-      data {
-        id
-        attributes {
-          cart
-        }
-      }
-    }
-  }
-`;
+// const USER_CART_QUERY = gql`
+//   query USER_CART_QUERY($id: ID!) {
+//     usersPermissionsUser(id: $id) {
+//       data {
+//         id
+//         attributes {
+//           cart
+//         }
+//       }
+//     }
+//   }
+// `;
 
-const UPDATE_USER_CART_MUTATION = gql`
-  mutation UPDATE_USER_CART_MUTATION(
-    $id: ID!
-    $data: UsersPermissionsUserInput!
-  ) {
-    updateUsersPermissionsUser(id: $id, data: $data) {
-      data {
-        id
-        attributes {
-          cart
-        }
-      }
-    }
-  }
-`;
+// const UPDATE_USER_CART_MUTATION = gql`
+//   mutation UPDATE_USER_CART_MUTATION(
+//     $id: ID!
+//     $data: UsersPermissionsUserInput!
+//   ) {
+//     updateUsersPermissionsUser(id: $id, data: $data) {
+//       data {
+//         id
+//         attributes {
+//           cart
+//         }
+//       }
+//     }
+//   }
+// `;
 
 export default function Cart() {
   const {
@@ -52,30 +58,35 @@ export default function Cart() {
     setTotalCost,
   } = useCart();
 
-  console.log(cart);
-
+  // const me = useUser();
   // user session
   const { data: session } = useSession();
 
   // get user query
-  const { data: userData, loading: userLoading } = useQuery(
-    USER_CART_QUERY,
-    {
-      variables: {
-        id: session?.id,
-      },
-    }
-  );
+  // const [
+  //   fetchCart,
+  //   { data: userData, loading: userLoading },
+  // ] = useLazyQuery(USER_CART_QUERY, {
+  //   variables: {
+  //     id: session?.id,
+  //   },
+  // });
 
   //  update user cart mutation
-  const [updateUsersPermissionsUser, { error }] =
-    useMutation(UPDATE_USER_CART_MUTATION);
+  // const [updateUsersPermissionsUser, { error }] =
+  //   useMutation(UPDATE_USER_CART_MUTATION);
 
   // purchase policy modal window state
   const [showModal, setShowModal] = useState(false);
 
   const router = useRouter();
   const cartRef = useRef(null);
+
+  // useEffect(() => {
+  //   if (session) {
+  //     fetchCart();
+  //   }
+  // }, [session]);
 
   // close cart on click outside
   useEffect(() => {
@@ -107,76 +118,51 @@ export default function Cart() {
 
   // check if cart has items before set initial state
   // if yes - fill cart with items from local storage
-  useEffect(() => {
-    if (userData) {
-      const cartData = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : '[]';
-
-      const userCart =
-        JSON.parse(
-          userData?.usersPermissionsUser?.data?.attributes
-            ?.cart
-        ) ?? [];
-
-      const newCart = [...cartData, ...userCart];
-
-      // clear cart in localStorage
-      localStorage.setItem('cart', '[]');
-
-      let obj = {};
-
-      for (let el of newCart) {
-        if (!obj[el.cartId]) {
-          obj[el.cartId] = el;
-        } else {
-          obj[el.cartId].quantity += el.quantity;
-        }
-      }
-
-      setCart(Object.keys(obj).map(el => (el = obj[el])));
-      
-    } else {
-      const cartData = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart'))
-        : '[]';
-
-      if (cartData !== null || cartData?.length > 0)
-        setCart(cartData);
-    }
-  }, [session, userLoading]);
-
-  // if user session - merge items from user cart with items from localStorage -> remove items from local storage after merge
   // useEffect(() => {
-  //   if (userData) {
-  //     const cartData = localStorage.getItem('cart')
-  //       ? JSON.parse(localStorage.getItem('cart'))
-  //       : '[]';
+  //   const mergeCart = () => {
+  //     if (session) {
+  //       if (userData) {
+  //         const cartData = JSON.parse(
+  //           localStorage.getItem('cart') ?? '[]'
+  //         );
 
-  //     const userCart =
-  //       JSON.parse(
-  //         userData?.usersPermissionsUser?.data?.attributes
-  //           ?.cart
-  //       ) ?? [];
+  //         const userCart = JSON.parse(
+  //           userData?.usersPermissionsUser?.data?.attributes
+  //             ?.cart
+  //         );
 
-  //     const newCart = [...cartData, ...userCart];
+  //         const newCart = [...cartData, ...userCart];
 
-  //     // clear cart in localStorage
-  //     localStorage.setItem('cart', '[]');
+  //         let obj = {};
 
-  //     let obj = {};
+  //         for (let el of newCart) {
+  //           if (!obj[el.cartId]) {
+  //             obj[el.cartId] = el;
+  //           } else {
+  //             obj[el.cartId].quantity += el.quantity;
+  //           }
+  //         }
 
-  //     for (let el of newCart) {
-  //       if (!obj[el.cartId]) {
-  //         obj[el.cartId] = el;
-  //       } else {
-  //         obj[el.cartId].quantity += el.quantity;
+  //         // updated/merged cart
+  //         setCart(
+  //           Object.keys(obj).map(el => (el = obj[el]))
+  //         );
+  //         localStorage.setItem('cart', '[]');
   //       }
+  //     } else {
+  //       setCart(JSON.parse(localStorage.getItem('cart')));
   //     }
+  //   };
+  //   setTimeout(() => {
+  //     mergeCart();
+  //   }, 100);
+  // }, [userLoading]);
 
-  //     setCart(Object.keys(obj).map(el => (el = obj[el])));
-  //   }
-  // }, [session, userLoading]);
+  useEffect(() => {
+    if (sessionStorage.getItem('cart')) {
+      setCart(JSON.parse(sessionStorage.getItem('cart')));
+    }
+  }, []);
 
   // calc total cost for all items in the cart
   useEffect(() => {
@@ -191,17 +177,17 @@ export default function Cart() {
       );
 
       // update user cart
-      if (session) {
-        await updateUsersPermissionsUser({
-          variables: {
-            id: session?.id,
-            data: { cart: JSON.stringify(cart) },
-          },
-        });
-      } else {
-        // set items from cart to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-      }
+      // if (session) {
+      //   await updateUsersPermissionsUser({
+      //     variables: {
+      //       id: session?.id,
+      //       data: { cart: JSON.stringify(cart) },
+      //     },
+      //   });
+      // } else {
+      // set items from cart to localStorage
+      sessionStorage.setItem('cart', JSON.stringify(cart));
+      // }
     };
 
     handleCart();
@@ -225,9 +211,9 @@ export default function Cart() {
           </button>
         </header>
         <div className='cart-body'>
-          <ul>
-            {cart && cart.length > 0 ? (
-              cart.map(cartItem => (
+          {cart && cart.length > 0 ? (
+            <ul>
+              {cart.map(cartItem => (
                 <CartItem
                   key={cartItem?.cartId}
                   cartId={cartItem?.cartId}
@@ -235,16 +221,16 @@ export default function Cart() {
                   link={cartItem?.link}
                   itemDetailsId={cartItem?.itemDetailsId}
                 />
-              ))
-            ) : (
-              <li className='cart-empty'>Cart is empty</li>
-            )}
-          </ul>
+              ))}
+            </ul>
+          ) : (
+            <EmptyCart />
+          )}
         </div>
         <footer>
           {totalCost > 0 && (
             <div className='cart-total'>
-              <p>Cart total - ${totalCost.toFixed(2)}</p>
+              <p>Cart subtotal - ${totalCost.toFixed(2)}</p>
               <sub>
                 Plus cost of items without a defined price{' '}
               </sub>

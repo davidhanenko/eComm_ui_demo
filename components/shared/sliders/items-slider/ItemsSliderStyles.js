@@ -30,8 +30,7 @@ const ItemsSliderStyles = styled.div`
 
   .embla__slide {
     position: relative;
-    /* min-width: 50%; */
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       min-width: 100%;
     }
   }
@@ -55,7 +54,8 @@ const ItemsSliderStyles = styled.div`
 
   .embla__button {
     outline: 0;
-    background-color: var(--lightGray);
+    background-color: var(--offWhite);
+    opacity: 0.5;
     box-sizing: content-box;
     padding: 1rem;
     border-radius: 50%;
@@ -65,19 +65,22 @@ const ItemsSliderStyles = styled.div`
     top: 50%;
     transform: translateY(-50%);
     border: 0;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
 
     svg {
-      fill: var(--blue2);
+      fill: var(--yellow);
+      opacity: 0.7;
+      transition: fill 0.2s;
     }
     @media (hover: hover) {
       &:hover {
         svg {
-          fill: var(--blue3);
+          opacity: 1;
+          fill: var(--green3);
         }
       }
     }
@@ -94,11 +97,19 @@ const ItemsSliderStyles = styled.div`
   }
 
   .embla__button--prev {
-    left: 27px;
+    left: -50px;
+
+    @media (max-width: 600px) {
+      left: 0px;
+    }
   }
 
   .embla__button--next {
-    right: 27px;
+    right: -50px;
+
+    @media (max-width: 600px) {
+      right: 0px;
+    }
   }
 `;
 

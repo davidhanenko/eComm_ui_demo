@@ -1,37 +1,52 @@
 import styled from 'styled-components';
 
 const AccountStyles = styled.main`
-  margin-top: calc(
-    var(--navHeight) + var(--searchHeight) + 5rem
-  );
+  margin: calc(
+      var(--navHeight) + var(--searchHeight) + 5rem
+    )
+    0;
   min-height: 80vh;
   padding: 0 5rem;
 
   header {
-    text-align: center;
-    margin-bottom: 5rem;
+    letter-spacing: 0.3px;
+    h2 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: var(--gray1);
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  hr {
+    background-color: var(--green);
+    margin: 2rem 0 3rem 0;
   }
 
   .account-container {
     display: grid;
     grid-template-columns: 1fr 2fr;
+    background-color: var(--white);
+    padding: 2rem;
+    box-shadow: var(--bs);
 
     .user {
-      border-right: 1px solid var(--blue4);
-      padding: 0 2rem;
-      margin: 2rem 0;
+      padding: 2rem;
+      margin: -2rem 0 -2rem -2rem;
+      background-color: var(--offWhite);
 
       hr {
         margin: 4rem 0;
-        border: none;
-        background-color: var(--blue4);
-        height: 1px;
       }
 
       h3 {
-        font-size: 3rem;
-        color: var(--blue1);
-        font-weight: 400;
+        font-size: 2.4rem;
+        color: var(--green4);
+        font-weight: 600;
+        text-transform: capitalize;
       }
 
       p {
@@ -44,11 +59,11 @@ const AccountStyles = styled.main`
 
         .divider {
           margin: 0 1rem;
-          color: var(--blue4);
+          color: var(--green);
         }
 
         a {
-          color: var(--blue3);
+          color: var(--linkBlue);
           transition: all 0.2s;
 
           @media (hover: hover) {
@@ -62,28 +77,66 @@ const AccountStyles = styled.main`
 
     .orders {
       padding: 0 2rem;
+      height: 600px;
+      overflow-y: hidden;
+
       h4 {
         text-align: center;
         font-size: 2.2rem;
-        color: var(--blue2);
-        font-weight: 400;
+        color: var(--gray);
+        background-color: var(--white);
+        font-weight: 600;
+        margin: 1rem 0;
+      }
+
+      .orders-container {
+        overflow-y: scroll;
+        height: 100%;
+        padding: 2rem 2rem 8rem 2rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      display: flex;
+      flex-direction: column;
+
+      .user {
+        margin: -2rem;
+        padding-bottom: 4rem;
+      }
+
+      .orders {
+        padding: 2rem 0;
       }
     }
   }
+
+  @media (max-width: 900px) {
+    padding: 0 1rem;
+  }
 `;
 
-const OrderItemStyles = styled.div`
+const SingleOrderStyles = styled.div`
   padding: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin: 1.5rem 0;
-  box-shadow: 0px 0px 3px 2px var(--blue5);
+  box-shadow: var(--bs);
+  position: relative;
 
+  .order-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
   p {
     margin: 0;
     font-size: 1.3rem;
   }
 
+  .order-id {
+    font-weight: 600;
+  }
   span {
     margin: 0;
     font-size: 1.3rem;
@@ -93,18 +146,19 @@ const OrderItemStyles = styled.div`
     }
   }
 
-  .left-side {
+  &:hover {
+    box-shadow: var(--bsHover);
+    cursor: pointer;
   }
 
-  .right-side {
-  }
+  @media (max-width: 650px) {
+    display: flex;
+    flex-direction: column;
 
-  @media (hover: hover) {
-    &:hover {
-      box-shadow: 0px 0px 3px 1px var(--blue4);
-      cursor: pointer;
+    .right-side {
+      margin-top: 2rem;
     }
   }
 `;
 
-export { AccountStyles, OrderItemStyles };
+export { AccountStyles, SingleOrderStyles };

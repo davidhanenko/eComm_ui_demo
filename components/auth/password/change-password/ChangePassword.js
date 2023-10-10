@@ -76,7 +76,6 @@ export function ChangePassword() {
       reset();
       router.push(`/auth/account/${session?.id}`);
     } catch (err) {
-      console.log(err);
       toast.error(
         'An unexpected error happen, please check your credentials and try again',
         {
@@ -113,7 +112,6 @@ export function ChangePassword() {
               dirtyFields.password ? 'input-dirty' : ''
             }
             {...register('password', {
-              disabled: isSubmitting || loading,
               required:
                 'You must specify your current password',
             })}
@@ -143,7 +141,6 @@ export function ChangePassword() {
               dirtyFields.password ? 'input-dirty' : ''
             }
             {...register('newPassword', {
-              disabled: isSubmitting || loading,
               required: 'You must specify a password',
               minLength: {
                 value: 5,
@@ -179,7 +176,6 @@ export function ChangePassword() {
                 : ''
             }
             {...register('newPasswordRepeat', {
-              disabled: isSubmitting || loading,
               required: 'Please re-enter your new password',
               validate: value => {
                 const { newPassword } = getValues();

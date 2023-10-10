@@ -2,17 +2,18 @@ import styled from 'styled-components';
 
 const SigninStyles = styled.div`
   width: 450px;
-  margin: 18rem auto;
+  margin: 15rem auto;
   text-align: center;
   min-height: 50vh;
 
-  box-shadow: 0px 0px 3px 1px var(--blue5);
-  padding: 5rem 3rem;
+  box-shadow: 0px 0px 3px 1px var(--green);
+  padding: 2rem;
 
   h3 {
     font-size: 2.5rem;
-    color: var(--blue3);
+    color: var(--green4);
     font-weight: 400;
+    margin: 0;
   }
 
   @media (max-width: 800px) {
@@ -25,10 +26,10 @@ const SigninStyles = styled.div`
   }
 
   .divider {
-    margin: 3rem auto;
+    margin: 2rem auto;
     position: relative;
     width: 80%;
-    color: var(--blue3);
+    color: var(--green);
 
     &::before {
       content: '';
@@ -37,7 +38,7 @@ const SigninStyles = styled.div`
       left: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue5);
+      background-color: var(--green);
     }
     &::after {
       content: '';
@@ -46,7 +47,7 @@ const SigninStyles = styled.div`
       right: 0;
       width: 45%;
       height: 1px;
-      background-color: var(--blue5);
+      background-color: var(--green);
     }
   }
 `;
@@ -63,9 +64,9 @@ const GoogleBtnStyles = styled.button`
   transition: all 0.25s;
   cursor: pointer;
 
-  @media (hover: hover) {
+  /* @media (hover: hover) { */
     &:hover {
-      background-color: var(--blue4);
+      background-color: var(--yellow);
     }
 
     div {
@@ -80,7 +81,7 @@ const GoogleBtnStyles = styled.button`
         margin-left: 1rem;
       }
     }
-  }
+  /* } */
 
   @media (max-width: 600px) {
     font-size: 1.1rem;
@@ -88,12 +89,12 @@ const GoogleBtnStyles = styled.button`
 `;
 
 const FormStyles = styled.form`
-  margin-top: 3rem;
+  margin-top: 2rem;
 
   fieldset {
     border: 1px solid transparent;
     outline: none;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     padding: 0 2rem;
     position: relative;
 
@@ -106,8 +107,8 @@ const FormStyles = styled.form`
 
     input,
     textarea {
-      border: 1px solid var(--blue4);
-      color: var(--dark);
+      border: 1px solid var(--yellow);
+      color: var(--gray);
       outline: none;
       background: transparent;
       padding: 0.6rem 0.5rem;
@@ -118,7 +119,8 @@ const FormStyles = styled.form`
       transition: all 0.25s ease;
 
       &:focus {
-        border: 1px solid var(--blue2);
+        border: 1px solid var(--green2);
+        box-shadow: 0px 0px 2px 1px var(--green2);
       }
 
       &::placeholder {
@@ -129,13 +131,13 @@ const FormStyles = styled.form`
     }
 
     .input-dirty {
-      border: 1px solid var(--blue2);
-      box-shadow: 0px 0px 2px 1px var(--blue5);
+      border: 1px solid var(--green2);
     }
 
     .input-error {
       font-size: 1rem;
       color: var(--red);
+      font-weight: 300;
       position: absolute;
       left: 2rem;
       bottom: -1.8rem;
@@ -152,7 +154,7 @@ const FormStyles = styled.form`
     height: 4rem;
     padding: 1rem;
     margin-top: 1rem;
-    background-color: var(--blue3);
+    background-color: var(--green2);
     color: var(--white);
     border-radius: 2rem;
     border: none;
@@ -163,12 +165,12 @@ const FormStyles = styled.form`
       width: 100%;
     }
 
-    @media (hover: hover) {
+    /* @media (hover: hover) { */
       &:hover {
         cursor: pointer;
-        background-color: var(--blue2);
+        background-color: var(--yellow);
       }
-    }
+    /* } */
 
     @media (max-width: 600px) {
       padding: 1.25rem;
@@ -185,14 +187,19 @@ const FooterStyles = styled.footer`
   }
 
   a {
-    color: var(--blue3);
+    color: var(--linkBlue);
     font-size: 1.3rem;
+    transition: all 0.2s;
 
     @media (hover: hover) {
       &:hover {
         text-decoration: underline;
       }
     }
+  }
+
+  .modal-trigger {
+    margin: 1rem 0;
   }
 `;
 

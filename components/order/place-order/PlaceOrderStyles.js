@@ -12,18 +12,25 @@ const PlaceOrderStyles = styled.div`
 
   header {
     margin-bottom: 5rem;
+
+    h1 {
+      color: var(--green3);
+    }
   }
 
   main {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    padding: 3rem;
+    background-color: var(--white);
+    box-shadow: 0 0 2px 1px var(--white);
 
     .items-section {
       padding-right: 3rem;
     }
     .charge-section {
       padding: 0 0 3rem 3rem;
-      border-left: 1px solid var(--blue3);
+      border-left: 1px solid var(--green2);
     }
   }
   @media (max-width: 850px) {
@@ -43,6 +50,10 @@ const PlaceOrderStyles = styled.div`
 
   @media (max-width: 600px) {
     padding: 2rem 1.5rem;
+
+    main {
+      padding: 1rem;
+    }
   }
 `;
 

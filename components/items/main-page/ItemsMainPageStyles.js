@@ -2,30 +2,56 @@ import styled from 'styled-components';
 
 const ItemsMainPageStyles = styled.section`
   position: relative;
-  margin: 20rem 5rem;
-  border-top: 1px solid var(--dark);
+  margin: 5rem;
+  background-color: var(--white);
+  padding: 5rem 2rem;
+  box-shadow: var(--bs);
 
-  @media (max-width: 828px) {
+  @media (min-width: 1400px) {
+    margin: 5rem 0;
+  }
+
+  @media (max-width: 900px) {
     margin: 10rem 1rem;
   }
   h2 {
     background: transparent;
     font-size: 4rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
-    color: var(--blue1);
-    padding-left: 5rem;
-    padding-bottom: 5rem;
+    color: var(--green4);
+    margin: 0;
+  }
+
+  h4 {
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0;
+    color: var(--lightGray);
+  }
+
+  hr {
+    background-color: var(--green);
+    margin: 2rem 0;
+  }
+
+  .items-slider {
+    padding: 1rem 5rem;
+
+    @media (max-width: 600px) {
+      padding: 0 1rem;
+    }
   }
 
   /* items slider styles for main page */
   .embla__slide {
     position: relative;
     min-width: 25%;
-    @media (max-width: 828px) {
+
+    @media (max-width: 1000px) {
       min-width: 50%;
     }
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       min-width: 100%;
     }
   }

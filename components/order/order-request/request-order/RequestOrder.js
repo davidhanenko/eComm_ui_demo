@@ -1,8 +1,10 @@
 import { useCart } from '../../../../context/cartState';
+
 import OrderItem from '../../place-order/order-item/OrderItem';
 import { TAX_VALUE } from '../../../../config';
 import { RequestOrderStyles } from './RequestOrderStyles';
 import RequestOrderForm from './request-order-form/RequestOrderForm';
+import EmptyCart from '../../../shared/EmptyCart';
 
 export default function RequestOrder() {
   const {
@@ -34,18 +36,22 @@ export default function RequestOrder() {
       </header>
       <main>
         <section className='items-section'>
-          {cart.map(orderItem => (
-            <OrderItem
-              orderItem={orderItem}
-              key={orderItem?.cartId}
-            />
-          ))}
+          {count === 0 ? (
+            <EmptyCart />
+          ) : (
+            cart.map(orderItem => (
+              <OrderItem
+                orderItem={orderItem}
+                key={orderItem?.cartId}
+              />
+            ))
+          )}
         </section>
 
         <section className='charge-section'>
-          <p>Total cost - ${costFromCart?.toFixed(2)}</p>
+          <p>Subtotal - ${costFromCart?.toFixed(2)}</p>
           <p>Tax - ${tax?.toFixed(2)}</p>
-          <p>Total charge - ${TotalCharge}</p>
+          <p>Total - ${TotalCharge}</p>
 
           <RequestOrderForm
             totalCost={costFromCart}

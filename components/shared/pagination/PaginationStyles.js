@@ -12,8 +12,9 @@ const PaginationContainerStyles = styled.div`
 `;
 
 const ItemsPerPageSelectStyles = styled.div`
-  display: inline;
+  display: inline-block;
   margin-left: 2rem;
+
   p {
     display: inline;
     text-transform: capitalize;
@@ -22,19 +23,25 @@ const ItemsPerPageSelectStyles = styled.div`
 `;
 
 const ItemsSortSelectStyles = styled.div`
-  display: inline;
+  display: inline-block;
   margin-left: 1rem;
+
+  #sort-btn {
+    width: 150px;
+  }
 `;
 
 const PagesControlStyles = styled.div`
   display: inline;
   margin-right: 2rem;
+  font-size: 1.3rem;
 
   @media (max-width: 850px) {
     display: flex;
     justify-content: end;
     padding-top: 3rem;
     align-items: center;
+    font-size: 1.4rem;
   }
 
   a {

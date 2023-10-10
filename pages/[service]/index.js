@@ -9,9 +9,14 @@ import {
 } from '../../lib/apollo';
 
 import capitalizeStr from '../../helpers/capitalizeStr';
+import LoaderContainer from '../../components/shared/loaders/loader-container/LoaderContainer';
 
-const Items = dynamic(() =>
-  import('../../components/items/items-page/items/Items')
+const Items = dynamic(
+  () =>
+    import('../../components/items/items-page/items/Items'),
+  {
+    loading: () => <LoaderContainer height={'500px'} />,
+  }
 );
 
 export const ITEMS_PAGE_QUERY = gql`
@@ -59,7 +64,7 @@ export default function ServicePage(props) {
               props?.services?.data[0]?.attributes
                 ?.metatags[0]?.metaTitle
             )}{' '}
-          - A2Z
+          - Demo-Ui
         </title>
         <meta
           name='description'

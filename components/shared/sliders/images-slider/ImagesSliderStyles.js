@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const ImagesSliderStyles = styled.div`
   position: relative;
-  /* background-color: #f7f7f7; */
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -57,7 +56,6 @@ const ImagesSliderStyles = styled.div`
     background-color: transparent;
     touch-action: manipulation;
     position: absolute;
-    z-index: 2;
     top: 50%;
     transform: translateY(-50%);
     border: 0;
@@ -68,9 +66,18 @@ const ImagesSliderStyles = styled.div`
     fill: blue;
     padding: 0;
 
+    svg {
+      fill: var(--yellow);
+      opacity: 0.5;
+      transition: fill 0.2s;
+    }
+
     @media (hover: hover) {
       &:hover {
-        fill: lightblue;
+        svg {
+          fill: var(--green3);
+          opacity: 0.8;
+        }
       }
     }
   }

@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-import placeholderImg from '../../../../public/img/1px.png';
 import { FoundItemStyles } from './FoundItemStyles';
 
 export default function FoundItem({ item }) {
@@ -55,17 +54,21 @@ export default function FoundItem({ item }) {
             alt={item?.itemTitle}
             width={200}
             height={200}
-            placeholder='blur'
-            blurDataURL={placeholderImg}
+            objectFit='scale-down'
           />
+
+          <p className='price-from'>
+            {minPrice ? (
+              !item.price ? (
+                `from $${minPrice}`
+              ) : (
+                `$${minPrice}`
+              )
+            ) : (
+              <p></p>
+            )}
+          </p>
           <h4>{item?.itemTitle}</h4>
-          {item.minPrice && (
-            <p className='price-from'>
-              {!item.price
-                ? `from $${minPrice}`
-                : `$${minPrice}`}
-            </p>
-          )}
         </a>
       </Link>
     </FoundItemStyles>

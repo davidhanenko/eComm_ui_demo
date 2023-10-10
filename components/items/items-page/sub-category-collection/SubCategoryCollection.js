@@ -6,9 +6,9 @@ import Head from 'next/head';
 import { usePagination } from '../../../../context/paginationState';
 import capitalizeStr from '../../../../helpers/capitalizeStr';
 
-
 import { SubCategoryCollectionStyles } from './SubCategoryCollectionStyles';
 import CollectionItem from './collection-item/CollectionItem';
+import LoaderContainer from '../../../shared/loaders/loader-container/LoaderContainer';
 
 const ITEMS_SUBCATEGORY_COLLECTION_QUERY = gql`
   query ITEMS_SUBCATEGORY_COLLECTION_QUERY(
@@ -32,7 +32,7 @@ const ITEMS_SUBCATEGORY_COLLECTION_QUERY = gql`
           itemTitle
           price
           description
-          available
+          isAvailable: is_available
           image {
             data {
               id
@@ -77,9 +77,21 @@ export default function SubCategoryCollection({
     }
   );
 
-
   const collectionItems = data?.singleItems?.data;
 
+  const arr = new Array(itemsCount).fill(1);
+
+  if (loading) {
+    return (
+      <SubCategoryCollectionStyles>
+        <div className='collection-container'>
+          {arr?.map((item, i) => (
+            <LoaderContainer key={i} height={'250px'} />
+          ))}
+        </div>
+      </SubCategoryCollectionStyles>
+    );
+  }
   return (
     <SubCategoryCollectionStyles>
       <Head>
@@ -90,7 +102,7 @@ export default function SubCategoryCollection({
                 ?.itemsCategories?.data[0]?.attributes
                 ?.categoryTitle
             )}{' '}
-          - A2Z
+          - Demo-UI
         </title>
       </Head>
       <h3 className='collection-title'>
@@ -103,20 +115,22 @@ export default function SubCategoryCollection({
       <hr className='title-underline' />
 
       <div className='collection-container'>
-        {collectionItems?.length > 0 ? (
-          collectionItems?.map(item => (
-            <CollectionItem
-              key={item?.id}
-              item={item?.attributes}
-              items={items}
-              collection={collection}
-            />
-          ))
-        ) : (
-          <div className='no-items'>
-            <p>Nothing here yet...</p>
-          </div>
-        )}
+        {collectionItems?.map(item => (
+          <CollectionItem
+            key={item?.id}
+            item={item?.attributes}
+            items={items}
+            collection={collection}
+          />
+        ))}
+        {collectionItems &&
+          collectionItems?.length === 0 && (
+            <div className='collection-container'>
+              <div className='no-items'>
+                <p>Nothing here yet...</p>
+              </div>
+            </div>
+          )}
       </div>
     </SubCategoryCollectionStyles>
   );

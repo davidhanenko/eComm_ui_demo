@@ -18,6 +18,5 @@ export default function useUser() {
   const { data, loading, error } = useQuery(
     CURRENT_USER_QUERY
   );
-
   return data?.me;
 }

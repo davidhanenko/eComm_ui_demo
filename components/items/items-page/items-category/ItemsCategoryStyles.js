@@ -2,14 +2,18 @@ import styled from 'styled-components';
 
 const ItemsCategoryStyles = styled.div`
   padding: 5rem 3rem 10rem 3rem;
-  margin-top: var(--layoutHeaderHeight);
+
+  @media (max-width: 600px) {
+    padding: 5rem 1rem 10rem 1rem;
+  }
 
   .items-category-title {
     font-size: 2.5rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 400;
+    letter-spacing: 0.75px;
     margin-bottom: 1rem;
-    color: var(--dark);
+    color: var(--green4);
     @media (max-width: 850px) {
       font-size: 2.5rem;
     }
@@ -19,23 +23,22 @@ const ItemsCategoryStyles = styled.div`
     height: 1px;
     border: none;
     margin-bottom: 10rem;
-    background-color: var(--blue3);
-    width: 75%;
+    background-color: var(--green2);
     margin-left: 0;
   }
 
   .category-container {
     display: grid;
-    grid-gap: 2rem;
+    grid-gap: 1rem;
     justify-content: center;
     grid-template-columns: repeat(
       auto-fill,
-      minmax(200px, 1fr)
+      minmax(250px, 1fr)
     );
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
       grid-template-columns: repeat(
         auto-fill,
-        minmax(135px, 1fr)
+        minmax(150px, 1fr)
       );
     }
   }

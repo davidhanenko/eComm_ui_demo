@@ -77,9 +77,9 @@ export default function Slide({
 
       <div className='slide-header'>
         <h2>{slidesByIndex(index)?.attributes?.slogan}</h2>
-        <h4>
+        <p>
           {slidesByIndex(index)?.attributes?.description}
-        </h4>
+        </p>
       </div>
     </SlideStyles>
   );

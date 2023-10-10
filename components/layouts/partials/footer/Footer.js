@@ -1,7 +1,7 @@
 import FooterSocial from './FooterSocial';
 import FooterServices from './FooterServices';
 import FooterLinks from './FooterLinks';
-import FooterContacts from './FooterContacts';
+import FooterAbout from './FooterInfo';
 import { FooterStyles } from './FooterStyles';
 
 export default function Footer() {
@@ -10,7 +10,7 @@ export default function Footer() {
       <div className='footer-container'>
         <FooterServices />
         <FooterLinks />
-        <FooterContacts />
+        <FooterAbout />
       </div>
       <FooterSocial />
     </FooterStyles>

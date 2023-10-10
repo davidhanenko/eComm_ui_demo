@@ -88,7 +88,7 @@ const SlideStyles = styled.div`
     right: 15%;
     display: block;
     cursor: pointer;
-    background: var(--dark);
+    background: var(--green3);
     color: var(--white);
     border: none;
     z-index: 2;
@@ -101,11 +101,11 @@ const SlideStyles = styled.div`
     animation: ${btnAnimation} 1s;
     animation-delay: 0.5s;
     animation-fill-mode: forwards;
-    transition: all 0.3s;
+    transition: all 0.2s;
 
     @media (hover: hover) {
       &:hover {
-        color: var(--orange);
+        color: var(--yellow);
       }
     }
   }
@@ -127,7 +127,7 @@ const SlideStyles = styled.div`
       transform-origin: top;
       animation: ${slideHeaderAnimation} 1s;
     }
-    h4 {
+    p {
       font-size: 2rem;
       color: white;
       margin: 0;

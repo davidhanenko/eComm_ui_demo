@@ -5,14 +5,14 @@ import { useRouter } from 'next/router';
 import { Slant as Hamburger } from 'hamburger-react';
 
 import { useMenu } from '../../context/menuState';
-import useWindowDimensions from '../../lib/windowDimensions';
-
+import useMediaQuery from '../../lib/useMediaQuery';
 import MenuLink from './MenuLink';
 import MenuTree from './MenuTree';
 import {
   ItemsMenuStyles,
   MenuButtonStyles,
 } from './ItemsMenuStyles';
+import { TOGGLE_WIDTH } from '../../config';
 
 const SERVICE_MENU_QUERY = gql`
   query SERVICE_MENU_QUERY($service: String!) {
@@ -65,7 +65,7 @@ export default function ItemsMenu({}) {
   const sideMenuRef = useRef();
   const btnRef = useRef();
 
-  const { width } = useWindowDimensions();
+  const isToggled = useMediaQuery(TOGGLE_WIDTH);
 
   // close side menu on click outside
   useEffect(() => {
@@ -101,13 +101,13 @@ export default function ItemsMenu({}) {
   // close side menu if width is more than 850px
   useEffect(() => {
     let isMounted = true;
-    if (width >= 850) {
+    if (!isToggled && isMounted) {
       closeMenu();
     }
     return () => {
       isMounted = false;
     };
-  }, [width]);
+  }, [isToggled]);
 
   const menuItems =
     data?.services?.data[0]?.attributes?.items?.data;
