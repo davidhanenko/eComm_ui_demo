@@ -31,9 +31,7 @@ export const ALL_ORDERS_PAGINATION_QUERY = gql`
 
 // styles fot the pagination component on orders page
 const PaginationStyles = styled.div`
-  margin-top: calc(
-    var(--navHeight) + var(--searchHeight)
-  );
+  margin-top: calc(var(--navHeight) + var(--searchHeight));
 `;
 
 export default function OrdersPage(props) {

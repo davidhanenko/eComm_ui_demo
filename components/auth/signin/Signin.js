@@ -27,7 +27,7 @@ export default function Signin({ providers }) {
       dirtyFields,
     },
   } = useForm({
-    mode: 'onBlur',
+    mode: 'onChange',
     defaultValues: {
       email: '',
       password: '',
@@ -36,6 +36,7 @@ export default function Signin({ providers }) {
 
   const router = useRouter();
   const urlToRedirect = router?.query?.callbackUrl;
+
   const onSubmitForm = async values => {
     try {
       const res = await signIn('credentials', {
@@ -99,14 +100,23 @@ export default function Signin({ providers }) {
         <fieldset>
           <label
             className={
-              dirtyFields.name ? 'label-dirty' : ''
+              dirtyFields.email ? 'label-dirty' : ''
             }
-            htmlFor='name'
+            htmlFor='email'
           >
             Email
           </label>
           <input
-            type='text'
+            {...register('email', {
+              required: 'Email is required',
+
+              pattern: {
+                value:
+                  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Please enter a valid email',
+              },
+            })}
+            type='email'
             name='email'
             id='email'
             autoComplete='email'
@@ -114,15 +124,6 @@ export default function Signin({ providers }) {
             className={
               dirtyFields.email ? 'input-dirty' : ''
             }
-            {...register('email', {
-              disabled: isSubmitting,
-              required: 'Email is required',
-              pattern: {
-                value:
-                  /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Please enter a valid email',
-              },
-            })}
           />
           {
             <div className='input-error'>
@@ -130,16 +131,20 @@ export default function Signin({ providers }) {
             </div>
           }
         </fieldset>
+
         <fieldset>
           <label
             className={
-              dirtyFields.name ? 'label-dirty' : ''
+              dirtyFields.password ? 'label-dirty' : ''
             }
-            htmlFor='name'
+            htmlFor='password'
           >
             Password
           </label>
           <input
+            {...register('password', {
+              required: 'Password is required',
+            })}
             type='password'
             name='password'
             id='password'
@@ -147,10 +152,6 @@ export default function Signin({ providers }) {
             className={
               dirtyFields.password ? 'input-dirty' : ''
             }
-            {...register('password', {
-              disabled: isSubmitting,
-              required: 'Password is required',
-            })}
           />
           {
             <div className='input-error'>

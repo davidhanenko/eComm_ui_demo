@@ -144,7 +144,6 @@ export default function Signup() {
               dirtyFields.username ? 'input-dirty' : ''
             }
             {...register('username', {
-              disabled: isSubmitting || loading,
               required: 'Name is required',
               minLength: {
                 value: 5,
@@ -162,14 +161,14 @@ export default function Signup() {
         <fieldset>
           <label
             className={
-              dirtyFields.name ? 'label-dirty' : ''
+              dirtyFields.email ? 'label-dirty' : ''
             }
             htmlFor='email'
           >
             Email
           </label>
           <input
-            type='text'
+            type='email'
             name='email'
             id='email'
             autoComplete='email'
@@ -178,7 +177,6 @@ export default function Signup() {
               dirtyFields.email ? 'input-dirty' : ''
             }
             {...register('email', {
-              disabled: isSubmitting || loading,
               required: 'Email is required',
               pattern: {
                 value:
@@ -196,7 +194,7 @@ export default function Signup() {
         <fieldset>
           <label
             className={
-              dirtyFields.name ? 'label-dirty' : ''
+              dirtyFields.password ? 'label-dirty' : ''
             }
             htmlFor='password'
           >
@@ -211,7 +209,6 @@ export default function Signup() {
               dirtyFields.password ? 'input-dirty' : ''
             }
             {...register('password', {
-              disabled: isSubmitting || loading,
               required: 'You must specify a password',
               minLength: {
                 value: 5,
@@ -229,7 +226,9 @@ export default function Signup() {
         <fieldset>
           <label
             className={
-              dirtyFields.name ? 'label-dirty' : ''
+              dirtyFields.passwordRepeat
+                ? 'label-dirty'
+                : ''
             }
             htmlFor='passwordRepeat'
           >
@@ -246,7 +245,6 @@ export default function Signup() {
                 : ''
             }
             {...register('repeatPassword', {
-              disabled: isSubmitting || loading,
               required: 'Please re-enter your password',
               validate: value => {
                 const { password } = getValues();

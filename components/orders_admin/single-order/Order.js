@@ -34,7 +34,7 @@ const UPDATE_ORDER_STATUS = gql`
 
 export default function Order({ order }) {
   const [status, setStatus] = useState(
-    order?.attributes?.status
+    order?.attributes?.status || null
   );
 
   // items included in current order (get from db - parse if JSON or use as object)
@@ -77,6 +77,8 @@ export default function Order({ order }) {
   const handleSelect = e => {
     setStatus(e.target.value);
   };
+
+
 
   return (
     <OrderStyles>

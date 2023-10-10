@@ -34,6 +34,7 @@ export const getServerSideProps = async ctx => {
       },
     };
   } catch {
+    console.log('error: ' + error )
     return {
       props: {},
     };

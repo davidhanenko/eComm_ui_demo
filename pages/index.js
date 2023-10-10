@@ -8,6 +8,7 @@ import capitalizeStr from '../helpers/capitalizeStr';
 
 import Main from '../components/main/Main';
 import Head from 'next/head';
+import Signin from '../components/auth/signin/Signin';
 
 const SERVICES_QUERY = gql`
   query SERVICES_QUERY {
